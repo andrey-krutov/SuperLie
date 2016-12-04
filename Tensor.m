@@ -69,7 +69,7 @@ TensorSpace::comp = "Components might be relatives of the spaces ``."
 NewValue[Rank]
 
 TensorSpace[name_, vect_, comp_, opts___] :=
-  Module[ { cmp, n, k },
+  Module[ { cmp, n, k, alg, brk },
     If [Head[comp]=!=List, Message[TensorSpace::list, comp]; Return[] ];
     Vector[name];
     CompList[name] ^= cmp = Flatten[comp /. x_^i_Integer :> Table[x, {i}] ];
@@ -80,8 +80,19 @@ TensorSpace[name_, vect_, comp_, opts___] :=
        k = Position[ Relatives[vect], cmp[[n]] ];
        If [Length[k]==0, Message[TensorSpace::comp, vect]; Return[] ];
     ];
-    P[expr_name] ^:=
-	PolynomialMod[Sum[P[ CompList[[j]][expr[[j]]] ], {j,Rank[name]}], 2];
+    With [{r=Rank[name], c=cmp, d=Dim[vect]},
+        P[expr_name] ^:= PolynomialMod[Sum[P[ c[[j]][expr[[j]]] ], {j,r}], 2];
+        Grade[expr_name] ^:= Sum[Grade[c[[j]][expr[[j]]] ], {j,r}];
+        If[NumberQ[d],
+           Dim[name] ^= d^r;
+           If [Dim[name]<=64000,
+              Basis[name] ^= Flatten[Outer[name , Sequence@@Range /@ Table[d, {r}]]];
+              Basis[name, n_] ^:= Select[Basis[name], Grade[#] == n &]]];
+        alg = TheAlgebra[vect];
+        If [alg=!=None,
+           TheAlgebra[name] ^= alg;
+           With[{brk=Bracket[alg,vect], bp=alg},
+              brk[g_bp,expr_name] ^:= VSum[brk[g, c[[j]][expr[[j]]]]/.c[[j]][i_]:>ReplacePart[expr,j->i], {j,r}]]]]
   ]
 
 End[]

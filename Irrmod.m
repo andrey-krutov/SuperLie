@@ -241,7 +241,7 @@ DPrint[1, "GList : ", GList[v]];
     GenRel[v] ^= rel;
     PDim[v]^=With[{s=Plus@@PList[v]},{Dim[v]-s,s}];
     TheAlgebra[v] ^= g;
-    Relatives[v]^= Table[None, {i, 8}];
+    Relatives[v] ^= {v, None, None, None, None, None, None, None};
     If [(Enum /.{opts}) =!= False,		(* enumeration *)
       With[{r=Length[RangeIndex[v]]-1},
 		EnumSet[v, {0,-r,-1}->
