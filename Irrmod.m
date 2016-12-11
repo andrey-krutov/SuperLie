@@ -181,10 +181,10 @@ DPrint[3, "srel = ", srel];
 DPrint[3, "Relations : ", eq];
 DPrint[4, "(decoded) : ", eq/.y[i_]:>zt[[i]]];
          srel = If [$Solve===ParamSolve,
-                        Block[{UserRate=hwOrderRate},ParamSolve[eq, Array[y,l]]],
+                        Block[{UserRate=hwOrderRate},ParamSolve[eq, Array[y,l]]][[1]],
                 (*else*)
-                        $Solve[eq, Array[y,l]] (* TODO: resolve solutions to ensure that y[i] is replaced with y[j] with j>i *)
-                ] [[1]] //. $`RestoreSV;
+                        orderSol[$Solve[eq, Array[y,l]][[1]], y] (* CHECK: resolve solutions to ensure that y[i] is replaced with y[j] with j>i *)
+                ] //. $`RestoreSV;
 DPrint[2, "Relations in max submodule: srel = ", srel];
 DPrint[4, "(decoded) :", srel/.y[i_]:>zt[[i]]],
       (* else: Build module Verma *)
@@ -273,6 +273,26 @@ rngHW[rnglist_]:=
     For[i=2, i<=maxrng, i++,
       indlist[[i]]=Max[indlist[[i]], indlist[[i-1]]]];
     {maxrng, indlist}];
+
+(* transform solution to ensure that y_i are expressed via y_j with j>i *)
+orderSol[orig_, y_] :=
+  Module[{si, sol=orig, dim=Length[orig], i, isol, imin},
+    For[i=1, i<=dim, i++,
+      si = sol[[i]];
+      isol = si[[1,1]];
+      imin = MatchMin[si[[2]], y, isol];
+      If[imin<isol,
+        si = $Solve[si[[1]]==si[[2]], y[imin]][[1,1]];
+        sol = Table[If[i==j, si, sol[[j,1]]->$SNormal[sol[[j,2]]/.si]], {j,dim}]]];
+    sol];
+
+MatchMin[expr_,head_,below_:Infinity] :=
+  Module[{min=below},
+    $`MatchPatrn=head[_];
+    $`MatchFunc = ((min = Min[min, #[[1]]])&);
+    $`MatchScan[expr];
+    min];
+
 
 HWModule::comp = VermaModule::comp =
  "Use AlgebraDecomposition[CartanTriade, ``, {x,h,y}] to define the
