@@ -331,5 +331,26 @@ List of changes
         (unless a new grading is defined in subalgebra).
 
 ==============================================
-21jul13  Version 2.08 Beta 01
+21jul16  Version 2.08 Beta 01
+==============================================
+
+04dec16 glAlgebra, slAlgebra:
+          Fixed list or relatives
+        TensorSpace:
+          Defined properiies Dim, P, Grade, TheAlgebra;
+          For tensor spaces of a module, defined the action the module's algebra.
+
+12dec16 HWModule:
+          Fixed case when y_i was expressed via y_j with j>i
+          Added properties TheAlgebra and Relatives
+
+14may17 NewRelative: Added property Basis
+        (?) Der, Der0: fixed case when Wedge is skew-symmetric
+
+04mar18 Fixed bugs in change 25oct15
+
+03may18 SubAlgebra: fixed case when all generators have garde > 1.
+
+==============================================
+06may18  Version 2.08 Beta 02
 ==============================================

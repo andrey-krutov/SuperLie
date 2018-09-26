@@ -537,11 +537,12 @@ CoLeft[ m_->cm_, opts___Rule] :=
     g===None,
        cm::usage = SPrint["`` is the space of the left even forms on ``", cm, m],
     ListQ[DecompositionList[g,CartanTriade]],
-       defCoAction[#, m, cm]& /@ DecompositionList[g,CartanTriade];
+       defCoAction[#, m, cm, 0]& /@ DecompositionList[g,CartanTriade];
        TheAlgebra[cm] ^= g;
        cm::usage = SPrint["`` is the ``-module of the left even forms on ``", cm, g, m],
     BracketMode[g]==Tabular,
-       defCoAction[g, m, cm];
+       defCoAction[g, m, cm, 0];
+       If[g===m, defCoAct[g, cm, 0, DivPowers /. {opts}, CoAct /. {opts}]];
        TheAlgebra[cm] ^= g;
        cm::usage = SPrint["`` is the ``-module of the left even forms on ``", cm, g, m],
     True,
@@ -549,24 +550,56 @@ CoLeft[ m_->cm_, opts___Rule] :=
        cm::usage = SPrint["`` is the space of the left even forms on ``", cm, m]
    ]]
 
-defCoAction[g_, m_, cm_] :=
-  Module[{i, j, k, pf, cf, pm, pfm, l, m1},
-    pm = Table[0, {i, Dim[m]}, {j, Dim[g]}];
-    For [i=1, i<=Dim[g], ++i, For[j=1, j<=Dim[m], ++j,
-      pf = VNormal @ Act[g[i],m[j]];
-      If [pf==0, Continue[]];
-      If [ Head[pf]=!=VPlus, pf = {pf}];
-      For [l=1, l<=Length[pf], ++l,
-        pfm = pf[[l]];
-        {m1, cf} = SplitPtrn[m[_]] @ pfm;
-        k = m1[[1]];
-        pm[[k,i]] = VPlus[pm[[k,i]], 
-			   (-(-1)^(P[g[i]]*P[m[k]])*cf) ~SVTimes~ cm[j] ];
-      ]
-    ]];
-    ActTable[g, cm] ^= pm;
-    Act[g[i_], cm[j_]] ^:= ActTable[g,cm][[j,i]];
-  ]
+defCoAction[g_, m_, cm_, p_] :=
+    Module[{k, tbl, elt, el1, cf, m1, brk = Bracket[m]},
+       tbl = Table[0, {Dim[m]}, {Dim[g]}];
+       Do [ elt = VNormal @ Act[g[i], m[j]];
+    	 If [elt == 0, Continue[]];
+    	 If [ Head[elt] =!= VPlus, elt = {elt}];
+    	 Do [ el1 = elt[[l]];
+     	      {m1, cf} = SplitPtrn[m[_]] @ el1;
+     	      k = m1[[1]];
+     	      tbl[[k, i]] = VPlus[tbl[[k, i]],
+       			  (-(-1)^(P[g[i]]*(P[m[k]]+p))*cf)~SVTimes~cm[j] ],
+     	    {l, Length[elt]}
+           ],
+          {i, Dim[g]}, {j, Dim[m]}
+        ];
+       ActTable[g, cm] ^= tbl;
+       brk[g[i_], cm[j_]] ^:= ActTable[g, cm][[j, i]]
+   ];
+
+defCoAct[g_, dm_, p_, divpw_, cobrk_] :=
+  Module[{coa, si, sj, res, cf, m1, k, brk = Bracket[g], dp=divpw},
+   If[cobrk===None, Return[]];
+   Switch[dp,
+     DivPowers, dp = DivPowersQ[dm,wPower],
+     False,     If[DivPowersQ[dm,wPower], UnDivPowers[dm->wPower]],
+     Wedge|wedge|wPower|True, dp = True; If[!DivPowersQ[dm,wPower], DivPowers[dm->wPower]],
+     _, Message[DLeft::dp, dp]; Return[$Failed]];
+   coa = Table[{}, {Dim[g]}];
+   Do[si = P[g[i]];
+    Do[sj = (-1)^(si*(P[g[j]]+p));
+     res =
+      VNormal@Which[i != j, brk[g[i], g[j]], si == 0, 0, $p == 2,
+        Squaring[g[i], brk], True, (1/2)~SVTimes~brk[g[i], g[j]]];
+     If[res == 0, Continue[]];
+     DPrint[3, "<",g,"[",i,"], ",g,"[",j,"]> -> "res];
+     If[Head[res] =!= VPlus, res = {res}];
+     Do[{m1, cf} = SplitPtrn[g[_]]@res[[l]];
+      DPrint[3, "Split: ", {m1, cf}];
+      k = m1[[1]];
+      AppendTo[coa[[k]],
+       Which[i != j, (sj*cf)~SVTimes~wedge[dm[i], dm[j]],
+        dp, (sj*cf*2)~SVTimes~wPower[dm[i], 2],
+        True, (sj*cf)~SVTimes~wPower[dm[i], 2]]],
+      {l, Length[res]}],
+    {j, i, Dim[g]}], {i, Dim[g]}];
+   DPrint[2, "CoAct: ", coa];
+   CoActList[dm] ^= Apply[VPlus, coa, {1}];
+   cobrk[dm[i_]] ^:= CoActList[dm][[i]]
+   ];
+
 
 CoLeft[m_] := Relatives[m][[2]]
 
@@ -668,21 +701,7 @@ If[g===None,
        { ig, Length[ Components[g] ] }
      ],
   (*case*) Tabular,
-    sol = Table[0, {Dim[m]}, {Dim[g]}];
-    Do [ res = VNormal @ Act[g[i],m[j]];  
-	 If [res==0, Continue[]];
-	 If [ Head[res]=!=VPlus, res = {res}];
-	 Do [ ptm = res[[l]];
-	      {m1, cf} = SplitPtrn[m[_]] @ ptm;
-	      k = m1[[1]];
-	      sol[[k,i]] = VPlus[sol[[k,i]], 
-			  (-(-1)^(P[g[i]]*(P[m[k]]+1))*cf)~SVTimes~dm[j] ],
-	    {l, Length[res]}
-      ],
-      {i, Dim[g]}, {j, Dim[m]}
-    ];
-    ActTable[g, dm] ^= sol;
-    brk[g[i_], dm[j_]] ^:= ActTable[g,dm][[j,i]];
+    defCoAction[g, m, dm, 1];
     If [cobrk=!=None,		(* define coaction  dg -> dg/\dg *)
 	coa = Table[{}, {Dim[m]}];
 	Do [ si = P[g[i]];

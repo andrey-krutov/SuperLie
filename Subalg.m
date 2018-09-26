@@ -347,6 +347,7 @@ $tm = TimeUsed[];
     GList[g] ^= {};
 	gpos = Table[0, {ngen}];
   $tm = TimeUsed[]; (* timer *)
+    If [grmin>1, gen$rng[i_]:=0 /; 0<i<grmin];
 	For[r=grmin, r<=maxGrade$, r++,         (* loop over grade *)
       DPrint[1, "Computing grade ", r, "  (", N[TimeUsed[ ]-$tm,4]," sec)" ]; $tm = TimeUsed[];
 	  dPrev = dim;

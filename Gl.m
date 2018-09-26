@@ -81,7 +81,7 @@ glAlgebra[g_, vect_Symbol, opts___Rule ] :=
  glAlgebra[ name_, opts___Rule ] :=
    Module [ {vect, covect},
       VectorSpace[vect, opts, CoLeft->covect];
-      Relatives[vect] ^= Table[None, {8}];
+      Relatives[vect] ^= {vect, None, None, None, None, None, None, None};
       glAlgebra[name, vect, opts]
    ]
 
@@ -137,7 +137,7 @@ slAlgebra[g_, vect_Symbol, opts___Rule ] :=
  slAlgebra[ name_, opts___Rule ] :=
    Module [ {vect, covect},
       VectorSpace[vect, opts(*, CoLeft->covect*)];
-      Relatives[vect] ^= Table[None, {8}];
+      Relatives[vect] ^= {vect, None, None, None, None, None, None, None};
       slAlgebra[name, vect]
    ]
 
