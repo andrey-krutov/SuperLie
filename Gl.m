@@ -160,6 +160,7 @@ pslAlgebra[g_, vect_Symbol, opts___Rule ] :=
     With[ { dm=Dim[vect], m=PDim[vect][[1]], brk=KeyValue[prop,Bracket] },
       Define[g, {Vector, BasisPattern->(_g), TheSpace->vect}];
       SetProperties[g, prop ];
+      TheAlgebra[g] ^= g;
       Dim[g] ^= dm^2 - 2;
       PDim[g] ^= { 2 m^2 - 2, 2 m^2 };
       PList[g] ^= Table[P[vect[i]], {i, dm}];

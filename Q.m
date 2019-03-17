@@ -68,7 +68,7 @@ sqAlgebra[g_, {x_,y_}, dim_, opts___] :=
   Module [{i, v, prop, brk, emode, zn },
       prop = UnionKeys[{opts}, Options[Algebra], Options[VectorSpace]];
       glAlgebra[x, Dim->dim, opts];
-      Define[y, {Vector, opts}];
+      Define[y, {Vector, prop}];
       P[_y] ^= 1;
       With[{brk = KeyValue[ prop, Bracket ]},
 	brk[u_y,v_x] ^:= (-1)~SVTimes~brk[v,u];
@@ -115,6 +115,7 @@ sqAlgebra[g_, {x_,y_}, dim_, opts___] :=
 			{y, 2, {{#1,1,dim},{#2,1,dim}}&, (#1!=#2)&},
 			{y, 1, {{#,1,dim-1}}, True& }};
       BracketMode[g] ^= Regular;
+      TheAlgebra[g] ^= g;
       g::usage = SPrint["`` = sq(``)", g, dim ]
   ]
 
@@ -158,6 +159,7 @@ pqAlgebra[g_, {x_,y_}, dim_, opts___] :=
       ];
       Dim[g] ^= 2dim^2-1;
       PDim[g] ^= {dim^2-1, dim^2};
+      TheAlgebra[g] ^= g;
       g::usage = SPrint["`` = pq(``)", g, dim ]
   ]
 
@@ -200,6 +202,7 @@ psqAlgebra[g_, {x_,y_}, dim_, opts___] :=
       ];
       Dim[g] ^= 2dim^2-2;
       PDim[g] ^= {dim^2-1, dim^2-1};
+      TheAlgebra[g] ^= g;
       g::usage = SPrint["`` = psq(``)", g, dim ]
   ]
 

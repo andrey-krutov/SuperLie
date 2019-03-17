@@ -354,3 +354,27 @@ List of changes
 ==============================================
 06may18  Version 2.08 Beta 02
 ==============================================
+
+09dec18 pslAlgebra: added missed property TheAlgebra
+
+11dec18 **qAlgebra: added missed property TheAlgebra
+
+17feb19 DefSubAlgebra: defines Squaring
+
+11mar19 Rewriten SubAlgebra without Flatten.
+        Hopefully fixes reported problem in Mathematica 10.
+
+==============================================
+11mar19  Version 2.08 Beta 03
+==============================================
+
+17mar19 ButtinAlgebra: added Squaring
+
+        New function: LeAlgebra (temporary name)
+
+        Fixed function Basis[g,n] for algebras on polynomials
+        in case of divided powers
+
+==============================================
+17mar19  Version 2.08 Beta 04
+==============================================

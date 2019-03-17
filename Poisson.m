@@ -57,6 +57,13 @@ the polynomials on x1,x2,...,y1,y2,... with standard Buttin bracket."
 SuperLie`Poisson`Bb::usage = "Bb[x,y] is the Buttin bracket (operator).";
 SuperLie`Poisson`bb::usage = "bb[x,y] is the Buttin bracket (unevaluated form)."
 
+SuperLie`Poisson`LeitesAlgebra::usage =
+  "LeitesAlgebra[name, {x,y}] defines a Leites (super)algebra \"name\" as the algebra of
+the polynomials on x1,x2,...,y1,y2,... with standard Schouten antibracket."
+
+SuperLie`Poisson`Sb::usage = "Sb[x,y] is the Schouten antibracket in Leites algebra (operator).";
+SuperLie`Poisson`sb::usage = "sb[x,y] is the Schouten antibracket in Leites algebra (unevaluated form)."
+
 SuperLie`Poisson`OKAlgebra::usage = 
   "OKAlgebra[name, {x,y,t}] defines an \"odd\" contact (super)algebra \"name\" as the algebra of
 the polynomials on x1,x2,...,y1,y2,... and t with standard bracket."
@@ -233,12 +240,13 @@ calcPoBasis[g_, x_, vt_, opts___Rule] :=
       gi = Grade[xi];
       If[! IntegerQ[gi] || gi < 0 || gi == 0 && P[xi] =!= 1, 
         Return[$Failed]]];
-    With[{bs=b, dg=Grade[x0]+Grade[xn]}, 
+    With[{bs=b, dg=Grade[x0]+Grade[xn],sel=KeyValue[{opts}, Select, #=!=0&]}, 
       mg=dg; Do[mg=Max[mg,Grade[vars[[i]]]],{i,1,Length[vars]}];
       If[ enum =!= False,
 	   EnumSet[g,  { -mg, Infinity, 1 } -> { d_ :> Basis[g,d]}]];
-      Basis[g, d_] ^:= GradeBasis[d+dg, bs, vt]]]
+      Basis[g, d_] ^:= Select[GradeBasis[d+dg, bs, vt],sel]]]
 
+hamSelect[x_]:=Not[x===0 || x===VTimes[]];
 
 (* Poisson Algebra, the case of  single component and user-defined form *)
 
@@ -407,7 +415,7 @@ poRev[x_] :=
 
 (* ======== Hamilton Algebra ========== *)
 
-NewBrace[Hb, "h.b.", 0, hb]
+NewBrace[Hb, "H.b.", 0, hb]
 
 HamiltonAlgebra[name_, x_, opts___Rule] :=
   With[{Hb$l=Hb/.{opts}, hb$l=hb/.{opts}, Pb$l=Pb/.{opts}},
@@ -415,6 +423,8 @@ HamiltonAlgebra[name_, x_, opts___Rule] :=
 	Hb$l[f_, g_] := Pb$l[f, g] /. e_VTimes :> 0 /; Length[e] == 0;
     Bracket[name] ^= Hb$l;
 	bracket[name] ^= hb$l;
+     ReGrade[name] ^:= calcPoBasis[name, x, VTimes, Select->hamSelect, opts];
+     ReGrade[name];
 	name::usage ^= SPrint["`` is a Hamiltonian algebra over ``", name, x]
   ]
 
@@ -424,6 +434,8 @@ HamiltonAlgebra[name_, x_Symbol, form_List, opts___Rule] :=
 	Hb$l[f_, g_] := Pb$l[f, g] /. e_VTimes :> 0 /; Length[e] == 0;
     Bracket[name] ^= Hb$l;
 	bracket[name] ^= hb$l;
+     ReGrade[name] ^:= calcPoBasis[name, x, VTimes, Select->hamSelect, opts];
+     ReGrade[name];
 	name::usage ^= SPrint["`` is a Hamiltonian algebra over ``", name, x]
   ]
 
@@ -477,6 +489,7 @@ ButtinAlgebra::parity = "The elements `` and `` should have different parity";
 
 ButtinAlgebra[name_, {x_,y_}, opts___Rule] :=
   With[{n=Dim[x], Bb$l=Bb/.{opts}, bb$l=bb/.{opts},
+     sqr = Squaring/.{opts}/.Squaring:>($p===2),
      EulerOp$l=EulerOp/.{opts}, ptrn=ptrnAux[{x,y},{opts}]},
     SetProperties[name, { Vector, BasisPattern->ptrnPoly[ptrn],
 			Bracket->Bb$l, bracket->bb$l, opts} ];
@@ -487,6 +500,8 @@ ButtinAlgebra[name_, {x_,y_}, opts___Rule] :=
            Message[ButtinAlgebra::parity, x[i], y[i]]; Return[$Failed]],
         {i,1,n}]];
     PolyPattern[name]^=ptrn;
+    If [sqr,
+      Squaring[f_,Bb$l] := VIf[P[f]==0,VSum[VTimes[LDer[f,x[i],ptrn],LDer[f,y[i],ptrn]]],{i,1,n}]];
     Bb$l[f_,g_] := 
       VSum[
         SVTimes[(-1)^(P[f]P[x[i]]),VTimes[LDer[f,x[i],ptrn],LDer[g,y[i],ptrn]]]~VPlus~
@@ -500,6 +515,26 @@ ButtinAlgebra[name_, {x_,y_}, opts___Rule] :=
      ReGrade[name];
     name::usage ^= SPrint["`` is a Buttin algebra over ``", name, {x, y}]
 ]
+
+(* ======= Leites Algebra ========= *)
+
+NewBrace[Sb, "S.b.", 1, sb]
+
+(* Le[f_][g_] := Bb[f,g] *)
+
+LeitesAlgebra::dims = PoissonAlgebra::dims;
+LeitesAlgebra::parity = "The elements `` and `` should have different parity";
+
+LeitesAlgebra[name_, x_, opts___Rule] :=
+  With[{Sb$l=Sb/.{opts}, sb$l=sb/.{opts}, Bb$l=Bb/.{opts}},
+    ButtinAlgebra[name, x, opts];
+	Sb$l[f_, g_] := Bb$l[f, g] /. e_VTimes :> 0 /; Length[e] == 0;
+    Bracket[name] ^= Sb$l;
+    bracket[name] ^= sb$l;
+    ReGrade[name] ^:= calcPoBasis[name, x, VTimes, Select->hamSelect, opts];
+    ReGrade[name];
+    name::usage ^= SPrint["`` is a Leites algebra over ``", name, x]
+  ]
 
 
 (* ======= "Odd" Contact Algebra ========= *)

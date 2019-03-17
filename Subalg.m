@@ -175,7 +175,7 @@ $tm = TimeUsed[];
 	 vars = MatchList[zg, bs];		(* remaining old basis *)
      DPrint[3, "gen$lst[[",i,"]]=",gen$lst[[i]], ", z=",z, ", zg=",zg, ", vars=",vars];
 	 If [vars==={},				(* no old ==> relation *)
-	    gen$rel = { gen$rel, gen$lst[[i]]==zg };
+	    gen$rel = Append[gen$rel, gen$lst[[i]]==zg];
 	    gen$var[_,i] = zg,			(* in {g} basis *)
 	 (*else*)				(* add to {g} basis *)
 	    gen$basis = {gen$basis, gen$lst[[i]]};  (* generation list *)
@@ -211,7 +211,7 @@ $tm = TimeUsed[];
     ];
     gen$basis = Flatten[gen$basis];
     GenBasis[g] ^=  gen$basis //. g[i_] :> gen$basis[[i]];
-    GenRel[g] ^= Flatten[gen$rel] //. g[i_] :> gen$basis[[i]];
+    GenRel[g] ^= gen$rel //. g[i_] :> gen$basis[[i]];
     DPrint[2, GenRel[g] ];
    ];
    ActTable[g] ^= VNormal[gen$tbl];			(* Final assignment *)
@@ -226,7 +226,7 @@ $tm = TimeUsed[];
    RangeIndex[g] ^= gen$ind;
    gen$basis = Flatten[gen$basis];
    GenBasis[g] ^=  gen$basis //. g[i_] :> gen$basis[[i]];
-   GenRel[g] ^= Flatten[gen$rel] //. g[i_] :> gen$basis[[i]];
+   GenRel[g] ^= gen$rel //. g[i_] :> gen$basis[[i]];
    With[{brk=Bracket[in], bs = BasisPattern[in]},
 	g/: Brk[g[i_], y:bs] := brk[Image[g][[i]], y]];
 (*    JacRel[g] ^= jrel; *)
@@ -410,7 +410,7 @@ $tm = TimeUsed[];
 	     vars = MatchList[zg, bs];		(* remaining old basis *)
      DPrint[3, "gen$lst[[",i,"]]=",gen$lst[[i]], ", z=",z, ", zg=",zg, ", vars=",vars];
 	    If [vars==={},				(* no old ==> relation *)
-	       gen$rel = { gen$rel, gen$lst[[i]]==zg };
+	       gen$rel = Append[ gen$rel, gen$lst[[i]]==zg ];
 	       gen$var[_,i] = zg,			(* in {g} basis *)
 	    (*else*)				(* add to {g} basis *)
 	       gen$basis = {gen$basis, gen$lst[[i]]};  (* generation list *)
@@ -445,7 +445,7 @@ $tm = TimeUsed[];
       ];
       gen$basis = Flatten[gen$basis];
       GenBasis[g] ^=  gen$basis //. g[i_] :> gen$basis[[i]];
-      GenRel[g] ^= Flatten[gen$rel] //. g[i_] :> gen$basis[[i]];
+      GenRel[g] ^= gen$rel //. g[i_] :> gen$basis[[i]];
       DPrint[2, GenRel[g] ];
    ]];
    ActTable[g] ^= VNormal[gen$tbl];			(* Final assignment *)
@@ -460,7 +460,7 @@ $tm = TimeUsed[];
    RangeIndex[g] ^= gen$ind;
    gen$basis = Flatten[gen$basis];
    GenBasis[g] ^=  gen$basis //. g[i_] :> gen$basis[[i]];
-   GenRel[g] ^= Flatten[gen$rel] //. g[i_] :> gen$basis[[i]];
+   GenRel[g] ^= gen$rel //. g[i_] :> gen$basis[[i]];
    With[{brk=Bracket[in], bs = BasisPattern[in]},
 	g/: Brk[g[i_], y:bs] := brk[Image[g][[i]], y]];
 (*    JacRel[g] ^= jrel; *)
@@ -577,7 +577,7 @@ AlgebraDecomposition[f_, g_, components_, opts___] :=
 
 
 DefSubAlgebra[n_, in_, el_, opts___Rule] :=
-  Module[ {i, j, dim, dima, eq, ee, seq, tbl, tbr, ptrn, brk, img=el, nAct, nact, split},
+  Module[ {i, j, dim, dima, eq, ee, seq, tbl, tbr, ptrn, brk, img=el, nAct, nact, split, sqr, sqrtab},
     split = KeyValue[{opts},Split];
     If[split=!=False, Return[DefSubAlgebra[n,in,el,split,Sequence@@ComplementKeys[{opts},{Split}]]]];
     DPrint[1, "Defining subalgebra ",n," \[Subset] ",in];
@@ -586,6 +586,8 @@ DefSubAlgebra[n_, in_, el_, opts___Rule] :=
 	brk = Bracket[in];
     nAct = Bracket /. {opts} /. Bracket->Act;
     nact = bracket /. {opts} /. bracket->act;
+    sqr = Squaring/.{opts}/.Squaring:>($p===2);
+    sqrtab = If [sqr, Table[0, {dim}], Null];
     tbl = {};
     dim = Length[el];
     eq = Table[ n[i]==el[[i]], {i, dim} ];
@@ -608,10 +610,18 @@ DefSubAlgebra[n_, in_, el_, opts___Rule] :=
       ];
       tbl = { tbl, tbr };
       DPrint[If[j===1 || Mod[j,10]===0, 1, 2], "Done ", j, " of ", dim];
+      If [sqr,
+        l = Squaring[nAct][img[[j]]];
+        If [l==0,  Continue[] ];
+        r =  VNormal[l /. seq ];
+        If[r=!=0, DPrint[3, n[j], "^[2] = ", r]];
+        If[ FreeQ[ r, ptrn ],  sqrtab[[j]] = r;  Continue[] ];
+        Message[DefSubAlgebra::noinvsq, n, ai, r];
+        Return[$Failed]];
     ];
     Bracket[n]^=nAct;
     bracket[n]^=nact;
-    TableBracket[n, nAct, Unevaluated[ActTable[n]], nact];
+    TableBracket[n, nAct, Unevaluated[ActTable[n]], nact, Infinity, sqrtab];
 (*
     Act[n[i_], n[j_]] ^:=
       If[i<=j, ActTable[n][[j,i]],
@@ -629,10 +639,11 @@ DefSubAlgebra[n_, in_, el_, opts___Rule] :=
   ]
 
 DefSubAlgebra::noinv = "The subspace `` is not a subalgebra: [``, ``] = `` is out of the subspace"
+DefSubAlgebra::noinvsq = "The subspace `` is not a subalgebra: [``]^[2] = `` is out of the subspace"
 
 DefSubAlgebra[n_, in_, el_, split_, opts___Rule] :=
   Module[ {i, j, dim, dima, eq, ee, seq, tbl, tbr, ptrn, brk, img, gi, mg=None,
-            abas, gr, eqgr, seqgr, la, ia, ai, mj, lj, toimg={}, nAct, nact},
+            abas, gr, eqgr, seqgr, la, ia, ai, mj, lj, toimg={}, nAct, nact, sqr, sqrtab, sqi},
       DPrint[1, "Defining graded subalgebra ",n," \[Subset] ",in];
       Vector[n];
       ptrn = BasisPattern[in];
@@ -657,6 +668,8 @@ DefSubAlgebra[n_, in_, el_, split_, opts___Rule] :=
       (*else*)
         img = el;
         dim = Length[el]];
+      sqr = Squaring/.{opts}/.Squaring:>($p===2);
+      sqrtab = If [sqr, Table[0, {dim}], Null];
       eq = SplitList[Table[ n[i]==img[[i]], {i, dim} ], _, split[#[[2]]]&];
       DPrint[3, "Equations: ", eq];
       seq = ApplySplit[ Dispatch[ VSolve[ #, MatchList[#, ptrn] ][[1]] ]&, eq];
@@ -664,6 +677,7 @@ DefSubAlgebra[n_, in_, el_, split_, opts___Rule] :=
       DPrint[4, "Solutions: ", seq];
       For[ j=1, j<=dim, ++j,
 	    If[j>lj,
+		  sqrtab = Join[sqrtab, Array[0,dim-lj]];
 		  lj = dim;
 		  img = Join[img,Flatten[toimg]];
 		  toimg={}
@@ -676,20 +690,24 @@ DefSubAlgebra[n_, in_, el_, split_, opts___Rule] :=
 	    tbr = vl @@ Table[0, {j}];
 	    For[ i=1, i<=j, ++i,
 	      ai = img[[i]];
+              sqi = sqr && i==j;
           If [NumberQ[mg] && grade$fn[ai]>mg, tbr[[i]]=nact[n[i],n[j]]; Continue[]];
-		  l = brk[ai, mj];
+          l = If[sqi, Squaring[ai,brk], brk[ai, mj]];
           If [l==0,  Continue[] ];
 		  gr = split[l];
           r =  VNormal[l /. PartSplit[seq,gr,{}] ];
-		  If[r=!=0, DPrint[3, act[n[i], n[j]], " = ", r]];
-          If[ FreeQ[ r, ptrn ],  tbr[[i]] = r;  Continue[] ];
+		  If[r=!=0, DPrint[3, If[sqi, Squaring[n[i],act], act[n[i], n[j]]], " = ", r]];
+          If[ FreeQ[ r, ptrn ],
+            If[sqi, sqrtab[[i]] = r; tbr[[i]] = VNormal[2~SVTimes~r],
+            (*else*) tbr[[i]] = r];
+            Continue[] ];
           If[ el===All,
-            Message[DefSubAlgebra::noinv, n, ai, mj, r];
+            If[sqi, Message[DefSubAlgebra::noinvsq, n, ai, r], Message[DefSubAlgebra::noinv, n, ai, mj, r]];
             Return[$Failed]];
           ++dim;
 	      l = VNormal[ l ];
 		  toimg = {toimg, l};
-          tbr[[i]] = n[dim];
+          If[sqi, sqrtbl = n[dim]; tbr[[i]] =  VNormal[2~SVTimes~n[dim]],  tbr[[i]] = n[dim]];
 	      eq = JoinSplit[eq, {gr->{n[dim]==l}}];
 	      DPrint[4, "New equations: ", eq];
 	      eqgr = PartSplit[eq, gr,{}];
@@ -706,7 +724,7 @@ DefSubAlgebra[n_, in_, el_, split_, opts___Rule] :=
       Bracket[n]^=nAct;
       bracket[n]^=nact;
       BracketMode[n] ^= Tabular;
-      TableBracket[n, nAct, Unevaluated[ActTable[n]], nact];
+      TableBracket[n, nAct, Unevaluated[ActTable[n]], nact, Infinity, sqrtab];
 (*
       Act[n[i_], n[j_]] ^:=
         If[i<=j, ActTable[n][[j,i]],

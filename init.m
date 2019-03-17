@@ -24,7 +24,7 @@ DeclarePackage["SuperLie`Gl`", {"glAlgebra", "slAlgebra", "pslAlgebra" }]
 DeclarePackage["SuperLie`Irrmod`", {"HWModule"}]
 
 DeclarePackage["SuperLie`Poisson`", {"PoissonAlgebra", "Pb", "pb",
-    "HamiltonAlgebra", "Hb", "hb",
+    "HamiltonAlgebra", "Hb", "hb", "LeitesAlgebra", "Sb", "sb",
     "ContactAlgebra", "Kb", "kb", "ButtinAlgebra", "Bb", "bb",
     "MoebiusAlgebra", "Mb", "mb", "OKAlgebra", "Ob", "ob",
     "RamondAlgebra", "Rb", "rb", "RamondD", "ZRamondD", "RamondK",
@@ -2357,7 +2357,7 @@ CreatePalette[{Cell[BoxData[
   Evaluator->Automatic,
   Method->"Preemptive"]], NotebookDefault]},WindowTitle->"SuperLie"]]
 
-Print["SuperLie Package Version 2.08 Beta 02 installed\nDisclaimer: This software is provided \"AS IS\", without a warranty of any kind"]
+Print["SuperLie Package Version 2.08 Beta 04 installed\nDisclaimer: This software is provided \"AS IS\", without a warranty of any kind"]
 
 EndPackage[]
 
