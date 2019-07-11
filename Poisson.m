@@ -190,11 +190,11 @@ PoissonAlgebra[name_, x_Symbol, opts___Rule] :=
         SVTimes[(-1)^P[f],VTimes[LDer[f,x[i],ptrn], ZLDer[x[n1-i],ptrn]]]~VPlus~
         SVTimes[-(-1)^(P[f]+P[x[i]]),VTimes[LDer[f,x[n1-i],ptrn],ZLDer[x[i],ptrn]]],
         {i,1,k}];
-    EulerOp$l[name] :=
+    EulerOp$l[name] ^:=
 	VSum[ VTimes[x[i], ZLDer[x[i],ptrn]], {i,1,n}];
     If [sqr,
-       Squaring[f_,Pb$l] := VSum[VTimes[LDer[f,x[i],ptrn], LDer[f,x[n1-i],ptrn]],{i,1,k}];
-       EulerOp$l[name,2] := VSum[ VTimes[x[i], ZLDer[x[i],ptrn]], {i,1,k}];
+       Pb$l /: Squaring[f_,Pb$l] := VSum[VTimes[LDer[f,x[i],ptrn], LDer[f,x[n1-i],ptrn]],{i,1,k}];
+       name /: EulerOp$l[name,2] := VSum[ VTimes[x[i], ZLDer[x[i],ptrn]], {i,1,k}];
     ];
   (* 011215: added enumeration and Basis[g, d] *)
      ReGrade[name, glist_] ^:= (ReGrade[x, glist]; ReGrade[name]);
@@ -218,17 +218,14 @@ poReGlist[basis_,r_] :=
            Homogen]]
 
 
-poBasis[x_, vt_, d_, min_, max_] :=
-  Flatten[Table[Outer[ct, GradeBasis[d - i, Basis[x], vt], Basis[dx, i]], {i, min, max}]]
-
 calcPoBasis[g_, x_, vt_, opts___Rule] :=
   Module[{d, b, i, xi, gi, x0, xn, enum, vars, mg},
     enum=KeyValue[{opts}, Enum];
     vars=KeyValue[{opts},Variables,{}];
     If[ListQ[x],
       b = Join@@Basis/@x;
-      x0 = x[[1]][1];
-      xn = x[[-1]][1],
+      x0 = b[[1]];
+      xn = b[[-1]],
     (*else*)
       b = Basis[x];
       x0 = x[1];
@@ -277,7 +274,7 @@ VTimes[LDer[f,x[form[[i,2]]],ptrn],LDer[g,x[form[[i,3]]],ptrn]]],
 	       
 VTimes[LDer[f,x[form[[i,2]]],ptrn],ZLDer[x[form[[i,3]]],ptrn]]],
 	       {i,1,nf}]];
-    EulerOp$l[name] :=
+    EulerOp$l[name] ^:=
 	VSum[ VTimes[x[i], ZLDer[x[i],ptrn], {i,1,n}]];
     name::usage ^= SPrint["`` is a Poisson algebra over ``", name, x]
   ]
@@ -355,7 +352,7 @@ PoissonAlgebra[name_, {x__}, opts___Rule] :=
 		{l,1,d}]]]
 	    ]]);
     SetDelayed @@ (rule /. Table[dd[i]->n[[i]],{i,1,r}]);
-    EulerOp$l[name] :=
+    EulerOp$l[name] ^:=
       Evaluate[VSum[
 		 With[{x1={x}[[i]], d=n[[i]]},
 	       Unevaluated[VSum[ VTimes[x1[l], ZLDer[x1[l],ptrn]], {l,1,d}]]],
@@ -374,7 +371,7 @@ PoissonAlgebra[name_, {x__}, opts___Rule] :=
 		{l,1,d}]] *)
 	    ]]);
         SetDelayed @@ (rule /. Table[dd[i]->n[[i]],{i,1,r}]);
-        EulerOp$l[name,2] := Evaluate[VSum[
+        name /: EulerOp$l[name,2] := Evaluate[VSum[
 		 With[{x1={x}[[i]], d=n[[i]]},
 	       Unevaluated[VSum[ VTimes[x1[l], ZLDer[x1[l],ptrn]], {l,1,d}]]],
 		 {i,1,r/2}]];
@@ -451,6 +448,7 @@ ContactAlgebra[name_, x_, t_, opts___] :=
        sqr = Squaring/.{opts}/.Squaring:>($p===2)},
   Module[{n=Dim[x], fm=form, m, parlist, idx, nind, v, ptrn},
     TrivialSpace[t];
+    Grade[t] ^= 2;
     If[
       PoissonAlgebra[name, x, Variables->Join[{t},Variables/.{opts}/.Variables->{}], opts]
       ===$Failed, Return[$Failed]];
@@ -473,6 +471,8 @@ ContactAlgebra[name_, x_, t_, opts___] :=
 	   Squaring[f,Pb$l]]];
     Bracket[name] ^= Kb$l; 
     bracket[name] ^= kb$l; 
+    ReGrade[name] ^:= calcPoBasis[name, x, VTimes, Variables->{t}, opts];
+    ReGrade[name];
     name::usage ^= SPrint["`` is a Contact algebra over `` and ``", name, x, t]
  ]
 ]
@@ -501,7 +501,9 @@ ButtinAlgebra[name_, {x_,y_}, opts___Rule] :=
         {i,1,n}]];
     PolyPattern[name]^=ptrn;
     If [sqr,
-      Squaring[f_,Bb$l] := VIf[P[f]==0,VSum[VTimes[LDer[f,x[i],ptrn],LDer[f,y[i],ptrn]]],{i,1,n}]];
+      Bb$l /: Squaring[f_,Bb$l] := VIf[P[f]==0,VSum[VTimes[LDer[f,x[i],ptrn],LDer[f,y[i],ptrn]],{i,1,n}]];
+      name /: EulerOp$l[name,2] := VSum[ VTimes[x[i], ZLDer[x[i],ptrn]], {i,1,n}];
+    ];
     Bb$l[f_,g_] := 
       VSum[
         SVTimes[(-1)^(P[f]P[x[i]]),VTimes[LDer[f,x[i],ptrn],LDer[g,y[i],ptrn]]]~VPlus~
@@ -543,10 +545,12 @@ NewBrace[Ob, "m.b.", 1, ob]
 
 OKAlgebra[name_, {x_, y_, t_}, opts___Rule] :=
  With[{Ob$l=Ob/.{opts}, ob$l=ob/.{opts}, Bb$l=Bb/.{opts},
-   EulerOp$l=EulerOp/.{opts}, 
+   sqr = Squaring/.{opts}/.Squaring:>($p===2),
+   EulerOp$l=EulerOp/.{opts},
    vars=Join[{t},Variables/.{opts}/.Variables->{}]},
   Module[{n=Dim[x], fm=form, m, parlist, idx, nind, v, ptrn},
     TrivialSpace[t,1];
+    Grade[t] ^= 2;
     If[ ButtinAlgebra[name, {x,y}, Variables->vars, opts]==$Failed,  Return[$Failed]];
 (*  BasisPattern[name] ^= BasisPattern[name] | t;  *)
 (*  PolyPattern[name] ^= ptrn = PolyPattern[name] | t;  *)
@@ -561,8 +565,17 @@ OKAlgebra[name_, {x_, y_, t_}, opts___Rule] :=
 	   VTimes[\[CapitalDelta][name][f], LDer[g,t,ptrn]],
 	   SVTimes[(-1)^P[f], VTimes[LDer[f,t,ptrn], \[CapitalDelta][name][g]]],
 	   SVTimes[-1, Bb$l[f,g]]];
-	Bracket[name] ^= Ob$l;
-	bracket[name] ^= ob$l;
+    If [sqr,
+      Ob$l /: Squaring[f_,Ob$l] :=
+        VIf[P[f]==0,
+          VPlus[
+            VTimes[\[CapitalDelta][name][f], LDer[f,t,ptrn]],
+            SVTimes[-1, Squaring[f, Bb$l]]]]
+    ];
+    Bracket[name] ^= Ob$l;
+    bracket[name] ^= ob$l;
+    ReGrade[name] ^:= calcPoBasis[name, {x,y}, VTimes, Variables->{t}, opts];
+    ReGrade[name];
     name::usage ^= SPrint["`` is an \"odd\" contact algebra over ``", name, {x, y, t}]
   ]  
 ]
