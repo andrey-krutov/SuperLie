@@ -325,36 +325,42 @@ nAssum[deg_,cf_] :=
 
 nAssum[0,cf_] = 0
 
-SolVars::assume = "M: Assuming ``  to solve 0 = ``"
+SolVars::assume = "Assuming ``  to solve 0 = ``"
 
     
 SolveSupportsPattern[_] = False;
 SolveSupportsPattern[SolVars] ^= True;
 
 GeneralSolve[equ_, v_, cf_, elim_:None] :=
-  Module[{cflist, sol, vars, excl},
-    cflist = MatchList[v, _cf];
+  Module[{cflist, sol, vars, excl, w},
+    w = ToGeneralSum[v,cf];
+    cflist = MatchList[w, _cf];
     If[SolveSupportsPattern[$Solve],
       vars = _cf;
       excl = If [elim===None, {}, _elim],
     (*else*)
       vars = cflist;
       excl = If [elim===None, {}, MatchList[equ, _elim]]];
-    sol = SVSolve[equ, vars, excl] [[1]];
-    cflist = Complement[cflist, First /@ sol];
-    v /. sol  /. SVNormalRule /. MapIndexed[(#1->cf[First[#2]])&, cflist]
+    sol = SVSolve[equ, vars, excl];
+    If[sol==={},
+      Message[GeneralSolve::nosol, equ]; $Failed,
+    (*else*)
+      sol = sol[[1]];
+      cflist = Complement[cflist, First /@ sol];
+      w /. sol  /. SVNormalRule /. MapIndexed[(#1->cf[First[#2]])&, cflist]]
   ]
 
 GeneralReduce[v_, cf_] :=
-  Module[{cflist, sol, cl1, cl2, repl, vars},
-    cflist = MatchList[v, _cf];
+  Module[{cflist, sol, cl1, cl2, repl, vars, w},
+    w = ToGeneralSum[v, cf];
+    cflist = MatchList[w, _cf];
     vars = If[SolveSupportsPattern[$Solve], _cf, cflist];
-    sol = SVSolve[v==0, vars] [[1]];
+    sol = SVSolve[w==0, vars] [[1]];
     cl1 = First /@ sol;             (* significant coefs *)
     cl2 = Complement[cflist, cl1];  (* unsignificant coefs *)
     repl = Join[ MapIndexed[(#1->cf[First[#2]])&, cl1],
                  (#1->0)& /@ cl2];
-    v /. repl
+    w /. repl
   ]
 
 End[];
