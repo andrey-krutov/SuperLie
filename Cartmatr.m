@@ -236,7 +236,7 @@ CartanMatrixAlgebra[g_, {x_, h_, y_}, cam_, opts___Rule] :=
     g/: Dim[g, r_/;r<0] := Dim[g,-r];
     Dim[x] ^= Dim[y] ^= dim;
     Dim[h] ^= nh;
-    Dim[g] ^= 2*dim+ngen;
+    Dim[g] ^= 2*dim+nh;
     If [gen$super,
       PList[x] ^= gen$par;
       P[x[i_]] ^:= PList[x][[i]];
