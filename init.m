@@ -2352,6 +2352,7 @@ If[$VersionNumber>=3.0,
     Get["SuperLie`Format2`"]
 ]
 
+(*
 If[$FrontEnd=!=Null && Notebooks["SuperLie"]==={},
 CreatePalette[{Cell[BoxData[
  ButtonBox["\<\"SuperLie Help\"\>",
@@ -2363,6 +2364,7 @@ CreatePalette[{Cell[BoxData[
          NotebookRead[$CellContext`nb]]]]}],
   Evaluator->Automatic,
   Method->"Preemptive"]], NotebookDefault]},WindowTitle->"SuperLie"]]
+*)
 
 Print["SuperLie Package Version 2.08 Beta 07 installed\nDisclaimer: This software is provided \"AS IS\", without a warranty of any kind"]
 
