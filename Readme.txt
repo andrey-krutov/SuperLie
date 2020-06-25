@@ -370,11 +370,19 @@ List of changes
 
 17mar19 ButtinAlgebra: added Squaring
 
-        New function: LeAlgebra (temporary name)
+        New function: LeitesAlgebra (with antibracket Sb)
 
         Fixed function Basis[g,n] for algebras on polynomials
         in case of divided powers
 
 ==============================================
 17mar19  Version 2.08 Beta 04
+==============================================
+
+==============================================
+16jul19  Version 2.08 Beta 05
+==============================================
+
+==============================================
+25jun20  Version 2.08 Beta 06
 ==============================================

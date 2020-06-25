@@ -69,25 +69,25 @@ VectScalQ = (VectorQ[#]||ScalarQ[#])&
 Vector[VTimes$,SVTimes$,VPlus$,VPower$]
 Scalar[Times$,Plus$,Power$]
 
-VectorQ[GPlus$[a__?VectorQ]] ^:= True
-ScalarQ[GPlus$[a__?ScalarQ]] ^:= True
+VectorQ[GPlus$[__?VectorQ]] ^:= True
+ScalarQ[GPlus$[__?ScalarQ]] ^:= True
 
-VectorQ[GTimes$[a___?VectScalQ, b_?VectorQ, c___?VectScalQ]] ^:= True
-ScalarQ[GTimes$[a__?ScalarQ]] ^:= True
+VectorQ[GTimes$[___?VectScalQ, _?VectorQ, ___?VectScalQ]] ^:= True
+ScalarQ[GTimes$[__?ScalarQ]] ^:= True
 
-VectorQ[GPower$[a_,b_]] ^:= VectorQ[a]
-ScalarQ[GPower$[a_,b_]] ^:= ScalarQ[a]
+VectorQ[GPower$[a_,_]] ^:= VectorQ[a]
+ScalarQ[GPower$[a_,_]] ^:= ScalarQ[a]
 
 
 Attributes[preVectorQ]^={HoldAll};
 Attributes[preScalarQ]^={HoldAll};
 Attributes[preVectScalQ]^={HoldAll};
 
-preVectorQ[GPlus$[a__?preVectorQ]] ^:= True
-preScalarQ[GPlus$[a__?preScalarQ]] ^:= True
+preVectorQ[GPlus$[__?preVectorQ]] ^:= True
+preScalarQ[GPlus$[__?preScalarQ]] ^:= True
 
-preVectorQ[GTimes$[a___?preVectScalQ, b_?preVectorQ, c___?preVectScalQ]] ^:= True
-preScalarQ[GTimes$[a__?preScalarQ]] ^:= True
+preVectorQ[GTimes$[___?preVectScalQ, _?preVectorQ, ___?preVectScalQ]] ^:= True
+preScalarQ[GTimes$[__?preScalarQ]] ^:= True
 
 preVectorQ[GPower$[a_,_]] ^:= preVectorQ[a]
 preScalarQ[GPower$[a_,_]] ^:= preScalarQ[a]
@@ -179,10 +179,10 @@ NewPower[power_, symbol_, texsymbol_] :=
      If[DivPowersQ[a,power],
        PrecedenceForm[Superscript[a,SequenceForm["(", symbol, n, ")"]], 190],
        PrecedenceForm[Superscript[a,SequenceForm[symbol, n]], 190]];
-   Format[power[a_,n_],TeXForm] :=
+(*   Format[power[a_,n_],TeXForm] :=
      If[DivPowersQ[a,power],
        PrecedenceForm[Superscript[a,SequenceForm["(", texsymbol, n, ")"]], 190],
-       PrecedenceForm[Superscript[a,SequenceForm[texsymbol, n]], 190]];
+       PrecedenceForm[Superscript[a,SequenceForm[texsymbol, n]], 190]]; *)
    MakeBoxes[power[a_,b__],ft_] ^:= 
      SuperscriptBox[PrecedenceBox[a, 590, ft], 
        If[DivPowersQ[a,power],
@@ -198,9 +198,9 @@ RemovePower[power_] :=
   ]
 
 
-NewPower[tPower, "\[CircleTimes]", "\\otimes"];
+NewPower[tPower, "\[CircleTimes]", "\[CircleTimes]"];
 
-NewPower[wPower, "\[Wedge]", "{\\wedge}"];
+NewPower[wPower, "\[Wedge]", "\[Wedge]"];
 
 (*
 MakeExpression[RowBox[{"\[Wedge]",a_}], form_] :=
@@ -218,7 +218,7 @@ NewSuperscript[name_, symb_, tex_:None] :=
   ($`supSymbol[name] ^= symb;
    $`supTeX[name] ^= tex;
    MakeExpression[SuperscriptBox[base_,symb],form_]:=
-	 MakeExpression[RowBox[{name,"[", base, "]"},form]];
+	 MakeExpression[RowBox[{name,"[", base, "]"}],form];
    MakeBoxes[name[base_],form_] ^:=
 	SuperscriptBox[MakeBoxes[base,form],symb];
    Format[name[base_],OutputForm] := base^symb;
@@ -241,7 +241,7 @@ RemoveSuperscript[name_] :=
 NewOverscript[name_, symb_, tex_:None] :=
   ($`overSymbol[name] ^= symb;
    MakeExpression[OverscriptBox[base_,symb],form_]:=
-	 MakeExpression[RowBox[{name,"[", base, "]"},form]];
+	 MakeExpression[RowBox[{name,"[", base, "]"}],form];
    MakeBoxes[name[base_],form_] ^:=
 	OverscriptBox[MakeBoxes[base,form],symb];
    Format[name[base_],OutputForm] := base^symb;
@@ -271,7 +271,7 @@ UseAsSymbol[expr:f_[x_Symbol,___]] :=
 UseAsSymbol[f_[x_Symbol,parm___],alias_]:=
   ( x/: f[x,parm]=alias;
     Format[alias]= HoldForm[f[x,parm]];
-    Format[alias,TeXForm]= HoldForm[f[x,parm]];
+(*    Format[alias,TeXForm]= HoldForm[f[x,parm]];*)
     Format[alias,StandardForm]= HoldForm[f[x,parm]];
     Format[alias,TraditionalForm]= HoldForm[f[x,parm]];
     If [ValueQ[$`supSymbol[f]],
@@ -323,8 +323,8 @@ Precedence[SVTimes] ^=399
 Precedence[VPower] ^=595
 
 SetProperties[VTimes, 
-	{ Output->InfixFormat["*", Prec->405],
-	  TeX->InfixFormat["{\\cdot}", Prec->148]
+	{ Output->InfixFormat["*", Prec->405] (*,
+	  TeX->InfixFormat["\[CenterDot]", Prec->148 ]*)
  } ]
 
 SignedForm[SVTimes[Times[n_/;n<0,s_.], v_]] :=
@@ -342,15 +342,15 @@ Format[VPower[a_,n_], OutputForm] :=
 Format[expr_SVTimes, OutputForm] := PrecedenceForm[Infix[expr, " ",150], 150]
 Format[SVTimes[-1,v_], OutputForm] := PrecedenceForm[Infix[{"-",v}, " ",150], 150]
 
-Format[VPlus[first_, next__], TeXForm] :=
+(*Format[VPlus[first_, next__], TeXForm] :=
 		PrecedenceForm[Infix[{first, SignedForm[next]}, " ", 140], 140]
-Format[expr_SVTimes,TeXForm] := PrecedenceForm[Infix[expr, "\\, ", 150], 150]
-Format[SVTimes[-1,v_],TeXForm] := PrecedenceForm[Infix[{"-",v}, "\\,", 150], 150]
+Format[expr_SVTimes,TeXForm] := PrecedenceForm[Infix[expr, "\[ThinSpace]", 150], 150]
+Format[SVTimes[-1,v_],TeXForm] := PrecedenceForm[Infix[{"-",v}, "\[ThinSpace]", 150], 150]
 Format[VPower[a_,n_], TeXForm] :=
   If[DivPowersQ[a],
     PrecedenceForm[Superscript[a,SequenceForm["(",n,")"]], 190],
     PrecedenceForm[Superscript[a,n], 190]];
-
+*)
 
 MakeBoxes[VPlus[a_,b__],ft_] ^:= 
   RowBox[{MakeBoxes[a, ft], SignedBoxes[b,ft]}]
@@ -381,17 +381,16 @@ MakeBoxes[SVTimes[-1,x_],ft_] ^:=
 
 (* tp, tPower *)
 
-
+(*
 SetProperties[CircleTimes,
-	{ (*Output->InfixFormat["#", Prec->145],*)
-	  TeX->InfixFormat["{\\otimes}", Prec->398]
+	{ Output->InfixFormat["#", Prec->145],
+	  TeX->InfixFormat["\[CircleTimes]", Prec->398]
  } ]
 
-(*
 Format[tPower[a_,n_],OutputForm] :=
   PrecedenceForm[Superscript[a,SequenceForm["\[CircleTimes]", n]], 190]
 Format[tPower[a_,n_],TeXForm] :=
-  PrecedenceForm[Superscript[a,SequenceForm["\\otimes", n]], 190]
+  PrecedenceForm[Superscript[a,SequenceForm["\[CircleTimes]", n]], 190]
  Infix[{a, SequenceForm["^{*",n,"}"]}, "", 190]
 
 MakeBoxes[tPower[a_,b__],ft_] ^:= 
@@ -401,13 +400,12 @@ MakeBoxes[tPower[a_,b__],ft_] ^:=
 
 (* wedge *)
 
-
+(*
 SetProperties[Wedge,
-	{ (*Output->InfixFormat["\[Wedge]", Prec->145],*)
-	  TeX->InfixFormat["{\\wedge}", Prec->397]
+	{ Output->InfixFormat["\[Wedge]", Prec->145],
+	  TeX->InfixFormat["\[Wedge]", Prec->397]
  } ]
 
-(*
 Format[ePower[a_,n_]] := Superscript[a, "\[Wedge]",n] (*, 190]*)
 Format[ePower[a_,n_],TeXForm] :=
 		Infix[{a, SequenceForm["^{{\wedge}", n, "}"]}, "", 190]

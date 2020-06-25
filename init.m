@@ -17,7 +17,8 @@ DeclarePackage["SuperLie`Generate`", {"GenRel", "GenBasis", "GRange", "ToDegree"
 
 DeclarePackage["SuperLie`Genvect`", {"GeneralSum", "GeneralSolve", "GeneralZero",
     "GeneralReduce", "GeneralPreImage", "GeneralBasis", "GeneralImage", "GeneralKernel",
-    "GeneralInverseImage", "GeneralPlus", "GeneralDim", "GeneralAct", "GeneralIntersection"}]
+    "GeneralInverseImage", "GeneralPlus", "GeneralDim", "GeneralAct", "GeneralIntersection",
+    "ImageBasis", "ReduceBasis"}]
 
 DeclarePackage["SuperLie`Gl`", {"glAlgebra", "slAlgebra", "pslAlgebra" }]
 
@@ -311,7 +312,7 @@ SuperLie`TestFirstRule::usage =
  "TestFirstRule[f] is the replacement rule f[x1+...] -> f[x1]."
 
 SuperLie`LogPower::usage = SuperLie`UnLogPower::usage =
- "LogPower[f] is the property f[x^p] = p*f[x]. LogPower[f->tms] is
+ "LogPower[f] is the property f[x^p] = p*f[x]. LogPower[f->tm] is
 f[x^p] = tm[p, f[x]]."
 
 SuperLie`LogPowerPule::usage =
@@ -352,7 +353,9 @@ of the space basis.
 UnOutput[v] cancels the definition given by Output."  
 
 SuperLie`TeX::usage = SuperLie`UnTeX::usage =
- "TeX[v->f] defines the format of v[...] in TeXForm as f[v[...]].
+ "The function TeX is obsolete. Mathematica generates TeX forms by converting
+the Traditional forms of expressions.
+TeX[v->f] defines the format of v[...] in TeXForm as f[v[...]].
 The space constructor option TeX->f defines the TeX output format of the elements
 of the space basis.
 UnTeX[v] cancels the definition given by TeX."
@@ -382,8 +385,9 @@ SuperLie`WithUnique::usage =
 with the new symbols with unique names." 
 
 SuperLie`UniqueCounters::usage =
-  "UniqueCounters[expr] return the expr with all counters in all sums and
-tables replaced with unique symbols."
+  "UniqueCounters[expr] returns the expr with all counters in all sums and
+tables replaced with unique symbols. UniqueCounters[] returns the list of unique
+counters defined in the lats call of UniqueCounters[expr]."
 
 
 SuperLie`SimplifySignRule::usage =
@@ -1406,8 +1410,10 @@ UniqueCounters[expr_] :=
 ( ui$list = {};
   ui$res = UniqueCountersScan[expr];
   ui$list = Flatten[ui$list];
-  UniqueCounters[ui$list, ui$res]
+  ui$res
 )
+
+UniqueCounters[] := ui$list;
 
 UniqueCountersScan[(hd:VSum|Sum|Table)[exi_,iter__]] :=
  (ui$tmp = UniqueCountersScan[exi];
@@ -1627,7 +1633,7 @@ SetProperties[wPower, {Vector, Vector->First, Scalar->Last}]
 
 
 Format[wedge[x___],OutputForm] := HoldForm[Wedge[x]]
-Format[wedge[x___],TeXForm] := HoldForm[Wedge[x]]
+(*Format[wedge[x___],TeXForm] := HoldForm[Wedge[x]]*)
 
 MakeBoxes[x_wedge, fmt_] ^:= InfixBoxes[x, "\[Wedge]", 440, "I", fmt];
 
@@ -1849,7 +1855,7 @@ Attributes[NonCommutativeMultiply] = {OneIdentity};
 SetProperties[NonCommutativeMultiply,
        {Vector, Vector->__, Graded, ZeroArg, (* IdArg, Linear*) DegTimes,
 		Output->InfixFormat["><", Prec->150, Empty->"I"],
-		TeX->InfixFormat["\\otimes ", Prec->150, Empty->"I"] } ]
+		TeX->InfixFormat["\[CircleTimes]", Prec->435, Empty->"I"] } ]
 
 
 (*Default[NonCommutativeMultiply] := Id*)
@@ -1998,15 +2004,17 @@ FDim[v_] :=
 Bracket::undef = "Action of \"``\" on \"``\" not defined."
 Options[NewBracket] ^= {Parity->0, Grade->0,
         Symbol->Auto, Output->ArgForm["[`1`,`2`]"],
-	Standard->SeqForm["[",#1,",\[ThinSpace]",#2,"]"],
-	Traditional->SeqForm["[",#1,",\[ThinSpace]",#2,"]"],
-	TeX->SeqForm["[",#1,",\[ThinSpace]",#2,"]"]
+	Standard->SeqForm["[",#1,",","\[ThinSpace]",#2,"]"],
+	Traditional->SeqForm["[",#1,",","\[ThinSpace]",#2,"]"](*,
+	TeX->SeqForm["[",#1,",","\[ThinSpace]",#2,"]"]*)
  }
 
 (*ArgForm[form_] := StringForm[form, Sequence@@#]&  *)
 (*SeqForm[form__] := (SequenceForm[form]& @@ #)&  *)
 ArgForm[form_] := Function[ex, StringForm[form, Sequence@@Unevaluated[ex]], {HoldAll}]
 SeqForm[form__] := Function[ex,(SequenceForm[form]& @@ Unevaluated[ex]), {HoldAll}]
+SeqForm[form__, Subscript->sub_] :=
+ Function[ex, Subscript[SequenceForm[form] & @@ Unevaluated[ex], sub], {HoldAll}]
 
 NewBracket[Brk_,opts___] :=
 Module[{brk, str, cap, p, gr},
@@ -2029,7 +2037,7 @@ Module[{out, tex, std, trad},
   {out,tex,std,trad} = {Output, TeX, Standard, Traditional} /.
 			 {opts} /. Options[NewBracket];
   SetProperties[{Brk, brk},
-		{ Vector, Vector->__, Linear, Graded, Output->out, TeX->tex,
+		{ Vector, Vector->__, Linear, Graded, Output->out, (*TeX->tex,*)
 		        Grade->gr, Parity->p, DegTimes,
 			Standard->std, Traditional->trad }];
   OpSymbol[Brk] ^= brk;
@@ -2073,14 +2081,13 @@ Weight[Squaring[x_,_]] ^:= 2*Weight[x];
 Squaring[x_VPlus,brk_] :=
   VPlus[Squaring[#,brk]& /@ x, VSum[brk[x[[i]],x[[j]]], {j,Length[x]},{i,1,j-1}]]
 
-    
 Squaring[VIf[x_,cond_], brk_] := VIf[Squaring[x,brk], cond]
 
 Squaring[e:VSum[x_,iter__],brk_] :=
-  VPlus[VSum[Squaring[x,brk],iter], SubdiagonalOuter[UniqueCounters[e][[2]], e, brk]]
+  VPlus[VSum[Squaring[x,brk],iter], SubdiagonalOuter[UniqueCounters[e], e, brk]]
 
 MakeBoxes[Squaring[x_, _], form_] ^:= SuperscriptBox[$`PrecedenceBox[x, 590, form], "[2]"]
-  
+
 SubdiagonalOuter[VSum[x_,xiter_], VSum[y_,yiter_], brk_, iter___] :=
   With[{siter=SubdiagonalIter[xiter, yiter]},
     VSum[brk[x,y], iter, siter]]
@@ -2345,7 +2352,6 @@ If[$VersionNumber>=3.0,
     Get["SuperLie`Format2`"]
 ]
 
-(*
 If[$FrontEnd=!=Null && Notebooks["SuperLie"]==={},
 CreatePalette[{Cell[BoxData[
  ButtonBox["\<\"SuperLie Help\"\>",
@@ -2357,9 +2363,8 @@ CreatePalette[{Cell[BoxData[
          NotebookRead[$CellContext`nb]]]]}],
   Evaluator->Automatic,
   Method->"Preemptive"]], NotebookDefault]},WindowTitle->"SuperLie"]]
-*)
 
-Print["SuperLie Package Version 2.08 Beta 04 installed\nDisclaimer: This software is provided \"AS IS\", without a warranty of any kind"]
+Print["SuperLie Package Version 2.08 Beta 06 installed\nDisclaimer: This software is provided \"AS IS\", without a warranty of any kind"]
 
 EndPackage[]
 

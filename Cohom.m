@@ -67,6 +67,9 @@ SuperLie`Cohom`chCalcMore::usage=
 r-cohomologies and prints the results. chCalcMore[] calculates one (next)
 cohomology. chCalcMore[-r] is equivalent to chCalcMore[r] but uses less memory and does not support further chCalcMore"
 
+SuperLie`Cohom`chQuot::usage="chQuot[q,d,r] builds q=ker/im as a qoutient module over algebra g0"
+SuperLie`Cohom`chBookQ::usage="chBookQ[v] stores the cocycle that represents the cohomology v built by chQuot[...]
+  and returns this cocycle converted to output format. chBookQ[v1,v2,...] stores multiple cosycles with same weight."
 
 SuperLie`Cohom`ch$M::usage="The module of differential forms"
 SuperLie`Cohom`ch$Wt::usage="The name of the weight function relative to Cartan subalgebra of g0. Default is Weight."
@@ -326,6 +329,27 @@ Vector[ch$M];
 TheAlgebra[ch$M] ^= ch$g0;
 BasisPattern[ch$M] ^= _Tp;
 Bracket[ch$M] ^:= Bracket[ch$g0];
+
+chQuot[q_, d_, r_] :=
+  Module[{im, ker},
+    ker = Flatten[GeneralBasis[#[[2, 1]], ch$c] & /@ ch$res[d, r]];
+    im = Flatten[GeneralBasis[#[[2, 2]], ch$b] & /@ ch$res[d, r - 1]];
+    QuotientModule[q, ch$M, im, Module -> ker,Split\[Rule]ch$Split]]
+
+chBookQ[v_, vv___] :=
+ Module[{d = Grade[v], w = Weight[v], q = TheModule[v], rep, r, ker},
+  rep = MappingRule[ch$M, q];
+  r = rep[[1, 1]];
+  If[Head[r] === Tp, r = r[[2]]];
+  r = Length[r];
+  ker = (w /. ch$res[d, r])[[1]];
+  ch$book[d, r, w] =
+   If[Length[{vv}] > 0,
+    (GeneralSolve[# == ker /. rep, ker, $`ch$c] /. _$`ch$c ->
+         0) & /@ {v, vv},
+    (*else*)
+    GeneralSolve[v == ker /. rep, ker, $`ch$c] /. _$`ch$c -> 0];
+  Thread[ch$Out[ch$book[d, r, w]]]]
 
 chExMod[deg_, d_, gen_:ch$gen] := 
   With[{imgen = Flatten[(GeneralBasis[#1[[2, 2]], ch$b] &) /@ ch$res[deg, d - 1]],

@@ -25,7 +25,7 @@ Begin["$`"]
 
 
 glAlgebra[g_, vect_Symbol, opts___Rule ] :=
-  Module [{v, prop, emode},
+  Module [{prop, emode},
     prop = UnionKeys[{opts}, Options[Algebra], Options[VectorSpace] ];
     With[ {dm=Dim[vect],brk = KeyValue[ prop, Bracket]},
       Define[g, {Vector, BasisPattern->(_g), TheSpace->vect}];
@@ -89,7 +89,7 @@ glAlgebra[g_, vect_Symbol, opts___Rule ] :=
 
 
 slAlgebra[g_, vect_Symbol, opts___Rule ] :=
-  Module [{i, v, prop, brk, emode, attrVIf = Attributes[VIf]},
+  Module [{i, v, attrVIf = Attributes[VIf]},
     glAlgebra[g, vect, opts];
     With[ {dm=Dim[vect], brk=Bracket[g]},
       Attributes[VIf] = {};
@@ -109,7 +109,7 @@ slAlgebra[g_, vect_Symbol, opts___Rule ] :=
 		VIf[i+1==k, (-(-1)^(P[vect[i]]+P[vect[i+1]]))~SVTimes~g[k,l]],
 		VIf[i==l, (-1)~SVTimes~g[k,l]],
 		VIf[i+1==l, ((-1)^(P[vect[i]]+P[vect[i+1]]))~SVTimes~g[k,l]] ];
-      brk[ y:g[k_,l_], x:g[i_] ] ^:= (-1) ~SVTimes~ brk[x,y];
+      brk[ y:g[_,_], x:g[_] ] ^:= (-1) ~SVTimes~ brk[x,y];
       If[ IntegerQ[Enum[g]],
 	g/: Enum[g, 1] = { 0 :> Table[g[i], {i, dm-1}] }
       ];
@@ -135,7 +135,7 @@ slAlgebra[g_, vect_Symbol, opts___Rule ] :=
   ]
 
  slAlgebra[ name_, opts___Rule ] :=
-   Module [ {vect, covect},
+   Module [ {vect},
       VectorSpace[vect, opts(*, CoLeft->covect*)];
       Relatives[vect] ^= {vect, None, None, None, None, None, None, None};
       slAlgebra[name, vect]
@@ -151,7 +151,7 @@ pslPrj[g_, j_, m_, mr_, js_] :=
 	VSum[((m+js-k)/m) ~SVTimes~ g[ mr[[k]] ], {k, j, m+js-1}]
 
 pslAlgebra[g_, vect_Symbol, opts___Rule ] :=
-  Module [{i, v, prop, emode, k, p, mr, sep, next},
+  Module [{i, prop, emode, k, p, mr, sep, next},
     If [PDim[vect][[1]] != PDim[vect][[2]],
 	Message[pslAlgebra::dim];
 	Return[]

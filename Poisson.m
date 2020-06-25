@@ -114,9 +114,8 @@ ptrnPoly[ptrn_] := Flatten[_VTimes|_VPower|ptrn];
 NewBrace[Op_, txt_, p_:0, op_:None] :=
  (SetProperties[If[op===None, Op, {Op, op}], {Vector, Vector->__, Linear,
  	Output->ArgForm["{``,``}"], 
-        Traditional->SeqForm[
-		SequenceForm["{", #1,",\[ThinSpace]", #2, "}", Subscript[txt]]],
-	TeX->SeqForm["\\left\\{",#1,",\\,",#2, "\\right\\}_{",txt,"}"] }];
+        Traditional->SeqForm["{", #1,",","\[ThinSpace]", #2, "}", Subscript->txt](*,
+	TeX->SeqForm["{",#1,",","\[ThinSpace]",#2, "}", Subscript->txt]*) }];
   P[Op] ^= p;
   P[Op[x_,y_]] ^:= pPlus[P[x],P[y],p];
   Parity[Op[x_,y_]] ^:= pPlus[Parity[x],Parity[y],p];
@@ -162,7 +161,7 @@ Jacobi[Pb->CircleTimes]
 (* Poisson Algebra, the case of  single component and standard form *)
 
 PoissonAlgebra::dim = "The dimension of `` should be even";
-PoissinAlgebra::parity = "The elements `` and `` should have equal parities";
+PoissonAlgebra::parity = "The elements `` and `` should have equal parities";
 
 PoissonAlgebra[name_, x_Symbol, opts___Rule] :=
   With[{n=Dim[x],n1=Dim[x]+1,k=Dim[x]/2, Pb$l=Pb/.{opts}, pb$l=pb/.{opts},
@@ -385,7 +384,7 @@ PoissonAlgebra[name_, {x__}, opts___Rule] :=
  ]
 
 poReGradeM[x_,r_] :=
- Module[{i, j, xi, xj, bsi, k, gl, sgn=1, rt=r},
+ Module[{i, j, xi, xj, gl, sgn=1, rt=r},
    If [r<0,	 x = poRev[x]; sgn = -1; rt = -r];
    For[i=1;j=Length[x], i<j, i++;j--,
      xi = x[[i]];
@@ -615,7 +614,7 @@ NewBrace[Rb, "R.b.", 0, rb]
 
 RamondAlgebra[name_, {x_, th_, t_}, opts___Rule] :=
  With[{Rb$l=Rb/.{opts}, rb$l=rb/.{opts}, Mb$l=Mb/.{opts}, EulerOp$l=EulerOp/.{opts}},
-  Module[{n=Dim[x], fm=form, m, parlist, idx, nind, v, ptrn, possonH},
+  Module[{n=Dim[x], ptrn},
     If[ MoebiusAlgebra[name, {x, th, t}, HamiltonianH->poissonH, opts]==$Failed, 
       Return[$Failed]];
     ptrn = PolyPattern[name];

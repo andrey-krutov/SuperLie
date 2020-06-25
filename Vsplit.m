@@ -56,6 +56,14 @@ SuperLie`Vsplit`ApplySplit::usage =
  "ApplySplit[func, expr, args...] applies function \"func\" to terms of splitted
 sum or list."
 
+SuperLie`Vsplit`ThreadSplit::usage =
+ "ThreadSplit[func, {expr1, ..., exprn}] applies function \"func\" with n arguments
+to terms with matching selectors of the splitted sums or lists expr1, ... exprn.
+If a term is missing in some of splitten expression, the default argument of func is
+used instead (or 0, if no default argument is defined).
+ThreadSplit[func, {expr1, ..., exprn}, {default1,...,defaultn}] specifies the defaults
+explisitly"
+
 SuperLie`Vsplit`MapSplit::usage =
  "MapSplit[func, expr] applies function \"func\" to member of lists -
 terms of splitted list."
@@ -181,6 +189,24 @@ MapSplit[func_, expr_] :=
 
 
 PartSplit[expr_, sel_, miss_:0] := With[{f=Cases[expr,_[sel,_]]},If[f==={},miss,f[[1,2]]]]
+
+Module[{n, def, TermFn},
+ TagSplitTerms[expr_, part_] := ApplySplit[List[part[[1]], #] &, expr];
+ ThreadSplit[fn_, exprs_] :=
+  (n = Length[exprs];
+   def = Table[
+     If[Head[Default[fn, i, n]]===Default, 0, Default[fn, i, n]], {i, n}];
+   MergeSplit[fn[TermFn[{##}]] &,
+    Sequence @@ MapIndexed[TagSplitTerms, exprs, {1}]]);
+ ThreadSplit[fn_, exprs_, default_] :=
+  (n = Length[exprs];
+   def = default;
+   MergeSplit[fn[TermFn[{##}]] &,
+    Sequence @@ MapIndexed[TagSplitTerms, exprs, {1}]]);
+ TermFn[args_] :=
+  Module[{m = def}, (m[[#[[1]]]] = #[[2]]) & /@ args;
+   Sequence @@ m]
+ ]
 
 End[]
 EndPackage[]

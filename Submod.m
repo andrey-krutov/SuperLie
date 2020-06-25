@@ -2,7 +2,7 @@
 
 (********************* SubModule **************************)
 BeginPackage["SuperLie`Submod`",
- {"SuperLie`", "SuperLie`Space`", "SuperLie`Vsplit`", "SuperLie`Domain`"}]
+ {"SuperLie`", "SuperLie`Space`", "SuperLie`Vsplit`", "SuperLie`Domain`", "SuperLie`Genvect`"}]
 
 SuperLie`Submod`SubModule::usage = 
  "SubModule[sub, in, {gen,..}] - defines the submodule \"sub\" of
@@ -310,11 +310,12 @@ QuotientModule::mod = "The argument `` should be a submodule name or a basis (li
 
 QuotientModule[n_, in_, sub_, opts___Rule]:=
   Module[ {i, j, dim, dima, dimn, dimp, eq, ee, seq, tbl, tbr, ptrn, alg, img=el,
-            wholebas, subbas, s, abas, gr, eqgr, seqgr, whole, split},
+            wholebas, subbas, s, abas, gr, eqgr, seqgr, whole, sqrn, split,c},
     With[{alg = Algebra /. {opts} /. Algebra->TheAlgebra[in],
           mapping = Mapping /. {opts}},
       DPrint[1, "Building graded quotient ",alg,"-module"(*, n, "=", in,"/",sub*)];
       whole = Module/.{opts}/.Module->None;
+      sqrn = Squaring/.{opts}/.Squaring:>($p===2);
       split = Split/.{opts}/.Split->None;
       ideal = (Ideal/.{opts})===True;
       Vector[n,s];
@@ -345,14 +346,14 @@ QuotientModule[n_, in_, sub_, opts___Rule]:=
         (*seq = ApplySplit[ VSolve[#,MatchList[eq, ptrn]][[1]]&, eq];*)
         seq = ApplySplit[ (DPrint[5,#];VSolve[#,MatchList[#, ptrn]][[1]])&, eq];
         DPrint[4, "Solutions: ", seq];
-        seq = Join @@ (Last /@ seq)    (* non-splitted system *)
+        seq = Join @@ (Last /@ seq);    (* non-splitted system *)
       ];
       subin =  First /@ seq;   (* representants of sub's basis in the in's basis *)
       DPrint[4, "subin = ", subin];
-      factin = Complement[wholebas, subin];  (* representants of quotient's basis in the in's basis *)
+      factin = ReduceBasis[wholebas /. Dispatch[seq/._s->0]];
       DPrint[4, "factin = ", factin];
       dimn = Length[factin];
-      proj = Table[factin[[i]]->n[i], {i, dimn}];
+      proj = VSolve[Table[factin[[i]]==n[i], {i, dimn}],MatchList[factin,ptrn]][[1]];
       DPrint[4, "Proj= ", proj];
 	  eq = LinearChange[Last /@ seq, proj] /. _s->0;
 	  eq = VNormal /@ eq;
@@ -392,8 +393,8 @@ QuotientModule[n_, in_, sub_, opts___Rule]:=
       If [ideal,
         ActTable[n] ^= Table[ VNormal[LinearChange[Act[factin[[j]],factin[[i]]], proj]],
                              {i,dimn}, {j,i}];
-        SqrTable[n] ^= Table[ If[P[n[i]]==0, None, VNormal[LinearChange[Squaring[factin[[i]],Act], proj]]],
-               {i,dimn}];
+        If[sqrn, SqrTable[n] ^= Table[ If[P[n[i]]==0, None, VNormal[LinearChange[Squaring[factin[[i]],Act], proj]]],
+               {i,dimn}]];
         TheAlgebra[n] ^= n;
         TableBracket[n, Act, Unevaluated[ActTable[n]], None, Infinity, Unevaluated[SqrTable[n]]];
         BracketMode[n] ^= Tabular;

@@ -61,10 +61,10 @@ CartanMatrixAlgebra::ngen =
 
 
 CartanMatrixAlgebra[g_, {x_, h_, y_}, cam_, opts___Rule] :=
-  Module[{i,j, rel={}, jrel={}, d, options,
-	  l, lr, z={}, pz={}, k, eq={}, adl={}, ad0, y0, cf, rr, rep, zs, cdim,
-	  s, sv, srel, an, ca, na, q, r, t, z0, zt, pzt, j1={1}, sm, adQ, dim,
-	  maxrng=2, inv, refl, rn, opt, opth, stdGrade, nh },
+  Module[{i,j, options,
+	  k, eq={}, y0, cf,zs, cdim,
+	  srel, an, ca, r, dim,
+	  inv, refl, rn, opt, opth, stdGrade, nh },
     Scalar[cf];
     Clear["$`gen$*"];
 
@@ -76,7 +76,7 @@ CartanMatrixAlgebra[g_, {x_, h_, y_}, cam_, opts___Rule] :=
     Algebra[x, Enum->False, BracketMode->Tabular, Bracket->Act, Sequence@@opt];
     Algebra[h, Enum->False, BracketMode->Tabular, Bracket->Act, Sequence@@opth];
     Algebra[y, Enum->False, BracketMode->Tabular, Bracket->Act, Sequence@@opt];
-    Define[g, {Vector, Output->Subscripted, TeX->Subscripted,
+    Define[g, {Vector, Output->Subscripted, (*TeX->Subscripted,*)
 		Standard->Subscripted, Traditional->Subscripted}];
 (*    Vector[gen$var]; *)
 

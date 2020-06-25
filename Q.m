@@ -60,6 +60,7 @@ qAlgebra[g_, {x_,y_}, dim_, opts___] :=
       Components[g] ^= {{x, 2, {{#1,1,dim},{#2,1,dim}}&, True&},
 			{y, 2, {{#1,1,dim},{#2,1,dim}}&, True&}};
       BracketMode[g] ^= Regular;
+      TheAlgebra[g] ^= g;
       g::usage = SPrint["`` = q(``)", g, dim ]
   ]
 

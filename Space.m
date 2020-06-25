@@ -14,7 +14,7 @@ SuperLie`Space`TrivialSpace::usage =
  TrivialSpace[name,1] define trivial odd space";
 
 Options[VectorSpace] ^=
-  { Output->Subscripted, TeX->Subscripted, Standard->Subscripted,
+  { Output->Subscripted, (*TeX->Subscripted,*) Standard->Subscripted,
     Traditional->Subscripted, SuperLie`Enum`Enum->Auto }
 Options[Algebra] ^= { Bracket->Act }
 
@@ -395,7 +395,7 @@ NewRelative[rel_, old_->new_, opts___Rule] :=
     {outform, texform, stdform, tradform} =
 	 {Output,TeX,Standard,Traditional} /. {opts} /. Options[NewRelative];
     relativeFormat[old, new, outform, OutputForm];
-    relativeFormat[old, new, texform, TeXForm];
+  (*  relativeFormat[old, new, texform, TeXForm]; *)
     relativeFormat[old, new, stdform, StandardForm];
     relativeFormat[old, new, tradform, TraditionalForm];
     If [ IntegerQ[Enum[old]],

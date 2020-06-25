@@ -150,7 +150,7 @@ StepGeneration[g_, deg_, rng_, Brk_, brk_, sqr_:False] :=
 (* version with generators with different gradings *)
 
 StepGenerationVG[g_, grade_, deg_, rng_, Brk_, brk_, sqr_:False] :=
-  Module[{ q, s, t, vars, jac, sol, solj={}, prevtmp, hl, i, j, k, l, mgr, g1, g2, g3},
+  Module[{ q, s, t, vars, jac, sol, solj={}, prevtmp, hl, i, j, k, l, g1, g2, g3},
 (* extend the tables of commutators and squares*)
       Clear[gen$var];
       VectorQ[gen$var]^=True;

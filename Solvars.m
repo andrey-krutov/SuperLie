@@ -250,11 +250,8 @@ SolVars[equs_, ptrn_] :=
           If[ListQ[$ParamAssume],
              If[!TrueQ[Reduce[Implies[And@@$ParamAssume, cfn!=0]]],
                  AppendTo[$ParamAssume, cfn!=0];
-                 (*                 Print["SolVars: Assuming ", StyleForm[cfn!=0,FontColor->Blue], " to solve 0 = ", exprList[[sInd]]]*)
-                 Message[SolVars::assume, StyleForm[cfn!=0,FontColor->Blue], exprList[[sInd]]]
-             ],
-             (*Print["SolVars: Assuming ", StyleForm[cfn!=0,FontColor->Blue], " to solve 0 = ", exprList[[sInd]]]]];*)
-             Message[SolVars::assume, StyleForm[cfn!=0,FontColor->Blue], exprList[[sInd]]]]];
+                 Print["SolVars: Assuming ", StyleForm[cfn!=0,FontColor->Blue], " to solve 0 = ", exprList[[sInd]]]],
+             Print["SolVars: Assuming ", StyleForm[cfn!=0,FontColor->Blue], " to solve 0 = ", exprList[[sInd]]]]];
         exprList = DeleteCases[$SNormal[Drop[exprList, {sInd}] /. sol], 0];
         sols = Join[sols /. sol, sol],
       (*else*)
@@ -300,13 +297,9 @@ SolVars[equs_, ptrn_, p_] :=
                cfni = modReduce[cfn[[i]]!=0,$p];
                If[!TrueQ[Reduce[Implies[And@@$ParamAssume, cfni]]],
                  AppendTo[$ParamAssume, cfni];
-(*                 Print["SolVars: Assuming ", StyleForm[cfni/.Mod[u_,_]:>u,FontColor->Blue],
-                       " to solve 0 = ", exprList[[sInd]]/.{sVar->StyleForm[sVar,FontColor->Red]}]*)
-                 Message[SolVars::assume, StyleForm[cfni/.Mod[u_,_]:>u,FontColor->Blue], exprList[[sInd]]/.{sVar->StyleForm[sVar,FontColor->Red]}]
-               ]],
-             (*             Print["SolVars: Assuming ", StyleForm[cfn!=0,FontColor->Blue], " to solve 0 = ", exprList[[sInd]]*)
-             Message[SolVars::assume, StyleForm[cfn!=0,FontColor->Blue], exprList[[sInd]]]
-             ]];
+                 Print["SolVars: Assuming ", StyleForm[cfni/.Mod[u_,_]:>u,FontColor->Blue], " to solve 0 = ", exprList[[sInd]]/.
+                         {sVar->StyleForm[sVar,FontColor->Red]}]]],
+             Print["SolVars: Assuming ", StyleForm[cfn!=0,FontColor->Blue], " to solve 0 = ", exprList[[sInd]]]]];
         exprList = $SNormal[Drop[exprList, {sInd}] /. sol];
         sols = $SNormal[Join[sols /. sol, sol]];
         DPrint[3,"sol: ", sols],

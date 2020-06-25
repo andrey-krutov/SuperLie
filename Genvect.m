@@ -70,6 +70,16 @@ representing the intersection of the spaces represented by v1, ..., vn"
 SuperLie`Genvect`GeneralDim::usage =
 "GeneralDim[v, cf] returns the number of the indeterminate coefficients in expression v"
 
+(***** Operations on vector lists implemented via general sums ********)
+
+SuperLie`Genvect`ImageBasis::usage =
+"ImageBasis[f, v] calculates the image f[V] of a space V under the action
+of operator f:V->W. The space V and the result are given as lists of vectors.
+If f is a list of operators, ImageBasis returns the sum of their images."
+
+SuperLie`Genvect`ReduceBasis::usage =
+"ReduceBasis[{v1,...,vn}] return a basis of <v1, ..., vn> as a list of vectoes."
+
 Begin["$`"]
 
 (********** Aux functions *********)
@@ -83,7 +93,7 @@ ToGeneralSum[e:List[__Rule], cf_] := ApplySplit[ToGeneralSum, e, cf];
  *)
 
 GeneralSum[coef_, expr_] := 
- ( SetProperties[coef, {Scalar,Standard->Subscripted,Traditional->Subscripted,TeX->Subscripted}];
+ ( SetProperties[coef, {Scalar,Standard->Subscripted,Traditional->Subscripted(*,TeX->Subscripted*)}];
    VPlus @@ MapIndexed[(coef[First[#2]]~SVTimes~#1)&, expr]
  )
 GeneralSum[coef_, expr:List[__Rule]] := ApplySplit[GeneralSum[coef, #]&, expr]
@@ -113,6 +123,9 @@ GeneralKernel[f_, v_, cf_] := GeneralSolve[f[v]==0, v, cf]
 GeneralImage[f_List, v_, cf_] := With[{s=ToGeneralSum[v,cf]}, GeneralReduce[VSum[f[[i]][s/.cf[j_]:>cf[i,j]],{i,Length[f]}],cf]]
 GeneralImage[f_, v_, cf_] := GeneralReduce[f[ToGeneralSum[v,cf]], cf]
 
+(*GeneralImage[f_List, v:List[__Rule], cf_] := DeleteCases[ApplySplit[GeneralImage[f, #, cf]&, v], _->0]*)
+GeneralImage[f_, v:List[__Rule], cf_] := DeleteCases[ApplySplit[GeneralImage[f, #, cf]&, v], _->0]
+
 (******************** GeneralInverseImage ***************)
 (*  Given to spaces X and Y represented as general sum and
  * a linear function f:X->Y or a list of such functions,
@@ -135,7 +148,7 @@ GeneralInverseImage[f_, x_, cx_, y_, cy_] :=
  *)
 
 GeneralZero[g_List, v_, cf_, op___] := Fold[GeneralZero[#2, #1, cf, op]&, ToGeneralSum[v,cf], g]
-GeneralZero[g_, v:List[__Rule], cf_, op___] := DeleteCases[ApplySplit[GeneralZero[g, #, cf, op]&, v], _->0]   
+GeneralZero[g_, v:List[__Rule], cf_, op___] := DeleteCases[ApplySplit[GeneralZero[g, #, cf, op]&, v], _->0]
 GeneralZero[g_, v_, cf_, op_:Act] :=
   With[{w=ToGeneralSum[v,cf]}, GeneralSolve[op[g,w]==0, w, cf]]
 
@@ -152,6 +165,7 @@ GeneralAct[f_List, v_, cf_, op_:Act] :=
   With[{s=ToGeneralSum[v,cf]}, GeneralReduce[VSum[op[g[[i]],s/.cf[j_]:>cf[i,j]],{i,Length[f]}],cf]]
 GeneralAct[g_, v_, cf_, op_:Act] := GeneralReduce[op[g,ToGeneralSum[v,cf]], cf]
 
+GeneralAct[g_, v:List[__Rule], cf_, op_:Act] := DeleteCases[ApplySplit[GeneralReduce[op[g,#],  cf]&,ToGeneralSum[v,cf]], _->0]
 
 (******************** GeneralSolve *********************)
 (*   Solve the equation equ with respect to cf[1], ... .
@@ -160,8 +174,9 @@ GeneralAct[g_, v_, cf_, op_:Act] := GeneralReduce[op[g,ToGeneralSum[v,cf]], cf]
  *)
 
 GeneralSolve[equ_, v_, cf_, elim_:None] := 
-  Module[{cflist, sol, excl},
-    cflist = MatchList[v, _cf];
+  Module[{cflist, sol, excl, w},
+    w = ToGeneralSum[v,cf];
+    cflist = MatchList[w, _cf];
     excl = If [elim===None, {}, MatchList[equ, _elim]];
     sol = SVSolve[equ, cflist, excl];
     If[sol==={},
@@ -169,9 +184,9 @@ GeneralSolve[equ_, v_, cf_, elim_:None] :=
     (*else*)
       sol = sol[[1]];
       cflist = Complement[cflist, First /@ sol];
-      ToGeneralSum[v,cf] /. sol  /. SVNormalRule /. MapIndexed[(#1->cf[First[#2]])&, cflist]]
+      w /. sol  /. SVNormalRule /. MapIndexed[(#1->cf[First[#2]])&, cflist]]
   ]
-GeneralSolve[equ_, v:List[__Rule], cf_, elim_:None] := DeleteCases[ApplySplit[GeneralSolve[equ, #, cf, elim]&, v], _->0]   
+GeneralSolve[equ_, v:List[__Rule], cf_, elim_:None] := DeleteCases[ApplySplit[GeneralSolve[equ, #, cf, elim]&, v], _->0]
 GeneralSolve::nosol = "Equation `` has no solutions";
     
 (******************** GeneralReduce *********************)
@@ -184,7 +199,7 @@ GeneralReduce[v_, cf_] :=
   Module[{cflist, sol, cl1, cl2, repl, w},
     w = ToGeneralSum[v,cf];
     cflist = MatchList[w, _cf];
-    sol = SVSolve[v==0, cflist] [[1]];
+    sol = SVSolve[w==0, cflist] [[1]];
     cl1 = First /@ sol;             (* significant coefs *)
     cl2 = Complement[cflist, cl1];  (* unsignificant coefs *)
     repl = Join[ MapIndexed[(#1->cf[First[#2]])&, cl1],
@@ -232,7 +247,10 @@ GeneralIntersection[x_, y_, cf_] :=
   Module[{s=ToGeneralSum[x,cf], cy}, GeneralSolve[s==ToGeneralSum[y/.cf->cy,cy], s, cf, cy]]
 GeneralIntersection[x_, y_, z__, cf_] := GeneralIntersection[GeneralIntersection[x, y, cf], z, cf]
 
+(***** Operations on vector lists implemented via general sums ********)
 
+ImageBasis[fn_. vlist_] := Module[{c}, GeneralBasis[GeneralImage[fn, vlist, c], c]];
+ReduceBasis[vlist_] := Module[{c}, GeneralBasis[GeneralReduce[vlist, c], c]];
 
 End[]
 EndPackage[]

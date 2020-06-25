@@ -233,7 +233,7 @@ svSetAlg2[g_, {neg_, zero_, pos_}] :=
 
 sv$Out={}
 
-svScalars[c__] := (SetProperties[{c},{Scalar,Standard->Subscripted,TeX->Subscripted}]; sv$c = {c}[[1]]);
+svScalars[c__] := (SetProperties[{c},{Scalar,Standard->Subscripted,Traditional->Subscripted}]; sv$c = {c}[[1]]);
 
 svImg[e_]:= e/.svImgRule/.sv$Out;
 

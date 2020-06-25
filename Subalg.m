@@ -556,7 +556,7 @@ AlgebraDecomposition[f_, g_, components_, opts___] :=
        {ix,1,iy-1}],
      {iy,2,ncomp}];
    If[sub=!=g,
-       	Define[sub, {Vector, Output->Subscripted, TeX->Subscripted,
+       	Define[sub, {Vector, Output->Subscripted, (*TeX->Subscripted,*)
 		Standard->Subscripted, Traditional->Subscripted}];
 	BasisPattern[sub] ^= Alternatives @@ Blank/@ names;
  	DecompositionRule[sub, f] ^= {};

@@ -15,8 +15,8 @@ vect over an g-module."
 SuperLie`Vecfield`Lb::usage = "Lb[x,y] is the Lie bracket (operator)."
 SuperLie`Vecfield`lb::usage = "lb[x,y] is the Lie bracket (unevaluated form)."
 
-NewBracket[Lb, Unevaluated->lb, Output->ArgForm["[``,``]"],
-	TeX->ArgForm["\\left[``,\\,``\\right]"] ]
+NewBracket[Lb, Unevaluated->lb, Output->ArgForm["[``,``]"] (*,
+	TeX->ArgForm["\\left[``,``\\right]"] *) ]
 Jacobi[Lb->{CircleTimes,VTimes}]
 
 SuperLie`Vecfield`Div::usage = "The options Div->operation gives the name the divergention of
@@ -39,7 +39,7 @@ VectorLieAlgebra[name_, x_, opts___Rule] :=
 	   Wedge$l=Wedge/.{opts},
            wedge$l=wedge/.{opts},
 	   v = GetRelative[x,CoLeft]},
-  Module[ { i , m, dim, pdim=PDim[x], s, y, r},
+  Module[ { i , dim, pdim=PDim[x], s, y, r},
    If[v===$Failed, Return[$Failed]];
    If[!VectorQ[ct],
      Attributes[ct] = {OneIdentity};
@@ -55,7 +55,7 @@ VectorLieAlgebra[name_, x_, opts___Rule] :=
      Format[wedge$l[]] := "I";
      P[wedge$l] ^= 0];
    If[!VectorQ[Lb$l],
-     NewBracket[Lb$l, Output->ArgForm["[``,``]"], TeX->ArgForm["\\left[``,\\,``\\right]"] ];
+     NewBracket[Lb$l, Output->ArgForm["[``,``]"] (*, TeX->ArgForm["\\left[``,\\,``\\right]"]*) ];
      Jacobi[Lb$l->{CircleTimes,VTimes,wedge$l}];
 	 P[Lb$l] ^= 0;
      Lb$l::usage = SPrint["``[x,y] is the Lie bracket in algebra ``=vect(``).", Lb$l, name, x]];
@@ -90,8 +90,10 @@ VectorLieAlgebra[name_, x_, opts___Rule] :=
      Lb$l[ ct[f_:VTimes[],z_v], ct[g_:VTimes[],m_v]] :=
         VPlus[ (f~VTimes~Lb$l[z,g]) ~ct~ m, 
 	           (-(-1)^((P[f]+P[z])*(P[g]+P[m]))) ~SVTimes~ (g ~VTimes~ Lb$l[m, f]) ~ct~ z];
+     Lb$l /: Squaring[ ct[f_:VTimes[],z_v], Lb$l] := VIf[Mod[P[f]+P[z],2]==1, (f~VTimes~Lb$l[z,f]) ~ct~ z];
+(*     Lb$l[ ct[f_:VTimes[],z_v], ct[g_:VTimes[],m_v]] := *)
      Lb$l[ ct[f_:VTimes[],z_v], ct[g_,m_]] :=
-        VPlus[ (f ~VTimes~ Lb$l[z,g]) ~ct~ m, 
+        VPlus[ (f ~VTimes~ Lb$l[z,g]) ~ct~ m,
 		((-1)^((P[f]+P[z])P[g])) ~SVTimes~ spm[g,Lb$l[ct[f,z], m],ct] ]; 
     Lb$l[ ct[f_:VTimes[],z_v], m_x] := VTimes[f,Lb$l[z,m]];  (* added 000305 *)
     Lb$l[ ct[f_:VTimes[],z_v], m_?VectorQ] :=
@@ -143,7 +145,7 @@ VectorRepresentation::ndef =
  "`` should be defined as vector Lie (super)algebra"
 
 VectorRepresentation[g_, v_, opts___Rule] :=
-  Module[{m, dm, img, bg, bm, mdim, brk, img},
+  Module[{m, dm, img, bg, bm, mdim, brk},
     m = TheSpace[v];
     If[!SymbolQ[m] ||
        !SymbolQ[dm = CoLeft[m]],

@@ -53,13 +53,14 @@ Der[form_Wedge] :=
 *)
 
 Der[form_wedge] :=
-   Module[{r, range, sg, sm, sumattr},
+   Module[{r, range, sg, sm, sumattr, s},
      range = Length[form];
      sumattr = Attributes[VSum];
      Attributes[VSum] = {OneIdentity};
+     s = If[SymmetricQ[Wedge], 1, -1];
      For [r=1; sg=1; sm={}, r<=range, ++r,
 	   sm = { sm,  (sg ~SVTimes~ Wedge[Take[form,r-1], Der[form[[r]]], Drop[form,r]])};
-	   sg *= (-1)^P[form[[r]]]
+	   sg *= s*(-1)^P[form[[r]]]
      ];
      Attributes[VSum] = sumattr;
      VPlus @@ Flatten[sm]
@@ -86,10 +87,11 @@ Der0[vect_,alg_:Auto] :=
    Module[{j, sm={}, sgn, g, dg, m},
      g = If[alg===Auto, TheAlgebra[TheModule[vect]], alg];
      dg = DLeft[g];
+     p = If[SymmetricQ[Wedge], 1, 0];
      For [ j=1, j<=Dim[g], ++j,
          m = Act[g[j], vect];
        	 If [m==0, Continue[]]; 
-         sm = { sm, ((-1)^(P[dg[j]]*(1+P[vect])))~SVTimes~m ** dg[j] } 
+         sm = { sm, ((-1)^(P[dg[j]]*(p+P[vect])))~SVTimes~m ** dg[j] }
     ];
      VPlus @@ Flatten[sm]
    ]

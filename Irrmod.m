@@ -183,7 +183,7 @@ DPrint[4, "(decoded) : ", eq/.y[i_]:>zt[[i]]];
          srel = If [$Solve===ParamSolve,
                         Block[{UserRate=hwOrderRate},ParamSolve[eq, Array[y,l]]][[1]],
                 (*else*)
-                        orderSol[$Solve[eq, Array[y,l]][[1]], y] (* CHECK: resolve solutions to ensure that y[i] is replaced with y[j] with j>i *)
+                        orderSol[$Solve[eq, Array[y,l]][[1]], y]
                 ] //. $`RestoreSV;
 DPrint[2, "Relations in max submodule: srel = ", srel];
 DPrint[4, "(decoded) :", srel/.y[i_]:>zt[[i]]],

@@ -97,7 +97,7 @@ optmm :=
 
 optz := ( {rowt,colt} = optzm )
 optzm :=
-  Module [{nz,c,c0,i,j,l,r,i0,j0,n0=0,r0,d0=Infinity,n,s},
+  Module [{nz,c,c0,i,j,l,i0,j0,n0=0,r0,d0=Infinity,n,s},
     l = Length[mrest];
     For [j=1, j<=l, ++j,
         c = #[[j]]& /@ mrest;
@@ -130,7 +130,7 @@ optzm :=
 
 optd := ( {rowt,colt} = optzd )
 optzd :=
-  Module [{nz,c,c0,i,j,l,r,i0,j0,n0=Infinity,r0,d0=Infinity,n,s},
+  Module [{nz,c,c0,i,j,l,i0,j0,n0=Infinity,r0,d0=Infinity,n,s},
     l = Length[mrest];
     For [j=1, j<=l, ++j,
         c = #[[j]]& /@ mrest;
@@ -208,7 +208,7 @@ adr[i_,j_,c_:1] := ( adr$[i,j,c];  prcol)
 
 (* ------ Remove (i0)x(colt); find new (rowt)x(colt) ---------- *)
 elim[i0_,j0_] :=
-  Module [{i,j,l,r,n0=Infinity,d0=Infinity,s0,n,s, s1, s2, h, v, fact},
+  Module [{i,l,s0,s, s1, s2, h, v, fact},
     l = Length[mrest];
     s0 = Factor[mrest[[i0,j0]]];
     fact = (-1)^(i0+j0)*s0;
