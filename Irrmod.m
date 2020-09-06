@@ -1,7 +1,7 @@
 (*********************** Verma Modules *********************)
 
 BeginPackage["SuperLie`Irrmod`", {"SuperLie`", "SuperLie`Enum`", "SuperLie`Space`",
- "SuperLie`Generate`", "SuperLie`Domain`", "SuperLie`Solvars`"}]
+ "SuperLie`Generate`", "SuperLie`Domain`", "SuperLie`Solvars`", "SuperLie`Vsplit`"}]
 
 SuperLie`Irrmod`HWModule::usage = "HWModule[name, alg, wt] build the irreducible
 module with highest weight wt";
@@ -47,6 +47,7 @@ HWModule[v_, g_, wt_, opts___Rule] :=
   Module[{i,j,k,l,m,q,r,s, j1={2}, adf={}, adx={{}}, y, y0, eq,	rn, rn0,
 		srel, none, rel={}, bf, rngf, rnx, rngx, props, clr, cont,
   		ind, minind, dimf, rj, fi, flist, tind, gen={v[1]}, ii, cf, factor,
+  		split=KeyValue[{opts}, Split], srels, spl, cfl, yl,
 		rnf, z={v[1]}, zt, an, na, comp=DecompositionList[g,CartanTriade]},
   Vector[y, none];
   Scalar[cf];
@@ -123,7 +124,7 @@ HWModule[v_, g_, wt_, opts___Rule] :=
         PolyGrade[v[i_]] ^:= PolyGrade[GenBasis[v][[i]]];
 
         VectorSpace[v, Clear->False, Enum->False,
-           Sequence@@ComplementKeys[{opts}, {Grade, P, Order, Dim, PList, Quotient, Factor, Clear}]];
+           Sequence@@ComplementKeys[{opts}, {Grade, P, Order, Dim, PList, Quotient, Factor, Clear, Split}]];
         Basis[v]^:=Array[v,Dim[v]];
         PDim[v]^=With[{s=Plus@@PList[v]},{Dim[v]-s,s}];
         NGen[v] ^= NGen[f];
@@ -164,11 +165,38 @@ DPrint[3, "Searching [",fi,",v], Grade[v]=", -rj, ", j in [",If[rj==0,1,j1[[rj]]
 	  (* else *)
 	    adf[[j,i]] = act[fi,v[j]]
       ] ] ];
+      If {l==0, Continue[]];
       zt = Flatten[zt];
       tind = Flatten[tind];
+DPrint[1, "Commutators of degree ", -r, " : ", l];
 DPrint[2, "Commutators of degree ", -r, ": zt = ", zt];
 (* search for dependences in {[f[i],v[j]]} *)
       If[factor,
+       If[split=!=False,
+        srel = {};
+        ForSplit[{SplitSum[VSum[cf[i]~SVTimes~y[i], {i,l}], _, split[#/.y[j_]:>zt[[j]]]&], spl->y0},
+DPrint[3, "y0 : ", spl->y0];
+         eq = Table[Act[x[i], y0/.y[j_]:>zt[[j]]]==0, {i, NGen[x]}];
+DPrint[3, "eq : ", eq];
+         cfl = First /@ If[Head[y0]===VPlus,List@@y0,List[y0]];
+         yl = Last /@ If[Head[y0]===VPlus,List@@y0,List[y0]];
+         srels = SVSolve[eq, cfl ] [[1]];
+DPrint[3, "srel = ", srels];
+         eq = ((y0/.srels)==0);
+         eq = Table[eq /. cfl[[i]]->1 /. _cf->0, {i,Length[cfl]}] /.
+				{SVTimes->Times, VPlus->Plus};
+DPrint[3, "Relations : ", eq];
+DPrint[3, "(decoded) : ", eq/.y[i_]:>zt[[i]]];
+         srels = If [$Solve===ParamSolve,
+                        Block[{UserRate=hwOrderRate},ParamSolve[eq, yl]][[1]],
+                (*else*)
+                        orderSol[$Solve[eq, yl][[1]], y]
+                ] //. $`RestoreSV;
+DPrint[2, "Relations in max submodule: srel = ", srels];
+DPrint[4, "(decoded) :", srels/.y[i_]:>zt[[i]]];
+         srel = Join[srel, srels]
+        ],
+        (*else: non-split*)
          y0 = VSum[cf[i]~SVTimes~y[i], {i,l}];
 DPrint[3, "y0 : ", y0];
          eq = Table[Act[x[i], y0/.y[j_]:>zt[[j]]]==0, {i, NGen[x]}];
@@ -186,12 +214,14 @@ DPrint[4, "(decoded) : ", eq/.y[i_]:>zt[[i]]];
                         orderSol[$Solve[eq, Array[y,l]][[1]], y]
                 ] //. $`RestoreSV;
 DPrint[2, "Relations in max submodule: srel = ", srel];
-DPrint[4, "(decoded) :", srel/.y[i_]:>zt[[i]]],
+DPrint[4, "(decoded) :", srel/.y[i_]:>zt[[i]]]
+      ],
       (* else: Build module Verma *)
          srel = {}
       ];
       q = Length[srel];
       k = l - q;		(* the number of new elements in y *)
+DPrint[1, "New elements : ", k, ", relations: ", q];
       an = Range[l];		(* an - list of free y[i] *)
       If [q>0, (*then*)
          For [i=1, i<=q, ++i, an[[ srel[[i,1,1]] ]] = 0 ];
@@ -220,7 +250,7 @@ DPrint[2, "Mult. table after factorization: adf = ", adf];
       adx = Join[adx, Table[ VNormal[ Act[ x[i], zt[[j]] ] ],
 		{j, k}, {i, rngx[[q]]} ] ];
       v/: ActTable[x,v] = adx;
-DPrint[1, "GList : ", GList[v]];
+DPrint[2, "GList : ", GList[v]];
       PList[v] ^= P /@ z;
       i = j1[[r+1]]-1;
       If[ValueQ[PList[x]],
