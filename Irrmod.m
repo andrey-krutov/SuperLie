@@ -165,7 +165,7 @@ DPrint[3, "Searching [",fi,",v], Grade[v]=", -rj, ", j in [",If[rj==0,1,j1[[rj]]
 	  (* else *)
 	    adf[[j,i]] = act[fi,v[j]]
       ] ] ];
-      If {l==0, Continue[]];
+      If [l==0, Continue[]];
       zt = Flatten[zt];
       tind = Flatten[tind];
 DPrint[1, "Commutators of degree ", -r, " : ", l];
