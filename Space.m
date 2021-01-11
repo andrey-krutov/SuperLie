@@ -551,7 +551,7 @@ CoLeft[ m_->cm_, opts___Rule] :=
    ]]
 
 defCoAction[g_, m_, cm_, p_] :=
-    Module[{k, tbl, elt, el1, cf, m1, brk = Bracket[m]},
+    Module[{k, tbl, elt, el1, cf, m1, brk = Bracket[g]},
        tbl = Table[0, {Dim[m]}, {Dim[g]}];
        Do [ elt = VNormal @ Act[g[i], m[j]];
     	 If [elt == 0, Continue[]];
