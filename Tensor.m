@@ -87,7 +87,9 @@ TensorSpace[name_, vect_, comp_, opts___] :=
            Dim[name] ^= d^r;
            If [Dim[name]<=64000,
               Basis[name] ^= Flatten[Outer[name , Sequence@@Range /@ Table[d, {r}]]];
-              Basis[name, n_] ^:= Select[Basis[name], Grade[#] == n &]]];
+              Basis[name, n_] ^:= Select[Basis[name], Grade[#] == n &];
+	      SetProperties[name, { Vector, BasisPattern->_name } ];
+	   ]];
         alg = TheAlgebra[vect];
         If [alg=!=None,
            TheAlgebra[name] ^= alg;
