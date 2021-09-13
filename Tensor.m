@@ -94,7 +94,14 @@ TensorSpace[name_, vect_, comp_, opts___] :=
         If [alg=!=None,
            TheAlgebra[name] ^= alg;
            With[{brk=Bracket[alg,vect], bp=alg},
-              brk[g_bp,expr_name] ^:= VSum[brk[g, c[[j]][expr[[j]]]]/.c[[j]][i_]:>ReplacePart[expr,j->i], {j,r}]]]]
+                (* FIXME: it should act accordingly to the rule brk for Tp
+		  Now it is act by Jacobi rule for Lie superalgebras
+		 *)
+                brk[g_bp,expr_name] ^:= VSum[
+                        SVTimes[(-1)^(P[g] Plus@@Table[P[ c[[jj]][expr[[jj]]] ], {jj,j-1}]),
+                                brk[g, c[[j]][expr[[j]]]] /.c[[j]][i_]:>ReplacePart[expr,j->i]],
+                        {j,r}];
+           ]]]
   ]
 
 End[]
