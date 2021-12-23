@@ -193,13 +193,13 @@ chCoHom[deg_, r_] :=
 	v = SplitList[ch$basis[r1, deg], _, ch$Split];
 	v = ApplySplit[chHVect, v];
 	ch$res[deg, r1] = v = ApplySplit[fn[#, r1] &, v];
-	DPrint[1,"(", deg, ",", r1, "): ", MapSplit[chGenDim, v]]]]
+	DPrint[1,"chCoHom: (", deg, ",", r1, "): ", MapSplit[chGenDim, v]]]]
 
 ch$res[__]:={}
 
 chImKer[v_, r_] :=
   With[{dv = If[r == 0, NDer0[v, ch$alg], NDer[v]], b = ch$b, c = ch$c},
-    DPrint[2, v -> dv];
+    DPrint[2, "chImKer: ", v -> dv];
     {GeneralReduce[VNormal[GeneralSolve[dv == 0, v, c]], c],
      VNormal[GeneralReduce[dv /. c -> b, b]]}
  ]
@@ -330,26 +330,26 @@ TheAlgebra[ch$M] ^= ch$g0;
 BasisPattern[ch$M] ^= _Tp;
 Bracket[ch$M] ^:= Bracket[ch$g0];
 
-chQuot[q_, d_, r_] :=
+chQuot[q_, d_, r_, opts___Rule] :=
   Module[{im, ker},
     ker = Flatten[GeneralBasis[#[[2, 1]], ch$c] & /@ ch$res[d, r]];
     im = Flatten[GeneralBasis[#[[2, 2]], ch$b] & /@ ch$res[d, r - 1]];
-    QuotientModule[q, ch$M, im, Module -> ker,Split\[Rule]ch$Split]]
+    QuotientModule[q, ch$M, im, Module -> ker,Split\[Rule]ch$Split, opts]]
 
 chBookQ[v_, vv___] :=
- Module[{d = Grade[v], w = Weight[v], q = TheModule[v], rep, r, ker},
+ Module[{d = Grade[v], sel = ch$Split[v], q = TheModule[v], rep, r, ker},
   rep = MappingRule[ch$M, q];
   r = rep[[1, 1]];
   If[Head[r] === Tp, r = r[[2]]];
   r = Length[r];
-  ker = (w /. ch$res[d, r])[[1]];
-  ch$book[d, r, w] =
+  ker = (sel /. ch$res[d, r])[[1]];
+  ch$book[d, r, sel] =
    If[Length[{vv}] > 0,
     (GeneralSolve[# == ker /. rep, ker, $`ch$c] /. _$`ch$c ->
          0) & /@ {v, vv},
     (*else*)
     GeneralSolve[v == ker /. rep, ker, $`ch$c] /. _$`ch$c -> 0];
-  Thread[ch$Out[ch$book[d, r, w]]]]
+  Thread[ch$Out[ch$book[d, r, sel]]]]
 
 chExMod[deg_, d_, gen_:ch$gen] := 
   With[{imgen = Flatten[(GeneralBasis[#1[[2, 2]], ch$b] &) /@ ch$res[deg, d - 1]],
