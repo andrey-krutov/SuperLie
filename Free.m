@@ -46,7 +46,7 @@ Begin["$`"]
 FreeLieAlgebra::ngen = "Ambiguous number of generators";
 
 FreeLieAlgebra[g_, gen_, rel_, opts___Rule] :=
-  FreeLieAlgebra[g, gen, rel, ToDegree/.{opts}/ToDegree->Infinity, opts];
+  FreeLieAlgebra[g, gen, rel, ToDegree/.{opts}/.ToDegree->Infinity, opts];
 
 FreeLieAlgebra[g_, gen_, rel_, rn_, opts___] :=
   Module[{rng, ngen, dgen, pgen, rels, rrels, vars, sol, nrg, pos, stdGrade,

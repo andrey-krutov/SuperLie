@@ -594,6 +594,8 @@ About::usage = $AboutList::usage =
 specified the list of topics to be printed. $AboutList is the default
 list of topics."
 
+Domain::undef = "Domain[``] not defined"
+
 Begin["dmn`"] (* ================================================== *)
 
 (* ----------------- Domain ------------------ *)
