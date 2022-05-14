@@ -1,0 +1,431 @@
+(************** Content-type: application/mathematica **************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      9601,        313]*)
+(*NotebookOutlinePosition[     10281,        337]*)
+(*  CellTagsIndexPosition[     10237,        333]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+    \(TextForm\`Algebra\ \(\((\[CapitalLambda] \((3)\)/
+                  Const, \[GothicC]\[GothicV]\[GothicE]\[GothicC]\[GothicT] \
+\((0 | 3)\))\)\_*\) = \[GothicV]le \((4 | 3)\)\)], "Title",
+  FontSize->24],
+
+Cell[CellGroupData[{
+
+Cell[TextData[
+"Definition as subalgebra in \[GothicV]\[GothicE]\[GothicC]\[GothicT](4|3)"], 
+  "Section"],
+
+Cell[CellGroupData[{
+
+Cell["Definitions", "Subsection"],
+
+Cell[BoxData[
+    \(Needs["\<SuperLie`\>"]\)], "Input",
+  InitializationCell->True],
+
+Cell[BoxData[{
+    \(\(Symmetric[VTimes];\)\), "\n", 
+    \(\(P[VTimes] ^= 0;\)\)}], "Input"],
+
+Cell[BoxData[{
+    \(VectorSpace[x, Dim \[Rule] {4, 3}, CoLeft \[Rule] v]\), "\n", 
+    \(VectorLieAlgebra[g, x]\)}], "Input",
+  InitializationCell->True],
+
+Cell[BoxData[{
+    \(Linear[Tp]; \nLbn[f_, g_] := VNormal[Lb[f, g]]\), 
+    \(P[Tp] ^= 0; \nP[VTimes] ^= 0; \nP[Wedge] ^= 0; \)}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Equations", "Subsection"],
+
+Cell[BoxData[{
+    \(VComp[f_**v_[i_], j_] := Delta[i, j] f\), 
+    \(SetProperties[
+      VComp, {Vector, Vector \[Rule] First, Linear \[Rule] First}]\n (*\ 
+      DComp[f_, i_, j_] := RDer[VComp[f, i], x[j], _x]\ *) \)}], "Input",
+  InitializationCell->True],
+
+Cell[BoxData[
+    \(DComp[f_, i_, j_] := LDer[VComp[f, i], x[j], _x]\)], "Input"],
+
+Cell[BoxData[
+    \(DComp[f_, i_, j_] := RDer[VComp[f, i], x[j], _x]\)], "Input"],
+
+Cell[BoxData[
+    \(\(EnumSet[
+      g, {\(-1\), Infinity, 1} 
+        \[Rule] {
+          k_ \[RuleDelayed] 
+            Flatten[Outer[Tp, DegreeBasis[k + 1, Basis[x]], Basis[v]]]}]; 
+    \)\)], "Input",
+  InitializationCell->True],
+
+Cell[BoxData[{
+    \(eq12[f_, i_, j_] := 
+      VPlus[DComp[f, i, j], 
+          SVTimes[\((\(-1\))\)\^P[f], DComp[f, j + 4, i + 4]]] /; 
+        i \[NotEqual] j\), 
+    \(eq12[f_, i_, i_] := 
+      VPlus[DComp[f, i, i], 
+        SVTimes[\((\(-1\))\)\^P[f], DComp[f, i + 4, i + 4]], 
+        SVTimes[\(-1\)/2, VSum[DComp[f, j, j], {j, 4}]]]\), 
+    \(eq3[f_, i_, j_] := VPlus[DComp[f, i, j + 4], DComp[f, j, i + 4]]\), 
+    \(eq4[f_, i_, j_, k_] := 
+      VPlus[DComp[f, i + 4, j], SVTimes[\(-1\), DComp[f, j + 4, i]], 
+        SVTimes[\((\(-1\))\)\^P[f], DComp[f, 4, k + 4]]]\), 
+    \(eq5[f_, i_] := DComp[f, i, 4]\), 
+    \(eq6[f_, i_, j_, k_] := 
+      VPlus[DComp[f, k + 4, 4], 
+        SVTimes[\(-1\)/2 \((\(-1\))\)\^P[f], DComp[f, i, j + 4]], 
+        SVTimes[1/2 \((\(-1\))\)\^P[f], DComp[f, j, i + 4]]]\)}], "Input",
+  InitializationCell->True],
+
+Cell[BoxData[
+    \(Eq = 
+      Flatten[{Table[
+            With[{i = i, j = j}, {eq12[#, i, j]&, eq3[#, i, j]&}], {i, 3}, {
+              j, 3}], eq4[#, 1, 2, 3]&, eq4[#, 3, 1, 2]&, eq4[#, 2, 3, 1]&, 
+          eq5[#, 1]&, eq5[#, 2]&, eq5[#, 3]&, eq6[#, 1, 2, 3]&, 
+          eq6[#, 3, 1, 2]&, eq6[#, 2, 3, 1]&}]\)], "Input",
+  InitializationCell->True]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Components", "Subsection"],
+
+Cell[BoxData[
+    \(Off[Solve::svars]\)], "Input"],
+
+Cell[BoxData[
+    \(GradedKerSpace[z, g, Eq, From \[Rule] 0, To \[Rule] 0]\)], "Input",
+  InitializationCell->True],
+
+Cell[BoxData[
+    \(PDim[z, 0]\)], "Input"],
+
+Cell[BoxData[
+    \(GradedKerSpace[z1, g, Eq, From \[Rule] 1, To \[Rule] 1]\)], "Input",
+  InitializationCell->True],
+
+Cell[BoxData[
+    \(PDim[z1, 1]\)], "Input"],
+
+Cell[BoxData[
+    \(GradedKerSpace[z2, g, Eq, From \[Rule] 2, To \[Rule] 2]\)], "Input"],
+
+Cell[BoxData[
+    \(PDim[z2, 2]\)], "Input"],
+
+Cell[BoxData[
+    \(GradedKerSpace[zm, g, Eq, From \[Rule] \(-1\), To \[Rule] \(-1\)]\)], 
+  "Input"],
+
+Cell[BoxData[
+    \(PDim[zm, \(-1\)]\)], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Standard Grade: (1,1,1,1,1,1,1)", "Subsection",
+  FontColor->RGBColor[0, 0, 1]],
+
+Cell[BoxData[
+    \(Grade[x[i_]] ^:= 1\)], "Input"],
+
+Cell[BoxData[{
+    \(zero = Image[z]\), 
+    \(neg = Image[zm]; \none = Image[z1]; \ntwo = Image[z2]; \)}], "Input"],
+
+Cell[BoxData[
+    \(zz = zero[\([{10, 12, 18, 25}]\)]\)], "Input"],
+
+Cell[BoxData[
+    \(Table[Lbn[zz[\([i]\)], x[j]**v[4]], {j, 1, 7}, {i, 1, 4}]\)], "Input"],
+
+Cell[BoxData[
+    \(Table[Lbn[zz[\([i]\)], VTimes[]**v[j]], {j, 1, 7}, {i, 1, 4}]\)], 
+  "Input"],
+
+Cell[BoxData[
+    \(Weight[x[1]] ^= {\(-1\), 0, 1, 1}; \nWeight[x[2]] ^= {\(-1\), 1, 0, 1}; 
+    \nWeight[x[3]] ^= {\(-1\), 1, 1, 0}; \nWeight[x[4]] ^= {1, 0, 0, 0}; \n
+    Weight[x[5]] ^= {0, 1, 0, 0}; \nWeight[x[6]] ^= {0, 0, 1, 0}; \n
+    Weight[x[7]] ^= {0, 0, 0, 1}; \nWeight[VTimes[]] ^= {0, 0, 0, 0}; \)], 
+  "Input"],
+
+Cell[BoxData[
+    \(raise = zero[\([{13, 19}]\)]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Other Grade: (2,2,2,0,1,1,1)", "Subsection",
+  FontColor->RGBColor[0, 0, 1]],
+
+Cell[BoxData[
+    \(\(Grade[x[i_]] ^:= {2, 2, 2, 0, 1, 1, 1}\[LeftDoubleBracket]i
+        \[RightDoubleBracket]; \)\)], "Input"],
+
+Cell[BoxData[{
+    \(Grade/@Image[zm]\), 
+    \(Grade/@Image[z]\), 
+    \(Grade/@Image[z1]\), 
+    \(Grade/@Image[z2]\)}], "Input"],
+
+Cell[BoxData[{
+    \(neg2 = Select[Image[zm], Grade[#] == \(-2\)&]\), 
+    \(neg1 = Select[Join[Image[zm], Image[z]], Grade[#] == \(-1\)&]\), 
+    \(zero = Select[Join[Image[zm], Image[z], Image[z1]], Grade[#] == 0&]\), 
+    \(one = Select[Join[Image[z], Image[z1]], Grade[#] == 1&]\), 
+    \(two = Select[Join[Image[z], Image[z1], Image[z2]], Grade[#] == 2&]\)}], 
+  "Input"],
+
+Cell[BoxData[{
+    \(h0 = 
+      Lbn[zero\[LeftDoubleBracket]1\[RightDoubleBracket], 
+        zero\[LeftDoubleBracket]12\[RightDoubleBracket]]\), 
+    \(h1 = 
+      Lbn[zero\[LeftDoubleBracket]6\[RightDoubleBracket], 
+        zero\[LeftDoubleBracket]4\[RightDoubleBracket]]\), 
+    \(h2 = 
+      Lbn[zero\[LeftDoubleBracket]10\[RightDoubleBracket], 
+        zero\[LeftDoubleBracket]8\[RightDoubleBracket]]\)}], "Input"],
+
+Cell[BoxData[
+    \(Table[Lbn[{h0, h1, h2}[\([i]\)], VTimes[]**v[j]], {j, 1, 7}, {i, 1, 3}]
+      \)], "Input"],
+
+Cell[BoxData[
+    \(Weight[x[1]] ^= {0, 1, 0}; \nWeight[x[2]] ^= {0, \(-1\), 1}; \n
+    Weight[x[3]] ^= {0, 0, \(-1\)}; \nWeight[x[4]] ^= {\(-2\), 0, 0}; \n
+    Weight[x[5]] ^= {\(-1\), \(-1\), 0}; \n
+    Weight[x[6]] ^= {\(-1\), 1, \(-1\)}; \nWeight[x[7]] ^= {\(-1\), 0, 1}; \n
+    Weight[VTimes[]] ^= {0, 0, 0}; \)], "Input"],
+
+Cell[BoxData[
+    \(Weight/@zero // ColumnForm\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Other Grade: (2,1,1,0,0,1,1)", "Subsection",
+  FontColor->RGBColor[0, 0, 1]],
+
+Cell[BoxData[
+    \(\(Grade[x[i_]] ^:= {2, 1, 1, 0, 0, 1, 1}\[LeftDoubleBracket]i
+        \[RightDoubleBracket]; \)\)], "Input"],
+
+Cell[BoxData[{
+    \(Grade/@Image[zm]\), 
+    \(Grade/@Image[z]\), 
+    \(Grade/@Image[z1]\), 
+    \(Grade/@Image[z2]\)}], "Input"],
+
+Cell[BoxData[{
+    \(neg2 = Select[Image[zm], Grade[#] == \(-2\)&]; \n
+    neg1 = Select[Join[Image[zm], Image[z]], Grade[#] == \(-1\)&]; \n
+    zero = Select[Join[Image[zm], Image[z], Image[z1]], Grade[#] == 0&]\), 
+    \(\(one = Select[Join[Image[z], Image[z1], Image[z2]], Grade[#] == 1&]; 
+    \)\n (*two = 
+        Select[Join[Image[z], Image[z1], Image[z2], Image[z3]], 
+          Grade[#] == 2&]; *) \)}], "Input"],
+
+Cell[BoxData[
+    \(Table[
+      Lbn[\(zero\[LeftDoubleBracket]{6, 8, 9, 13}\[RightDoubleBracket]\)[
+          \([i]\)], VTimes[]**v[j]], {j, 1, 7}, {i, 1, 4}]\)], "Input"],
+
+Cell[BoxData[
+    \(Weight[x[1]] ^= {1, 0, 1, 1}; \nWeight[x[2]] ^= {1, 1, 0, 1}; \n
+    Weight[x[3]] ^= {1, 1, 1, 0}; \nWeight[x[4]] ^= {\(-1\), 0, 0, 0}; \n
+    Weight[x[5]] ^= {0, 1, 0, 0}; \nWeight[x[6]] ^= {0, 0, 1, 0}; \n
+    Weight[x[7]] ^= {0, 0, 0, 1}; \nWeight[VTimes[]] ^= {0, 0, 0, 0}; \)], 
+  "Input"],
+
+Cell[BoxData[
+    \(\({P[#], Weight[#]}&\)/@zero // ColumnForm\)], "Input"],
+
+Cell[BoxData[
+    \(zero[\([17]\)]\)], "Input"],
+
+Cell[BoxData[
+    \(zero[\([{10, 12}]\)]\)], "Input"],
+
+Cell[BoxData[
+    \(zero[\([{1, 21}]\)]\)], "Input"],
+
+Cell[BoxData[
+    \(Lbn[zero[\([12]\)], zero[\([1]\)]]\)], "Input"]
+}, Closed]]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"4.1 for X",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+AutoGeneratedPackage->None,
+WindowSize->{1070, 711},
+WindowMargins->{{Automatic, 35}, {Automatic, 44}},
+Magnification->1.25
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1727, 52, 223, 4, 118, "Title"],
+
+Cell[CellGroupData[{
+Cell[1975, 60, 106, 2, 76, "Section"],
+
+Cell[CellGroupData[{
+Cell[2106, 66, 33, 0, 56, "Subsection"],
+Cell[2142, 68, 83, 2, 35, "Input",
+  InitializationCell->True],
+Cell[2228, 72, 93, 2, 56, "Input"],
+Cell[2324, 76, 154, 3, 56, "Input",
+  InitializationCell->True],
+Cell[2481, 81, 139, 2, 119, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2657, 88, 31, 0, 56, "Subsection"],
+Cell[2691, 90, 260, 5, 77, "Input",
+  InitializationCell->True],
+Cell[2954, 97, 81, 1, 35, "Input"],
+Cell[3038, 100, 81, 1, 35, "Input"],
+Cell[3122, 103, 232, 7, 35, "Input",
+  InitializationCell->True],
+Cell[3357, 112, 853, 18, 208, "Input",
+  InitializationCell->True],
+Cell[4213, 132, 354, 7, 77, "Input",
+  InitializationCell->True]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4604, 144, 32, 0, 56, "Subsection"],
+Cell[4639, 146, 50, 1, 35, "Input"],
+Cell[4692, 149, 115, 2, 35, "Input",
+  InitializationCell->True],
+Cell[4810, 153, 43, 1, 35, "Input"],
+Cell[4856, 156, 116, 2, 35, "Input",
+  InitializationCell->True],
+Cell[4975, 160, 44, 1, 35, "Input"],
+Cell[5022, 163, 88, 1, 35, "Input"],
+Cell[5113, 166, 44, 1, 35, "Input"],
+Cell[5160, 169, 101, 2, 35, "Input"],
+Cell[5264, 173, 49, 1, 35, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5350, 179, 85, 1, 56, "Subsection"],
+Cell[5438, 182, 51, 1, 35, "Input"],
+Cell[5492, 185, 116, 2, 98, "Input"],
+Cell[5611, 189, 66, 1, 35, "Input"],
+Cell[5680, 192, 90, 1, 35, "Input"],
+Cell[5773, 195, 97, 2, 35, "Input"],
+Cell[5873, 199, 324, 5, 182, "Input"],
+Cell[6200, 206, 61, 1, 35, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[6298, 212, 82, 1, 35, "Subsection"],
+Cell[6383, 215, 128, 2, 35, "Input"],
+Cell[6514, 219, 131, 4, 98, "Input"],
+Cell[6648, 225, 376, 6, 119, "Input"],
+Cell[7027, 233, 419, 9, 77, "Input"],
+Cell[7449, 244, 111, 2, 35, "Input"],
+Cell[7563, 248, 327, 5, 182, "Input"],
+Cell[7893, 255, 59, 1, 35, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[7989, 261, 82, 1, 35, "Subsection"],
+Cell[8074, 264, 128, 2, 35, "Input"],
+Cell[8205, 268, 131, 4, 98, "Input"],
+Cell[8339, 274, 421, 7, 140, "Input"],
+Cell[8763, 283, 172, 3, 56, "Input"],
+Cell[8938, 288, 314, 5, 182, "Input"],
+Cell[9255, 295, 75, 1, 35, "Input"],
+Cell[9333, 298, 47, 1, 35, "Input"],
+Cell[9383, 301, 53, 1, 35, "Input"],
+Cell[9439, 304, 52, 1, 35, "Input"],
+Cell[9494, 307, 67, 1, 35, "Input"]
+}, Closed]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

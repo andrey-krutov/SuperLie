@@ -1,0 +1,362 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      8983,        262]*)
+(*NotebookOutlinePosition[      9984,        294]*)
+(*  CellTagsIndexPosition[      9940,        290]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+  "Cohomologies in ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[GothicO]\[GothicS]\[GothicP](4 | 2; \[Alpha])\)]],
+  " "
+}], "Title"],
+
+Cell["General definitions", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Needs["\<SuperLie`\>"]\), "\[IndentingNewLine]", 
+    \(Needs["\<SuperLie`Cohom`\>"]\), "\[IndentingNewLine]", 
+    \(\(Linear[Tp];\)\), "\n", 
+    \(\(Jacobi[Act -> {wedge, Tp}];\)\), "\[IndentingNewLine]", 
+    \(\(Off[Solve::svars];\)\)}], "Input"],
+
+Cell[BoxData[
+    \("SuperLie Package Version 2.06 installed\nDisclaimer: This software is \
+provided \"AS IS\", without a warranty of any kind"\)], "Print"]
+}, Open  ]],
+
+Cell["Definition of \[GothicO]\[GothicS]\[GothicP](4|2;\[Alpha])", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{\(Scalar[\[Alpha]];\), "\n", 
+    RowBox[{"CartanMatrixAlgebra", "[", 
+      RowBox[{"g", ",", \({x, h, y}\), ",", 
+        RowBox[{"(", GridBox[{
+              {"0", "1", \(\(-1\) - \[Alpha]\)},
+              {\(-1\), "0", \(-\[Alpha]\)},
+              {\(\(-1\) - \[Alpha]\), "\[Alpha]", "0"}
+              }], ")"}], ",", \(PList \[Rule] {1, 1, 1}\)}], "]"}]}], "Input"],
+
+Cell[BoxData[
+    InterpretationBox["\<\"\\!\\(9\\)|\\!\\(8\\)\"\>",
+      StringForm[ "``|``", 9, 8],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "Build a basis ",
+  Cell[BoxData[
+      \(TraditionalForm\`{u\_1, \(\(...\) \(u\_17\)\)}\)]]
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SubAlgebra[u, g, Basis[g]]\)], "Input"],
+
+Cell[BoxData[
+    \("u is a sublagebra in g"\)], "Output"]
+}, Open  ]],
+
+Cell["Declare the problem for SulerLie`Cohom`", "Text"],
+
+Cell[BoxData[{
+    \(\(chSetAlg[u, du, u, u];\)\), "\[IndentingNewLine]", 
+    \(chScalars[b, c]\)}], "Input"],
+
+Cell["\<\
+The cohomology may be of zero weight only, so we skip other weights\
+\
+\>", "Text"],
+
+Cell[BoxData[
+    \(chSplit[x_] := If[Weight[x] === {0, 0, 0}, 0, SkipVal]\)], "Input"],
+
+Cell["Select the even raising and lowring elements", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(ch$raise = 
+      Select[Basis[u], 
+        P[#] \[Equal] 0 && Grade[#] > 0 &]\), "\[IndentingNewLine]", 
+    \(ch$lower = 
+      Select[Basis[u], P[#] \[Equal] 0 && Grade[#] < 0 &]\)}], "Input"],
+
+Cell[BoxData[
+    \({u\_7, u\_8, u\_9}\)], "Output"],
+
+Cell[BoxData[
+    \({u\_14, u\_15, u\_16}\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+Now we can start calculations. All forms with zero weight have also \
+zero grade, so we calculate only in the zero grade. In this example we \
+calculate cohomology up to the degree 2.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(chCalc[0, 2]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[\("Total: "\[InvisibleSpace]{{0, 0}, {0, 4}, {5, 4}}\),
+      SequenceForm[ "Total: ", {{0, 0}, {0, 4}, {5, 4}}],
+      Editable->False]], "Print"]
+}, Open  ]],
+
+Cell["We see here 1-dimensional 2-cohomology", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(chNext[]\)], "Input"],
+
+Cell[BoxData[
+    \(0 \[Rule] {{{c\_2 \[Rule] \(-\(\(4\ c\_3\)\/\(\(-8\)\ \[Alpha] - 
+                        8\ \[Alpha]\^2\)\)\) - \(\((\(-4\) - 8\ \[Alpha])\)\ \
+c\_4\)\/\(\(-8\)\ \[Alpha] - 8\ \[Alpha]\^2\) + \(4\ \[Alpha]\ c\_5\)\/\(\(-8\
+\)\ \[Alpha] - 8\ \[Alpha]\^2\)}}, {18, 22, 44, 56, 56}}\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "The ratings {18,22,44,56,56} are number of occurences of coefficients ",
+  Cell[BoxData[
+      \(TraditionalForm\`c\_i\)]],
+  " in the answer. To get a short answer, we can set one of ",
+  Cell[BoxData[
+      \(TraditionalForm\`c\_i\)]],
+  " to 1 and all other to 0 so that ",
+  Cell[BoxData[
+      \(c\_2 \[NotEqual] \(-\(\(4\ c\_3\)\/\(\(-8\)\ \[Alpha] - 
+                  8\ \[Alpha]\^2\)\)\) - \(\((\(-4\) - 8\ \[Alpha])\)\ c\_4\)\
+\/\(\(-8\)\ \[Alpha] - 8\ \[Alpha]\^2\) + \(4\ \[Alpha]\ c\_5\)\/\(\(-8\)\ \
+\[Alpha] - 8\ \[Alpha]\^2\)\)]],
+  ". Our choice is ",
+  Cell[BoxData[
+      \(TraditionalForm\`c\_2 = 1\)]],
+  "."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(chBook[c[2] \[Rule] 1]\)], "Input"],
+
+Cell[BoxData[
+    \(\((1 + \[Alpha])\)\[ThinSpace]u\_1 ** \((du\_4\[Wedge]du\_11)\) - \
+\[Alpha]\[ThinSpace]u\_1 ** \((du\_5\[Wedge]du\_12)\) - \[Alpha]\[ThinSpace]u\
+\_1 ** \((du\_6\[Wedge]du\_13)\) + \((\(-1\) - \[Alpha])\)\[ThinSpace]u\_1 ** \
+\((du\_10\[Wedge]du\_17)\) + \((\(-1\) - \[Alpha])\)\[ThinSpace]u\_2 ** \((du\
+\_4\[Wedge]du\_11)\) + \[Alpha]\[ThinSpace]u\_2 ** \((du\_5\[Wedge]du\_12)\) \
++ \((1 + \[Alpha])\)\[ThinSpace]u\_2 ** \((du\_6\[Wedge]du\_13)\) + \[Alpha]\
+\[ThinSpace]u\_2 ** \((du\_10\[Wedge]du\_17)\) + 
+      u\_3 ** \((du\_4\[Wedge]du\_11)\) + 
+      u\_3 ** \((du\_5\[Wedge]du\_12)\) + \((1 + 
+            2\ \[Alpha])\)\[ThinSpace]u\_7 ** \((du\_4\[Wedge]du\_5)\) + \
+\((\(-1\) - 2\ \[Alpha])\)\[ThinSpace]u\_7 ** \((du\_10\[Wedge]du\_13)\) + 
+      u\_8 ** \((du\_4\[Wedge]du\_6)\) + u\_8 ** \((du\_10\[Wedge]du\_12)\) - 
+      u\_9 ** \((du\_5\[Wedge]du\_6)\) + 
+      u\_9 ** \((du\_10\[Wedge]du\_11)\) + \((1 + 
+            2\ \[Alpha])\)\[ThinSpace]u\_14 ** \((du\_6\[Wedge]du\_17)\) + \
+\((1 + 2\ \[Alpha])\)\[ThinSpace]u\_14 ** \((du\_11\[Wedge]du\_12)\) - 
+      u\_15 ** \((du\_5\[Wedge]du\_17)\) + 
+      u\_15 ** \((du\_11\[Wedge]du\_13)\) - 
+      u\_16 ** \((du\_4\[Wedge]du\_17)\) - 
+      u\_16 ** \((du\_12\[Wedge]du\_13)\)\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+Rewrite the answer in the standard basis of the algebra built from \
+Cartan matrix:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(% /. {u[i_] \[RuleDelayed] \(Image[u]\)[\([i]\)], 
+        du[i_] \[RuleDelayed] d[\(Image[u]\)[\([i]\)]]}\)], "Input"],
+
+Cell[BoxData[
+    \(\((1 + \[Alpha])\)\[ThinSpace]h\_1 ** \((d[x\_1]\[Wedge]d[
+                y\_1])\) - \[Alpha]\[ThinSpace]h\_1 ** \((d[x\_2]\[Wedge]d[
+                y\_2])\) - \[Alpha]\[ThinSpace]h\_1 ** \((d[x\_3]\[Wedge]d[
+                y\_3])\) + \((\(-1\) - \[Alpha])\)\[ThinSpace]h\_1 ** \((d[
+                x\_7]\[Wedge]d[
+                y\_7])\) + \((\(-1\) - \[Alpha])\)\[ThinSpace]h\_2 ** \((d[
+                x\_1]\[Wedge]d[y\_1])\) + \[Alpha]\[ThinSpace]h\_2 ** \((d[
+                x\_2]\[Wedge]d[
+                y\_2])\) + \((1 + \[Alpha])\)\[ThinSpace]h\_2 ** \((d[
+                x\_3]\[Wedge]d[y\_3])\) + \[Alpha]\[ThinSpace]h\_2 ** \((d[
+                x\_7]\[Wedge]d[y\_7])\) + 
+      h\_3 ** \((d[x\_1]\[Wedge]d[y\_1])\) + 
+      h\_3 ** \((d[x\_2]\[Wedge]d[y\_2])\) + \((1 + 
+            2\ \[Alpha])\)\[ThinSpace]x\_4 ** \((d[x\_1]\[Wedge]d[
+                x\_2])\) + \((\(-1\) - 
+            2\ \[Alpha])\)\[ThinSpace]x\_4 ** \((d[x\_7]\[Wedge]d[y\_3])\) + 
+      x\_5 ** \((d[x\_1]\[Wedge]d[x\_3])\) + 
+      x\_5 ** \((d[x\_7]\[Wedge]d[y\_2])\) - 
+      x\_6 ** \((d[x\_2]\[Wedge]d[x\_3])\) + 
+      x\_6 ** \((d[x\_7]\[Wedge]d[y\_1])\) + \((1 + 
+            2\ \[Alpha])\)\[ThinSpace]y\_4 ** \((d[x\_3]\[Wedge]d[
+                y\_7])\) + \((1 + 
+            2\ \[Alpha])\)\[ThinSpace]y\_4 ** \((d[y\_1]\[Wedge]d[y\_2])\) - 
+      y\_5 ** \((d[x\_2]\[Wedge]d[y\_7])\) + 
+      y\_5 ** \((d[y\_1]\[Wedge]d[y\_3])\) - 
+      y\_6 ** \((d[x\_1]\[Wedge]d[y\_7])\) - 
+      y\_6 ** \((d[y\_2]\[Wedge]d[y\_3])\)\)], "Output"]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"5.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1400}, {0, 967}},
+WindowSize->{963, 668},
+WindowMargins->{{160, Automatic}, {Automatic, 5}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic},
+PrintingOptions->{"PaperSize"->{612, 792},
+"PaperOrientation"->"Portrait",
+"PostScriptOutputFile":>FrontEnd`FileName[{"home", "guests", "grozman", \
+"sLie", "BWB"}, "osp_4_2_alpha.nb.ps", CharacterEncoding -> \
+"WindowsCyrillic"],
+"Magnification"->1},
+ShowSelection->True,
+Magnification->1.25
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 150, 5, 117, "Title"],
+Cell[1929, 60, 35, 0, 38, "Text"],
+
+Cell[CellGroupData[{
+Cell[1989, 64, 272, 5, 119, "Input"],
+Cell[2264, 71, 157, 2, 51, "Print"]
+}, Open  ]],
+Cell[2436, 76, 74, 0, 38, "Text"],
+
+Cell[CellGroupData[{
+Cell[2535, 80, 387, 7, 92, "Input"],
+Cell[2925, 89, 137, 3, 35, "Output"]
+}, Open  ]],
+Cell[3077, 95, 122, 4, 38, "Text"],
+
+Cell[CellGroupData[{
+Cell[3224, 103, 59, 1, 35, "Input"],
+Cell[3286, 106, 58, 1, 35, "Output"]
+}, Open  ]],
+Cell[3359, 110, 55, 0, 38, "Text"],
+Cell[3417, 112, 110, 2, 56, "Input"],
+Cell[3530, 116, 93, 3, 38, "Text"],
+Cell[3626, 121, 87, 1, 35, "Input"],
+Cell[3716, 124, 60, 0, 38, "Text"],
+
+Cell[CellGroupData[{
+Cell[3801, 128, 216, 5, 56, "Input"],
+Cell[4020, 135, 52, 1, 35, "Output"],
+Cell[4075, 138, 55, 1, 35, "Output"]
+}, Open  ]],
+Cell[4145, 142, 207, 4, 59, "Text"],
+
+Cell[CellGroupData[{
+Cell[4377, 150, 45, 1, 35, "Input"],
+Cell[4425, 153, 183, 3, 30, "Print"]
+}, Open  ]],
+Cell[4623, 159, 54, 0, 38, "Text"],
+
+Cell[CellGroupData[{
+Cell[4702, 163, 41, 1, 35, "Input"],
+Cell[4746, 166, 314, 4, 50, "Output"]
+}, Open  ]],
+Cell[5075, 173, 660, 17, 62, "Text"],
+
+Cell[CellGroupData[{
+Cell[5760, 194, 55, 1, 35, "Input"],
+Cell[5818, 197, 1286, 20, 140, "Output"]
+}, Open  ]],
+Cell[7119, 220, 107, 3, 38, "Text"],
+
+Cell[CellGroupData[{
+Cell[7251, 227, 139, 2, 35, "Input"],
+Cell[7393, 231, 1562, 27, 161, "Output"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

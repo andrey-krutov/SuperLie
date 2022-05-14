@@ -1,0 +1,1551 @@
+(************** Content-type: application/mathematica **************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     41745,       1317]*)
+(*NotebookOutlinePosition[     42426,       1341]*)
+(*  CellTagsIndexPosition[     42382,       1337]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+    \(TextForm\`Algebra\ \[GothicK]\[GothicS]\[GothicL]\[GothicE] \((5 | 
+          10)\)\)], "Title",
+  FontSize->24],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  "Definition of \[GothicK]\[GothicS]\[GothicL]\[GothicE](5|10) as submodule \
+in ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[CapitalOmega](x\_1, \(\(...\) \(x\_5\)\))\)]]
+}], "Section"],
+
+Cell[CellGroupData[{
+
+Cell["Definitions of \[CapitalOmega]", "Subsection"],
+
+Cell[BoxData[
+    \(Needs["\<SuperLie`\>"]\)], "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Symmetric[VTimes]\), "\n", 
+    \(\(P[VTimes] ^= 0;\)\)}], "Input"],
+
+Cell[BoxData[
+    \(AutoRule::"dupl" \(\(:\)\(\ \)\) 
+      "Auto Rule \"\!\(SymmetricRule[VTimes]\)\" was already defined."\)], \
+"Message"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(VectorSpace[x, PiRight \[Rule] dx, CoLeft -> v, 
+      Dim \[Rule] 5]\), "\n", 
+    \(ExteriorAlgebra[\[CapitalOmega], x, CTimes -> CenterDot, 
+      Wedge -> VTimes, Der -> Derx]\), "\n", 
+    \(Jacobi[Lb \[Rule] Wedge]\), "\n", 
+    \(VectorLieAlgebra[g, x, CTimes -> CenterDot]\)}], "Input",
+  InitializationCell->True],
+
+Cell[BoxData[
+    \("x is a vector space"\)], "Output"],
+
+Cell[BoxData[
+    \(General::"spell1" \(\(:\)\(\ \)\) 
+      "Possible spelling error: new symbol name \"\!\(Derx\)\" is similar to \
+existing symbol \"\!\(Der\)\"."\)], "Message"],
+
+Cell[BoxData[
+    \("\[CapitalOmega] = \[CapitalOmega](x)"\)], "Output"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        TagBox[\(JacobiRule[Lb, Wedge]\),
+          HoldForm], ",", 
+        TagBox[\(JacobiRule[Lb, {CircleTimes, VTimes}]\),
+          HoldForm], ",", 
+        TagBox[\(LinearRule[Lb]\),
+          HoldForm]}], "}"}]], "Output"],
+
+Cell[BoxData[
+    \("g = vect(x)"\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Derx[x\_2\[CenterDot]dx\_4]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      InterpretationBox["1",
+        VTimes[ ]], "\[CenterDot]", 
+      RowBox[{"(", 
+        RowBox[{
+          InterpretationBox[\(dx\_2\),
+            Subscripted[ 
+              dx[ 2]],
+            Editable->False], "\[ThinSpace]", 
+          InterpretationBox[\(dx\_4\),
+            Subscripted[ 
+              dx[ 4]],
+            Editable->False]}], ")"}]}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Lb[x\_1\^4\[CenterDot]v\_2 - \((\(x\_1\) \(x\_2\) x\_5)\)\[CenterDot]
+          v\_4, %]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{
+        RowBox[{"(", 
+          RowBox[{"4", "\[ThinSpace]", 
+            SuperscriptBox[
+              InterpretationBox[\(x\_1\),
+                Subscripted[ 
+                  x[ 1]],
+                Editable->False], "3"]}], ")"}], "\[CenterDot]", 
+        RowBox[{"(", 
+          RowBox[{
+            InterpretationBox[\(dx\_1\),
+              Subscripted[ 
+                dx[ 1]],
+              Editable->False], "\[ThinSpace]", 
+            InterpretationBox[\(dx\_4\),
+              Subscripted[ 
+                dx[ 4]],
+              Editable->False]}], ")"}]}], "-", 
+      RowBox[{
+        InterpretationBox["1",
+          VTimes[ ]], "\[CenterDot]", 
+        RowBox[{"(", 
+          RowBox[{
+            InterpretationBox[\(dx\_2\),
+              Subscripted[ 
+                dx[ 2]],
+              Editable->False], "\[ThinSpace]", 
+            RowBox[{"(", 
+              RowBox[{
+                RowBox[{
+                  RowBox[{"(", 
+                    RowBox[{
+                      InterpretationBox[\(x\_2\),
+                        Subscripted[ 
+                          x[ 2]],
+                        Editable->False], "\[ThinSpace]", 
+                      InterpretationBox[\(x\_5\),
+                        Subscripted[ 
+                          x[ 5]],
+                        Editable->False]}], ")"}], "\[CenterDot]", 
+                  InterpretationBox[\(dx\_1\),
+                    Subscripted[ 
+                      dx[ 1]],
+                    Editable->False]}], "+", 
+                RowBox[{
+                  RowBox[{"(", 
+                    RowBox[{
+                      InterpretationBox[\(x\_1\),
+                        Subscripted[ 
+                          x[ 1]],
+                        Editable->False], "\[ThinSpace]", 
+                      InterpretationBox[\(x\_5\),
+                        Subscripted[ 
+                          x[ 5]],
+                        Editable->False]}], ")"}], "\[CenterDot]", 
+                  InterpretationBox[\(dx\_2\),
+                    Subscripted[ 
+                      dx[ 2]],
+                    Editable->False]}], "+", 
+                RowBox[{
+                  RowBox[{"(", 
+                    RowBox[{
+                      InterpretationBox[\(x\_1\),
+                        Subscripted[ 
+                          x[ 1]],
+                        Editable->False], "\[ThinSpace]", 
+                      InterpretationBox[\(x\_2\),
+                        Subscripted[ 
+                          x[ 2]],
+                        Editable->False]}], ")"}], "\[CenterDot]", 
+                  InterpretationBox[\(dx\_5\),
+                    Subscripted[ 
+                      dx[ 5]],
+                    Editable->False]}]}], ")"}]}], ")"}]}]}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(VNormal[%]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{
+        RowBox[{"(", 
+          RowBox[{"4", "\[ThinSpace]", 
+            SuperscriptBox[
+              InterpretationBox[\(x\_1\),
+                Subscripted[ 
+                  x[ 1]],
+                Editable->False], "3"]}], ")"}], "\[CenterDot]", 
+        RowBox[{"(", 
+          RowBox[{
+            InterpretationBox[\(dx\_1\),
+              Subscripted[ 
+                dx[ 1]],
+              Editable->False], "\[ThinSpace]", 
+            InterpretationBox[\(dx\_4\),
+              Subscripted[ 
+                dx[ 4]],
+              Editable->False]}], ")"}]}], "-", 
+      RowBox[{
+        RowBox[{"(", 
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "\[ThinSpace]", 
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False]}], ")"}], "\[CenterDot]", 
+        RowBox[{"(", 
+          RowBox[{
+            InterpretationBox[\(dx\_2\),
+              Subscripted[ 
+                dx[ 2]],
+              Editable->False], "\[ThinSpace]", 
+            InterpretationBox[\(dx\_5\),
+              Subscripted[ 
+                dx[ 5]],
+              Editable->False]}], ")"}]}], "+", 
+      RowBox[{
+        RowBox[{"(", 
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "\[ThinSpace]", 
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False]}], ")"}], "\[CenterDot]", 
+        RowBox[{"(", 
+          RowBox[{
+            InterpretationBox[\(dx\_1\),
+              Subscripted[ 
+                dx[ 1]],
+              Editable->False], "\[ThinSpace]", 
+            InterpretationBox[\(dx\_2\),
+              Subscripted[ 
+                dx[ 2]],
+              Editable->False]}], ")"}]}]}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Relatives[x]\)], "Input"],
+
+Cell[BoxData[
+    \({x, v, None, None, dx, None, None, None}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[{
+    \(\(Linear[CenterDot];\)\), "\n", 
+    \(Lbn[f_, g_] := VNormal[Lb[f, g]]\), "\n", 
+    \(\(P[wedge] ^= 0;\)\)}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Vector[pi]\), "\n", 
+    \(P[pi] ^= 1\)}], "Input"],
+
+Cell[BoxData[
+    \(Vector\)], "Output"],
+
+Cell[BoxData[
+    \(1\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Bracket", "Subsection"],
+
+Cell[BoxData[{
+    \(Act[f_\[CenterDot]\((dx[i_] dx[j_])\), 
+        g_\[CenterDot]\((dx[k_] 
+              dx[l_])\)] := \n\t\t\((\((f/pi)\) \((g/
+                pi)\))\)\[CenterDot]\((\((dx[i] dx[j] dx[k] 
+                dx[l] \(dx[1]\^\(-1\)\) \(dx[2]\^\(-1\)\) \(dx[
+                      3]\^\(-1\)\) \(dx[4]\^\(-1\)\) dx[5]\^\(-1\))\) /. 
+            dx[m_]\^\(-1\) \[RuleDelayed] v[m])\)\), "\n", 
+    \(Act[f : \((\((_)\)\[CenterDot]\((_v)\))\), 
+        g : \((\((_)\)\[CenterDot]\((_v)\))\)] := VNormal[Lb[f, g]]\), "\n", 
+    \(Act[
+        f : \((\((_)\)\[CenterDot]\((_v)\))\), \
+\((g_)\)\[CenterDot]\((v_VTimes)\)] := 
+      VNormal[\((pi\[CenterDot]VTimes[])\) 
+          Lb[f, \((\(pi\^\(-1\)\) g)\)\[CenterDot]v]]\), "\n", 
+    \(Act[\((g_)\)\[CenterDot]\((v_VTimes)\), 
+        f : \((\((_)\)\[CenterDot]\((_v)\))\)] := 
+      VNormal[\((\(-pi\)\[CenterDot]VTimes[])\) 
+          Lb[f, \((\(pi\^\(-1\)\) g)\)\[CenterDot]v]]\)}], "Input"],
+
+Cell[BoxData[{
+    \(\(Bracket[dg] ^= Act;\)\), "\n", 
+    \(\(bracket[dg] ^= act;\)\), "\n", 
+    \(\(BasisPattern[dg] ^= _CenterDot;\)\)}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Equations and components", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(VComp[f_\[CenterDot]v_[i_], j_] := Delta[i, j] f;\)\), "\n", 
+    \(\(SetProperties[
+        VComp, {Vector, Vector \[Rule] First, 
+          Linear \[Rule] First}];\)\), "\n", 
+    \(\(DComp[f_, i_, j_] := LDer[VComp[f, i], x[j], x[_] | pi];\)\), "\n", 
+    \(LDiv[f_] := VSum[DComp[f, i, i], {i, 1, 5}]\)}], "Input",
+  InitializationCell->True],
+
+Cell[BoxData[
+    \(General::"spell1" \(\(:\)\(\ \)\) 
+      "Possible spelling error: new symbol name \"\!\(DComp\)\" is similar to \
+existing symbol \"\!\(VComp\)\"."\)], "Message"],
+
+Cell[BoxData[
+    \(General::"spell1" \(\(:\)\(\ \)\) 
+      "Possible spelling error: new symbol name \"\!\(LDiv\)\" is similar to \
+existing symbol \"\!\(Div\)\"."\)], "Message"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(ZeroBasis[fn_, bs_] := \n\t
+      With[{s = GeneralSum[c, bs]}, 
+        GeneralBasis[GeneralSolve[fn[s] == 0, s, c], c]]\)], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Algebra \[GothicK]\[GothicS]\[GothicL]\[GothicE]", "Subsection"],
+
+Cell[BoxData[
+    \(Define[
+      ksle, {Vector, Bracket \[Rule] Act, bracket \[Rule] act}]\)], "Input"],
+
+Cell[BoxData[
+    \(Basis[ksle, k_?EvenQ] ^:= \(dgComp[k] = 
+        ZeroBasis[LDiv, 
+          Flatten[Outer[CenterDot, DegreeBasis[k/2 + 1, Basis[x]], 
+              Basis[v]]]]\)\)], "Input"],
+
+Cell[BoxData[
+    \(Basis[ksle, 
+        k_?OddQ] ^:= \(dgComp[
+          k] = \(\((\((pi\[CenterDot]VTimes[])\) #)\) &\) /@ 
+          ZeroBasis[Derx, 
+            Flatten[Outer[CenterDot, DegreeBasis[\((k + 1)\)/2, Basis[x]], 
+                DegreeBasis[2, Basis[dx]]]]]\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(EnumSet[
+      ksle, {\(-2\), Infinity, 
+          1} \[Rule] {k_ \[RuleDelayed] dgComp[k]}]\)], "Input",
+  InitializationCell->True],
+
+Cell[BoxData[
+    \(1\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Weight", "Subsection"],
+
+Cell[BoxData[{
+    \(Weight[x[i_]] ^:= WeightMark[5, i]\), "\n", 
+    \(Weight[v[i_]] ^:= \(-WeightMark[5, i]\)\), "\n", 
+    \(\(Weight[pi] ^= {0, 0, 0, 0, 0};\)\), "\n", 
+    \(\(Weight[VTimes[]] ^= {0, 0, 0, 0, 0};\)\)}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Realization \[GothicE](5|10)", "Subsection"],
+
+Cell[BoxData[{
+    \(\(Grade[x[5]] ^= 2;\)\), "\n", 
+    \(\(Grade[x[_]] ^= 2;\)\), "\n", 
+    \(\(Grade[dx[5]] ^= \(-1\)/2;\)\), "\n", 
+    \(\(Grade[dx[_]] ^= \(-1\)/2;\)\), "\n", 
+    \(\(Grade[v[5]] ^= \(-2\);\)\), "\n", 
+    \(\(Grade[v[_]] ^= \(-2\);\)\)}], "Input"],
+
+Cell[BoxData[
+    \(\(Grade[pi] ^= 0;\)\)], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Realization \[GothicE](9|6)", "Subsection"],
+
+Cell[BoxData[{
+    \(\(Grade[x[5]] ^= 2;\)\), "\n", 
+    \(\(Grade[x[_]] ^= 1;\)\), "\n", 
+    \(\(Grade[dx[5]] ^= 1/2;\)\), "\n", 
+    \(\(Grade[dx[_]] ^= \(-1\)/2;\)\), "\n", 
+    \(\(Grade[v[5]] ^= \(-2\);\)\), "\n", 
+    \(\(Grade[v[_]] ^= \(-1\);\)\)}], "Input"],
+
+Cell[BoxData[
+    \(\(Grade[pi] ^= 0;\)\)], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Realization \[GothicE](11|9)", "Subsection"],
+
+Cell[BoxData[{
+    \(\(Grade[x[4]] ^= 1;\)\), "\n", 
+    \(\(Grade[x[5]] ^= 1;\)\), "\n", 
+    \(\(Grade[x[_]] ^= 2;\)\), "\n", 
+    \(\(Grade[dx[4]] ^= \(-1\);\)\), "\n", 
+    \(\(Grade[dx[5]] ^= \(-1\);\)\), "\n", 
+    \(\(Grade[dx[_]] ^= 0;\)\), "\n", 
+    \(\(Grade[v[4]] ^= \(-1\);\)\), "\n", 
+    \(\(Grade[v[5]] ^= \(-1\);\)\), "\n", 
+    \(\(Grade[v[_]] ^= \(-2\);\)\)}], "Input"],
+
+Cell[BoxData[
+    \(\(Grade[pi] ^= 0;\)\)], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Realization \[GothicC]\[GothicK](11|9)", "Subsection"],
+
+Cell[BoxData[{
+    \(\(Grade[x[1]] ^= 3;\)\), "\n", 
+    \(\(Grade[x[2]] ^= 3;\)\), "\n", 
+    \(\(Grade[x[3]] ^= 2;\)\), "\n", 
+    \(\(Grade[x[4]] ^= 2;\)\), "\n", 
+    \(\(Grade[x[5]] ^= 2;\)\), "\n", 
+    \(\(Grade[dx[1]] ^= 0;\)\), "\n", 
+    \(\(Grade[dx[2]] ^= 0;\)\), "\n", 
+    \(\(Grade[dx[3]] ^= \(-1\);\)\), "\n", 
+    \(\(Grade[dx[4]] ^= \(-1\);\)\), "\n", 
+    \(\(Grade[dx[5]] ^= \(-1\);\)\), "\n", 
+    \(\(Grade[v[1]] ^= \(-3\);\)\), "\n", 
+    \(\(Grade[v[2]] ^= \(-3\);\)\), "\n", 
+    \(\(Grade[v[3]] ^= \(-2\);\)\), "\n", 
+    \(\(Grade[v[4]] ^= \(-2\);\)\), "\n", 
+    \(\(Grade[v[5]] ^= \(-2\);\)\)}], "Input"],
+
+Cell[BoxData[
+    \(\(Grade[pi] ^= 0;\)\)], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Vector realization of \
+\[GothicK]\[GothicS]\[GothicL]\[GothicE](5|10)\
+\>", "Section"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Needs["\<SuperLie`\>"]\)], "Input",
+  InitializationCell->True],
+
+Cell[BoxData[
+    \("SuperLie Package installed"\)], "Print"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(Symmetric[VTimes]\)], "Input"],
+
+Cell[BoxData[{
+    \(\(P[Tp] ^= 0;\)\), "\n", 
+    \(\(P[Wedge] ^= 0;\)\), "\[IndentingNewLine]", 
+    \(\(P[VTimes] ^= 0;\)\)}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(VectorSpace[x, CoLeft \[Rule] dx, Dim \[Rule] {5, 10}]\), "\n", 
+    \(VectorLieAlgebra[g, x, CTimes -> CenterDot]\)}], "Input",
+  InitializationCell->True],
+
+Cell[BoxData[
+    \("x is a vector space"\)], "Output"],
+
+Cell[BoxData[
+    \("g = vect(x)"\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Linear[CenterDot]\), "\n", 
+    \(VTimes[]\[CenterDot]x_ := x\), "\n", 
+    \(Lbn[f_, g_] := VNormal[Lb[f, g]]\)}], "Input"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        TagBox[\(LinearRule[CenterDot]\),
+          HoldForm], ",", 
+        TagBox[\(LinearRule[CenterDot, Last]\),
+          HoldForm], ",", 
+        TagBox[\(ZeroArgRule[CenterDot]\),
+          HoldForm]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(BasisPattern[g] ^= \((_\[CenterDot]dx[_])\) | dx[_]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{"_", "\[CenterDot]", 
+        InterpretationBox[\(dx\__\),
+          Subscripted[ 
+            dx[ 
+              Blank[ ]]],
+          Editable->False]}], "|", 
+      InterpretationBox[\(dx\__\),
+        Subscripted[ 
+          dx[ 
+            Blank[ ]]],
+        Editable->False]}]], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(CompInd[i_, j_] := 
+      Select[Permutations[Complement[{1, 2, 3, 4, 5}, {i, j}]], 
+        Signature[{i, j, Sequence @@ #}] \[Equal] 1 &]\)], "Input"],
+
+Cell[BoxData[{
+    \(Vector[th, dh]\), "\[IndentingNewLine]", 
+    \(WithoutPreSL[
+      Th[x[i_]] := 
+        Which[i \[LessEqual] 5, x[i], i \[LessEqual] 9, th[1, i - 4], 
+          i \[LessEqual] 12, th[2, i - 7], i \[LessEqual] 14, th[3, i - 9], 
+          True, th[4, 5]]; \[IndentingNewLine]Tx[th[i_, j_]] := 
+        x[i \((9 - i)\)/2 + j]; \[IndentingNewLine]Tx[x[i_]] := 
+        x[i]; \[IndentingNewLine]th[i_, i_] := 
+        0; \[IndentingNewLine]Th[dx[i_]] := 
+        Which[i \[LessEqual] 5, dx[i], i \[LessEqual] 9, dh[1, i - 4], 
+          i \[LessEqual] 12, dh[2, i - 7], i \[LessEqual] 14, dh[3, i - 9], 
+          True, dh[4, 5]]; \[IndentingNewLine]Tx[dh[i_, j_]] := 
+        dx[i \((9 - i)\)/2 + j]; \[IndentingNewLine]Tx[dx[i_]] := 
+        dx[i]; \[IndentingNewLine]dh[i_, i_] := 
+        0\[IndentingNewLine]]\), "\[IndentingNewLine]", 
+    \(\(th[i_, j_] := \(-th[j, i]\) /; i > j;\)\), "\[IndentingNewLine]", 
+    \(\(dh[i_, j_] := \(-dh[j, i]\) /; i > j;\)\), "\[IndentingNewLine]", 
+    \(SetProperties[{Th, Tx}, {Vector, Vector \[Rule] _, Linear}]\)}], "Input"],
+
+Cell[BoxData[{
+    \(Format[x[i_ /; i > 5], StandardForm] := 
+      Subscripted[
+        Th[x[i]] /. th[a_, b_] \[RuleDelayed] \[Theta][10  a + b]]\), "\n", 
+    \(Format[dx[i_ /; i > 5], StandardForm] := 
+      Subscripted[
+        Th[dx[i]] /. dh[a_, b_] \[RuleDelayed] \[Delta][10  a + b]]\), "\n", 
+    \(Format[dx[i_ /; i \[LessEqual] 5], StandardForm] := 
+      Subscripted["\<\[PartialD]\>"[i]]\)}], "Input"],
+
+Cell[BoxData[{
+    \(Format[x[i_ /; i > 5], TeXForm] := 
+      Subscripted[
+        Th[x[i]] /. th[a_, b_] \[RuleDelayed] \[Theta][10  a + b]]\), "\n", 
+    \(Format[dx[i_ /; i > 5], TeXForm] := 
+      Subscripted[
+        Th[dx[i]] /. dh[a_, b_] \[RuleDelayed] \[Delta][10  a + b]]\), "\n", 
+    \(Format[dx[i_ /; i \[LessEqual] 5], TeXForm] := 
+      Subscripted["\<\\partial\>"[i]]\)}], "Input"],
+
+Cell[BoxData[{
+    \(z[i_, j_] := 
+      x[i]\[CenterDot]dx[j] + 
+        VSum[Tx[th[j, k]]\[CenterDot]Tx[dh[k, i]], {k, 1, 5}]\), "\n", 
+    \(z[i_] := z[i, i] - z[i + 1, i + 1]\), "\n", 
+    \(n1[i_, j_] := 
+      Tx[dh[i, j]] + 
+        VPlus @@ \((\(Tx[
+                    th[#\[LeftDoubleBracket]1\[RightDoubleBracket], #\
+\[LeftDoubleBracket]2\[RightDoubleBracket]]]\[CenterDot]
+                  dx[#\[LeftDoubleBracket]3\[RightDoubleBracket]] &\) /@ 
+              CompInd[i, j])\)\)}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Realization \[GothicC]\[GothicK](11|9)", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["Grading", "Subsection"],
+
+Cell[BoxData[{
+    \(\(Grade[x[1]] ^= 3;\)\), "\n", 
+    \(\(Grade[x[2]] ^= 3;\)\), "\n", 
+    \(\(Grade[x[3]] ^= 2;\)\), "\n", 
+    \(\(Grade[x[4]] ^= 2;\)\), "\n", 
+    \(\(Grade[x[5]] ^= 2;\)\), "\n", 
+    \(\(Grade[dx[1]] ^= 0;\)\), "\n", 
+    \(\(Grade[dx[2]] ^= 0;\)\), "\n", 
+    \(\(Grade[dx[3]] ^= \(-1\);\)\), "\n", 
+    \(\(Grade[dx[4]] ^= \(-1\);\)\), "\n", 
+    \(\(Grade[dx[5]] ^= \(-1\);\)\), "\n", 
+    \(\(Grade[v[1]] ^= \(-3\);\)\), "\n", 
+    \(\(Grade[v[2]] ^= \(-3\);\)\), "\n", 
+    \(\(Grade[v[3]] ^= \(-2\);\)\), "\n", 
+    \(\(Grade[v[4]] ^= \(-2\);\)\), "\n", 
+    \(\(Grade[v[5]] ^= \(-2\);\)\)}], "Input"],
+
+Cell[BoxData[
+    \(\(Grade[pi] ^= 0;\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Grade /@ dgComp[\(-3\)]\), "\n", 
+    \(Grade /@ dgComp[\(-2\)]\)}], "Input"],
+
+Cell[BoxData[
+    \({}\)], "Output"],
+
+Cell[BoxData[
+    \({\(-3\), \(-3\), \(-2\), \(-2\), \(-2\)}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Grade /@ dgComp[\(-1\)]\), "\n", 
+    \(Grade /@ dgComp[0]\), "\n", 
+    \(Grade /@ dgComp[1]\), "\n", 
+    \(Grade /@ dgComp[2]\), "\n", 
+    \(Grade /@ dgComp[3]\), "\n", 
+    \(\(\(Grade /@ dgComp[4]\)\(\n\)
+    \)\)}], "Input"],
+
+Cell[BoxData[
+    \({0, \(-1\), \(-1\), \(-1\), \(-1\), \(-1\), \(-1\), \(-2\), \(-2\), \
+\(-2\)}\)], "Output"],
+
+Cell[BoxData[
+    \({0, 1, 1, 1, 0, 0, 1, 1, 1, \(-1\), \(-1\), 0, 0, 0, \(-1\), \(-1\), 0, 
+      0, 0, \(-1\), \(-1\), 0, 0, 0}\)], "Output"],
+
+Cell[BoxData[
+    \({3, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 0, 0, 2, 1, 1, 
+      1, 1, 1, 1, 0, 0, 0, 2, 1, 1, 1, 1, 1, 1, 0, 0, 0}\)], "Output"],
+
+Cell[BoxData[
+    \({3, 4, 4, 4, 3, 4, 4, 4, 2, 3, 3, 3, 2, 3, 3, 3, 2, 3, 3, 3, 3, 3, 4, 
+      4, 4, 2, 2, 3, 3, 3, 2, 2, 3, 3, 3, 2, 2, 3, 3, 3, 1, 1, 2, 2, 2, 1, 1, 
+      2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 
+      2}\)], "Output"],
+
+Cell[BoxData[
+    \({6, 5, 5, 5, 6, 5, 5, 5, 5, 4, 4, 4, 5, 4, 4, 4, 5, 4, 4, 4, 6, 5, 5, 
+      5, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4, 5, 4, 4, 4, 4, 4, 4, 5, 4, 4, 4, 4, 4, 
+      4, 4, 3, 3, 3, 3, 3, 3, 2, 2, 4, 3, 3, 3, 3, 3, 3, 2, 2, 4, 3, 3, 3, 3, 
+      3, 3, 2, 2, 4, 3, 3, 3, 3, 3, 3, 2, 2, 2, 4, 3, 3, 3, 3, 3, 3, 2, 2, 2, 
+      4, 3, 3, 3, 3, 3, 3, 2, 2, 2}\)], "Output"],
+
+Cell[BoxData[
+    \({6, 7, 7, 7, 6, 7, 7, 7, 5, 6, 6, 6, 5, 6, 6, 6, 5, 6, 6, 6, 6, 7, 7, 
+      7, 5, 6, 6, 6, 5, 6, 6, 6, 5, 6, 6, 6, 4, 5, 5, 5, 4, 5, 5, 5, 4, 5, 5, 
+      5, 4, 5, 5, 5, 4, 5, 5, 5, 4, 5, 5, 5, 6, 6, 7, 7, 7, 5, 5, 6, 6, 6, 5, 
+      5, 6, 6, 6, 5, 5, 6, 6, 6, 4, 4, 5, 5, 5, 4, 4, 5, 5, 5, 4, 4, 5, 5, 5, 
+      4, 4, 5, 5, 5, 4, 4, 5, 5, 5, 4, 4, 5, 5, 5, 3, 3, 4, 4, 4, 3, 3, 4, 4, 
+      4, 3, 3, 4, 4, 4, 3, 3, 4, 4, 4, 3, 3, 4, 4, 4, 3, 3, 4, 4, 4, 3, 3, 4, 
+      4, 4, 3, 3, 4, 4, 4, 3, 3, 4, 4, 4, 3, 3, 4, 4, 4}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Grade /@ dgComp[5]\)], "Input"],
+
+Cell[BoxData[
+    \({9, 8, 8, 8, 9, 8, 8, 8, 8, 7, 7, 7, 8, 7, 7, 7, 8, 7, 7, 7, 9, 8, 8, 
+      8, 8, 7, 7, 7, 8, 7, 7, 7, 8, 7, 7, 7, 7, 6, 6, 6, 7, 6, 6, 6, 7, 6, 6, 
+      6, 7, 6, 6, 6, 7, 6, 6, 6, 7, 6, 6, 6, 9, 8, 8, 8, 8, 8, 8, 8, 7, 7, 7, 
+      7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 7, 6, 6, 6, 6, 6, 6, 
+      7, 6, 6, 6, 6, 6, 6, 7, 6, 6, 6, 6, 6, 6, 7, 6, 6, 6, 6, 6, 6, 7, 6, 6, 
+      6, 6, 6, 6, 7, 6, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 5, 5, 4, 4, 6, 5, 5, 5, 
+      5, 5, 5, 4, 4, 6, 5, 5, 5, 5, 5, 5, 4, 4, 6, 5, 5, 5, 5, 5, 5, 4, 4, 6, 
+      5, 5, 5, 5, 5, 5, 4, 4, 6, 5, 5, 5, 5, 5, 5, 4, 4, 6, 5, 5, 5, 5, 5, 5, 
+      4, 4, 4, 6, 5, 5, 5, 5, 5, 5, 4, 4, 4, 6, 5, 5, 5, 5, 5, 5, 4, 4, 4, 6, 
+      5, 5, 5, 5, 5, 5, 4, 4, 4}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(dgcomp5 = Join @@ Table[dgComp[i], {i, \(-2\), 5}];\)\), "\n", 
+    \(Length[dgcomp5]\)}], "Input"],
+
+Cell[BoxData[
+    \(638\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(gcomp[k_] := \(gcomp[k] = Select[dgcomp5, Grade[#] == k &]\)\)], "Input"],
+
+Cell[BoxData[
+    \(Basis[dg, k_] ^:= gcomp[k]\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(neg = Join[gcomp[\(-1\)], gcomp[\(-2\)], gcomp[\(-3\)]]\), "\n", 
+    \(zero = gcomp[0]\)}], "Input"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{"pi", "\[CenterDot]", 
+          RowBox[{"(", 
+            RowBox[{
+              InterpretationBox[\(dx\_1\),
+                Subscripted[ 
+                  dx[ 1]],
+                Editable->False], "\[ThinSpace]", 
+              InterpretationBox[\(dx\_3\),
+                Subscripted[ 
+                  dx[ 3]],
+                Editable->False]}], ")"}]}], ",", 
+        RowBox[{"pi", "\[CenterDot]", 
+          RowBox[{"(", 
+            RowBox[{
+              InterpretationBox[\(dx\_1\),
+                Subscripted[ 
+                  dx[ 1]],
+                Editable->False], "\[ThinSpace]", 
+              InterpretationBox[\(dx\_4\),
+                Subscripted[ 
+                  dx[ 4]],
+                Editable->False]}], ")"}]}], ",", 
+        RowBox[{"pi", "\[CenterDot]", 
+          RowBox[{"(", 
+            RowBox[{
+              InterpretationBox[\(dx\_1\),
+                Subscripted[ 
+                  dx[ 1]],
+                Editable->False], "\[ThinSpace]", 
+              InterpretationBox[\(dx\_5\),
+                Subscripted[ 
+                  dx[ 5]],
+                Editable->False]}], ")"}]}], ",", 
+        RowBox[{"pi", "\[CenterDot]", 
+          RowBox[{"(", 
+            RowBox[{
+              InterpretationBox[\(dx\_2\),
+                Subscripted[ 
+                  dx[ 2]],
+                Editable->False], "\[ThinSpace]", 
+              InterpretationBox[\(dx\_3\),
+                Subscripted[ 
+                  dx[ 3]],
+                Editable->False]}], ")"}]}], ",", 
+        RowBox[{"pi", "\[CenterDot]", 
+          RowBox[{"(", 
+            RowBox[{
+              InterpretationBox[\(dx\_2\),
+                Subscripted[ 
+                  dx[ 2]],
+                Editable->False], "\[ThinSpace]", 
+              InterpretationBox[\(dx\_4\),
+                Subscripted[ 
+                  dx[ 4]],
+                Editable->False]}], ")"}]}], ",", 
+        RowBox[{"pi", "\[CenterDot]", 
+          RowBox[{"(", 
+            RowBox[{
+              InterpretationBox[\(dx\_2\),
+                Subscripted[ 
+                  dx[ 2]],
+                Editable->False], "\[ThinSpace]", 
+              InterpretationBox[\(dx\_5\),
+                Subscripted[ 
+                  dx[ 5]],
+                Editable->False]}], ")"}]}], ",", 
+        RowBox[{
+          InterpretationBox[\(x\_3\),
+            Subscripted[ 
+              x[ 3]],
+            Editable->False], "\[CenterDot]", 
+          InterpretationBox[\(v\_1\),
+            Subscripted[ 
+              v[ 1]],
+            Editable->False]}], ",", 
+        RowBox[{
+          InterpretationBox[\(x\_3\),
+            Subscripted[ 
+              x[ 3]],
+            Editable->False], "\[CenterDot]", 
+          InterpretationBox[\(v\_2\),
+            Subscripted[ 
+              v[ 2]],
+            Editable->False]}], ",", 
+        RowBox[{
+          InterpretationBox[\(x\_4\),
+            Subscripted[ 
+              x[ 4]],
+            Editable->False], "\[CenterDot]", 
+          InterpretationBox[\(v\_1\),
+            Subscripted[ 
+              v[ 1]],
+            Editable->False]}], ",", 
+        RowBox[{
+          InterpretationBox[\(x\_4\),
+            Subscripted[ 
+              x[ 4]],
+            Editable->False], "\[CenterDot]", 
+          InterpretationBox[\(v\_2\),
+            Subscripted[ 
+              v[ 2]],
+            Editable->False]}], ",", 
+        RowBox[{
+          InterpretationBox[\(x\_5\),
+            Subscripted[ 
+              x[ 5]],
+            Editable->False], "\[CenterDot]", 
+          InterpretationBox[\(v\_1\),
+            Subscripted[ 
+              v[ 1]],
+            Editable->False]}], ",", 
+        RowBox[{
+          InterpretationBox[\(x\_5\),
+            Subscripted[ 
+              x[ 5]],
+            Editable->False], "\[CenterDot]", 
+          InterpretationBox[\(v\_2\),
+            Subscripted[ 
+              v[ 2]],
+            Editable->False]}], ",", 
+        RowBox[{
+          InterpretationBox["1",
+            VTimes[ ]], "\[CenterDot]", 
+          InterpretationBox[\(v\_3\),
+            Subscripted[ 
+              v[ 3]],
+            Editable->False]}], ",", 
+        RowBox[{
+          InterpretationBox["1",
+            VTimes[ ]], "\[CenterDot]", 
+          InterpretationBox[\(v\_4\),
+            Subscripted[ 
+              v[ 4]],
+            Editable->False]}], ",", 
+        RowBox[{
+          InterpretationBox["1",
+            VTimes[ ]], "\[CenterDot]", 
+          InterpretationBox[\(v\_5\),
+            Subscripted[ 
+              v[ 5]],
+            Editable->False]}], ",", 
+        RowBox[{"pi", "\[CenterDot]", 
+          RowBox[{"(", 
+            RowBox[{
+              InterpretationBox[\(dx\_3\),
+                Subscripted[ 
+                  dx[ 3]],
+                Editable->False], "\[ThinSpace]", 
+              InterpretationBox[\(dx\_4\),
+                Subscripted[ 
+                  dx[ 4]],
+                Editable->False]}], ")"}]}], ",", 
+        RowBox[{"pi", "\[CenterDot]", 
+          RowBox[{"(", 
+            RowBox[{
+              InterpretationBox[\(dx\_3\),
+                Subscripted[ 
+                  dx[ 3]],
+                Editable->False], "\[ThinSpace]", 
+              InterpretationBox[\(dx\_5\),
+                Subscripted[ 
+                  dx[ 5]],
+                Editable->False]}], ")"}]}], ",", 
+        RowBox[{"pi", "\[CenterDot]", 
+          RowBox[{"(", 
+            RowBox[{
+              InterpretationBox[\(dx\_4\),
+                Subscripted[ 
+                  dx[ 4]],
+                Editable->False], "\[ThinSpace]", 
+              InterpretationBox[\(dx\_5\),
+                Subscripted[ 
+                  dx[ 5]],
+                Editable->False]}], ")"}]}], ",", 
+        RowBox[{
+          InterpretationBox["1",
+            VTimes[ ]], "\[CenterDot]", 
+          InterpretationBox[\(v\_1\),
+            Subscripted[ 
+              v[ 1]],
+            Editable->False]}], ",", 
+        RowBox[{
+          InterpretationBox["1",
+            VTimes[ ]], "\[CenterDot]", 
+          InterpretationBox[\(v\_2\),
+            Subscripted[ 
+              v[ 2]],
+            Editable->False]}]}], "}"}]], "Output"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{"pi", "\[CenterDot]", 
+          RowBox[{"(", 
+            RowBox[{
+              InterpretationBox[\(dx\_1\),
+                Subscripted[ 
+                  dx[ 1]],
+                Editable->False], "\[ThinSpace]", 
+              InterpretationBox[\(dx\_2\),
+                Subscripted[ 
+                  dx[ 2]],
+                Editable->False]}], ")"}]}], ",", 
+        RowBox[{
+          InterpretationBox[\(x\_1\),
+            Subscripted[ 
+              x[ 1]],
+            Editable->False], "\[CenterDot]", 
+          InterpretationBox[\(v\_2\),
+            Subscripted[ 
+              v[ 2]],
+            Editable->False]}], ",", 
+        RowBox[{
+          InterpretationBox[\(x\_2\),
+            Subscripted[ 
+              x[ 2]],
+            Editable->False], "\[CenterDot]", 
+          InterpretationBox[\(v\_1\),
+            Subscripted[ 
+              v[ 1]],
+            Editable->False]}], ",", 
+        RowBox[{
+          RowBox[{"-", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_1\),
+                Subscripted[ 
+                  x[ 1]],
+                Editable->False], "\[CenterDot]", 
+              InterpretationBox[\(v\_1\),
+                Subscripted[ 
+                  v[ 1]],
+                Editable->False]}]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "\[CenterDot]", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{"-", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_1\),
+                Subscripted[ 
+                  x[ 1]],
+                Editable->False], "\[CenterDot]", 
+              InterpretationBox[\(v\_1\),
+                Subscripted[ 
+                  v[ 1]],
+                Editable->False]}]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "\[CenterDot]", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          InterpretationBox[\(x\_3\),
+            Subscripted[ 
+              x[ 3]],
+            Editable->False], "\[CenterDot]", 
+          InterpretationBox[\(v\_4\),
+            Subscripted[ 
+              v[ 4]],
+            Editable->False]}], ",", 
+        RowBox[{
+          InterpretationBox[\(x\_3\),
+            Subscripted[ 
+              x[ 3]],
+            Editable->False], "\[CenterDot]", 
+          InterpretationBox[\(v\_5\),
+            Subscripted[ 
+              v[ 5]],
+            Editable->False]}], ",", 
+        RowBox[{
+          InterpretationBox[\(x\_4\),
+            Subscripted[ 
+              x[ 4]],
+            Editable->False], "\[CenterDot]", 
+          InterpretationBox[\(v\_3\),
+            Subscripted[ 
+              v[ 3]],
+            Editable->False]}], ",", 
+        RowBox[{
+          RowBox[{"-", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_1\),
+                Subscripted[ 
+                  x[ 1]],
+                Editable->False], "\[CenterDot]", 
+              InterpretationBox[\(v\_1\),
+                Subscripted[ 
+                  v[ 1]],
+                Editable->False]}]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "\[CenterDot]", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          InterpretationBox[\(x\_4\),
+            Subscripted[ 
+              x[ 4]],
+            Editable->False], "\[CenterDot]", 
+          InterpretationBox[\(v\_5\),
+            Subscripted[ 
+              v[ 5]],
+            Editable->False]}], ",", 
+        RowBox[{
+          InterpretationBox[\(x\_5\),
+            Subscripted[ 
+              x[ 5]],
+            Editable->False], "\[CenterDot]", 
+          InterpretationBox[\(v\_3\),
+            Subscripted[ 
+              v[ 3]],
+            Editable->False]}], ",", 
+        RowBox[{
+          InterpretationBox[\(x\_5\),
+            Subscripted[ 
+              x[ 5]],
+            Editable->False], "\[CenterDot]", 
+          InterpretationBox[\(v\_4\),
+            Subscripted[ 
+              v[ 4]],
+            Editable->False]}], ",", 
+        RowBox[{
+          RowBox[{"-", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_1\),
+                Subscripted[ 
+                  x[ 1]],
+                Editable->False], "\[CenterDot]", 
+              InterpretationBox[\(v\_1\),
+                Subscripted[ 
+                  v[ 1]],
+                Editable->False]}]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "\[CenterDot]", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{"(", 
+            RowBox[{"pi", "\[ThinSpace]", 
+              InterpretationBox[\(x\_3\),
+                Subscripted[ 
+                  x[ 3]],
+                Editable->False]}], ")"}], "\[CenterDot]", 
+          RowBox[{"(", 
+            RowBox[{
+              InterpretationBox[\(dx\_3\),
+                Subscripted[ 
+                  dx[ 3]],
+                Editable->False], "\[ThinSpace]", 
+              InterpretationBox[\(dx\_4\),
+                Subscripted[ 
+                  dx[ 4]],
+                Editable->False]}], ")"}]}], ",", 
+        RowBox[{
+          RowBox[{"(", 
+            RowBox[{"pi", "\[ThinSpace]", 
+              InterpretationBox[\(x\_3\),
+                Subscripted[ 
+                  x[ 3]],
+                Editable->False]}], ")"}], "\[CenterDot]", 
+          RowBox[{"(", 
+            RowBox[{
+              InterpretationBox[\(dx\_3\),
+                Subscripted[ 
+                  dx[ 3]],
+                Editable->False], "\[ThinSpace]", 
+              InterpretationBox[\(dx\_5\),
+                Subscripted[ 
+                  dx[ 5]],
+                Editable->False]}], ")"}]}], ",", 
+        RowBox[{
+          RowBox[{"(", 
+            RowBox[{"pi", "\[ThinSpace]", 
+              InterpretationBox[\(x\_4\),
+                Subscripted[ 
+                  x[ 4]],
+                Editable->False]}], ")"}], "\[CenterDot]", 
+          RowBox[{"(", 
+            RowBox[{
+              InterpretationBox[\(dx\_3\),
+                Subscripted[ 
+                  dx[ 3]],
+                Editable->False], "\[ThinSpace]", 
+              InterpretationBox[\(dx\_4\),
+                Subscripted[ 
+                  dx[ 4]],
+                Editable->False]}], ")"}]}], ",", 
+        RowBox[{
+          RowBox[{
+            RowBox[{"(", 
+              RowBox[{"pi", "\[ThinSpace]", 
+                InterpretationBox[\(x\_3\),
+                  Subscripted[ 
+                    x[ 3]],
+                  Editable->False]}], ")"}], "\[CenterDot]", 
+            RowBox[{"(", 
+              RowBox[{
+                InterpretationBox[\(dx\_4\),
+                  Subscripted[ 
+                    dx[ 4]],
+                  Editable->False], "\[ThinSpace]", 
+                InterpretationBox[\(dx\_5\),
+                  Subscripted[ 
+                    dx[ 5]],
+                  Editable->False]}], ")"}]}], "+", 
+          RowBox[{
+            RowBox[{"(", 
+              RowBox[{"pi", "\[ThinSpace]", 
+                InterpretationBox[\(x\_4\),
+                  Subscripted[ 
+                    x[ 4]],
+                  Editable->False]}], ")"}], "\[CenterDot]", 
+            RowBox[{"(", 
+              RowBox[{
+                InterpretationBox[\(dx\_3\),
+                  Subscripted[ 
+                    dx[ 3]],
+                  Editable->False], "\[ThinSpace]", 
+                InterpretationBox[\(dx\_5\),
+                  Subscripted[ 
+                    dx[ 5]],
+                  Editable->False]}], ")"}]}]}], ",", 
+        RowBox[{
+          RowBox[{"(", 
+            RowBox[{"pi", "\[ThinSpace]", 
+              InterpretationBox[\(x\_4\),
+                Subscripted[ 
+                  x[ 4]],
+                Editable->False]}], ")"}], "\[CenterDot]", 
+          RowBox[{"(", 
+            RowBox[{
+              InterpretationBox[\(dx\_4\),
+                Subscripted[ 
+                  dx[ 4]],
+                Editable->False], "\[ThinSpace]", 
+              InterpretationBox[\(dx\_5\),
+                Subscripted[ 
+                  dx[ 5]],
+                Editable->False]}], ")"}]}], ",", 
+        RowBox[{
+          RowBox[{"-", "\[ThinSpace]", 
+            RowBox[{
+              RowBox[{"(", 
+                RowBox[{"pi", "\[ThinSpace]", 
+                  InterpretationBox[\(x\_3\),
+                    Subscripted[ 
+                      x[ 3]],
+                    Editable->False]}], ")"}], "\[CenterDot]", 
+              RowBox[{"(", 
+                RowBox[{
+                  InterpretationBox[\(dx\_4\),
+                    Subscripted[ 
+                      dx[ 4]],
+                    Editable->False], "\[ThinSpace]", 
+                  InterpretationBox[\(dx\_5\),
+                    Subscripted[ 
+                      dx[ 5]],
+                    Editable->False]}], ")"}]}]}], "+", 
+          RowBox[{
+            RowBox[{"(", 
+              RowBox[{"pi", "\[ThinSpace]", 
+                InterpretationBox[\(x\_5\),
+                  Subscripted[ 
+                    x[ 5]],
+                  Editable->False]}], ")"}], "\[CenterDot]", 
+            RowBox[{"(", 
+              RowBox[{
+                InterpretationBox[\(dx\_3\),
+                  Subscripted[ 
+                    dx[ 3]],
+                  Editable->False], "\[ThinSpace]", 
+                InterpretationBox[\(dx\_4\),
+                  Subscripted[ 
+                    dx[ 4]],
+                  Editable->False]}], ")"}]}]}], ",", 
+        RowBox[{
+          RowBox[{"(", 
+            RowBox[{"pi", "\[ThinSpace]", 
+              InterpretationBox[\(x\_5\),
+                Subscripted[ 
+                  x[ 5]],
+                Editable->False]}], ")"}], "\[CenterDot]", 
+          RowBox[{"(", 
+            RowBox[{
+              InterpretationBox[\(dx\_3\),
+                Subscripted[ 
+                  dx[ 3]],
+                Editable->False], "\[ThinSpace]", 
+              InterpretationBox[\(dx\_5\),
+                Subscripted[ 
+                  dx[ 5]],
+                Editable->False]}], ")"}]}], ",", 
+        RowBox[{
+          RowBox[{"(", 
+            RowBox[{"pi", "\[ThinSpace]", 
+              InterpretationBox[\(x\_5\),
+                Subscripted[ 
+                  x[ 5]],
+                Editable->False]}], ")"}], "\[CenterDot]", 
+          RowBox[{"(", 
+            RowBox[{
+              InterpretationBox[\(dx\_4\),
+                Subscripted[ 
+                  dx[ 4]],
+                Editable->False], "\[ThinSpace]", 
+              InterpretationBox[\(dx\_5\),
+                Subscripted[ 
+                  dx[ 5]],
+                Editable->False]}], ")"}]}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Length[zero]\)], "Input"],
+
+Cell[BoxData[
+    \(21\)], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.1 for X",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+AutoGeneratedPackage->None,
+WindowSize->{1016, 664},
+WindowMargins->{{103, Automatic}, {Automatic, 95}},
+Magnification->1.25
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1727, 52, 132, 3, 118, "Title"],
+
+Cell[CellGroupData[{
+Cell[1884, 59, 204, 5, 76, "Section"],
+
+Cell[CellGroupData[{
+Cell[2113, 68, 52, 0, 56, "Subsection"],
+Cell[2168, 70, 83, 2, 35, "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+Cell[2276, 76, 88, 2, 56, "Input"],
+Cell[2367, 80, 141, 3, 28, "Message"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2545, 88, 343, 7, 98, "Input",
+  InitializationCell->True],
+Cell[2891, 97, 55, 1, 35, "Output"],
+Cell[2949, 100, 180, 3, 47, "Message"],
+Cell[3132, 105, 72, 1, 35, "Output"],
+Cell[3207, 108, 276, 8, 35, "Output"],
+Cell[3486, 118, 47, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3570, 124, 60, 1, 35, "Input"],
+Cell[3633, 127, 404, 13, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4074, 145, 121, 2, 36, "Input"],
+Cell[4198, 149, 2812, 75, 36, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7047, 229, 43, 1, 35, "Input"],
+Cell[7093, 232, 1977, 61, 36, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9107, 298, 45, 1, 35, "Input"],
+Cell[9155, 301, 74, 1, 35, "Output"]
+}, Open  ]],
+Cell[9244, 305, 141, 3, 77, "Input"],
+
+Cell[CellGroupData[{
+Cell[9410, 312, 72, 2, 56, "Input"],
+Cell[9485, 316, 40, 1, 35, "Output"],
+Cell[9528, 319, 35, 1, 35, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9612, 326, 29, 0, 56, "Subsection"],
+Cell[9644, 328, 957, 18, 143, "Input"],
+Cell[10604, 348, 150, 3, 77, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[10791, 356, 46, 0, 56, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[10862, 360, 369, 7, 98, "Input",
+  InitializationCell->True],
+Cell[11234, 369, 183, 3, 47, "Message"],
+Cell[11420, 374, 180, 3, 47, "Message"]
+}, Open  ]],
+Cell[11615, 380, 154, 3, 56, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[11806, 388, 70, 0, 56, "Subsection"],
+Cell[11879, 390, 104, 2, 35, "Input"],
+Cell[11986, 394, 194, 4, 56, "Input"],
+Cell[12183, 400, 288, 6, 119, "Input"],
+
+Cell[CellGroupData[{
+Cell[12496, 410, 153, 4, 35, "Input",
+  InitializationCell->True],
+Cell[12652, 416, 35, 1, 35, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[12736, 423, 28, 0, 56, "Subsection"],
+Cell[12767, 425, 233, 4, 98, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[13037, 434, 50, 0, 56, "Subsection"],
+Cell[13090, 436, 272, 6, 140, "Input"],
+Cell[13365, 444, 52, 1, 35, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[13454, 450, 49, 0, 56, "Subsection"],
+Cell[13506, 452, 267, 6, 140, "Input"],
+Cell[13776, 460, 52, 1, 35, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[13865, 466, 50, 0, 56, "Subsection"],
+Cell[13918, 468, 388, 9, 203, "Input"],
+Cell[14309, 479, 52, 1, 35, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[14398, 485, 60, 0, 56, "Subsection"],
+Cell[14461, 487, 633, 15, 329, "Input"],
+Cell[15097, 504, 52, 1, 35, "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[15198, 511, 97, 3, 76, "Section"],
+
+Cell[CellGroupData[{
+Cell[15320, 518, 83, 2, 35, "Input",
+  InitializationCell->True],
+Cell[15406, 522, 61, 1, 30, "Print"]
+}, Open  ]],
+Cell[15482, 526, 50, 1, 35, "Input"],
+Cell[15535, 529, 138, 3, 77, "Input"],
+
+Cell[CellGroupData[{
+Cell[15698, 536, 177, 3, 56, "Input",
+  InitializationCell->True],
+Cell[15878, 541, 55, 1, 35, "Output"],
+Cell[15936, 544, 47, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[16020, 550, 145, 3, 77, "Input"],
+Cell[16168, 555, 274, 8, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[16479, 568, 84, 1, 35, "Input"],
+Cell[16566, 571, 337, 12, 36, "Output"]
+}, Open  ]],
+Cell[16918, 586, 172, 3, 56, "Input"],
+Cell[17093, 591, 1090, 18, 308, "Input"],
+Cell[18186, 611, 415, 8, 77, "Input"],
+Cell[18604, 621, 398, 8, 77, "Input"],
+Cell[19005, 631, 504, 11, 77, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[19546, 647, 57, 0, 66, "Section"],
+
+Cell[CellGroupData[{
+Cell[19628, 651, 29, 0, 57, "Subsection"],
+Cell[19660, 653, 633, 15, 329, "Input"],
+Cell[20296, 670, 52, 1, 35, "Input"],
+
+Cell[CellGroupData[{
+Cell[20373, 675, 98, 2, 56, "Input"],
+Cell[20474, 679, 36, 1, 35, "Output"],
+Cell[20513, 682, 74, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[20624, 688, 252, 7, 161, "Input"],
+Cell[20879, 697, 111, 2, 35, "Output"],
+Cell[20993, 701, 143, 2, 35, "Output"],
+Cell[21139, 705, 161, 2, 56, "Output"],
+Cell[21303, 709, 265, 4, 56, "Output"],
+Cell[21571, 715, 377, 5, 77, "Output"],
+Cell[21951, 722, 556, 7, 119, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[22544, 734, 51, 1, 35, "Input"],
+Cell[22598, 737, 769, 10, 161, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[23404, 752, 122, 2, 56, "Input"],
+Cell[23529, 756, 37, 1, 35, "Output"]
+}, Open  ]],
+Cell[23581, 760, 93, 1, 35, "Input"],
+Cell[23677, 763, 59, 1, 35, "Input"],
+
+Cell[CellGroupData[{
+Cell[23761, 768, 122, 2, 56, "Input"],
+Cell[23886, 772, 6253, 190, 56, "Output"],
+Cell[30142, 964, 11430, 338, 98, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[41609, 1307, 45, 1, 35, "Input"],
+Cell[41657, 1310, 36, 1, 35, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

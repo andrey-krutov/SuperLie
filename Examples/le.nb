@@ -1,0 +1,186 @@
+(************** Content-type: application/mathematica **************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      3482,        124]*)
+(*NotebookOutlinePosition[      4133,        147]*)
+(*  CellTagsIndexPosition[      4089,        143]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+  "Leites algebra - ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[GothicL]\[GothicE](n)\)]]
+}], "Title"],
+
+Cell[TextData[{
+  "Algebra ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[GothicL]\[GothicE](n)\)]],
+  " is implemented as the quotient ",
+  Cell[BoxData[
+      \(TraditionalForm\`\(\[GothicB](
+          n)\)/\[LeftAngleBracket]const\[RightAngleBracket]\)]],
+  ";"
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    RowBox[{"Needs", 
+      StyleBox["[",
+        "SmallText"], 
+      StyleBox["\"\<SuperLie`\>\"",
+        "SmallText"], 
+      StyleBox["]",
+        "SmallText"]}], "\[IndentingNewLine]", \(n = 2;\)}], "Input"],
+
+Cell[BoxData[
+    \("SuperLie Package installed"\)], "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["First define le as Buttin algebra", "Subsubsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(VectorSpace[x, Dim \[Rule] n];\)\), "\[IndentingNewLine]", 
+    \(\(VectorSpace[\[Xi], Dim \[Rule] {0, n}];\)\), "\[IndentingNewLine]", 
+    \(ButtinAlgebra[le, {x, \[Xi]}]\)}], "Input"],
+
+Cell[BoxData[
+    \("le is a Buttin algebra over {x, \[Xi]}"\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Now redefine the bracket", "Subsubsection"],
+
+Cell[BoxData[
+    \(NewBracket[Lt, Parity \[Rule] 1]\)], "Input"],
+
+Cell[BoxData[
+    \(Lt[f_, g_] := VNormal[Bb[f, g]] /. e : VTimes[] \[Rule] 0\)], "Input"],
+
+Cell[BoxData[{
+    \(\(Bracket[le] ^= Lt;\)\), "\[IndentingNewLine]", 
+    \(\(bracket[le] ^= lt;\)\)}], "Input"],
+
+Cell[BoxData[{
+    \(ReGrade[x, Table[1, {n}]]\), "\[IndentingNewLine]", 
+    \(ReGrade[\[Xi], Table[1, {n}]]\)}], "Input"],
+
+Cell[BoxData[{
+    \(ReGrade[le]\), "\[IndentingNewLine]", 
+    \(Basis[le, \(-2\)] = {}\)}], "Input"]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"4.1 for X",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+WindowSize->{904, 825},
+WindowMargins->{{150, Automatic}, {Automatic, 52}},
+Magnification->1.5
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1727, 52, 120, 4, 178, "Title"],
+Cell[1850, 58, 275, 9, 46, "Text"],
+
+Cell[CellGroupData[{
+Cell[2150, 71, 228, 7, 62, "Input"],
+Cell[2381, 80, 61, 1, 33, "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2479, 86, 58, 0, 60, "Subsubsection"],
+
+Cell[CellGroupData[{
+Cell[2562, 90, 209, 3, 85, "Input"],
+Cell[2774, 95, 74, 1, 39, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2897, 102, 49, 0, 60, "Subsubsection"],
+Cell[2949, 104, 65, 1, 39, "Input"],
+Cell[3017, 107, 90, 1, 39, "Input"],
+Cell[3110, 110, 113, 2, 62, "Input"],
+Cell[3226, 114, 123, 2, 62, "Input"],
+Cell[3352, 118, 102, 2, 62, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

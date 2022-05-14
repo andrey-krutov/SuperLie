@@ -1,0 +1,107 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 4.0,
+MathReader 4.0, or any compatible application. The data for the notebook 
+starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      2656,         70]*)
+(*NotebookOutlinePosition[      3323,         93]*)
+(*  CellTagsIndexPosition[      3279,         89]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[TextData[{
+  StyleBox["Disclaimer: This software is provided \"AS IS\"", 
+    "Subsubsection"],
+  ", ",
+  StyleBox[" without a warranty of any kind", "Subsubsection"],
+  ". "
+}], "Text"],
+
+Cell["\<\
+ALL EXPRESS OR IMPLIED CONDITIONS,  REPRESENTATIONS AND WARRANTIES,  \
+INCLUDING ANY IMPLIED WARRANTY OF MERCHANTABILITY,  FITNESS FOR A PARTICULAR \
+PURPOSE OR NON-INFRINGEMENT,  ARE HEREBY EXCLUDED. THE AUTHOR SHALL NOT BE \
+LIABLE FOR ANY DAMAGES SUFFERED BY THE USER AS A RESULT OF USING,  MODIFYING \
+OR DISTRIBUTING THE SOFTWARE OR ITS DERIVATIVES. IN NO EVENT WILL THE AUTHOR \
+BE LIABLE FOR ANY LOST REVENUE,  PROFIT OR DATA,  OR FOR DIRECT,  INDIRECT,  \
+SPECIAL,  CONSEQUENTIAL,  INCIDENTAL OR PUNITIVE DAMAGES,  HOWEVER CAUSED AND \
+REGARDLESS OF THE THEORY OF LIABILITY,  ARISING OUT OF THE USE OF OR \
+INABILITY TO USE SOFTWARE,  EVEN IF THE AUTHOR HAS BEEN ADVISED OF THE \
+POSSIBILITY OF SUCH DAMAGES. \
+\>", "Text"]
+},
+FrontEndVersion->"4.0 \\344\\353\\377 Microsoft Windows",
+ScreenRectangle->{{0, 1024}, {0, 692}},
+WindowSize->{754, 462},
+WindowMargins->{{Automatic, 98}, {83, Automatic}}
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1717, 49, 191, 6, 33, "Text"],
+Cell[1911, 57, 741, 11, 147, "Text"]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

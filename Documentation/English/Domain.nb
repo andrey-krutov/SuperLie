@@ -1,0 +1,3128 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     96837,       3119]
+NotebookOptionsPosition[     37031,       1692]
+NotebookOutlinePosition[     91480,       2952]
+CellTagsIndexPosition[     90484,       2908]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+ "Package ",
+ StyleBox["SuperLie`Domain`",
+  FontFamily->"Courier New"],
+ ": ",
+ "Object Oriented Programming in Mathematica"
+}], "Title",
+ FontSize->24,
+ CellTags->{"Domain", "c:1"}],
+
+Cell[CellGroupData[{
+
+Cell["Properties", "Section",
+ CellTags->{"c:2", "b:8.0"}],
+
+Cell["SetProperty", "ObjectName",
+ CellTags->{"i:1", "b:8.0"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["SetProperty", "DisplayMath"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["property",
+  FontSlant->"Italic"],
+ "] defines the property of the object."
+}], "Usage",
+ CellTags->"b:8.0"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] Both parameters can be lists.\n\[FilledSmallSquare] \
+Either objects or properties can be with parameters, as ",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["value ",
+  FontSlant->"Italic"],
+ "or ",
+ StyleBox["property",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["value",
+  FontSlant->"Italic"],
+ " (but not both simultaneosly).\n\[FilledSmallSquare] Each property must be \
+previously defined using the functions ",
+ StyleBox["NewProperty", "DisplayMath"],
+ ", ",
+ StyleBox["NewValue", "DisplayMath"],
+ ", ",
+ StyleBox["NewList", "DisplayMath"],
+ " or ",
+ StyleBox["NewDomain", "DisplayMath"],
+ ". Only one of the properties in the list can be a domain.\n\
+\[FilledSmallSquare] Another way to set the property of the objects is to \
+call ",
+ StyleBox["property",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ", ...] or ",
+ StyleBox["property",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "->",
+ StyleBox["value",
+  FontSlant->"Italic"],
+ ", ...]. Only the second form is valid for ",
+ StyleBox["Value", "DisplayMath"],
+ " and ",
+ StyleBox["List", "DisplayMath"],
+ " types of properties."
+}], "Notes",
+ CellChangeTimes->{{3.42159497362963*^9, 3.421594981310675*^9}},
+ CellTags->"b:8.0"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["CancelProperty", "DisplayMath"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["property",
+  FontSlant->"Italic"],
+ "] cancels the property of the object."
+}], "Usage",
+ CellTags->{"i:2", "b:8.0"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] Both parameters can be lists.\n\[FilledSmallSquare] \
+Objects, as well as the property, can be with parameters, e.g., ",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["value ",
+  FontSlant->"Italic"],
+ "or ",
+ StyleBox["property",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["value",
+  FontSlant->"Italic"],
+ " (but not both simultaneously).\n\[FilledSmallSquare] Another way to cancel \
+a property of an objects is to call ",
+ StyleBox["Un", "DisplayMath"],
+ StyleBox["property",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ", ...] or ",
+ StyleBox["Un", "DisplayMath"],
+ StyleBox["property",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["value",
+  FontSlant->"Italic"],
+ ", ...]."
+}], "Notes",
+ CellChangeTimes->{{3.4215950176929903`*^9, 3.4215950240521345`*^9}},
+ CellTags->"b:8.0"],
+
+Cell["Define", "ObjectName",
+ CellTags->{"i:3", "b:8.0"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["Define", "DisplayMath"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["prop",
+  FontSlant->"Italic"],
+ "] clears all settings of the object and calls ",
+ StyleBox["SetProperty", "DisplayMath"],
+ ".\n\[FilledSmallSquare] ",
+ StyleBox["Define", "DisplayMath"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["prop",
+  FontSlant->"Italic"],
+ ", {",
+ StyleBox["attr",
+  FontSlant->"Italic"],
+ "}] sets attributes of the object before the properties."
+}], "Usage",
+ CellTags->"b:8.0"],
+
+Cell["ClearDef", "ObjectName",
+ CellTags->{"i:5", "b:8.0"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["ClearDef", "DisplayMath"],
+ "[",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "] clears all settings associated with the symbol ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "."
+}], "Usage",
+ CellTags->"b:8.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Keys", "Section",
+ CellTags->{"c:3", "b:8.1"}],
+
+Cell[TextData[{
+ "In ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ", there are two ways for holding the properties of objects. One is \
+Attributes[obj] whose value is {",
+ StyleBox["key",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["key",
+  FontSlant->"Italic"],
+ ", ... }, the other one is Options[obj] with value of the form {",
+ StyleBox["key",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["value",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["key",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["value",
+  FontSlant->"Italic"],
+ ", ... }.\nThe ",
+ StyleBox["Domain", "Name"],
+ " package allows one to define other lists of properties, which can contain \
+terms of both types: ",
+ StyleBox["key",
+  FontSlant->"Italic"],
+ " or ",
+ StyleBox["key",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["value",
+  FontSlant->"Italic"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.4215960833853807`*^9, 3.421596085418304*^9}, {
+  3.4215961941546593`*^9, 3.4215962359747934`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:8.1"],
+
+Cell["NewList", "ObjectName",
+ CellTags->{"i:4", "b:8.1"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["NewList",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "] defines a new list of properties. The value of ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "] will be the list of properties of the object, ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["key",
+  FontSlant->"Italic"],
+ "] is the value of the property ",
+ StyleBox["key",
+  FontSlant->"Italic"],
+ " (or ",
+ StyleBox["True",
+  FontFamily->"Courier"],
+ " if ",
+ StyleBox["key",
+  FontSlant->"Italic"],
+ " has no value) and ",
+ StyleBox["False",
+  FontFamily->"Courier"],
+ " if ",
+ StyleBox["key",
+  FontSlant->"Italic"],
+ " is not a term of ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "]."
+}], "Usage",
+ CellChangeTimes->{{3.421596301278696*^9, 3.4215963020898623`*^9}, 
+   3.421596343018715*^9},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:8.1"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] The expression ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["list",
+  FontSlant->"Italic"],
+ "] is used to add or change the properties, ",
+ StyleBox["Un",
+  FontFamily->"Courier"],
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["list",
+  FontSlant->"Italic"],
+ "]  to remove the properties.\n\[FilledSmallSquare] One function can set \
+properties of several objects: ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["list",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["list",
+  FontSlant->"Italic"],
+ ", ...] or ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[{",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["ob",
+  FontSlant->"Italic"],
+ "j,..}\[Rule]",
+ StyleBox["list",
+  FontSlant->"Italic"],
+ "].\n\[FilledSmallSquare] Each member of the list must be either ",
+ StyleBox["key",
+  FontSlant->"Italic"],
+ " or ",
+ StyleBox["key",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["value",
+  FontSlant->"Italic"],
+ ". If the ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "] already contains the member with the same key, it will be replaced.\n\
+\[FilledSmallSquare] Another way to set/reset the list of properties \
+(together with properties of other kinds) is ",
+ StyleBox["SetProperty",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ", {..., ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["list",
+  FontSlant->"Italic"],
+ ", ..}] and ",
+ StyleBox["CancelProperty",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ", {...,",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["list",
+  FontSlant->"Italic"],
+ ", ..}]",
+ StyleBox[".",
+  FontFamily->"Courier"]
+}], "Notes",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:8.1"],
+
+Cell["NewValue", "ObjectName",
+ CellTags->{"i:6", "b:8.1"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["NewValue",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ ",..]",
+ " declares new properties of the type Value."
+}], "Usage",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:8.1"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] After declaration one can use ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["val",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["val",
+  FontSlant->"Italic"],
+ ", ...] to set (or change) the value of the property name and ",
+ StyleBox["Un",
+  FontFamily->"Courier"],
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ", ...] to discard the property.\n\[FilledSmallSquare] The expression ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "] returns the value of the property ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ " of the object ",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ".\n\[FilledSmallSquare] Another way to set/reset the value of the property \
+(together with properties of other kinds) is ",
+ StyleBox["SetProperty",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ", {..., ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["val",
+  FontSlant->"Italic"],
+ ", ..}]",
+ StyleBox[" ",
+  FontFamily->"Courier"],
+ "and",
+ StyleBox[" CancelProperty",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ", {..., ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ ", ..}]",
+ StyleBox[".",
+  FontFamily->"Courier"]
+}], "Notes",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:8.1"],
+
+Cell["NewProperty", "ObjectName",
+ CellTags->{"i:7", "b:8.1"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["NewProperty",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "] ",
+ "declares a new property of objects. \n\[FilledSmallSquare] ",
+ StyleBox["NewProperty",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ ", {",
+ StyleBox["method",
+  FontSlant->"Italic"],
+ ",...}] ",
+ " defines also the method of setting and resetting the property. "
+}], "Usage",
+ CellTags->"b:8.1"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] The predefined methods are:\n\[FilledSmallSquare] ",
+ StyleBox["Flag",
+  FontFamily->"Courier"],
+ ": ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "] sets the flag ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ StyleBox["Q", "Program"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "] = ",
+ StyleBox["True, Un",
+  FontFamily->"Courier"],
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "]",
+ StyleBox[" ",
+  FontFamily->"Courier"],
+ "cancels this definition. This is the default method, if it is used, then ",
+ StyleBox["NewProperty",
+  FontFamily->"Courier"],
+ " is called without the second parameter.\n\[FilledSmallSquare] ",
+ StyleBox["Flag\[Rule]",
+  FontFamily->"Courier"],
+ StyleBox["value",
+  FontSlant->"Italic"],
+ "  is the same as ",
+ StyleBox["Flag",
+  FontFamily->"Courier"],
+ " with given value used instead of ",
+ StyleBox["True",
+  FontFamily->"Courier"],
+ ".\n\[FilledSmallSquare] ",
+ StyleBox["Rule",
+  FontFamily->"Courier"],
+ ": ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "] transforms the replacement rule ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ StyleBox["Rule", "Program"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "] into a definition attached to ",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "; ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["parm",
+  FontSlant->"Italic"],
+ "] uses ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ StyleBox["Rule",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["parm",
+  FontSlant->"Italic"],
+ "]. The function ",
+ StyleBox["Un",
+  FontFamily->"Courier"],
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "] (",
+ StyleBox["Un", "Program",
+  FontFamily->"Courier"],
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["parm",
+  FontSlant->"Italic"],
+ "]) cancels this definition.\n\[FilledSmallSquare] ",
+ StyleBox["Rule\[Rule]",
+  FontFamily->"Courier"],
+ StyleBox["parm",
+  FontSlant->"Italic"],
+ " gives the default value of the parameter for ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ StyleBox["Rule", "Program"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "].\n\[FilledSmallSquare] ",
+ StyleBox["VarRule",
+  FontFamily->"Courier"],
+ " is the same as ",
+ StyleBox["Rule",
+  FontFamily->"Courier"],
+ ", but adds to the name of the rule a prefix depending on the domain of the \
+object (about domains, see below). So the property may differ from one domain \
+to another.\n\[FilledSmallSquare] ",
+ StyleBox["VarRule\[Rule]",
+  FontFamily->"Courier"],
+ StyleBox["parm",
+  FontSlant->"Italic"],
+ " gives the default value of the parameter.\n\[FilledSmallSquare] ",
+ StyleBox["Option",
+  FontFamily->"Courier"],
+ ": ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["val",
+  FontSlant->"Italic"],
+ "] sets the option ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["val",
+  FontSlant->"Italic"],
+ " of the given object; ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "] sets ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["True; Un",
+  FontFamily->"Courier"],
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "] deletes the option.\n\[FilledSmallSquare] ",
+ StyleBox["Option\[Rule]",
+  FontFamily->"Courier"],
+ StyleBox["value",
+  FontSlant->"Italic"],
+ " gives the default value of the option (instead of ",
+ StyleBox["True",
+  FontFamily->"Courier"],
+ ").\n\[FilledSmallSquare] ",
+ StyleBox["Also\[Rule]",
+  FontFamily->"Courier"],
+ "{",
+ StyleBox["prop",
+  FontSlant->"Italic"],
+ ",..} shows that ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "] sets also the properties from the list by calling ",
+ StyleBox["parm",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "]. Each of them may have a parameter: ",
+ StyleBox["prop",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["parm",
+  FontSlant->"Italic"],
+ ", then it is used in the call ",
+ StyleBox["prop",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["parm",
+  FontSlant->"Italic"],
+ "].\n\[FilledSmallSquare] ",
+ StyleBox["Format",
+  FontFamily->"Courier"],
+ ": shows that ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["func",
+  FontSlant->"Italic"],
+ "] defines the output format as ",
+ StyleBox["Format",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ StyleBox["_", "Program"],
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ StyleBox["Form", "Program"],
+ "] := ",
+ StyleBox["func",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ "]. Example: ",
+ StyleBox["TeX[",
+  FontFamily->"Courier"],
+ StyleBox["x",
+  FontSlant->"Italic"],
+ StyleBox["\[Rule]Subscripted]",
+  FontFamily->"Courier"],
+ " defines ",
+ StyleBox["Format[",
+  FontFamily->"Courier"],
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ StyleBox["_",
+  FontFamily->"Courier"],
+ StyleBox["x",
+  FontSlant->"Italic"],
+ StyleBox[", TeXForm] := Subscripted[",
+  FontFamily->"Courier"],
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ StyleBox["]",
+  FontFamily->"Courier"],
+ "."
+}], "Notes",
+ CellChangeTimes->{{3.4215963936515217`*^9, 3.4215964010020914`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:8.1"],
+
+Cell["NewDomain", "ObjectName",
+ CellTags->{"i:8", "b:8.1"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["NewDomain",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "]",
+ " declares a new domain."
+}], "Usage",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:8.1"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] To attach an object to this domain, enter ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ",...] or ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["parm",
+  FontSlant->"Italic"],
+ ",...] if the domain requires a parameter.\n\[FilledSmallSquare] To detach \
+the object, type ",
+ StyleBox["Un",
+  FontFamily->"Courier"],
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ ",...] or",
+ StyleBox[" Un",
+  FontFamily->"Courier"],
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["obj",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["parm",
+  FontSlant->"Italic"],
+ ",...].\n\[FilledSmallSquare] The names of domains can be used also in ",
+ StyleBox["SetProperty ",
+  FontFamily->"Courier"],
+ "and",
+ StyleBox[" CancelProperty",
+  FontFamily->"Courier"],
+ ".\n\[FilledSmallSquare] ",
+ StyleBox["NewDomain",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ ",{",
+ StyleBox["method",
+  FontSlant->"Italic"],
+ ",...},",
+ StyleBox["\"",
+  FontFamily->"Courier"],
+ StyleBox["prefix",
+  FontSlant->"Italic"],
+ StyleBox["\"",
+  FontFamily->"Courier"],
+ "]  defines also a method of attaching and detaching an object to the \
+domain. The methods are the same as for ",
+ StyleBox["NewProperty",
+  FontFamily->"Courier"],
+ ". The third parameter is the prefix used in ",
+ StyleBox["VarRule",
+  FontFamily->"Courier"],
+ " method for this domain."
+}], "Notes",
+ CellChangeTimes->{3.42159644884088*^9},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:8.1"],
+
+Cell["Domain", "ObjectName",
+ CellTags->{"i:9", "b:8.1"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["Domain",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ "] ",
+ "returns the domain of the value of expression ",
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ ". \n\[FilledSmallSquare] ",
+ StyleBox["Domain",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["op",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["n",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["tot",
+  FontSlant->"Italic"],
+ "] ",
+ "returns the domain of the ",
+ StyleBox["n",
+  FontSlant->"Italic"],
+ "-th argument of the function ",
+ StyleBox["op",
+  FontSlant->"Italic"],
+ " when it is called with ",
+ StyleBox["tot",
+  FontSlant->"Italic"],
+ " arguments."
+}], "Usage",
+ CellTags->"b:8.1"],
+
+Cell["Operation", "ObjectName",
+ CellTags->{"i:10", "b:8.1"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["Operation",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["generic",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["domain",
+  FontSlant->"Italic"],
+ ", ... ]\[Rule]",
+ StyleBox["domain",
+  FontSlant->"Italic"],
+ "] ",
+ "defines a new operation ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ " as a restriction of the ",
+ StyleBox["generic",
+  FontSlant->"Italic"],
+ " operation if its parameters belong to certain domains."
+}], "Usage",
+ CellTags->"b:8.1"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] In case of operations with a variable number of \
+operands, the repeated operands may be written as ",
+ StyleBox["domain",
+  FontSlant->"Italic"],
+ ".. (two dots) or ",
+ StyleBox["domain",
+  FontSlant->"Italic"],
+ "... (three dots; the last version allows zero operands).\n\
+\[FilledSmallSquare] In the case where a repeated group of operands enters a \
+new operation not directly but as a result of another operation, this \
+condition may be written as ",
+ StyleBox["domain",
+  FontSlant->"Italic"],
+ "..\[Rule] ",
+ StyleBox["opname",
+  FontSlant->"Italic"],
+ ". An example of such a condition is the restriction of the generic ",
+ StyleBox["Times",
+  FontFamily->"Courier"],
+ " operation (",
+ StyleBox["GTimes",
+  FontFamily->"Courier"],
+ ") to the product of a scalar coefficient and the vector: "
+}], "Notes",
+ CellChangeTimes->{{3.421596470922632*^9, 3.421596471142949*^9}, 
+   3.4237427641968193`*^9},
+ CellTags->"b:8.1"],
+
+Cell[TextData[{
+ StyleBox["Operation[SVTimes, GTimes[Scalar..\[Rule]Times, \
+Vector]\[Rule]Vector]",
+  FontFamily->"Courier"],
+ "."
+}], "Text",
+ CellTags->"b:8.1"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Tools", "Section",
+ CellTags->{"c:4", "b:8.2"}],
+
+Cell["SPrint", "ObjectName",
+ CellTags->{"i:11", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["SPrint",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["format",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["val",
+  FontSlant->"Italic"],
+ ", ...]",
+ " converts the arguments to a string. All arguments are the same as in the  ",
+ ButtonBox["Print",
+  BaseStyle->"RefGuideLink"],
+ " function."
+}], "Usage",
+ CellChangeTimes->{{3.421596496609568*^9, 3.4215965000845647`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:8.2"],
+
+Cell["AutoRule", "ObjectName",
+ CellTags->{"i:12", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["AutoRule",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["rule",
+  FontSlant->"Italic"],
+ "] converts the replacement rule or list of rules into definition(s), so the \
+rule will be automatically applied whenever possible. The value of the ",
+ StyleBox["rule",
+  FontSlant->"Italic"],
+ " is changed to {} (if ",
+ StyleBox["rule",
+  FontSlant->"Italic"],
+ " is non-protected) to prevent the repeated attempts to apply the rule.\n\
+\[FilledSmallSquare] ",
+ StyleBox["AutoRule",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["rule",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["tag",
+  FontSlant->"Italic"],
+ "] attaches the definitions to the given tag."
+}], "Usage",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:8.2"],
+
+Cell["UnAutoRule", "ObjectName",
+ CellTags->{"i:13", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["UnAutoRule",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["rule",
+  FontSlant->"Italic"],
+ "]",
+ " cancels the definitions made by ",
+ StyleBox["AutoRule",
+  FontFamily->"Courier"],
+ "[rule]",
+ " or ",
+ StyleBox["AutoRule",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["rule",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["tag",
+  FontSlant->"Italic"],
+ "]",
+ " and restores the value of the ",
+ StyleBox["rule",
+  FontSlant->"Italic"],
+ "."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell["NameSuffix", "ObjectName",
+ CellTags->{"i:14", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["NameSuffix",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["\"",
+  FontFamily->"Courier"],
+ StyleBox["suffix",
+  FontSlant->"Italic"],
+ StyleBox["\"",
+  FontFamily->"Courier"],
+ "]",
+ " builds a new name, appending the suffix to the old name."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell["PrefixName", "ObjectName",
+ CellTags->{"i:15", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["PrefixName[\"",
+  FontFamily->"Courier"],
+ StyleBox["prefix",
+  FontSlant->"Italic"],
+ StyleBox["\"",
+  FontFamily->"Courier"],
+ ", ",
+ StyleBox["name",
+  FontSlant->"Italic"],
+ "]",
+ " builds a new name, prepending the prefix to the old name."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell["Tag", "ObjectName",
+ CellTags->{"i:16", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["Tag", "DisplayMath"],
+ "[",
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ "] returns the ",
+ StyleBox["HoldPattern", "DisplayMath"],
+ "[",
+ StyleBox["tag",
+  FontSlant->"Italic"],
+ "], where ",
+ StyleBox["tag",
+  FontSlant->"Italic"],
+ " is the first symbol in the sequence ",
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["Head", "DisplayMath"],
+ "[",
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ "], ",
+ StyleBox["Head", "DisplayMath"],
+ "[",
+ StyleBox["Head", "DisplayMath"],
+ "[",
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ "]], ... ."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] Only the head of ",
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ "  is evaluated (as in the left hand side of \"=\")."
+}], "Notes",
+ CellChangeTimes->{3.4215965635358033`*^9},
+ CellTags->"b:8.2"],
+
+Cell["Target", "ObjectName",
+ CellTags->{"i:17", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["Target", "DisplayMath"],
+ "[",
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ "] evaluates the head and the arguments of the expression and returns the \
+result enclosed in ",
+ StyleBox["HoldPattern", "DisplayMath"],
+ "[] to prevent further evaluation of the expression. The result may be used \
+as target for assignment, in replacement rules, and so on.\n\
+\[FilledSmallSquare] ",
+ StyleBox["Target", "DisplayMath"],
+ "[",
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["head",
+  FontSlant->"Italic"],
+ "] returns ",
+ StyleBox["head",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["value",
+  FontSlant->"Italic"],
+ "] rather than ",
+ StyleBox["HoldPattern", "DisplayMath"],
+ "[",
+ StyleBox["value",
+  FontSlant->"Italic"],
+ "]. For example, ",
+ StyleBox["Print", "DisplayMath"],
+ "[",
+ StyleBox["Target", "DisplayMath"],
+ "[",
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["HoldForm", "DisplayMath"],
+ "]] prints partially evaluated expression."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell["AddHead", "ObjectName",
+ CellTags->{"i:18", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["AddHead", "DisplayMath"],
+ "[",
+ StyleBox["head",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ "] returns ",
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ " if ",
+ StyleBox["Head", "DisplayMath"],
+ "[",
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ "]\[Congruent]",
+ StyleBox["head",
+  FontSlant->"Italic"],
+ " and  ",
+ StyleBox["head",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["expr",
+  FontSlant->"Italic"],
+ "] otherwise."
+}], "Usage",
+ CellChangeTimes->{{3.4237429854649873`*^9, 3.4237429875379677`*^9}},
+ CellTags->"b:8.2"],
+
+Cell["InfixFormat", "ObjectName",
+ CellTags->{"i:19", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["InfixFormat", "DisplayMath"],
+ "[",
+ StyleBox["sep",
+  FontSlant->"Italic"],
+ "][",
+ StyleBox["f",
+  FontSlant->"Italic"],
+ "] defines the infix output format for the expressions with header ",
+ StyleBox["f",
+  FontSlant->"Italic"],
+ ": ",
+ StyleBox["f",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["x",
+  FontSlant->"Italic"],
+ "1,",
+ StyleBox["x",
+  FontSlant->"Italic"],
+ "2,..] \[LongRightArrow] ",
+ StyleBox["x",
+  FontSlant->"Italic"],
+ "1 ",
+ StyleBox["sep",
+  FontSlant->"Italic"],
+ " ",
+ StyleBox["x",
+  FontSlant->"Italic"],
+ "2 ... .\n\[FilledSmallSquare] ",
+ StyleBox["InfixFormat", "DisplayMath"],
+ "[",
+ StyleBox["sep",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["options",
+  FontSlant->"Italic"],
+ "][",
+ StyleBox["f",
+  FontSlant->"Italic"],
+ "] defines the infix format with the options:\n  ",
+ StyleBox["Prec", "DisplayMath"],
+ " is the precedence level (the default is 100),\n  ",
+ StyleBox["Group", "DisplayMath"],
+ " is  grouping (the default is None),\n  ",
+ StyleBox["Empty", "DisplayMath"],
+ " is the format for ",
+ StyleBox["f",
+  FontSlant->"Italic"],
+ "[] (the default is 1),\n  ",
+ StyleBox["Type", "DisplayMath"],
+ " is the format type (the default is ",
+ StyleBox["OutputForm",
+  FontFamily->"Courier"],
+ ")."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell["SetFormat", "ObjectName",
+ CellTags->{"i:20", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["SetFormat", "DisplayMath"],
+ "[",
+ StyleBox["type",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["f",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["fun",
+  FontSlant->"Italic"],
+ "] defines the output format for the expressions with header ",
+ StyleBox["f",
+  FontSlant->"Italic"],
+ ": ",
+ StyleBox["f",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["x",
+  FontSlant->"Italic"],
+ ",...] \[LongRightArrow]",
+ StyleBox["fun",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["f",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["x",
+  FontSlant->"Italic"],
+ ", ...]] .\n\[FilledSmallSquare] ",
+ StyleBox["SetFormat", "DisplayMath"],
+ "[",
+ StyleBox["StandardForm", "Program"],
+ ", ",
+ StyleBox["f",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["Subscripted", "Program"],
+ "] defines also the interpretation of the subscripted input."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell["ClearFormat", "ObjectName",
+ CellTags->{"i:21", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["ClearFormat", "DisplayMath"],
+ "[",
+ StyleBox["type",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["f",
+  FontSlant->"Italic"],
+ "] cancels the definition given by ",
+ StyleBox["SetFormat", "Program"],
+ "."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell["Formats", "ObjectName",
+ CellTags->{"i:21", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["Formats", "DisplayMath"],
+ "[ ",
+ StyleBox["f",
+  FontSlant->"Italic"],
+ "] returns the list of formats associated with ",
+ StyleBox["f",
+  FontSlant->"Italic"],
+ " and defined by ",
+ StyleBox["SetFormat", "Program"],
+ "."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell["SetToTag", "ObjectName",
+ CellTags->{"i:22", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["SetToTag", "DisplayMath"],
+ "[",
+ StyleBox["symb",
+  FontSlant->"Italic"],
+ "] redefines assignments of expressions with header ",
+ StyleBox["symb",
+  FontSlant->"Italic"],
+ ", so that assignments ",
+ StyleBox["symb",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["arg",
+  FontSlant->"Italic"],
+ ",..] = ... and ",
+ StyleBox["symb",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["arg",
+  FontSlant->"Italic"],
+ ",..] ",
+ StyleBox[":=", "DisplayMath"],
+ " ... will be attached to ",
+ StyleBox["arg",
+  FontSlant->"Italic"],
+ " rather than to ",
+ StyleBox["symb",
+  FontSlant->"Italic"],
+ "."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell["Compound", "ObjectName",
+ CellTags->{"i:23", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["Compound", "DisplayMath"],
+ "[{",
+ StyleBox["f1",
+  FontSlant->"Italic"],
+ ",...",
+ StyleBox["fn",
+  FontSlant->"Italic"],
+ "}] returns compound function which, if applied to arguments ",
+ StyleBox["args,",
+  FontSlant->"Italic"],
+ " evaluates (",
+ StyleBox["f1",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["args",
+  FontSlant->"Italic"],
+ "]; ...; ",
+ StyleBox["fn",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["args",
+  FontSlant->"Italic"],
+ "])."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell["SortKeys", "ObjectName",
+ CellTags->{"i:24", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["SortKeys",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["list",
+  FontSlant->"Italic"],
+ "] sorts the list in the alphabetical order of the keys."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell["OrderKeys", "ObjectName",
+ CellTags->{"i:25", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["OrderKeys",
+  FontFamily->"Courier"],
+ "[ ",
+ StyleBox["arg",
+  FontSlant->"Italic"],
+ "1,",
+ StyleBox["arg",
+  FontSlant->"Italic"],
+ "2] returns ",
+ Cell[BoxData[
+  RowBox[{"-", "1"}]]],
+ ", ",
+ Cell[BoxData["0"]],
+ ", or ",
+ Cell[BoxData["1"]],
+ " depending on the order of the keys in arguments (like function ",
+ ButtonBox["Order",
+  BaseStyle->"RefGuideLink"],
+ ")."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell["OrderedKeysQ", "ObjectName",
+ CellTags->{"i:26", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["OrderedKeysQ",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["list",
+  FontSlant->"Italic"],
+ "] returns ",
+ StyleBox["True", "Program"],
+ " if keys in the list are ordered and ",
+ StyleBox["False", "Program"],
+ " otherwise (like function ",
+ ButtonBox["OrderedQ",
+  BaseStyle->"RefGuideLink"],
+ ")."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell["SameKeysQ", "ObjectName",
+ CellTags->{"i:27", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["SameKeysQ",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["arg",
+  FontSlant->"Italic"],
+ ",...] returns ",
+ StyleBox["True", "Program"],
+ " if all arguments have the same keys and ",
+ StyleBox["False", "Program"],
+ " otherwise (like function ",
+ ButtonBox["SameQ",
+  BaseStyle->"RefGuideLink"],
+ ")."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell["Merge", "ObjectName",
+ CellTags->{"i:28", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["Merge", "DisplayMath"],
+ "[",
+ StyleBox["list",
+  FontSlant->"Italic"],
+ "1,",
+ StyleBox["list",
+  FontSlant->"Italic"],
+ "2,...] is similar to ",
+ StyleBox["Union", "DisplayMath"],
+ ", but supports more options:\n",
+ StyleBox["SameTest", "DisplayMath"],
+ "\[Rule]",
+ StyleBox["test",
+  FontSlant->"Italic"],
+ " specifies the function used to determine equivalent elements (like in ",
+ ButtonBox["Union",
+  BaseStyle->"RefGuideLink"],
+ ");\n",
+ StyleBox["Sort", "DisplayMath"],
+ "\[Rule]",
+ StyleBox["fn",
+  FontSlant->"Italic"],
+ " specifies the function to be used for sort the union (like in ",
+ ButtonBox["Sort",
+  BaseStyle->"RefGuideLink"],
+ ").\n",
+ StyleBox["Merge\[Rule]", "DisplayMath"],
+ StyleBox["fn",
+  FontSlant->"Italic"],
+ " specifies the function that is used to merge sets of equivalent elements."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] See also ",
+ ButtonBox["Union",
+  BaseStyle->"RefGuideLink",
+  ButtonData:>"Union"],
+ ", ",
+ ButtonBox["Sort",
+  BaseStyle->"RefGuideLink",
+  ButtonData:>"Sort"],
+ "."
+}], "Notes",
+ CellTags->"b:8.2"],
+
+Cell["Union", "ObjectName",
+ CellTags->{"i:29", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["Domain`Union", "DisplayMath"],
+ " supports the option ",
+ StyleBox["Sort", "DisplayMath"],
+ "\[Rule]",
+ StyleBox["fn",
+  FontSlant->"Italic"],
+ " which specifies the function to be used to sort the union (like in ",
+ StyleBox["Sort", "DisplayMath"],
+ ")."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] See also ",
+ ButtonBox["System`Union",
+  BaseStyle->"RefGuideLink",
+  ButtonData:>"Union"],
+ ", ",
+ ButtonBox["Sort",
+  BaseStyle->"RefGuideLink",
+  ButtonData:>"Sort"],
+ "."
+}], "Notes",
+ CellTags->"b:8.2"],
+
+Cell["UnionKeys", "ObjectName",
+ CellTags->{"i:30", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["UnionKeys",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["list",
+  FontSlant->"Italic"],
+ ", ... ] returns the joined list, sorted by the key order, with repeated \
+keys dropped."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell["DeleteSame", "ObjectName",
+ CellTags->{"i:31", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["DeleteSame",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["list",
+  FontSlant->"Italic"],
+ "] deletes from the list the adjacent repeated terms leaving only the first \
+one. ",
+ StyleBox["DeleteSame",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["list",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["test",
+  FontSlant->"Italic"],
+ "] uses function ",
+ StyleBox["test",
+  FontSlant->"Italic"],
+ " instead of ",
+ ButtonBox["SameQ",
+  BaseStyle->"RefGuideLink"],
+ " to check the equivalence of terms."
+}], "Usage",
+ CellTags->"b:8.2"],
+
+Cell["KeyValue", "ObjectName",
+ CellTags->{"i:32", "b:8.2"}],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["KeyValue",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["list",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["key",
+  FontSlant->"Italic"],
+ "] returns ",
+ StyleBox["True",
+  FontFamily->"Courier"],
+ " if the list contains the member ",
+ StyleBox["key",
+  FontSlant->"Italic"],
+ ", the value if the list contains the member ",
+ StyleBox["key",
+  FontSlant->"Italic"],
+ "\[Rule]",
+ StyleBox["value",
+  FontSlant->"Italic"],
+ ", and ",
+ StyleBox["False",
+  FontFamily->"Courier"],
+ " otherwise."
+}], "Usage",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:8.2"]
+}, Open  ]]
+}, Open  ]]
+},
+AutoGeneratedPackage->None,
+WindowToolbars->{"RulerBar", "EditBar"},
+WindowSize->{1089, 881},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrintingStartingPageNumber->133,
+PrintingPageRange->{Automatic, Automatic},
+PageHeaders->{{
+   Cell[
+    TextData[
+     CounterBox["Page"]], "Header"], None, 
+   Cell["Package SuperLie`Domain`", "Header"]}, {
+   Cell["Object Oriented Programming in Mathematica", "Header"], None, 
+   Cell[
+    TextData[
+     CounterBox["Page"]], "Header"]}},
+PageFooters->{{None, None, None}, {None, None, None}},
+PageHeaderLines->{True, True},
+PageFooterLines->{False, False},
+PrintingOptions->{"CellBackgroundHalftoneAngle"->Automatic,
+"CellBackgroundHalftoneDensity"->Automatic,
+"FacingPages"->True,
+"FirstPageFace"->Right,
+"FirstPageFooter"->False,
+"FirstPageHeader"->False,
+"GraphicsPrintingFormat"->"Automatic",
+"IncludePostScriptResourceDirectives"->False,
+"IncludeSpecialFonts"->True,
+"Magnification"->1,
+"PaperOrientation"->"Portrait",
+"PaperSize"->{597.563, 842.375},
+"PostScriptOutputFile":>FrontEnd`FileName[{
+  "home", "guests", "grozman", "sLie", "Documentation"}, "Domain.nb.ps", 
+  CharacterEncoding -> "WindowsCyrillic"],
+"PrintCellBrackets"->False,
+"PrintMultipleHorizontalPages"->False,
+"PrintRegistrationMarks"->False,
+"PrintSelectionHighlighting"->False,
+"RestPagesFooter"->True,
+"RestPagesHeader"->True,
+"UnixShellPrintingCommand"->"lpr ",
+"UsePostScriptOutputFile"->True,
+"UseUnixShellPrintingCommand"->False},
+TaggingRules->{"NextIndexingNumber" -> 33, "IndexEntries" -> {{"i:1", 
+     StyleBox["SetProperty", "Program"]}, {"i:10", 
+     StyleBox["Operation", "Program"]}, {"i:11", 
+     StyleBox["SPrint", "Program"]}, {"i:12", 
+     StyleBox["AutoRule", "Program"]}, {"i:13", 
+     StyleBox["UnAutoRule", "Program"]}, {"i:14", 
+     StyleBox["NameSuffix", "Program"]}, {"i:15", 
+     StyleBox["PrefixName", "Program"]}, {"i:16", 
+     StyleBox["Tag", "Program"]}, {"i:17", 
+     StyleBox["Target", "Program"]}, {"i:18", 
+     StyleBox["AddHead", "Program"]}, {"i:19", 
+     StyleBox["InfixFormat", "Program"]}, {"i:2", 
+     StyleBox["CancelProperty", "Program"]}, {"i:20", 
+     StyleBox["SetFormat", "Program"]}, {"i:21", 
+     StyleBox["ClearFormat", "Program"]}, {"i:22", 
+     StyleBox["SetToTag", "Program"]}, {"i:23", 
+     StyleBox["Compound", "Program"]}, {"i:24", 
+     StyleBox["SortKeys", "Program"]}, {"i:25", 
+     StyleBox["OrderKeys", "Program"]}, {"i:26", 
+     StyleBox["OrderedKeysQ", "Program"]}, {"i:27", 
+     StyleBox["SamedKeysQ", "Program"]}, {"i:28", 
+     StyleBox["Merge", "Program"]}, {"i:29", 
+     StyleBox["Union", "Program"]}, {"i:30", 
+     StyleBox["UnionKeys", "Program"]}, {"i:31", 
+     StyleBox["DeleteSame", "Program"]}, {"i:32", 
+     StyleBox["KeyValue", "Program"]}, {"i:4", 
+     StyleBox["NewList", "Program"]}, {"i:5", 
+     StyleBox["ClearDef", "Program"]}, {"i:6", 
+     StyleBox["NewValue", "Program"]}, {"i:7", 
+     StyleBox["NewProperty", "Program"]}, {"i:8", 
+     StyleBox["NewDomain", "Program"]}, {"i:9", 
+     StyleBox["Domain", "Program"]}, {"i:3", 
+     StyleBox["Define", "Program"], "", ""}}, 
+  "PaginationCache" -> {{2013, 7, 18, 21, 34, 8.59375`8.686757682850073}, {
+    133, 133, 133, 133, 133, 133, 133, 133, 133, 133, 133, 133, 133, 133, 133,
+     134, 134, 134, 134, 134, 134, 134, 134, 134, 134, 134, 135, 135, 135, 
+    135, 135, 135, 135, 135, 135, 135, 135, 135, 135, 135, 135, 135, 135, 135,
+     135, 135, 136, 136, 136, 136, 136, 136, 136, 136, 136, 136, 136, 136, 
+    136, 136, 136, 136, 136, 136, 136, 136, 136, 137, 137, 137, 137, 137, 137,
+     137, 137, 137, 137, 137, 137, 137, 137}, Automatic}},
+Magnification->2.,
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->Notebook[{
+   Cell[
+    CellGroupData[{
+      Cell["Style Definitions", "Subtitle"], 
+      Cell[
+      "\nModify the definitions below to change the default appearance of all \
+cells in \na given style.  Make modifications to any definition using \
+commands in the \nFormat menu.\n", "Text"], 
+      Cell[
+       CellGroupData[{
+         Cell["Style Environment Names", "Section"], 
+         Cell[
+          StyleData[All, "Working"], PageWidth -> WindowWidth, ScriptMinSize -> 
+          9], 
+         Cell[
+          StyleData[All, "Printout"], PageWidth -> PaperWidth, ScriptMinSize -> 
+          7, FontSize -> 10, 
+          PrivateFontOptions -> {"FontType" -> "Outline"}]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Notebook Options", "Section"], 
+         Cell[
+         "\nThe options defined for the style below will be used at the \
+Notebook level.\n", "Text"], 
+         Cell[
+          StyleData["Notebook"], WindowToolbars -> {}, PageHeaders -> {{
+             Cell[
+              TextData[{
+                CounterBox["Page"]}], "PageNumber"], None, 
+             Cell[
+              TextData[{
+                ValueBox[FileName], " \[Bullet]  ", 
+                ValueBox[Date]}], "Header"]}, {
+             Cell[
+              TextData[{
+                ValueBox[FileName], " \[Bullet]  ", 
+                ValueBox[Date]}], "Header"], None, 
+             Cell[
+              TextData[{
+                CounterBox["Page"]}], "PageNumber"]}}, DefaultNewCellStyle -> 
+          "Text", DefaultDuplicateCellStyle -> "Text", 
+          DefaultInlineFormatType -> StandardForm, StyleMenuListing -> None]},
+         Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Favorite styles", "Section"], 
+         Cell[
+          StyleData["Name"], FontFamily -> "Courier New"], 
+         Cell[
+          StyleData["Var"], FontSlant -> "Italic"], 
+         Cell[
+          StyleData["Def"], FontWeight -> "Bold", FontSlant -> "Italic", 
+          FontColor -> RGBColor[0.6, 0.2, 0]]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Headings", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Chapter"], CellDingbat -> "\[FilledSquare]", 
+             CellMargins -> {{24, Inherited}, {8, 24}}, 
+             CellGroupingRules -> {"SectionGrouping", 20}, PageBreakAbove -> 
+             True, CellFrameLabelMargins -> 6, CounterIncrements -> "Chapter",
+              FontFamily -> "Helvetica", FontSize -> 18, FontWeight -> 
+             "Bold"], 
+            Cell[
+             StyleData["Chapter", "Printout"], 
+             CellMargins -> {{15, 0}, {7, 22}}]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Section"], CellDingbat -> "\[FilledSquare]", 
+             CellMargins -> {{24, Inherited}, {8, 24}}, 
+             CellGroupingRules -> {"SectionGrouping", 30}, PageBreakBelow -> 
+             False, CellFrameLabelMargins -> 6, CounterIncrements -> 
+             "Section", FontFamily -> "Helvetica", FontSize -> 14, FontWeight -> 
+             "Bold"], 
+            Cell[
+             StyleData["Section", "Printout"], 
+             CellMargins -> {{15, 0}, {7, 22}}, FontSize -> 14]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsection"], CellDingbat -> "\[FilledSquare]", 
+             CellMargins -> {{24, 4}, {2, 18}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 12}, 
+             CellGroupingRules -> {"SectionGrouping", 40}, PageBreakBelow -> 
+             False, CellFrameLabelMargins -> 6, CounterIncrements -> 
+             "Subsection", CounterAssignments -> {{"Subsubsection", 0}}, 
+             FontFamily -> "Helvetica", FontSize -> 12.5, FontWeight -> 
+             "Bold"], 
+            Cell[
+             StyleData["Subsection", "Printout"], 
+             CellMargins -> {{2, 4}, {2, 18}}, FontSize -> 12.5]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsubsection"], CellDingbat -> "\[FilledSquare]", 
+             CellMargins -> {{24, 4}, {2, 18}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 12}, 
+             CellGroupingRules -> {"SectionGrouping", 50}, PageBreakBelow -> 
+             False, CellFrameLabelMargins -> 6, CounterIncrements -> 
+             "Subsubsection", FontFamily -> "Helvetica", FontSize -> 12, 
+             FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Subsubsection", "Printout"], 
+             CellMargins -> {{2, 4}, {2, 18}}, FontSize -> 12]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["SubsectionIcon"], ShowGroupOpener -> True, 
+             CellMargins -> {{24, 4}, {0, 18}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 8}, 
+             CellGroupingRules -> {"SectionGrouping", 50}, 
+             ConversionRules :> {
+              "HTML" -> {
+                "<LI TYPE=\"SQUARE\"><FONT FACE=\"Helvetica, Arial\"><P><B>", 
+                 "</B></P></FONT>\n"}}, 
+             InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Section", FontFamily -> "Helvetica", 
+             FontSize -> 12.5, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["SubsectionIcon", "Printout"], CellDingbat -> 
+             "\[FilledSquare]", ShowGroupOpener -> False, 
+             CellMargins -> {{16, 0}, {0, 18}}, PageBreakBelow -> False, 
+             FontSize -> 12.5]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["SubsubsectionIcon"], ShowGroupOpener -> True, 
+             CellMargins -> {{24, 4}, {0, 8}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 4}, 
+             CellGroupingRules -> {"SectionGrouping", 60}, 
+             ConversionRules :> {
+              "HTML" -> {
+                "<LI TYPE=\"SQUARE\"><FONT FACE=\"Helvetica, Arial\"><P><B>", 
+                 "</B></P></FONT>\n"}}, 
+             InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Subsection", 
+             CounterAssignments -> {{"Subsubection", 0}}, FontFamily -> 
+             "Helvetica", FontSize -> 12, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["SubsubsectionIcon", "Printout"], CellDingbat -> 
+             "\[FilledSquare]", ShowGroupOpener -> False, 
+             CellMargins -> {{2, 0}, {0, 18}}, PageBreakBelow -> False, 
+             FontSize -> 12]}, Open]]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Styles for Text", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Text"], CellMargins -> {{12, 10}, {7, 7}}, 
+             InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, TextAlignment -> 
+             Left, TextJustification -> 1, Hyphenation -> True, 
+             LineSpacing -> {1, 2}, ParagraphIndent -> 24, FontSize -> 12], 
+            Cell[
+             StyleData["Text", "Printout"], CellMargins -> {{2, 2}, {6, 6}}]},
+            Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["MonoText"], CellMargins -> {{12, 10}, {7, 7}}, 
+             Hyphenation -> True, LineSpacing -> {1, 2}, FontFamily -> 
+             "Courier", FontSize -> 12], 
+            Cell[
+             StyleData["MonoText", "Printout"], 
+             CellMargins -> {{2, 2}, {6, 6}}, FontSize -> 9]}, Closed]]}, 
+        Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Styles for Input/Output", "Section"], 
+         Cell[
+         "\nThe cells in this section define styles used for input and output \
+to the \nkernel.  Be careful when modifying, renaming, or removing these \
+styles, \nbecause the front end associates special meanings with these style \
+names.\n", "Text"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Input"], CellMargins -> {{45, 10}, {5, 7}}, 
+             Evaluatable -> True, CellGroupingRules -> "InputGrouping", 
+             CellHorizontalScrolling -> True, 
+             CellLabelMargins -> {{14, Inherited}, {Inherited, Inherited}}, 
+             DefaultFormatType -> DefaultInputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, 
+             AutoItalicWords -> {}, LanguageCategory -> "Formula", FormatType -> 
+             InputForm, ShowStringCharacters -> True, NumberMarks -> True, 
+             LinebreakAdjustments -> {0.85, 2, 10, 0, 1}, CounterIncrements -> 
+             "Input", FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Input", "Printout"], CellMargins -> {{39, 0}, {4, 6}},
+              LinebreakAdjustments -> {0.85, 2, 10, 1, 1}, FontSize -> 9]}, 
+           Closed]], 
+         Cell[
+          StyleData["InlineInput"], Evaluatable -> True, CellGroupingRules -> 
+          "InputGrouping", CellHorizontalScrolling -> True, PageBreakWithin -> 
+          False, GroupPageBreakWithin -> False, DefaultFormatType -> 
+          DefaultInputFormatType, 
+          HyphenationOptions -> {"HyphenationCharacter" -> "\[Continuation]"},
+           AutoItalicWords -> {}, FormatType -> InputForm, 
+          ShowStringCharacters -> True, NumberMarks -> True, 
+          CounterIncrements -> "Input", FontWeight -> "Bold"], 
+         Cell[
+          StyleData["Output"], PageWidth -> PaperWidth, 
+          CellMargins -> {{47, 10}, {7, 5}}, CellEditDuplicate -> True, 
+          CellGroupingRules -> "OutputGrouping", CellHorizontalScrolling -> 
+          True, GeneratedCell -> True, CellAutoOverwrite -> True, 
+          CellLabelMargins -> {{14, Inherited}, {Inherited, Inherited}}, 
+          DefaultFormatType -> DefaultOutputFormatType, 
+          HyphenationOptions -> {"HyphenationCharacter" -> "\[Continuation]"},
+           AutoItalicWords -> {}, LanguageCategory -> "Formula", FormatType -> 
+          InputForm, CounterIncrements -> "Output", StyleMenuListing -> None, 
+          FontSlant -> "Plain"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Message"], 
+             CellMargins -> {{45, Inherited}, {Inherited, Inherited}}, 
+             CellGroupingRules -> "OutputGrouping", PageBreakWithin -> False, 
+             GroupPageBreakWithin -> False, GeneratedCell -> True, 
+             CellAutoOverwrite -> True, ShowCellLabel -> False, 
+             CellLabelMargins -> {{14, Inherited}, {Inherited, Inherited}}, 
+             DefaultFormatType -> DefaultOutputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, 
+             AutoItalicWords -> {}, FormatType -> InputForm, 
+             CounterIncrements -> "Message", StyleMenuListing -> None, 
+             FontColor -> RGBColor[0, 0, 1]], 
+            Cell[
+             StyleData["Message", "Printout"], 
+             CellMargins -> {{39, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 8, FontColor -> GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Print"], 
+             CellMargins -> {{45, Inherited}, {Inherited, Inherited}}, 
+             CellGroupingRules -> "OutputGrouping", CellHorizontalScrolling -> 
+             True, PageBreakWithin -> False, GroupPageBreakWithin -> False, 
+             GeneratedCell -> True, CellAutoOverwrite -> True, ShowCellLabel -> 
+             False, CellLabelMargins -> {{14, Inherited}, {
+               Inherited, Inherited}}, DefaultFormatType -> 
+             DefaultOutputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, 
+             AutoItalicWords -> {}, FormatType -> InputForm, 
+             CounterIncrements -> "Print", StyleMenuListing -> None], 
+            Cell[
+             StyleData["Print", "Printout"], 
+             CellMargins -> {{39, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 8]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Graphics"], 
+             CellMargins -> {{4, Inherited}, {Inherited, Inherited}}, 
+             CellGroupingRules -> "GraphicsGrouping", CellHorizontalScrolling -> 
+             True, PageBreakWithin -> False, GeneratedCell -> True, 
+             CellAutoOverwrite -> True, ShowCellLabel -> False, 
+             DefaultFormatType -> DefaultOutputFormatType, FormatType -> 
+             InputForm, CounterIncrements -> "Graphics", 
+             ImageMargins -> {{43, Inherited}, {Inherited, 0}}, 
+             StyleMenuListing -> None], 
+            Cell[
+             StyleData["Graphics", "Printout"], ImageSize -> {250, 250}, 
+             ImageMargins -> {{30, Inherited}, {Inherited, 0}}, FontSize -> 
+             9]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["CellLabel"], StyleMenuListing -> None, FontFamily -> 
+             "Helvetica", FontSize -> 9, FontColor -> RGBColor[0, 0, 1]], 
+            Cell[
+             StyleData["CellLabel", "Printout"], FontFamily -> "Courier", 
+             FontSize -> 8, FontSlant -> "Italic", FontColor -> 
+             GrayLevel[0]]}, Closed]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Unique Styles", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Author"], ShowCellBracket -> False, 
+             CellMargins -> {{10, 4}, {2, 10}}, FontSize -> 16, FontSlant -> 
+             "Italic"], 
+            Cell[
+             StyleData["Author", "Presentation"], 
+             CellMargins -> {{12, 10}, {2, 12}}, LineSpacing -> {1, 5}, 
+             ParagraphSpacing -> {0, 12}, FontSize -> 20], 
+            Cell[
+             StyleData["Author", "Condensed"], 
+             CellMargins -> {{8, 10}, {1, 4}}, LineSpacing -> {1, 1}, 
+             ParagraphSpacing -> {0, 4}, FontSize -> 12], 
+            Cell[
+             StyleData["Author", "Printout"], 
+             CellMargins -> {{9, 0}, {4, 12}}, ParagraphSpacing -> {0, 6}, 
+             FontSize -> 14]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Copyright"], ShowCellBracket -> False, 
+             CellMargins -> {{10, 10}, {40, 2}}, FontFamily -> "Helvetica", 
+             FontSize -> 9], 
+            Cell[
+             StyleData["Copyright", "Presentation"], 
+             CellMargins -> {{12, 10}, {50, 2}}, LineSpacing -> {1, 5}, 
+             FontSize -> 12], 
+            Cell[
+             StyleData["Copyright", "Condensed"], 
+             CellMargins -> {{8, 10}, {12, 1}}, LineSpacing -> {1, 2}, 
+             FontSize -> 9], 
+            Cell[
+             StyleData["Copyright", "Printout"], 
+             CellMargins -> {{9, 0}, {72, 4}}, FontSize -> 7]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Example"], CellMargins -> {{12, 10}, {5, 12}}, 
+             LineSpacing -> {1, 3}, ParagraphSpacing -> {0, 12}, 
+             CounterIncrements -> "Example", FontFamily -> "Times", 
+             FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Example", "Presentation"], 
+             CellMargins -> {{18, 10}, {8, 20}}, LineSpacing -> {1, 5}, 
+             ParagraphSpacing -> {0, 12}], 
+            Cell[
+             StyleData["Example", "Condensed"], 
+             CellMargins -> {{8, 10}, {4, 8}}, LineSpacing -> {1, 1}, 
+             ParagraphSpacing -> {0, 4}], 
+            Cell[
+             StyleData["Example", "Printout"], 
+             CellMargins -> {{9, 0}, {4, 10}}, ParagraphSpacing -> {0, 6}]}, 
+           Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Definition"], CellFrame -> {{3, 0}, {0, 0}}, 
+             CellMargins -> {{52, 10}, {8, 8}}, PageBreakWithin -> False, 
+             GroupPageBreakWithin -> False, 
+             CellLabelMargins -> {{23, Inherited}, {Inherited, Inherited}}, 
+             Hyphenation -> True, ShowStringCharacters -> True, 
+             CounterIncrements -> "Definition", FontFamily -> "Helvetica", 
+             FontWeight -> "Bold", FontColor -> GrayLevel[1], Background -> 
+             RGBColor[0.2, 0.700008, 0.700008]], 
+            Cell[
+             StyleData["Definition", "Presentation"], 
+             CellMargins -> {{62, Inherited}, {5, 12}}, 
+             LineSpacing -> {1, 0}], 
+            Cell[
+             StyleData["Definition", "Condensed"], 
+             CellMargins -> {{40, 10}, {1, 4}}], 
+            Cell[
+             StyleData["Definition", "Printout"], 
+             CellMargins -> {{44, 0}, {2, 6}}, Background -> GrayLevel[0.6]]},
+            Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Theorem"], CellFrame -> {{3, 0}, {0, 0}}, 
+             CellMargins -> {{52, 10}, {8, 8}}, PageBreakWithin -> False, 
+             GroupPageBreakWithin -> False, 
+             CellLabelMargins -> {{23, Inherited}, {Inherited, Inherited}}, 
+             Hyphenation -> True, ShowStringCharacters -> True, 
+             CounterIncrements -> "Theorem", FontFamily -> "Helvetica", 
+             FontWeight -> "Bold", FontColor -> GrayLevel[1], Background -> 
+             RGBColor[0.571389, 0.19675, 0.570504]], 
+            Cell[
+             StyleData["Theorem", "Presentation"], 
+             CellMargins -> {{62, Inherited}, {5, 12}}, 
+             LineSpacing -> {1, 0}], 
+            Cell[
+             StyleData["Theorem", "Condensed"], 
+             CellMargins -> {{40, 10}, {1, 4}}], 
+            Cell[
+             StyleData["Theorem", "Printout"], 
+             CellMargins -> {{44, 0}, {2, 6}}, Background -> GrayLevel[0.4]]},
+            Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["ExerciseMain"], CellFrame -> {{6, 0}, {0, 1}}, 
+             CellMargins -> {{12, Inherited}, {4, 20}}, 
+             CellGroupingRules -> {"SectionGrouping", 30}, PageBreakBelow -> 
+             False, CellFrameColor -> RGBColor[0.571389, 0.19675, 0.570504], 
+             CounterIncrements -> "Subsection", 
+             CounterAssignments -> {{"Subsubsection", 0}}, FontFamily -> 
+             "Helvetica", FontSize -> 16, FontWeight -> "Bold", FontColor -> 
+             RGBColor[0.571389, 0.19675, 0.570504]], 
+            Cell[
+             StyleData["ExerciseMain", "Presentation"], 
+             CellMargins -> {{18, 10}, {8, 32}}, LineSpacing -> {1, 2}, 
+             FontSize -> 24, FontTracking -> "Condensed"], 
+            Cell[
+             StyleData["ExerciseMain", "Condensed"], 
+             CellMargins -> {{8, Inherited}, {2, 12}}, FontSize -> 12], 
+            Cell[
+             StyleData["ExerciseMain", "Printout"], 
+             CellMargins -> {{9, 0}, {2, 50}}, CellFrameColor -> 
+             GrayLevel[0.500008], FontSize -> 14, FontTracking -> "Plain", 
+             FontColor -> GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Exercise"], CellDingbat -> "\[FilledDownTriangle]", 
+             CellMargins -> {{23, Inherited}, {4, 18}}, 
+             CellGroupingRules -> {"SectionGrouping", 50}, PageBreakBelow -> 
+             False, Hyphenation -> True, CounterIncrements -> "Subsubsection",
+              FontFamily -> "Times", FontSize -> 13, FontWeight -> "Bold", 
+             FontColor -> RGBColor[0.571389, 0.19675, 0.570504]], 
+            Cell[
+             StyleData["Exercise", "Presentation"], 
+             CellMargins -> {{33, 10}, {8, 26}}, LineSpacing -> {1, 0}, 
+             FontSize -> 18], 
+            Cell[
+             StyleData["Exercise", "Condensed"], 
+             CellMargins -> {{17, Inherited}, {2, 12}}, FontSize -> 10], 
+            Cell[
+             StyleData["Exercise", "Printout"], 
+             CellFrame -> {{0, 0}, {0.5, 0}}, CellDingbat -> None, 
+             CellMargins -> {{9, 0}, {6, 20}}, FontSize -> 11, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["ExerciseText"], CellMargins -> {{62, 10}, {5, 5}}, 
+             Hyphenation -> True, LineSpacing -> {1, 3}, 
+             ParagraphSpacing -> {0, 8}, CounterIncrements -> "ExcersiceText",
+              FontFamily -> "Times"], 
+            Cell[
+             StyleData["ExerciseText", "Presentation"], 
+             CellMargins -> {{74, 10}, {8, 8}}, LineSpacing -> {1, 5}, 
+             ParagraphSpacing -> {0, 12}], 
+            Cell[
+             StyleData["ExerciseText", "Condensed"], 
+             CellMargins -> {{52, 10}, {2, 2}}, LineSpacing -> {1, 1}, 
+             ParagraphSpacing -> {0, 4}], 
+            Cell[
+             StyleData["ExerciseText", "Printout"], 
+             CellMargins -> {{54, 0}, {4, 4}}, ParagraphSpacing -> {0, 6}]}, 
+           Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["ObjectName"], CellMargins -> {{10, 4}, {1, 10}}, 
+             FontFamily -> "Courier", FontSize -> 16, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["ObjectName", "Brackets"], 
+             CellMargins -> {{72, 4}, {1, 14}}, 
+             CellGroupingRules -> {"SectionGrouping", 90}, StyleMenuListing -> 
+             None, FontFamily -> "Courier", FontSize -> 12, FontWeight -> 
+             "Bold"], 
+            Cell[
+             StyleData["ObjectName", "Printout"], 
+             CellMargins -> {{2, 0}, {1, 10}}, FontSize -> 12]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Usage"], CellFrame -> {{0, 0}, {0.5, 0.5}}, 
+             CellMargins -> {{10, 4}, {0, 4}}, CellFrameMargins -> 5, 
+             TextAlignment -> Left, TextJustification -> 1, Hyphenation -> 
+             True, ParagraphSpacing -> {0, 6}, ParagraphIndent -> -10, 
+             StyleMenuListing -> None], 
+            Cell[
+             StyleData["Usage", "Brackets"], 
+             CellFrame -> {{0, 0}, {0.5, 0.5}}, 
+             CellMargins -> {{72, 4}, {0, 4}}, CellFrameMargins -> 5, 
+             ParagraphSpacing -> {0, 6}, ParagraphIndent -> -10, 
+             StyleMenuListing -> None], 
+            Cell[
+             StyleData["Usage", "Printout"], CellMargins -> {{2, 0}, {0, 4}}, 
+             FontSize -> 10, FontWeight -> "Plain"]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Notes"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, TextAlignment -> Left, 
+             TextJustification -> 1, Hyphenation -> True, 
+             ParagraphSpacing -> {0, 6}, ParagraphIndent -> -10, 
+             StyleMenuListing -> None, FontFamily -> "Times"], 
+            Cell[
+             StyleData["Notes", "Brackets"], CellMargins -> {{72, 4}, {0, 8}},
+              CellHorizontalScrolling -> True, ParagraphSpacing -> {0, 6}, 
+             ParagraphIndent -> -10, StyleMenuListing -> None, FontFamily -> 
+             "Times"], 
+            Cell[
+             StyleData["Notes", "Printout"], CellMargins -> {{2, 0}, {0, 8}}, 
+             FontSize -> 9]}, Closed]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Title", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Title"], CellMargins -> {{12, Inherited}, {2, 20}}, 
+             CellGroupingRules -> {"TitleGrouping", 0}, PageBreakBelow -> 
+             False, InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Title", 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}, {"Subtitle", 0}, {"Subsubtitle", 0}}, FontFamily -> 
+             "Helvetica", FontSize -> 30, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Title", "Printout"], 
+             CellMargins -> {{2, 10}, {2, 30}}, FontSize -> 24]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subtitle"], CellMargins -> {{12, Inherited}, {2, 2}}, 
+             CellGroupingRules -> {"TitleGrouping", 10}, PageBreakBelow -> 
+             False, InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Subtitle", 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}, {"Subsubtitle", 0}}, FontFamily -> "Helvetica", 
+             FontSize -> 14, FontColor -> RGBColor[0, 0, 0.6]], 
+            Cell[
+             StyleData["Subtitle", "Printout"], 
+             CellMargins -> {{2, 10}, {2, 4}}, FontSize -> 18, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsubtitle"], 
+             CellMargins -> {{12, Inherited}, {2, 12}}, 
+             CellGroupingRules -> {"TitleGrouping", 20}, PageBreakBelow -> 
+             False, InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Subsubtitle", 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}}, FontFamily -> "Helvetica", FontSize -> 14, 
+             FontSlant -> "Italic", FontColor -> RGBColor[0, 0, 0.6]], 
+            Cell[
+             StyleData["Subsubtitle", "Printout"], 
+             CellMargins -> {{2, 10}, {2, 8}}, FontSize -> 12, FontColor -> 
+             GrayLevel[0]]}, Closed]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Hyperlink Styles", "Section"], 
+         Cell[
+         "The cells below define styles useful for making hypertext \
+ButtonBoxes.  The \"Hyperlink\" style is for links within the same Notebook, \
+or between Notebooks.", "Text"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Hyperlink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`NotebookLocate[#2]}]& ), ButtonNote -> 
+               ButtonData}], 
+            Cell[
+             StyleData["Hyperlink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+         "The following styles are for linking automatically to the on-line \
+help system.", "Text"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["MainBookLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["MainBook", #]}]& )}], 
+            Cell[
+             StyleData["MainBookLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["AddOnsLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, FontFamily -> "Courier", 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["AddOns", #]}]& )}], 
+            Cell[
+             StyleData["AddOnsLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["RefGuideLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, FontFamily -> "Courier", 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["RefGuide", #]}]& )}], 
+            Cell[
+             StyleData["RefGuideLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["GettingStartedLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["GettingStarted", #]}]& )}], 
+            Cell[
+             StyleData["GettingStartedLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["OtherInformationLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["OtherInformation", #]}]& )}], 
+            Cell[
+             StyleData["OtherInformationLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Palette Styles", "Section"], 
+         Cell[
+         "The cells below define styles that define standard ButtonFunctions, \
+for use in palette buttons.", "Text"], 
+         Cell[
+          StyleData["Paste"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, After]}]& )}], 
+         Cell[
+          StyleData["Evaluate"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, All], 
+               SelectionEvaluate[
+                FrontEnd`InputNotebook[], All]}]& )}], 
+         Cell[
+          StyleData["EvaluateCell"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, All], 
+               FrontEnd`SelectionMove[
+                FrontEnd`InputNotebook[], All, Cell, 1], 
+               FrontEnd`SelectionEvaluateCreateCell[
+                FrontEnd`InputNotebook[], All]}]& )}], 
+         Cell[
+          StyleData["CopyEvaluate"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`SelectionCreateCell[
+                FrontEnd`InputNotebook[], All], 
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, All], 
+               FrontEnd`SelectionEvaluate[
+                FrontEnd`InputNotebook[], All]}]& )}], 
+         Cell[
+          StyleData["CopyEvaluateCell"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`SelectionCreateCell[
+                FrontEnd`InputNotebook[], All], 
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, All], 
+               FrontEnd`SelectionEvaluateCreateCell[
+                FrontEnd`InputNotebook[], All]}]& )}]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Formulas and Programming", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["InlineFormula"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, ScriptLevel -> 1, 
+             SingleLetterItalics -> True, SpanMaxSize -> Infinity, 
+             StyleMenuListing -> None, 
+             GridBoxOptions -> {
+              GridBoxItemSize -> {
+                "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {{1.}}, "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["InlineFormula", "Printout"], 
+             CellMargins -> {{2, 0}, {0, 8}}, FontSize -> 10]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["InlineOutput"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, StyleMenuListing -> 
+             None, FontFamily -> "Courier"], 
+            Cell[
+             StyleData["InlineOutput", "Printout"], 
+             CellMargins -> {{2, 0}, {0, 8}}, FontSize -> 9.5]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["DisplayFormula"], 
+             CellMargins -> {{42, Inherited}, {Inherited, Inherited}}, 
+             CellHorizontalScrolling -> True, DefaultFormatType -> 
+             DefaultInputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, LanguageCategory -> 
+             "Formula", ScriptLevel -> 0, SingleLetterItalics -> True, 
+             SpanMaxSize -> Infinity, 
+             UnderoverscriptBoxOptions -> {LimitsPositioning -> True}, 
+             GridBoxOptions -> {
+              GridBoxItemSize -> {
+                "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {{1.}}, "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["DisplayFormula", "Printout"], 
+             CellMargins -> {{34, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 10]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["DisplayMath"], CellMargins -> {{42, 10}, {7, 7}}, 
+             Evaluatable -> False, CellGroupingRules -> "InputGrouping", 
+             CellHorizontalScrolling -> True, PageBreakWithin -> False, 
+             GroupPageBreakWithin -> False, DefaultFormatType -> 
+             DefaultInputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, 
+             AutoItalicWords -> {}, LanguageCategory -> "Formula", FormatType -> 
+             InputForm, ShowStringCharacters -> True, NumberMarks -> True, 
+             CounterIncrements -> "Input"], 
+            Cell[
+             StyleData["DisplayMath", "Printout"], 
+             CellMargins -> {{39, 0}, {6, 6}}, FontSize -> 9]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Program"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, LanguageCategory -> "Formula", 
+             FontFamily -> "Courier"], 
+            Cell[
+             StyleData["Program", "Printout"], 
+             CellMargins -> {{2, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 9.5]}, Closed]], 
+         Cell[
+          StyleData["List"], CellMargins -> {{12, 0}, {2, 8}}, 
+          CellElementSpacings -> {"ClosedGroupTopMargin" -> 12}, 
+          CellGroupingRules -> {"SectionGrouping", 60}, PageBreakBelow -> 
+          False, FontWeight -> "Bold"]}, Closed]]}, Open]]}, Visible -> False,
+   FrontEndVersion -> 
+  "8.0 for Microsoft Windows (32-bit) (February 23, 2011)", StyleDefinitions -> 
+  "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "Domain"->{
+  Cell[567, 22, 199, 8, 161, "Title",
+   CellTags->{"Domain", "c:1"}]},
+ "c:1"->{
+  Cell[567, 22, 199, 8, 161, "Title",
+   CellTags->{"Domain", "c:1"}]},
+ "c:2"->{
+  Cell[791, 34, 58, 1, 97, "Section",
+   CellTags->{"c:2", "b:8.0"}]},
+ "b:8.0"->{
+  Cell[791, 34, 58, 1, 97, "Section",
+   CellTags->{"c:2", "b:8.0"}],
+  Cell[852, 37, 62, 1, 58, "ObjectName",
+   CellTags->{"i:1", "b:8.0"}],
+  Cell[917, 40, 256, 11, 58, "Usage",
+   CellTags->"b:8.0"],
+  Cell[1176, 53, 1351, 50, 238, "Notes",
+   CellTags->"b:8.0"],
+  Cell[2530, 105, 268, 11, 58, "Usage",
+   CellTags->{"i:2", "b:8.0"}],
+  Cell[2801, 118, 966, 38, 172, "Notes",
+   CellTags->"b:8.0"],
+  Cell[3770, 158, 57, 1, 58, "ObjectName",
+   CellTags->{"i:3", "b:8.0"}],
+  Cell[3830, 161, 568, 24, 94, "Usage",
+   CellTags->"b:8.0"],
+  Cell[4401, 187, 59, 1, 58, "ObjectName",
+   CellTags->{"i:5", "b:8.0"}],
+  Cell[4463, 190, 261, 11, 58, "Usage",
+   CellTags->"b:8.0"]},
+ "i:1"->{
+  Cell[852, 37, 62, 1, 58, "ObjectName",
+   CellTags->{"i:1", "b:8.0"}]},
+ "i:2"->{
+  Cell[2530, 105, 268, 11, 58, "Usage",
+   CellTags->{"i:2", "b:8.0"}]},
+ "i:3"->{
+  Cell[3770, 158, 57, 1, 58, "ObjectName",
+   CellTags->{"i:3", "b:8.0"}]},
+ "i:5"->{
+  Cell[4401, 187, 59, 1, 58, "ObjectName",
+   CellTags->{"i:5", "b:8.0"}]},
+ "c:3"->{
+  Cell[4761, 206, 52, 1, 97, "Section",
+   CellTags->{"c:3", "b:8.1"}]},
+ "b:8.1"->{
+  Cell[4761, 206, 52, 1, 97, "Section",
+   CellTags->{"c:3", "b:8.1"}],
+  Cell[4816, 209, 1034, 41, 180, "Text",
+   CellTags->"b:8.1"],
+  Cell[5853, 252, 58, 1, 58, "ObjectName",
+   CellTags->{"i:4", "b:8.1"}],
+  Cell[5914, 255, 1059, 49, 117, "Usage",
+   CellTags->"b:8.1"],
+  Cell[6976, 306, 2070, 96, 267, "Notes",
+   CellTags->"b:8.1"],
+  Cell[9049, 404, 59, 1, 58, "ObjectName",
+   CellTags->{"i:6", "b:8.1"}],
+  Cell[9111, 407, 271, 12, 58, "Usage",
+   CellTags->"b:8.1"],
+  Cell[9385, 421, 1545, 70, 174, "Notes",
+   CellTags->"b:8.1"],
+  Cell[10933, 493, 62, 1, 58, "ObjectName",
+   CellTags->{"i:7", "b:8.1"}],
+  Cell[10998, 496, 475, 20, 94, "Usage",
+   CellTags->"b:8.1"],
+  Cell[11476, 518, 5765, 259, 640, "Notes",
+   CellTags->"b:8.1"],
+  Cell[17244, 779, 60, 1, 58, "ObjectName",
+   CellTags->{"i:8", "b:8.1"}],
+  Cell[17307, 782, 249, 12, 58, "Usage",
+   CellTags->"b:8.1"],
+  Cell[17559, 796, 1673, 70, 240, "Notes",
+   CellTags->"b:8.1"],
+  Cell[19235, 868, 57, 1, 58, "ObjectName",
+   CellTags->{"i:9", "b:8.1"}],
+  Cell[19295, 871, 720, 35, 123, "Usage",
+   CellTags->"b:8.1"],
+  Cell[20018, 908, 61, 1, 58, "ObjectName",
+   CellTags->{"i:10", "b:8.1"}],
+  Cell[20082, 911, 548, 25, 87, "Usage",
+   CellTags->"b:8.1"],
+  Cell[20633, 938, 966, 27, 195, "Notes",
+   CellTags->"b:8.1"],
+  Cell[21602, 967, 163, 6, 56, "Text",
+   CellTags->"b:8.1"]},
+ "i:4"->{
+  Cell[5853, 252, 58, 1, 58, "ObjectName",
+   CellTags->{"i:4", "b:8.1"}]},
+ "i:6"->{
+  Cell[9049, 404, 59, 1, 58, "ObjectName",
+   CellTags->{"i:6", "b:8.1"}]},
+ "i:7"->{
+  Cell[10933, 493, 62, 1, 58, "ObjectName",
+   CellTags->{"i:7", "b:8.1"}]},
+ "i:8"->{
+  Cell[17244, 779, 60, 1, 58, "ObjectName",
+   CellTags->{"i:8", "b:8.1"}]},
+ "i:9"->{
+  Cell[19235, 868, 57, 1, 58, "ObjectName",
+   CellTags->{"i:9", "b:8.1"}]},
+ "i:10"->{
+  Cell[20018, 908, 61, 1, 58, "ObjectName",
+   CellTags->{"i:10", "b:8.1"}]},
+ "c:4"->{
+  Cell[21802, 978, 53, 1, 97, "Section",
+   CellTags->{"c:4", "b:8.2"}]},
+ "b:8.2"->{
+  Cell[21802, 978, 53, 1, 97, "Section",
+   CellTags->{"c:4", "b:8.2"}],
+  Cell[21858, 981, 58, 1, 58, "ObjectName",
+   CellTags->{"i:11", "b:8.2"}],
+  Cell[21919, 984, 486, 19, 88, "Usage",
+   CellTags->"b:8.2"],
+  Cell[22408, 1005, 60, 1, 58, "ObjectName",
+   CellTags->{"i:12", "b:8.2"}],
+  Cell[22471, 1008, 772, 28, 152, "Usage",
+   CellTags->"b:8.2"],
+  Cell[23246, 1038, 62, 1, 58, "ObjectName",
+   CellTags->{"i:13", "b:8.2"}],
+  Cell[23311, 1041, 517, 27, 87, "Usage",
+   CellTags->"b:8.2"],
+  Cell[23831, 1070, 62, 1, 58, "ObjectName",
+   CellTags->{"i:14", "b:8.2"}],
+  Cell[23896, 1073, 374, 17, 58, "Usage",
+   CellTags->"b:8.2"],
+  Cell[24273, 1092, 62, 1, 58, "ObjectName",
+   CellTags->{"i:15", "b:8.2"}],
+  Cell[24338, 1095, 330, 14, 58, "Usage",
+   CellTags->"b:8.2"],
+  Cell[24671, 1111, 55, 1, 58, "ObjectName",
+   CellTags->{"i:16", "b:8.2"}],
+  Cell[24729, 1114, 633, 31, 88, "Usage",
+   CellTags->"b:8.2"],
+  Cell[25365, 1147, 232, 7, 43, "Notes",
+   CellTags->"b:8.2"],
+  Cell[25600, 1156, 58, 1, 58, "ObjectName",
+   CellTags->{"i:17", "b:8.2"}],
+  Cell[25661, 1159, 1047, 41, 183, "Usage",
+   CellTags->"b:8.2"],
+  Cell[26711, 1202, 59, 1, 58, "ObjectName",
+   CellTags->{"i:18", "b:8.2"}],
+  Cell[26773, 1205, 603, 29, 58, "Usage",
+   CellTags->"b:8.2"],
+  Cell[27379, 1236, 63, 1, 58, "ObjectName",
+   CellTags->{"i:19", "b:8.2"}],
+  Cell[27445, 1239, 1319, 57, 267, "Usage",
+   CellTags->"b:8.2"],
+  Cell[28767, 1298, 61, 1, 58, "ObjectName",
+   CellTags->{"i:20", "b:8.2"}],
+  Cell[28831, 1301, 882, 41, 152, "Usage",
+   CellTags->"b:8.2"],
+  Cell[29716, 1344, 63, 1, 58, "ObjectName",
+   CellTags->{"i:21", "b:8.2"}],
+  Cell[29782, 1347, 288, 13, 58, "Usage",
+   CellTags->"b:8.2"],
+  Cell[30073, 1362, 59, 1, 58, "ObjectName",
+   CellTags->{"i:21", "b:8.2"}],
+  Cell[30135, 1365, 308, 13, 58, "Usage",
+   CellTags->"b:8.2"],
+  Cell[30446, 1380, 60, 1, 58, "ObjectName",
+   CellTags->{"i:22", "b:8.2"}],
+  Cell[30509, 1383, 664, 31, 88, "Usage",
+   CellTags->"b:8.2"],
+  Cell[31176, 1416, 60, 1, 58, "ObjectName",
+   CellTags->{"i:23", "b:8.2"}],
+  Cell[31239, 1419, 529, 26, 87, "Usage",
+   CellTags->"b:8.2"],
+  Cell[31771, 1447, 60, 1, 58, "ObjectName",
+   CellTags->{"i:24", "b:8.2"}],
+  Cell[31834, 1450, 229, 9, 58, "Usage",
+   CellTags->"b:8.2"],
+  Cell[32066, 1461, 61, 1, 58, "ObjectName",
+   CellTags->{"i:25", "b:8.2"}],
+  Cell[32130, 1464, 458, 22, 88, "Usage",
+   CellTags->"b:8.2"],
+  Cell[32591, 1488, 64, 1, 58, "ObjectName",
+   CellTags->{"i:26", "b:8.2"}],
+  Cell[32658, 1491, 382, 16, 88, "Usage",
+   CellTags->"b:8.2"],
+  Cell[33043, 1509, 61, 1, 58, "ObjectName",
+   CellTags->{"i:27", "b:8.2"}],
+  Cell[33107, 1512, 383, 16, 88, "Usage",
+   CellTags->"b:8.2"],
+  Cell[33493, 1530, 57, 1, 58, "ObjectName",
+   CellTags->{"i:28", "b:8.2"}],
+  Cell[33553, 1533, 901, 33, 163, "Usage",
+   CellTags->"b:8.2"],
+  Cell[34457, 1568, 239, 11, 44, "Notes",
+   CellTags->"b:8.2"],
+  Cell[34699, 1581, 57, 1, 58, "ObjectName",
+   CellTags->{"i:29", "b:8.2"}],
+  Cell[34759, 1584, 341, 12, 88, "Usage",
+   CellTags->"b:8.2"],
+  Cell[35103, 1598, 246, 11, 44, "Notes",
+   CellTags->"b:8.2"],
+  Cell[35352, 1611, 61, 1, 58, "ObjectName",
+   CellTags->{"i:30", "b:8.2"}],
+  Cell[35416, 1614, 262, 10, 58, "Usage",
+   CellTags->"b:8.2"],
+  Cell[35681, 1626, 62, 1, 58, "ObjectName",
+   CellTags->{"i:31", "b:8.2"}],
+  Cell[35746, 1629, 575, 25, 88, "Usage",
+   CellTags->"b:8.2"],
+  Cell[36324, 1656, 60, 1, 58, "ObjectName",
+   CellTags->{"i:32", "b:8.2"}],
+  Cell[36387, 1659, 616, 29, 88, "Usage",
+   CellTags->"b:8.2"]},
+ "i:11"->{
+  Cell[21858, 981, 58, 1, 58, "ObjectName",
+   CellTags->{"i:11", "b:8.2"}]},
+ "i:12"->{
+  Cell[22408, 1005, 60, 1, 58, "ObjectName",
+   CellTags->{"i:12", "b:8.2"}]},
+ "i:13"->{
+  Cell[23246, 1038, 62, 1, 58, "ObjectName",
+   CellTags->{"i:13", "b:8.2"}]},
+ "i:14"->{
+  Cell[23831, 1070, 62, 1, 58, "ObjectName",
+   CellTags->{"i:14", "b:8.2"}]},
+ "i:15"->{
+  Cell[24273, 1092, 62, 1, 58, "ObjectName",
+   CellTags->{"i:15", "b:8.2"}]},
+ "i:16"->{
+  Cell[24671, 1111, 55, 1, 58, "ObjectName",
+   CellTags->{"i:16", "b:8.2"}]},
+ "i:17"->{
+  Cell[25600, 1156, 58, 1, 58, "ObjectName",
+   CellTags->{"i:17", "b:8.2"}]},
+ "i:18"->{
+  Cell[26711, 1202, 59, 1, 58, "ObjectName",
+   CellTags->{"i:18", "b:8.2"}]},
+ "i:19"->{
+  Cell[27379, 1236, 63, 1, 58, "ObjectName",
+   CellTags->{"i:19", "b:8.2"}]},
+ "i:20"->{
+  Cell[28767, 1298, 61, 1, 58, "ObjectName",
+   CellTags->{"i:20", "b:8.2"}]},
+ "i:21"->{
+  Cell[29716, 1344, 63, 1, 58, "ObjectName",
+   CellTags->{"i:21", "b:8.2"}],
+  Cell[30073, 1362, 59, 1, 58, "ObjectName",
+   CellTags->{"i:21", "b:8.2"}]},
+ "i:22"->{
+  Cell[30446, 1380, 60, 1, 58, "ObjectName",
+   CellTags->{"i:22", "b:8.2"}]},
+ "i:23"->{
+  Cell[31176, 1416, 60, 1, 58, "ObjectName",
+   CellTags->{"i:23", "b:8.2"}]},
+ "i:24"->{
+  Cell[31771, 1447, 60, 1, 58, "ObjectName",
+   CellTags->{"i:24", "b:8.2"}]},
+ "i:25"->{
+  Cell[32066, 1461, 61, 1, 58, "ObjectName",
+   CellTags->{"i:25", "b:8.2"}]},
+ "i:26"->{
+  Cell[32591, 1488, 64, 1, 58, "ObjectName",
+   CellTags->{"i:26", "b:8.2"}]},
+ "i:27"->{
+  Cell[33043, 1509, 61, 1, 58, "ObjectName",
+   CellTags->{"i:27", "b:8.2"}]},
+ "i:28"->{
+  Cell[33493, 1530, 57, 1, 58, "ObjectName",
+   CellTags->{"i:28", "b:8.2"}]},
+ "i:29"->{
+  Cell[34699, 1581, 57, 1, 58, "ObjectName",
+   CellTags->{"i:29", "b:8.2"}]},
+ "i:30"->{
+  Cell[35352, 1611, 61, 1, 58, "ObjectName",
+   CellTags->{"i:30", "b:8.2"}]},
+ "i:31"->{
+  Cell[35681, 1626, 62, 1, 58, "ObjectName",
+   CellTags->{"i:31", "b:8.2"}]},
+ "i:32"->{
+  Cell[36324, 1656, 60, 1, 58, "ObjectName",
+   CellTags->{"i:32", "b:8.2"}]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"Domain", 81496, 2629},
+ {"c:1", 81578, 2632},
+ {"c:2", 81660, 2635},
+ {"b:8.0", 81743, 2638},
+ {"i:1", 82434, 2659},
+ {"i:2", 82518, 2662},
+ {"i:3", 82601, 2665},
+ {"i:5", 82687, 2668},
+ {"c:3", 82773, 2671},
+ {"b:8.1", 82858, 2674},
+ {"i:4", 84235, 2715},
+ {"i:6", 84321, 2718},
+ {"i:7", 84407, 2721},
+ {"i:8", 84494, 2724},
+ {"i:9", 84581, 2727},
+ {"i:10", 84669, 2730},
+ {"c:4", 84757, 2733},
+ {"b:8.2", 84843, 2736},
+ {"i:11", 88415, 2837},
+ {"i:12", 88504, 2840},
+ {"i:13", 88594, 2843},
+ {"i:14", 88684, 2846},
+ {"i:15", 88774, 2849},
+ {"i:16", 88864, 2852},
+ {"i:17", 88954, 2855},
+ {"i:18", 89044, 2858},
+ {"i:19", 89134, 2861},
+ {"i:20", 89224, 2864},
+ {"i:21", 89314, 2867},
+ {"i:22", 89482, 2872},
+ {"i:23", 89572, 2875},
+ {"i:24", 89662, 2878},
+ {"i:25", 89752, 2881},
+ {"i:26", 89842, 2884},
+ {"i:27", 89932, 2887},
+ {"i:28", 90022, 2890},
+ {"i:29", 90112, 2893},
+ {"i:30", 90202, 2896},
+ {"i:31", 90292, 2899},
+ {"i:32", 90382, 2902}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 199, 8, 161, "Title",
+ CellTags->{"Domain", "c:1"}],
+Cell[CellGroupData[{
+Cell[791, 34, 58, 1, 97, "Section",
+ CellTags->{"c:2", "b:8.0"}],
+Cell[852, 37, 62, 1, 58, "ObjectName",
+ CellTags->{"i:1", "b:8.0"}],
+Cell[917, 40, 256, 11, 58, "Usage",
+ CellTags->"b:8.0"],
+Cell[1176, 53, 1351, 50, 238, "Notes",
+ CellTags->"b:8.0"],
+Cell[2530, 105, 268, 11, 58, "Usage",
+ CellTags->{"i:2", "b:8.0"}],
+Cell[2801, 118, 966, 38, 172, "Notes",
+ CellTags->"b:8.0"],
+Cell[3770, 158, 57, 1, 58, "ObjectName",
+ CellTags->{"i:3", "b:8.0"}],
+Cell[3830, 161, 568, 24, 94, "Usage",
+ CellTags->"b:8.0"],
+Cell[4401, 187, 59, 1, 58, "ObjectName",
+ CellTags->{"i:5", "b:8.0"}],
+Cell[4463, 190, 261, 11, 58, "Usage",
+ CellTags->"b:8.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4761, 206, 52, 1, 97, "Section",
+ CellTags->{"c:3", "b:8.1"}],
+Cell[4816, 209, 1034, 41, 180, "Text",
+ CellTags->"b:8.1"],
+Cell[5853, 252, 58, 1, 58, "ObjectName",
+ CellTags->{"i:4", "b:8.1"}],
+Cell[5914, 255, 1059, 49, 117, "Usage",
+ CellTags->"b:8.1"],
+Cell[6976, 306, 2070, 96, 267, "Notes",
+ CellTags->"b:8.1"],
+Cell[9049, 404, 59, 1, 58, "ObjectName",
+ CellTags->{"i:6", "b:8.1"}],
+Cell[9111, 407, 271, 12, 58, "Usage",
+ CellTags->"b:8.1"],
+Cell[9385, 421, 1545, 70, 174, "Notes",
+ CellTags->"b:8.1"],
+Cell[10933, 493, 62, 1, 58, "ObjectName",
+ CellTags->{"i:7", "b:8.1"}],
+Cell[10998, 496, 475, 20, 94, "Usage",
+ CellTags->"b:8.1"],
+Cell[11476, 518, 5765, 259, 640, "Notes",
+ CellTags->"b:8.1"],
+Cell[17244, 779, 60, 1, 58, "ObjectName",
+ CellTags->{"i:8", "b:8.1"}],
+Cell[17307, 782, 249, 12, 58, "Usage",
+ CellTags->"b:8.1"],
+Cell[17559, 796, 1673, 70, 240, "Notes",
+ CellTags->"b:8.1"],
+Cell[19235, 868, 57, 1, 58, "ObjectName",
+ CellTags->{"i:9", "b:8.1"}],
+Cell[19295, 871, 720, 35, 123, "Usage",
+ CellTags->"b:8.1"],
+Cell[20018, 908, 61, 1, 58, "ObjectName",
+ CellTags->{"i:10", "b:8.1"}],
+Cell[20082, 911, 548, 25, 87, "Usage",
+ CellTags->"b:8.1"],
+Cell[20633, 938, 966, 27, 195, "Notes",
+ CellTags->"b:8.1"],
+Cell[21602, 967, 163, 6, 56, "Text",
+ CellTags->"b:8.1"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21802, 978, 53, 1, 97, "Section",
+ CellTags->{"c:4", "b:8.2"}],
+Cell[21858, 981, 58, 1, 58, "ObjectName",
+ CellTags->{"i:11", "b:8.2"}],
+Cell[21919, 984, 486, 19, 88, "Usage",
+ CellTags->"b:8.2"],
+Cell[22408, 1005, 60, 1, 58, "ObjectName",
+ CellTags->{"i:12", "b:8.2"}],
+Cell[22471, 1008, 772, 28, 152, "Usage",
+ CellTags->"b:8.2"],
+Cell[23246, 1038, 62, 1, 58, "ObjectName",
+ CellTags->{"i:13", "b:8.2"}],
+Cell[23311, 1041, 517, 27, 87, "Usage",
+ CellTags->"b:8.2"],
+Cell[23831, 1070, 62, 1, 58, "ObjectName",
+ CellTags->{"i:14", "b:8.2"}],
+Cell[23896, 1073, 374, 17, 58, "Usage",
+ CellTags->"b:8.2"],
+Cell[24273, 1092, 62, 1, 58, "ObjectName",
+ CellTags->{"i:15", "b:8.2"}],
+Cell[24338, 1095, 330, 14, 58, "Usage",
+ CellTags->"b:8.2"],
+Cell[24671, 1111, 55, 1, 58, "ObjectName",
+ CellTags->{"i:16", "b:8.2"}],
+Cell[24729, 1114, 633, 31, 88, "Usage",
+ CellTags->"b:8.2"],
+Cell[25365, 1147, 232, 7, 43, "Notes",
+ CellTags->"b:8.2"],
+Cell[25600, 1156, 58, 1, 58, "ObjectName",
+ CellTags->{"i:17", "b:8.2"}],
+Cell[25661, 1159, 1047, 41, 183, "Usage",
+ CellTags->"b:8.2"],
+Cell[26711, 1202, 59, 1, 58, "ObjectName",
+ CellTags->{"i:18", "b:8.2"}],
+Cell[26773, 1205, 603, 29, 58, "Usage",
+ CellTags->"b:8.2"],
+Cell[27379, 1236, 63, 1, 58, "ObjectName",
+ CellTags->{"i:19", "b:8.2"}],
+Cell[27445, 1239, 1319, 57, 267, "Usage",
+ CellTags->"b:8.2"],
+Cell[28767, 1298, 61, 1, 58, "ObjectName",
+ CellTags->{"i:20", "b:8.2"}],
+Cell[28831, 1301, 882, 41, 152, "Usage",
+ CellTags->"b:8.2"],
+Cell[29716, 1344, 63, 1, 58, "ObjectName",
+ CellTags->{"i:21", "b:8.2"}],
+Cell[29782, 1347, 288, 13, 58, "Usage",
+ CellTags->"b:8.2"],
+Cell[30073, 1362, 59, 1, 58, "ObjectName",
+ CellTags->{"i:21", "b:8.2"}],
+Cell[30135, 1365, 308, 13, 58, "Usage",
+ CellTags->"b:8.2"],
+Cell[30446, 1380, 60, 1, 58, "ObjectName",
+ CellTags->{"i:22", "b:8.2"}],
+Cell[30509, 1383, 664, 31, 88, "Usage",
+ CellTags->"b:8.2"],
+Cell[31176, 1416, 60, 1, 58, "ObjectName",
+ CellTags->{"i:23", "b:8.2"}],
+Cell[31239, 1419, 529, 26, 87, "Usage",
+ CellTags->"b:8.2"],
+Cell[31771, 1447, 60, 1, 58, "ObjectName",
+ CellTags->{"i:24", "b:8.2"}],
+Cell[31834, 1450, 229, 9, 58, "Usage",
+ CellTags->"b:8.2"],
+Cell[32066, 1461, 61, 1, 58, "ObjectName",
+ CellTags->{"i:25", "b:8.2"}],
+Cell[32130, 1464, 458, 22, 88, "Usage",
+ CellTags->"b:8.2"],
+Cell[32591, 1488, 64, 1, 58, "ObjectName",
+ CellTags->{"i:26", "b:8.2"}],
+Cell[32658, 1491, 382, 16, 88, "Usage",
+ CellTags->"b:8.2"],
+Cell[33043, 1509, 61, 1, 58, "ObjectName",
+ CellTags->{"i:27", "b:8.2"}],
+Cell[33107, 1512, 383, 16, 88, "Usage",
+ CellTags->"b:8.2"],
+Cell[33493, 1530, 57, 1, 58, "ObjectName",
+ CellTags->{"i:28", "b:8.2"}],
+Cell[33553, 1533, 901, 33, 163, "Usage",
+ CellTags->"b:8.2"],
+Cell[34457, 1568, 239, 11, 44, "Notes",
+ CellTags->"b:8.2"],
+Cell[34699, 1581, 57, 1, 58, "ObjectName",
+ CellTags->{"i:29", "b:8.2"}],
+Cell[34759, 1584, 341, 12, 88, "Usage",
+ CellTags->"b:8.2"],
+Cell[35103, 1598, 246, 11, 44, "Notes",
+ CellTags->"b:8.2"],
+Cell[35352, 1611, 61, 1, 58, "ObjectName",
+ CellTags->{"i:30", "b:8.2"}],
+Cell[35416, 1614, 262, 10, 58, "Usage",
+ CellTags->"b:8.2"],
+Cell[35681, 1626, 62, 1, 58, "ObjectName",
+ CellTags->{"i:31", "b:8.2"}],
+Cell[35746, 1629, 575, 25, 88, "Usage",
+ CellTags->"b:8.2"],
+Cell[36324, 1656, 60, 1, 58, "ObjectName",
+ CellTags->{"i:32", "b:8.2"}],
+Cell[36387, 1659, 616, 29, 88, "Usage",
+ CellTags->"b:8.2"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

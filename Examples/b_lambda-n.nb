@@ -1,0 +1,317 @@
+(************** Content-type: application/mathematica **************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      6370,        220]*)
+(*NotebookOutlinePosition[      7049,        244]*)
+(*  CellTagsIndexPosition[      7005,        240]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+  "Algebra ",
+  Cell[BoxData[
+      \(TraditionalForm\`\(\[GothicB]\_\[Lambda]\)(n)\)]]
+}], "Title"],
+
+Cell[CellGroupData[{
+
+Cell["Introduction", "Section"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Needs["\<SuperLie`\>"]\), "\[IndentingNewLine]", 
+    \(Needs["\<SuperLie`Cohom`\>"]\), "\[IndentingNewLine]", 
+    \(\(n = 2;\)\)}], "Input"],
+
+Cell[BoxData[
+    \("SuperLie Package installed"\)], "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  "First we definne \[GothicM]=OK(n), \"odd\" contact algebra of variavles ",
+  Cell[BoxData[
+      \(TraditionalForm\`q\_i\)]],
+  ", ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Xi]\_i\)]],
+  " and ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Tau]\)]],
+  "."
+}], "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(VectorSpace[q, Dim \[Rule] n]\), "\[IndentingNewLine]", 
+    \(VectorSpace[\[Xi], Dim \[Rule] {0, n}]\), "\n", 
+    \(Symmetric[VTimes]\)}], "Input"],
+
+Cell[BoxData[
+    \("q is a vector space"\)], "Output"],
+
+Cell[BoxData[
+    \("\[Xi] is a vector space"\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(OKAlgebra[\[GothicM], {q, \[Xi], \[Tau]}]\)], "Input"],
+
+Cell[BoxData[
+    \("\[GothicM] is an \"odd\" contact algebra over {q, \[Xi], \[Tau]}"\)], \
+"Output"]
+}, Open  ]],
+
+Cell[BoxData[{
+    \(Obn[f_, g_] := VNormal[VExpand[Ob[f, g]]]\), "\n", 
+    \(\(Bracket[\[GothicM]] ^= Obn;\)\), "\n", 
+    \(\(P[Obn] ^= 1;\)\)}], "Input"],
+
+Cell[BoxData[{
+    \(\(Weight[q[i_]] ^:= WeightMark[n, i];\)\), "\n", 
+    \(Weight[\[Xi][i_]] ^:= WeightMark[n, \(-i\)]; 
+    Weight[\[Tau]] ^:= WeightMark[n];\), "\n", 
+    \(\(Weight[VTimes[]] ^:= WeightMark[n];\)\)}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["Grading r=0,..n", "Subsubsection"],
+
+Cell[BoxData[
+    \(WithoutPreSL[
+      grk[q[i_]] := 
+        If[i \[LessEqual] $last1, 1, 2]; \[IndentingNewLine]grk[\[Xi][i_]] := 
+        If[i \[LessEqual] $last1, 1, 0]; \[IndentingNewLine]grk[\[Tau]] = 
+        2; \[IndentingNewLine]grk[e_VTimes] := 
+        Plus @@ \((grk /@ \((List @@ e)\))\); \[IndentingNewLine]grk[
+          VPower[f_, k_]] := k*grk[f]; \[IndentingNewLine]grk[e_VPlus] := 
+        grk[e[\([1]\)]]; \[IndentingNewLine]Grade[
+          e : \((_q | _\[Xi] | \[Tau])\)] := 
+        grk[e] - 2; \n\ \ Grade[e_VTimes] ^:= grk[e] - 2; 
+      Grade[e_VPower] ^:= grk[e] - 2;]\)], "Input"],
+
+Cell[BoxData[
+    \(mComp[d_] := 
+      Block[{Grade = grk}, 
+        GradeBasis[d + 2, 
+          Flatten[{\[Tau], Basis[q], Basis[\[Xi]]}]]]\)], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Special grading E (for n=2 only)", "Subsubsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Grade[\[Xi][i_]] ^:= \(-1\)\), "\[IndentingNewLine]", 
+    \(Grade[q[i_]] ^:= 1\), "\[IndentingNewLine]", 
+    \(Grade[\[Tau]] ^= 0\)}], "Input"],
+
+Cell[BoxData[
+    \(0\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(mComp[d_] := \[IndentingNewLine]Flatten[
+        Outer[VTimes, {VTimes[], \[Tau]}, 
+          Flatten[{DegreeBasis[d, Basis[q]], \[IndentingNewLine]Outer[VTimes, 
+                DegreeBasis[d + 1, 
+                  Basis[q]], {\[Xi]\_1, \[Xi]\_2}], \[IndentingNewLine]Outer[
+                VTimes, 
+                DegreeBasis[d + 2, 
+                  Basis[q]], {\(\[Xi]\_1\) \[Xi]\_2}]}]]]\)], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  "Define the algebra ",
+  Cell[BoxData[
+      \(TraditionalForm\`\(\[GothicB]\_\[Lambda]\)(n; r)\)]]
+}], "Subsection"],
+
+Cell[BoxData[
+    \(With[{p = BasisPattern[\[GothicM]]}, \[IndentingNewLine]Laplacian[f_] := 
+        VSum[LDer[LDer[f, \[Xi][i], p], q[i], p], {i, n}]]\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Scalar[\[Lambda]a, \[Lambda]b, \[Lambda]]\)], "Input"],
+
+Cell[BoxData[
+    \(General::"spell1" \(\(:\)\(\ \)\) 
+      "Possible spelling error: new symbol name \"\!\(\[Lambda]b\)\" is \
+similar to existing symbol \"\!\(\[Lambda]a\)\"."\)], "Message"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(With[{p = BasisPattern[\[GothicM]]}, \[IndentingNewLine]bEq[f_] := 
+        With[{df = 
+              LDer[f, \[Tau], p]}, \[Lambda]b*n*
+                df - \[Lambda]a*\(EulerOp[\[GothicM]]\)[
+                  df] \[Equal] \[Lambda]a*Laplacian[f]]]\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(bComp[d_] := 
+      With[{f = GeneralSum[c, mComp[d]]}, 
+        GeneralBasis[GeneralSolve[bEq[f], f, c], c]]\)], "Input"],
+
+Cell[BoxData[
+    \(General::"spell1" \(\(:\)\(\ \)\) 
+      "Possible spelling error: new symbol name \"\!\(bComp\)\" is similar to \
+existing symbol \"\!\(mComp\)\"."\)], "Message"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"4.1 for X",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+AutoGeneratedPackage->None,
+WindowSize->{933, 938},
+WindowMargins->{{151, Automatic}, {Automatic, 0}},
+Magnification->1.25
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1727, 52, 116, 4, 147, "Title"],
+
+Cell[CellGroupData[{
+Cell[1868, 60, 31, 0, 76, "Section"],
+
+Cell[CellGroupData[{
+Cell[1924, 64, 163, 3, 77, "Input"],
+Cell[2090, 69, 61, 1, 30, "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2188, 75, 295, 11, 56, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[2508, 90, 170, 3, 77, "Input"],
+Cell[2681, 95, 55, 1, 35, "Output"],
+Cell[2739, 98, 59, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2835, 104, 74, 1, 35, "Input"],
+Cell[2912, 107, 102, 2, 35, "Output"]
+}, Open  ]],
+Cell[3029, 112, 157, 3, 77, "Input"],
+Cell[3189, 117, 230, 4, 77, "Input"],
+
+Cell[CellGroupData[{
+Cell[3444, 125, 40, 0, 54, "Subsubsection"],
+Cell[3487, 127, 609, 11, 182, "Input"],
+Cell[4099, 140, 155, 4, 35, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4291, 149, 57, 0, 54, "Subsubsection"],
+
+Cell[CellGroupData[{
+Cell[4373, 153, 166, 3, 77, "Input"],
+Cell[4542, 158, 35, 1, 35, "Output"]
+}, Open  ]],
+Cell[4592, 162, 428, 8, 98, "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5069, 176, 135, 4, 56, "Subsection"],
+Cell[5207, 182, 165, 2, 56, "Input"],
+
+Cell[CellGroupData[{
+Cell[5397, 188, 74, 1, 35, "Input"],
+Cell[5474, 191, 193, 3, 47, "Message"]
+}, Open  ]],
+Cell[5682, 197, 283, 5, 56, "Input"],
+
+Cell[CellGroupData[{
+Cell[5990, 206, 142, 3, 35, "Input"],
+Cell[6135, 211, 183, 3, 47, "Message"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

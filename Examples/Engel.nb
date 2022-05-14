@@ -1,0 +1,270 @@
+(************** Content-type: application/mathematica **************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5015,        194]*)
+(*NotebookOutlinePosition[      5679,        217]*)
+(*  CellTagsIndexPosition[      5635,        213]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Engel algebra", "Section"],
+
+Cell[BoxData[{
+    \(Needs["\<SuperLie`\>"]\), "\n", 
+    \(Linear[Tp]\)}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["The vector model of the Engel Algebra", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[
+"Build \[GothicV]\[GothicE]\[GothicC]\[GothicT](4)"], "Subsubsection"],
+
+Cell["VectorSpace[x, Dim->4, CoLeft->v]\nVectorLieAlgebra[vect, x]", "Input",
+  PageWidth->Infinity,
+  InitializationCell->True,
+  ShowSpecialCharacters->False,
+  FormatType->InputForm]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["The basis of Engel algebra", "Subsubsection"],
+
+Cell["\<\
+X[-3] = v[4]
+X[-2] = v[3] + x[1]**v[4]
+D1 = v[1]
+e = x[1]**v[1] + x[2]**v[2] + 2x[3]**v[3] + 3x[4]**v[4]
+h = x[1]**v[1] - x[2]**v[2] + x[4]**v[4]
+X[n_] := x[1]^(n+1)**v[2] + 1/(n+2) x[1]^(n+2)**v[3] +
+          1/(n+2)/(n+3) x[1]^(n+3)**v[4]\
+\>", "Input",
+  PageWidth->Infinity,
+  InitializationCell->True,
+  ShowSpecialCharacters->False,
+  FormatType->InputForm]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["The bracket in the Engel Algebra", "Subsubsection"],
+
+Cell["\<\
+Ln[v_,w_] := VNormal[Lb[v,w]]
+$SNormal = Together\
+\>", "Input",
+  PageWidth->Infinity,
+  InitializationCell->True,
+  ShowSpecialCharacters->False,
+  FormatType->InputForm]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Clear definitions", "Subsubsection"],
+
+Cell[BoxData[
+    \(ClearAll[X, D1, h, e]\)], "Input"]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["The model with direct definitions", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell["The definition of the algebra Eng", "Subsubsection"],
+
+Cell["\<\
+Define[Eng, {Vector, BasisPattern->(_X|e|h|d)}];
+Vector[X,e,h,d];
+TheAlgebra[Eng] ^= Eng;
+Bracket[Eng] ^= Act;
+bracket[Eng] ^= act;
+Dim[Eng] ^= Infinity;
+PDim[Eng] ^= {Infinity, 0};
+Grade[X[i_]] ^:= i;
+Grade[e] ^= 0;
+Grade[h] ^= 0;
+Grade[d] ^= -1;
+
+BracketMode[Eng] ^= Regular;
+Components[Eng] ^=
+  { { X, 1, {{#1, -3, Infinity}}&, True& },
+    { e, 0, {}, True& },
+    { h, 0, {}, True& },
+    { d, 0, {}, True& } };
+
+Eng/: Components[Eng, Grade->d_/;d<-1] =
+\t\t{ { X, 1, {{#1, d, d}}&, True& } };
+Eng/: Components[Eng, Grade->-1] =
+\t\t{ { X, 1, {{#1, -1, -1}}&, True& },
+\t\t  { d, 0, {}, True& } };
+Eng/: Components[Eng, Grade->0] =
+\t\t{ { X, 1, {{#1, 0, 0}}&, True& },
+\t\t  { e, 0, {}, True& },
+\t\t  { h, 0, {}, True& } };
+Eng/: Components[Eng, Grade->d_/;d>0] =
+\t\t{ { X, 1, {{#1, d, d}}&, True& } };
+
+Act[_X, _X] ^= 0;
+Act[e, v:X[i_]] ^= SVTimes[i, v];
+Act[h, v:X[i_]] ^= SVTimes[i+2, v];
+Act[d, X[i_]] ^:=
+   VIf[i>=-2, SVTimes[If[i>0,(i+1),1], X[i-1]] ];
+
+Act[e, d] ^= SVTimes[-1, d];
+Act[h, d] ^= SVTimes[-1, d];
+Act[e, e|h] ^= 0;
+Act[h, e|h] ^= 0;
+Act[d, d] ^= 0;
+
+Act[v:(_X|d), e] ^:= SVTimes[-1, Act[e,v]];
+Act[v:(_X|d), h] ^:= SVTimes[-1, Act[h,v]];
+Act[v_X, d] ^:= SVTimes[-1, Act[d,v]];
+
+P[_X] ^= 0;
+P[e] ^= 0;
+P[h] ^= 0;
+P[d] ^= 0;
+
+Enum[Eng] ^= 2;
+Eng/: EnumRange[Eng, 1] = {-3, 0, 1};
+Eng/: EnumRange[Eng, 2] = {1, 5, 1};
+Eng/: Enum[Eng, 1] = { -3 :> {X[-3]}, -2 :> {X[-2]},
+\t-1 :> {d, X[-1]}, 0 :> {e, h, X[0]}};
+Eng/: Enum[Eng, 2] = { d_ :> {X[d]}};
+
+Relatives[Eng] ^= {Eng, None, None, None, None, None, None, None};\
+\>", "Input",
+  PageWidth->Infinity,
+  InitializationCell->True,
+  ShowSpecialCharacters->False,
+  FormatType->InputForm]
+}, Open  ]]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.1 for X",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+AutoGeneratedPackage->Automatic,
+WindowSize->{926, 621},
+WindowMargins->{{Automatic, 149}, {Automatic, 91}}
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1727, 52, 32, 0, 61, "Section"],
+Cell[1762, 54, 84, 2, 43, "Input"],
+
+Cell[CellGroupData[{
+Cell[1871, 60, 59, 0, 45, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[1955, 64, 85, 1, 42, "Subsubsection"],
+Cell[2043, 67, 185, 4, 42, "Input",
+  InitializationCell->True]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2265, 76, 51, 0, 42, "Subsubsection"],
+Cell[2319, 78, 374, 12, 117, "Input",
+  InitializationCell->True]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2730, 95, 57, 0, 42, "Subsubsection"],
+Cell[2790, 97, 182, 7, 42, "Input",
+  InitializationCell->True]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3009, 109, 42, 0, 42, "Subsubsection"],
+Cell[3054, 111, 54, 1, 27, "Input"]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[3157, 118, 55, 0, 29, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[3237, 122, 58, 0, 42, "Subsubsection"],
+Cell[3298, 124, 1677, 65, 912, "Input",
+  InitializationCell->True]
+}, Open  ]]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

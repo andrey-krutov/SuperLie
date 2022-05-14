@@ -1,0 +1,281 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 4.0,
+MathReader 4.0, or any compatible application. The data for the notebook 
+starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5580,        189]*)
+(*NotebookOutlinePosition[      6281,        214]*)
+(*  CellTagsIndexPosition[      6237,        210]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+    \(TextForm\`Algebra\ \[GothicV]\[GothicA]\[GothicS] \((4 | 
+            4)\) = \(\((spin, \[GothicA]\[GothicS])\)\_*\)\)], "Title"],
+
+Cell[BoxData[
+    \(Needs["\<SuperLie`\>"]\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Vector realization, \[GothicV]\[GothicA]\[GothicS](4|4) \[Subset] \[GothicV]\
+\[GothicE]\[GothicC]\[GothicT](4|4)\
+\>", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["Definitions", "Subsection"],
+
+Cell[BoxData[{
+    \(\(Symmetric[VTimes];\)\), "\n", 
+    \(\(P[VTimes] ^= 0;\)\)}], "Input"],
+
+Cell[BoxData[{
+    \(VectorSpace[x, Dim \[Rule] {4, 4}, CoLeft \[Rule] v]\), "\n", 
+    \(VectorLieAlgebra[g, x]\)}], "Input",
+  InitializationCell->True],
+
+Cell[BoxData[{
+    \(\(Linear[Tp];\)\), "\n", 
+    \(Lbn[f_, g_] := VNormal[Lb[f, g]]\), "\n", 
+    \(\(P[Tp] ^= 0;\)\), "\n", 
+    \(\(P[VTimes] ^= 0;\)\), "\n", 
+    \(\(P[wedge] ^= 0;\)\)}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Equations", "Subsection"],
+
+Cell[BoxData[{
+    \(VComp[f_ ** v_[i_], j_] := Delta[i, j] f\), "\n", 
+    \(SetProperties[
+      VComp, {Vector, Vector \[Rule] First, Linear \[Rule] First}]\), "\n", 
+    \(DComp[f_, i_, j_] := RDer[VComp[f, i], x[j], _x]\)}], "Input",
+  InitializationCell->True],
+
+Cell[BoxData[
+    \(\(EnumSet[
+        g, {\(-1\), Infinity, 
+            1} \[Rule] {k_ \[RuleDelayed] 
+              Flatten[Outer[Tp, DegreeBasis[k + 1, Basis[x]], 
+                  Basis[v]]]}];\)\)], "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Scalar[\[Lambda]]\)], "Input",
+  InitializationCell->True],
+
+Cell[BoxData[
+    \(Scalar\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[{
+    \(Vas1[f_, i_, j_] := 
+      VPlus[DComp[f, i, j], 
+          SVTimes[\((\(-1\))\)\^P[f], DComp[f, j + 4, i + 4]]] /; 
+        i \[NotEqual] j\), "\n", 
+    \(Vas1[f_, i_, i_] := 
+      VPlus[DComp[f, i, i], 
+        SVTimes[\((\(-1\))\)\^P[f], DComp[f, i + 4, i + 4]], 
+        SVTimes[\(-1\)/2, VSum[DComp[f, j, j], {j, 4}]]]\), "\n", 
+    \(Vas2[f_, i_, j_] := 
+      VPlus[DComp[f, i, j + 4], DComp[f, j, i + 4]]\), "\n", 
+    \(Vas3[f_, i_, j_, k_, l_] := 
+      VPlus[DComp[f, i + 4, j], SVTimes[\(-1\), DComp[f, j + 4, i]], 
+        SVTimes[\(-\((\(-1\))\)\^P[f]\) \[Lambda], DComp[f, k, l + 4]], 
+        SVTimes[\(\((\(-1\))\)\^P[f]\) \[Lambda], 
+          DComp[f, l, k + 4]]]\), "\n", 
+    \(VasEq = 
+      Flatten[{Table[
+            With[{i = i, j = j}, {Vas1[#, i, j] &, Vas2[#, i, j] &}], {i, 
+              4}, {j, 4}], Vas3[#, 1, 2, 3, 4] &, Vas3[#, 1, 3, 4, 2] &, 
+          Vas3[#, 1, 4, 2, 3] &, Vas3[#, 2, 1, 4, 3] &, 
+          Vas3[#, 2, 3, 1, 4] &, Vas3[#, 2, 4, 3, 1] &, 
+          Vas3[#, 3, 1, 2, 4] &, Vas3[#, 3, 2, 4, 1] &, 
+          Vas3[#, 3, 4, 1, 2] &, Vas3[#, 4, 1, 3, 2] &, 
+          Vas3[#, 4, 2, 1, 3] &, Vas3[#, 4, 3, 2, 1] &}]\)}], "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\[Lambda] = 1\)], "Input",
+  InitializationCell->True],
+
+Cell[BoxData[
+    \(1\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[{
+    \(Off[Solve::svars]\), "\n", 
+    \(\($DPrint = 1;\)\)}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Components", "Subsection"],
+
+Cell[BoxData[
+    \(GradedKerSpace[z, g, VasEq, From \[Rule] 0, To \[Rule] 0]\)], "Input",
+  InitializationCell->True],
+
+Cell[BoxData[
+    \(gk[k_] := 
+      Flatten[Outer[Tp, DegreeBasis[k + 1, Basis[x]], Basis[v]]]\)], "Input"],
+
+Cell[BoxData[
+    \(\(one = 
+        GeneralPreImage[gk[\(-1\)], GeneralSum[c, gk[1]], c, \ 
+          GeneralSum[a, Image[z]], a, Lbn];\)\)], "Input"],
+
+Cell[BoxData[
+    \(Act[f_Tp, g_Tp] := VNormal[Lbn[f, g]]\)], "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+
+Cell["Standard Grade: (1,1,1,1,1,1,1,1)", "Subsubsection"],
+
+Cell[BoxData[
+    \(Grade[x[i_]] ^:= 1\)], "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.0 for Microsoft Windows",
+ScreenRectangle->{{0, 800}, {0, 555}},
+AutoGeneratedPackage->None,
+WindowSize->{792, 529},
+WindowMargins->{{3, Automatic}, {7, Automatic}},
+Magnification->1.25
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1739, 51, 149, 2, 131, "Title"],
+Cell[1891, 55, 55, 1, 35, "Input"],
+
+Cell[CellGroupData[{
+Cell[1971, 60, 140, 3, 66, "Section"],
+
+Cell[CellGroupData[{
+Cell[2136, 67, 33, 0, 57, "Subsection"],
+Cell[2172, 69, 93, 2, 56, "Input"],
+Cell[2268, 73, 154, 3, 56, "Input",
+  InitializationCell->True],
+Cell[2425, 78, 202, 5, 119, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2664, 88, 31, 0, 57, "Subsection"],
+Cell[2698, 90, 266, 5, 77, "Input",
+  InitializationCell->True],
+Cell[2967, 97, 242, 6, 56, "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+Cell[3234, 107, 78, 2, 35, "Input",
+  InitializationCell->True],
+Cell[3315, 111, 40, 1, 35, "Output"]
+}, Open  ]],
+Cell[3370, 115, 1228, 25, 375, "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+Cell[4623, 144, 74, 2, 35, "Input",
+  InitializationCell->True],
+Cell[4700, 148, 35, 1, 35, "Output"]
+}, Open  ]],
+Cell[4750, 152, 85, 2, 56, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4872, 159, 32, 0, 57, "Subsection"],
+Cell[4907, 161, 118, 2, 35, "Input",
+  InitializationCell->True],
+Cell[5028, 165, 108, 2, 35, "Input"],
+Cell[5139, 169, 151, 3, 56, "Input"],
+Cell[5293, 174, 98, 2, 35, "Input",
+  InitializationCell->True],
+
+Cell[CellGroupData[{
+Cell[5416, 180, 58, 0, 51, "Subsubsection"],
+Cell[5477, 182, 51, 1, 35, "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

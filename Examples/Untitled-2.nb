@@ -1,0 +1,1446 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     37628,       1101]*)
+(*NotebookOutlinePosition[     41101,       1207]*)
+(*  CellTagsIndexPosition[     40841,       1195]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["5. Decomposition of the tensor square", "Section",
+  CellTags->{"c:23", "i:21"}],
+
+Cell[CellGroupData[{
+
+Cell["5.1. Algebra \[GothicO]\[GothicS]\[GothicP](1|4)", "Subsection",
+  CellTags->{"c:24", "i:14", "b:9.4.0"}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{\(Needs["\<SuperLie`\>"];\), "\n", \(FieldChar[
+      3]\), "\n", \(Off[Solve::svars];\), "\[IndentingNewLine]", 
+    RowBox[{"CartanMatrixAlgebra", "[", 
+      RowBox[{"k", ",", \({x, h, y}\), ",", 
+        RowBox[{"(", GridBox[{
+              {"2", \(-1\)},
+              {\(-1\), "1"}
+              }], ")"}], ",", \(PList \[Rule] {0, 1}\)}], "]"}]}], "Input",
+  CellTags->"b:9.4.0"],
+
+Cell[BoxData[
+    \("SuperLie Package Version 2.06 installed\nDisclaimer: This software is \
+provided \"AS IS\", without a warranty of any kind"\)], "Print",
+  CellTags->"b:9.4.0"],
+
+Cell[BoxData[
+    \(3\)], "Output",
+  CellTags->"b:9.4.0"],
+
+Cell[BoxData[
+    InterpretationBox["\<\"\\!\\(10\\)|\\!\\(4\\)\"\>",
+      StringForm[ "``|``", 10, 4],
+      Editable->False]], "Output",
+  CellTags->"b:9.4.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SubAlgebra[g, k, Basis[k]]\)], "Input"],
+
+Cell[BoxData[
+    \("g is a sublagebra in k"\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\($DPrint = 1;\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SubModule[m, g, Basis[g], Split \[Rule] Weight]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[\("Building \
+"\[InvisibleSpace]g\[InvisibleSpace]"-submodule "\[InvisibleSpace]m\
+\[InvisibleSpace]" \[Subset] "\[InvisibleSpace]g\),
+      SequenceForm[ "Building ", g, "-submodule ", m, " \[Subset] ", g],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]1\[InvisibleSpace]" of "\
+\[InvisibleSpace]14\),
+      SequenceForm[ "Done ", 1, " of ", 14],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]10\[InvisibleSpace]" of "\
+\[InvisibleSpace]14\),
+      SequenceForm[ "Done ", 10, " of ", 14],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    \("m is a g-submodule in g"\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(ActTable[g, m]\)], "Input"],
+
+Cell[BoxData[
+    \({{0, 0, m\_3, m\_4, 2\[ThinSpace]m\_5, 2\[ThinSpace]m\_6, 0, m\_8, 
+        2\[ThinSpace]m\_9, 2\[ThinSpace]m\_10, m\_11, m\_12, 0, 
+        2\[ThinSpace]m\_14}, {0, 0, m\_3, 2\[ThinSpace]m\_4, 0, m\_6, 
+        2\[ThinSpace]m\_7, 0, 2\[ThinSpace]m\_9, m\_10, 0, 
+        2\[ThinSpace]m\_12, m\_13, 0}, {2\[ThinSpace]m\_3, 2\[ThinSpace]m\_3, 
+        0, 2\[ThinSpace]m\_5, 0, m\_7, 2\[ThinSpace]m\_8, 0, 
+        2\[ThinSpace]m\_1, 0, 2\[ThinSpace]m\_10, 0, 2\[ThinSpace]m\_12, 
+        m\_13}, {2\[ThinSpace]m\_4, m\_4, m\_5, m\_6, m\_7, 0, 0, 0, 0, m\_2, 
+        2\[ThinSpace]m\_9, 2\[ThinSpace]m\_10, m\_11, 0}, {m\_5, 0, 0, m\_7, 
+        m\_8, 0, 0, 0, m\_4, m\_3, 2\[ThinSpace]m\_1 + 2\[ThinSpace]m\_2, 0, 
+        2\[ThinSpace]m\_10, m\_11}, {m\_6, 2\[ThinSpace]m\_6, 
+        2\[ThinSpace]m\_7, 0, 0, 0, 0, 0, 0, 2\[ThinSpace]m\_4, 0, m\_2, 
+        m\_9, 0}, {0, m\_7, m\_8, 0, 0, 0, 0, 0, m\_6, m\_5, 
+        2\[ThinSpace]m\_4, 2\[ThinSpace]m\_3, 2\[ThinSpace]m\_1 + m\_2, 
+        2\[ThinSpace]m\_9}, {2\[ThinSpace]m\_8, 0, 0, 0, 0, 0, 0, 0, 
+        2\[ThinSpace]m\_7, 0, m\_5, 0, m\_3, m\_1 + m\_2}, {m\_9, m\_9, m\_1, 
+        0, 2\[ThinSpace]m\_4, 0, 2\[ThinSpace]m\_6, m\_7, 0, 
+        2\[ThinSpace]m\_11, 0, m\_13, 2\[ThinSpace]m\_14, 0}, {m\_10, 
+        2\[ThinSpace]m\_10, 0, m\_2, m\_3, m\_4, 2\[ThinSpace]m\_5, 0, m\_11, 
+        m\_12, m\_13, 0, 0, 0}, {2\[ThinSpace]m\_11, 0, m\_10, 
+        2\[ThinSpace]m\_9, 2\[ThinSpace]m\_1 + 2\[ThinSpace]m\_2, 0, m\_4, 
+        2\[ThinSpace]m\_5, 0, m\_13, m\_14, 0, 0, 0}, {2\[ThinSpace]m\_12, 
+        m\_12, 0, m\_10, 0, 2\[ThinSpace]m\_2, m\_3, 0, 2\[ThinSpace]m\_13, 
+        0, 0, 0, 0, 0}, {0, 2\[ThinSpace]m\_13, m\_12, 2\[ThinSpace]m\_11, 
+        m\_10, 2\[ThinSpace]m\_9, m\_1 + 2\[ThinSpace]m\_2, 
+        2\[ThinSpace]m\_3, m\_14, 0, 0, 0, 0, 0}, {m\_14, 0, 
+        2\[ThinSpace]m\_13, 0, 2\[ThinSpace]m\_11, 0, m\_9, 
+        2\[ThinSpace]m\_1 + 2\[ThinSpace]m\_2, 0, 0, 0, 0, 0, 0}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Hold[$`PiOrder] /. Hold[$`PiOrder] \[Rule] True\)], "Input"],
+
+Cell[BoxData[
+    \(True\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(?? SubSpace\)], "Input"],
+
+Cell[BoxData[
+    \("SubSpace[name, in, basis] - define a subspace with given basis."\)], \
+"Print",
+  CellTags->"Info3375952809-1307717"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {GridBox[{
+                {\(SubSpace[$`n_, $`in_, $`el_, $`opts___] := 
+                    Module[{$`par, $`dim}, $`par = 
+                        If[TrueQ[$`PiOrder /. \[InvisibleSpace]{$`opts}], 
+                          1 - P /@ $`el, P /@ $`el]; $`dim = 
+                        Length[$`el]; $`dim = 
+                        If[Select[$`par, #1 =!= 0 &, 1] =!= {}, 
+                          If[Select[$`par, #1 =!= 1 &, 1] =!= {}, 
+                            PList \[Rule] $`par, Dim \[Rule] {0, $`dim}], 
+                          Dim \[Rule] $`dim]; 
+                      VectorSpace[$`n, $`dim, InSpace \[Rule] $`in, 
+                        Image \[Rule] $`el, $`opts]; 
+                      Image[$`n, $`in] ^= $`el; $`DefMapping[
+                        Mapping /. \[InvisibleSpace]{$`opts}, $`n, $`el]; \
+]\)}
+                },
+              GridBaseline->{Baseline, {1, 1}},
+              ColumnWidths->0.999,
+              ColumnAlignments->{Left}]}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      Definition[ "SubSpace"],
+      Editable->False]], "Print",
+  CellTags->"Info3375952809-1307717"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Block[{$`PiOrder = \(! $`PiOrder\)}, 
+      Block[{$`PiOrder = \(! $`PiOrder\)}, $`PiOrder]]\)], "Input"],
+
+Cell[BoxData[
+    \(False\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(?P\)\)], "Input"],
+
+Cell[BoxData[
+    \("P[vect] is the parity of vect."\)], "Print",
+  CellTags->"Info3375952505-3697644"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(?Invert\)\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{\(Information::"notfound"\), \(\(:\)\(\ \)\), "\<\"Symbol \
+\\!\\(\\\"Invert\\\"\\) not found. \
+\\!\\(\\*ButtonBox[\\\"More\[Ellipsis]\\\", ButtonStyle->\\\"RefGuideLinkText\
+\\\", ButtonFrame->None, ButtonData:>\\\"General::notfound\\\"]\\)\"\>"}]], \
+"Message"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(PList[m] ^= 1 - PList[m]\)], "Input"],
+
+Cell[BoxData[
+    \({1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1}\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "We will use operation NonCommutativeMultiply (defined in ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  ") to denote the tensor product. In SuperLie, there is a shorter synonym to \
+this operation, Tp. In order to define a module, we need the following \
+properties of the tensor product:"
+}], "Text",
+  CellTags->"b:9.4.0"],
+
+Cell[BoxData[{
+    \(\(Jacobi[Act -> Tp];\)\), "\n", 
+    \(\(Linear[Tp];\)\), "\[IndentingNewLine]", 
+    \(\(P[Tp] ^= 0;\)\)}], "Input",
+  CellTags->"b:9.4.0"],
+
+Cell[TextData[{
+  "Let us define the tensor product as a module ",
+  Cell[BoxData[
+      \(M\)]],
+  " over algebra ",
+  Cell[BoxData[
+      \(g\)]],
+  ":"
+}], "Text",
+  CellTags->"b:9.4.0"],
+
+Cell[BoxData[{
+    \(\(Vector[M];\)\), "\n", 
+    \(\(TheAlgebra[M] ^= g;\)\), "\n", 
+    \(\(BasisPattern[M] ^= _Tp;\)\), "\[IndentingNewLine]", 
+    \(\(Basis[M] ^= Flatten[Outer[Tp, \ Basis[m], \ Basis[m]]];\)\)}], "Input",\
+
+  CellTags->"b:9.4.0"],
+
+Cell[BoxData[
+    \(eBas[v_] := 
+      Flatten[Table[
+            VNormal[v\[LeftDoubleBracket]i\[RightDoubleBracket] ** 
+                  v\[LeftDoubleBracket]
+                    j\[RightDoubleBracket] + \(\((\(-1\))\)\^\(\((P[
+                            v\[LeftDoubleBracket]
+                              i\[RightDoubleBracket]])\) \((P[
+                            v\[LeftDoubleBracket]
+                              j\[RightDoubleBracket]])\)\)\) 
+                  v\[LeftDoubleBracket]j\[RightDoubleBracket] ** 
+                    v\[LeftDoubleBracket]i\[RightDoubleBracket]], {i, 1, 
+              Length[v]}, {j, i, Length[v]}] /. {0 \[Rule] 
+              Unevaluated[]}]\)], "Input"],
+
+Cell[BoxData[
+    \(aBas[v_] := 
+      Flatten[Table[
+            VNormal[v\[LeftDoubleBracket]i\[RightDoubleBracket] ** 
+                  v\[LeftDoubleBracket]
+                    j\[RightDoubleBracket] - \(\((\(-1\))\)\^\(P[
+                          v\[LeftDoubleBracket]i\[RightDoubleBracket]] 
+                        P[v\[LeftDoubleBracket]j\[RightDoubleBracket]]\)\) 
+                  v\[LeftDoubleBracket]j\[RightDoubleBracket] ** 
+                    v\[LeftDoubleBracket]i\[RightDoubleBracket]], {i, 1, 
+              Length[v]}, {j, i, Length[v]}] /. {0 \[Rule] 
+              Unevaluated[]}]\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(With[{i = 1, j = 2, v = Basis[g]}, 
+        v\[LeftDoubleBracket]i\[RightDoubleBracket] ** 
+            v\[LeftDoubleBracket]j\[RightDoubleBracket] - \(\((\(-1\))\)\^\(P[
+                    v\[LeftDoubleBracket]i\[RightDoubleBracket]] 
+                  P[v\[LeftDoubleBracket]j\[RightDoubleBracket]]\)\) 
+            v\[LeftDoubleBracket]j\[RightDoubleBracket] ** 
+              v\[LeftDoubleBracket]i\[RightDoubleBracket]] // 
+      VNormal\)], "Input"],
+
+Cell[BoxData[
+    \(g\_1 ** g\_2 + 2\[ThinSpace]g\_2 ** g\_1\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Length[eBas[Basis[m]]]\), "\[IndentingNewLine]", 
+    \(Length[aBas[Basis[m]]]\)}], "Input"],
+
+Cell[BoxData[
+    \(95\)], "Output"],
+
+Cell[BoxData[
+    \(101\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(eBas[Basis[m]]\)], "Input"],
+
+Cell[BoxData[
+    \({m\_1 ** m\_2 + 2\[ThinSpace]m\_2 ** m\_1, 
+      m\_1 ** m\_3 + 2\[ThinSpace]m\_3 ** m\_1, m\_1 ** m\_4 + m\_4 ** m\_1, 
+      m\_1 ** m\_5 + m\_5 ** m\_1, m\_1 ** m\_6 + 2\[ThinSpace]m\_6 ** m\_1, 
+      m\_1 ** m\_7 + 2\[ThinSpace]m\_7 ** m\_1, 
+      m\_1 ** m\_8 + 2\[ThinSpace]m\_8 ** m\_1, 
+      m\_1 ** m\_9 + 2\[ThinSpace]m\_9 ** m\_1, 
+      m\_1 ** m\_10 + m\_10 ** m\_1, m\_1 ** m\_11 + m\_11 ** m\_1, 
+      m\_1 ** m\_12 + 2\[ThinSpace]m\_12 ** m\_1, 
+      m\_1 ** m\_13 + 2\[ThinSpace]m\_13 ** m\_1, 
+      m\_1 ** m\_14 + 2\[ThinSpace]m\_14 ** m\_1, 
+      m\_2 ** m\_3 + 2\[ThinSpace]m\_3 ** m\_2, m\_2 ** m\_4 + m\_4 ** m\_2, 
+      m\_2 ** m\_5 + m\_5 ** m\_2, m\_2 ** m\_6 + 2\[ThinSpace]m\_6 ** m\_2, 
+      m\_2 ** m\_7 + 2\[ThinSpace]m\_7 ** m\_2, 
+      m\_2 ** m\_8 + 2\[ThinSpace]m\_8 ** m\_2, 
+      m\_2 ** m\_9 + 2\[ThinSpace]m\_9 ** m\_2, 
+      m\_2 ** m\_10 + m\_10 ** m\_2, m\_2 ** m\_11 + m\_11 ** m\_2, 
+      m\_2 ** m\_12 + 2\[ThinSpace]m\_12 ** m\_2, 
+      m\_2 ** m\_13 + 2\[ThinSpace]m\_13 ** m\_2, 
+      m\_2 ** m\_14 + 2\[ThinSpace]m\_14 ** m\_2, 
+      m\_3 ** m\_4 + m\_4 ** m\_3, m\_3 ** m\_5 + m\_5 ** m\_3, 
+      m\_3 ** m\_6 + 2\[ThinSpace]m\_6 ** m\_3, 
+      m\_3 ** m\_7 + 2\[ThinSpace]m\_7 ** m\_3, 
+      m\_3 ** m\_8 + 2\[ThinSpace]m\_8 ** m\_3, 
+      m\_3 ** m\_9 + 2\[ThinSpace]m\_9 ** m\_3, 
+      m\_3 ** m\_10 + m\_10 ** m\_3, m\_3 ** m\_11 + m\_11 ** m\_3, 
+      m\_3 ** m\_12 + 2\[ThinSpace]m\_12 ** m\_3, 
+      m\_3 ** m\_13 + 2\[ThinSpace]m\_13 ** m\_3, 
+      m\_3 ** m\_14 + 2\[ThinSpace]m\_14 ** m\_3, 2\[ThinSpace]m\_4 ** m\_4, 
+      m\_4 ** m\_5 + m\_5 ** m\_4, m\_4 ** m\_6 + m\_6 ** m\_4, 
+      m\_4 ** m\_7 + m\_7 ** m\_4, m\_4 ** m\_8 + m\_8 ** m\_4, 
+      m\_4 ** m\_9 + m\_9 ** m\_4, m\_4 ** m\_10 + m\_10 ** m\_4, 
+      m\_4 ** m\_11 + m\_11 ** m\_4, m\_4 ** m\_12 + m\_12 ** m\_4, 
+      m\_4 ** m\_13 + m\_13 ** m\_4, m\_4 ** m\_14 + m\_14 ** m\_4, 
+      2\[ThinSpace]m\_5 ** m\_5, m\_5 ** m\_6 + m\_6 ** m\_5, 
+      m\_5 ** m\_7 + m\_7 ** m\_5, m\_5 ** m\_8 + m\_8 ** m\_5, 
+      m\_5 ** m\_9 + m\_9 ** m\_5, m\_5 ** m\_10 + m\_10 ** m\_5, 
+      m\_5 ** m\_11 + m\_11 ** m\_5, m\_5 ** m\_12 + m\_12 ** m\_5, 
+      m\_5 ** m\_13 + m\_13 ** m\_5, m\_5 ** m\_14 + m\_14 ** m\_5, 
+      m\_6 ** m\_7 + 2\[ThinSpace]m\_7 ** m\_6, 
+      m\_6 ** m\_8 + 2\[ThinSpace]m\_8 ** m\_6, 
+      m\_6 ** m\_9 + 2\[ThinSpace]m\_9 ** m\_6, 
+      m\_6 ** m\_10 + m\_10 ** m\_6, m\_6 ** m\_11 + m\_11 ** m\_6, 
+      m\_6 ** m\_12 + 2\[ThinSpace]m\_12 ** m\_6, 
+      m\_6 ** m\_13 + 2\[ThinSpace]m\_13 ** m\_6, 
+      m\_6 ** m\_14 + 2\[ThinSpace]m\_14 ** m\_6, 
+      m\_7 ** m\_8 + 2\[ThinSpace]m\_8 ** m\_7, 
+      m\_7 ** m\_9 + 2\[ThinSpace]m\_9 ** m\_7, 
+      m\_7 ** m\_10 + m\_10 ** m\_7, m\_7 ** m\_11 + m\_11 ** m\_7, 
+      m\_7 ** m\_12 + 2\[ThinSpace]m\_12 ** m\_7, 
+      m\_7 ** m\_13 + 2\[ThinSpace]m\_13 ** m\_7, 
+      m\_7 ** m\_14 + 2\[ThinSpace]m\_14 ** m\_7, 
+      m\_8 ** m\_9 + 2\[ThinSpace]m\_9 ** m\_8, 
+      m\_8 ** m\_10 + m\_10 ** m\_8, m\_8 ** m\_11 + m\_11 ** m\_8, 
+      m\_8 ** m\_12 + 2\[ThinSpace]m\_12 ** m\_8, 
+      m\_8 ** m\_13 + 2\[ThinSpace]m\_13 ** m\_8, 
+      m\_8 ** m\_14 + 2\[ThinSpace]m\_14 ** m\_8, 
+      m\_9 ** m\_10 + m\_10 ** m\_9, m\_9 ** m\_11 + m\_11 ** m\_9, 
+      m\_9 ** m\_12 + 2\[ThinSpace]m\_12 ** m\_9, 
+      m\_9 ** m\_13 + 2\[ThinSpace]m\_13 ** m\_9, 
+      m\_9 ** m\_14 + 2\[ThinSpace]m\_14 ** m\_9, 
+      2\[ThinSpace]m\_10 ** m\_10, m\_10 ** m\_11 + m\_11 ** m\_10, 
+      m\_10 ** m\_12 + m\_12 ** m\_10, m\_10 ** m\_13 + m\_13 ** m\_10, 
+      m\_10 ** m\_14 + m\_14 ** m\_10, 2\[ThinSpace]m\_11 ** m\_11, 
+      m\_11 ** m\_12 + m\_12 ** m\_11, m\_11 ** m\_13 + m\_13 ** m\_11, 
+      m\_11 ** m\_14 + m\_14 ** m\_11, 
+      m\_12 ** m\_13 + 2\[ThinSpace]m\_13 ** m\_12, 
+      m\_12 ** m\_14 + 2\[ThinSpace]m\_14 ** m\_12, 
+      m\_13 ** m\_14 + 2\[ThinSpace]m\_14 ** m\_13}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Bracket[g]\)], "Input"],
+
+Cell[BoxData[
+    \(Act\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(<< SuperLie`Submod`\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \($DPrint = 5\)], "Input"],
+
+Cell[BoxData[
+    \(5\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Weight /@ eBas[Basis[g]]\)], "Input"],
+
+Cell[BoxData[
+    \({{0, 0}, {2, \(-1\)}, {\(-1\), 1}, {1, 0}, {\(-2\), 2}, {0, 1}, {2, 
+        0}, {\(-2\), 1}, {1, \(-1\)}, {\(-1\), 
+        0}, {2, \(-2\)}, {0, \(-1\)}, {\(-2\), 0}, {2, \(-1\)}, {\(-1\), 
+        1}, {1, 0}, {\(-2\), 2}, {0, 1}, {2, 0}, {\(-2\), 
+        1}, {1, \(-1\)}, {\(-1\), 0}, {2, \(-2\)}, {0, \(-1\)}, {\(-2\), 
+        0}, {1, 0}, {3, \(-1\)}, {0, 1}, {2, 0}, {4, \(-1\)}, {0, 
+        0}, {3, \(-2\)}, {1, \(-1\)}, {4, \(-3\)}, {2, \(-2\)}, {0, \(-1\)}, \
+{\(-2\), 2}, {0, 1}, {\(-3\), 3}, {\(-1\), 2}, {1, 1}, {\(-3\), 2}, {0, 
+        0}, {\(-2\), 1}, {1, \(-1\)}, {\(-1\), 0}, {\(-3\), 1}, {2, 
+        0}, {\(-1\), 2}, {1, 1}, {3, 0}, {\(-1\), 1}, {2, \(-1\)}, {0, 
+        0}, {3, \(-2\)}, {1, \(-1\)}, {\(-1\), 0}, {\(-2\), 3}, {0, 
+        2}, {\(-4\), 3}, {\(-1\), 1}, {\(-3\), 2}, {0, 0}, {\(-2\), 
+        1}, {\(-4\), 2}, {2, 1}, {\(-2\), 2}, {1, 0}, {\(-1\), 
+        1}, {2, \(-1\)}, {0, 0}, {\(-2\), 1}, {0, 1}, {3, \(-1\)}, {1, 
+        0}, {4, \(-2\)}, {2, \(-1\)}, {0, 0}, {\(-1\), 0}, {\(-3\), 
+        1}, {0, \(-1\)}, {\(-2\), 0}, {\(-4\), 
+        1}, {2, \(-2\)}, {0, \(-1\)}, {3, \(-3\)}, {1, \(-2\)}, {\(-1\), \(-1\
+\)}, {\(-2\), 0}, {1, \(-2\)}, {\(-1\), \(-1\)}, {\(-3\), 
+        0}, {2, \(-3\)}, {0, \(-2\)}, {\(-2\), \(-1\)}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SubModule[u, M, eBas[Basis[m]], Split \[Rule] Weight]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[\("Building \
+"\[InvisibleSpace]g\[InvisibleSpace]"-submodule "\[InvisibleSpace]u\
+\[InvisibleSpace]" \[Subset] "\[InvisibleSpace]M\),
+      SequenceForm[ "Building ", g, "-submodule ", u, " \[Subset] ", M],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]1\[InvisibleSpace]" of "\
+\[InvisibleSpace]95\),
+      SequenceForm[ "Done ", 1, " of ", 95],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]10\[InvisibleSpace]" of "\
+\[InvisibleSpace]95\),
+      SequenceForm[ "Done ", 10, " of ", 95],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]20\[InvisibleSpace]" of "\
+\[InvisibleSpace]95\),
+      SequenceForm[ "Done ", 20, " of ", 95],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]30\[InvisibleSpace]" of "\
+\[InvisibleSpace]95\),
+      SequenceForm[ "Done ", 30, " of ", 95],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]40\[InvisibleSpace]" of "\
+\[InvisibleSpace]95\),
+      SequenceForm[ "Done ", 40, " of ", 95],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]50\[InvisibleSpace]" of "\
+\[InvisibleSpace]95\),
+      SequenceForm[ "Done ", 50, " of ", 95],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]60\[InvisibleSpace]" of "\
+\[InvisibleSpace]95\),
+      SequenceForm[ "Done ", 60, " of ", 95],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]70\[InvisibleSpace]" of "\
+\[InvisibleSpace]95\),
+      SequenceForm[ "Done ", 70, " of ", 95],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]80\[InvisibleSpace]" of "\
+\[InvisibleSpace]95\),
+      SequenceForm[ "Done ", 80, " of ", 95],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]90\[InvisibleSpace]" of "\
+\[InvisibleSpace]95\),
+      SequenceForm[ "Done ", 90, " of ", 95],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    RowBox[{\(Rule::"argr"\), \(\(:\)\(\ \)\), "\<\"\\!\\(Rule\\) called with \
+1 argument; \\!\\(2\\) arguments are expected. \\!\\(\\*ButtonBox[\\\"More\
+\[Ellipsis]\\\", ButtonStyle->\\\"RefGuideLinkText\\\", ButtonFrame->None, \
+ButtonData:>\\\"General::argr\\\"]\\)\"\>"}]], "Message"],
+
+Cell[BoxData[
+    RowBox[{\(Rule::"argr"\), \(\(:\)\(\ \)\), "\<\"\\!\\(Rule\\) called with \
+1 argument; \\!\\(2\\) arguments are expected. \\!\\(\\*ButtonBox[\\\"More\
+\[Ellipsis]\\\", ButtonStyle->\\\"RefGuideLinkText\\\", ButtonFrame->None, \
+ButtonData:>\\\"General::argr\\\"]\\)\"\>"}]], "Message"],
+
+Cell[BoxData[
+    \("u is a g-submodule in M"\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(PDim[u]\)], "Input"],
+
+Cell[BoxData[
+    \({55, 40}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Length[eBas[Basis[m]]]\)], "Input"],
+
+Cell[BoxData[
+    \(95\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(P /@ Basis[u]\)], "Input"],
+
+Cell[BoxData[
+    \({0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 
+      0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 
+      0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 
+      0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 
+      0}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Grade /@ Basis[u]\)], "Input"],
+
+Cell[BoxData[
+    \({0, 1, 1, 2, 2, 3, 4, \(-1\), \(-1\), \(-2\), \(-2\), \(-3\), \(-4\), 
+      1, 1, 2, 2, 3, 4, \(-1\), \(-1\), \(-2\), \(-2\), \(-3\), \(-4\), 2, 3, 
+      3, 4, 5, 0, 0, \(-1\), \(-1\), \(-2\), \(-3\), 2, 3, 3, 4, 5, 0, 
+      0, \(-1\), \(-1\), \(-2\), \(-3\), 4, 4, 5, 6, 1, 1, 0, 
+      0, \(-1\), \(-2\), 5, 6, 1, 1, 0, 0, \(-1\), \(-2\), 7, 2, 2, 1, 1, 
+      0, \(-1\), 3, 3, 2, 2, 1, 
+      0, \(-2\), \(-3\), \(-3\), \(-4\), \(-5\), \(-2\), \(-3\), \(-3\), \(-4\
+\), \(-5\), \(-4\), \(-4\), \(-5\), \(-6\), \(-5\), \(-6\), \(-7\)}\)], \
+"Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(FieldChar[3]\)], "Input"],
+
+Cell[BoxData[
+    \(3\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SubModule[s, u, Select[Basis[u], Mod[Grade[#], 3] \[NotEqual] 0 &], 
+      Split \[Rule] Weight]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[\("Building \
+"\[InvisibleSpace]g\[InvisibleSpace]"-submodule "\[InvisibleSpace]s\
+\[InvisibleSpace]" \[Subset] "\[InvisibleSpace]u\),
+      SequenceForm[ "Building ", g, "-submodule ", s, " \[Subset] ", u],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]1\[InvisibleSpace]" of "\
+\[InvisibleSpace]69\),
+      SequenceForm[ "Done ", 1, " of ", 69],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]10\[InvisibleSpace]" of "\
+\[InvisibleSpace]92\),
+      SequenceForm[ "Done ", 10, " of ", 92],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]20\[InvisibleSpace]" of "\
+\[InvisibleSpace]94\),
+      SequenceForm[ "Done ", 20, " of ", 94],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]30\[InvisibleSpace]" of "\
+\[InvisibleSpace]95\),
+      SequenceForm[ "Done ", 30, " of ", 95],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]40\[InvisibleSpace]" of "\
+\[InvisibleSpace]95\),
+      SequenceForm[ "Done ", 40, " of ", 95],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]50\[InvisibleSpace]" of "\
+\[InvisibleSpace]95\),
+      SequenceForm[ "Done ", 50, " of ", 95],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]60\[InvisibleSpace]" of "\
+\[InvisibleSpace]95\),
+      SequenceForm[ "Done ", 60, " of ", 95],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]70\[InvisibleSpace]" of "\
+\[InvisibleSpace]95\),
+      SequenceForm[ "Done ", 70, " of ", 95],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]80\[InvisibleSpace]" of "\
+\[InvisibleSpace]95\),
+      SequenceForm[ "Done ", 80, " of ", 95],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Done "\[InvisibleSpace]90\[InvisibleSpace]" of "\
+\[InvisibleSpace]95\),
+      SequenceForm[ "Done ", 90, " of ", 95],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    RowBox[{\(Rule::"argr"\), \(\(:\)\(\ \)\), "\<\"\\!\\(Rule\\) called with \
+1 argument; \\!\\(2\\) arguments are expected. \\!\\(\\*ButtonBox[\\\"More\
+\[Ellipsis]\\\", ButtonStyle->\\\"RefGuideLinkText\\\", ButtonFrame->None, \
+ButtonData:>\\\"General::argr\\\"]\\)\"\>"}]], "Message"],
+
+Cell[BoxData[
+    RowBox[{\(Rule::"argr"\), \(\(:\)\(\ \)\), "\<\"\\!\\(Rule\\) called with \
+1 argument; \\!\\(2\\) arguments are expected. \\!\\(\\*ButtonBox[\\\"More\
+\[Ellipsis]\\\", ButtonStyle->\\\"RefGuideLinkText\\\", ButtonFrame->None, \
+ButtonData:>\\\"General::argr\\\"]\\)\"\>"}]], "Message"],
+
+Cell[BoxData[
+    \("s is a g-submodule in u"\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(PDim[s]\)], "Input"],
+
+Cell[BoxData[
+    \({55, 40}\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "Note that the central element ",
+  Cell[BoxData[
+      \(g\_1\)]],
+  "acts on M by zero. All such finite-dimensional undecomposible \[GothicS]\
+\[GothicL](1|1)-modules are known, see [LInd]. There are two types of \
+modules. One type may be described as a \"snake\" and the another one as a \
+\"square\", see below. The bullets denote the elements of the basis and the \
+arrows denotes all non-zero actions of ",
+  Cell[BoxData[
+      \(g\_\(1, 2\)\)]],
+  "(down and to the right) and ",
+  Cell[BoxData[
+      \(g\_\(2, 1\)\)]],
+  " (down and to the left). The \"snake\" can have any length and may begin \
+with the arrow directed to the left as well:"
+}], "Text",
+  CellTags->"b:9.4.0"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{GridBox[{
+            {"\[FilledSmallCircle]", " ", " ", " ", "\[FilledSmallCircle]", 
+              " ", " ", " ", "\[FilledSmallCircle]", " "},
+            {" ", "\[LowerRightArrow]", " ", "\[LowerLeftArrow]", " ", 
+              "\[LowerRightArrow]", " ", "\[LowerLeftArrow]", " ", 
+              "\[LowerRightArrow]"},
+            {" ", " ", "\[FilledSmallCircle]", " ", " ", " ", 
+              "\[FilledSmallCircle]", " ", " ", " "}
+            }], "..."}], "..."}]], "Input",
+  CellTags->"b:9.4.0"],
+
+Cell[BoxData[GridBox[{
+        {" ", " ", "\[FilledSmallCircle]", " ", " "},
+        {" ", "\[LowerLeftArrow]", " ", "\[LowerRightArrow]", " "},
+        {"\[FilledSmallCircle]", " ", " ", " ", "\[FilledSmallCircle]"},
+        {" ", "\[LowerRightArrow]", " ", "\[LowerLeftArrow]", " "},
+        {" ", " ", "\[FilledSmallCircle]", " ", " "}
+        }]], "Input",
+  CellTags->"b:9.4.0"],
+
+Cell["\<\
+Note that all elements in the lower row of the \"snake\" and \"square\" (and \
+only they) are annihilated by \[GothicS]\[GothicL](1|1).  Let us find them:\
+\>", "Text",
+  CellTags->"b:9.4.0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(GeneralZero[Basis[g], Basis[M], c]\)], "Input",
+  CellTags->"b:9.4.0"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{\(c[1]\), "\[ThinSpace]", 
+        RowBox[{
+          InterpretationBox[\(g\_1\),
+            Subscripted[ 
+              g[ 1]],
+            Editable->False], "**", 
+          InterpretationBox[\(g\_1\),
+            Subscripted[ 
+              g[ 1]],
+            Editable->False]}]}], "-", 
+      RowBox[{\(c[2]\), "\[ThinSpace]", 
+        RowBox[{
+          InterpretationBox[\(g\_1\),
+            Subscripted[ 
+              g[ 1]],
+            Editable->False], "**", 
+          InterpretationBox[\(g\_\(1, 2\)\),
+            Subscripted[ 
+              g[ 1, 2]],
+            Editable->False]}]}], "-", 
+      RowBox[{\(c[3]\), "\[ThinSpace]", 
+        RowBox[{
+          InterpretationBox[\(g\_1\),
+            Subscripted[ 
+              g[ 1]],
+            Editable->False], "**", 
+          InterpretationBox[\(g\_\(2, 1\)\),
+            Subscripted[ 
+              g[ 2, 1]],
+            Editable->False]}]}], "+", 
+      RowBox[{\(c[2]\), "\[ThinSpace]", 
+        RowBox[{
+          InterpretationBox[\(g\_\(1, 2\)\),
+            Subscripted[ 
+              g[ 1, 2]],
+            Editable->False], "**", 
+          InterpretationBox[\(g\_1\),
+            Subscripted[ 
+              g[ 1]],
+            Editable->False]}]}], "+", 
+      RowBox[{\(c[3]\), "\[ThinSpace]", 
+        RowBox[{
+          InterpretationBox[\(g\_\(2, 1\)\),
+            Subscripted[ 
+              g[ 2, 1]],
+            Editable->False], "**", 
+          InterpretationBox[\(g\_1\),
+            Subscripted[ 
+              g[ 1]],
+            Editable->False]}]}]}]], "Output",
+  CellTags->"b:9.4.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(lv = GeneralBasis[%, c]\)], "Input",
+  CellTags->"b:9.4.0"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{
+          InterpretationBox[\(g\_1\),
+            Subscripted[ 
+              g[ 1]],
+            Editable->False], "**", 
+          InterpretationBox[\(g\_1\),
+            Subscripted[ 
+              g[ 1]],
+            Editable->False]}], ",", 
+        RowBox[{
+          RowBox[{"-", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(g\_1\),
+                Subscripted[ 
+                  g[ 1]],
+                Editable->False], "**", 
+              InterpretationBox[\(g\_\(1, 2\)\),
+                Subscripted[ 
+                  g[ 1, 2]],
+                Editable->False]}]}], "+", 
+          RowBox[{
+            InterpretationBox[\(g\_\(1, 2\)\),
+              Subscripted[ 
+                g[ 1, 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(g\_1\),
+              Subscripted[ 
+                g[ 1]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{"-", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(g\_1\),
+                Subscripted[ 
+                  g[ 1]],
+                Editable->False], "**", 
+              InterpretationBox[\(g\_\(2, 1\)\),
+                Subscripted[ 
+                  g[ 2, 1]],
+                Editable->False]}]}], "+", 
+          RowBox[{
+            InterpretationBox[\(g\_\(2, 1\)\),
+              Subscripted[ 
+                g[ 2, 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(g\_1\),
+              Subscripted[ 
+                g[ 1]],
+              Editable->False]}]}]}], "}"}]], "Output",
+  CellTags->"b:9.4.0"]
+}, Open  ]],
+
+Cell[TextData[{
+  "Now find the elements \"glued\" to these. We just calculate the action of \
+",
+  Cell[BoxData[
+      \(g\)]],
+  " on the basis of M.\nHere is the action of ",
+  Cell[BoxData[
+      \(g\_\(1, 2\)\)]]
+}], "Text",
+  CellTags->"b:9.4.0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(# \[Rule] VNormal[Act[g\_\(1, 2\), #]] &\) /@ Basis[M] // 
+      ColumnForm\)], "Input",
+  CellTags->"b:9.4.0"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(g\_1 ** g\_1 \[Rule] 0\)},
+          {\(g\_1 ** g\_\(1, 2\) \[Rule] 0\)},
+          {\(g\_1 ** g\_\(2, 1\) \[Rule] g\_1 ** g\_1\)},
+          {\(g\_\(1, 2\) ** g\_1 \[Rule] 0\)},
+          {\(g\_\(1, 2\) ** g\_\(1, 2\) \[Rule] 0\)},
+          {\(g\_\(1, 2\) ** 
+                g\_\(2, 1\) \[Rule] \(-\[ThinSpace]g\_\(1, 2\) ** g\_1\)\)},
+          {\(g\_\(2, 1\) ** g\_1 \[Rule] g\_1 ** g\_1\)},
+          {\(g\_\(2, 1\) ** g\_\(1, 2\) \[Rule] g\_1 ** g\_\(1, 2\)\)},
+          {\(g\_\(2, 1\) ** g\_\(2, 1\) \[Rule] 
+              g\_1 ** g\_\(2, 1\) - g\_\(2, 1\) ** g\_1\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {NonCommutativeMultiply[ 
+          g[ 1], 
+          g[ 1]] -> 0, NonCommutativeMultiply[ 
+          g[ 1], 
+          g[ 1, 2]] -> 0, NonCommutativeMultiply[ 
+          g[ 1], 
+          g[ 2, 1]] -> NonCommutativeMultiply[ 
+          g[ 1], 
+          g[ 1]], NonCommutativeMultiply[ 
+          g[ 1, 2], 
+          g[ 1]] -> 0, NonCommutativeMultiply[ 
+          g[ 1, 2], 
+          g[ 1, 2]] -> 0, NonCommutativeMultiply[ 
+          g[ 1, 2], 
+          g[ 2, 1]] -> SVTimes[ -1, 
+          NonCommutativeMultiply[ 
+            g[ 1, 2], 
+            g[ 1]]], NonCommutativeMultiply[ 
+          g[ 2, 1], 
+          g[ 1]] -> NonCommutativeMultiply[ 
+          g[ 1], 
+          g[ 1]], NonCommutativeMultiply[ 
+          g[ 2, 1], 
+          g[ 1, 2]] -> NonCommutativeMultiply[ 
+          g[ 1], 
+          g[ 1, 2]], NonCommutativeMultiply[ 
+          g[ 2, 1], 
+          g[ 2, 1]] -> VPlus[ 
+          NonCommutativeMultiply[ 
+            g[ 1], 
+            g[ 2, 1]], 
+          SVTimes[ -1, 
+            NonCommutativeMultiply[ 
+              g[ 2, 1], 
+              g[ 1]]]]}],
+      Editable->False]], "Output",
+  CellTags->"b:9.4.0"]
+}, Open  ]],
+
+Cell[TextData[{
+  "and here is the action of ",
+  Cell[BoxData[
+      \(g\_\(2, 1\)\)]],
+  ":"
+}], "Text",
+  CellTags->"b:9.4.0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(# \[Rule] VNormal[Act[g\_\(2, 1\), #]] &\) /@ Basis[M] // 
+      ColumnForm\)], "Input",
+  CellTags->"b:9.4.0"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(g\_1 ** g\_1 \[Rule] 0\)},
+          {\(g\_1 ** g\_\(1, 2\) \[Rule] g\_1 ** g\_1\)},
+          {\(g\_1 ** g\_\(2, 1\) \[Rule] 0\)},
+          {\(g\_\(1, 2\) ** g\_1 \[Rule] g\_1 ** g\_1\)},
+          {\(g\_\(1, 2\) ** g\_\(1, 2\) \[Rule] 
+              g\_1 ** g\_\(1, 2\) - g\_\(1, 2\) ** g\_1\)},
+          {\(g\_\(1, 2\) ** g\_\(2, 1\) \[Rule] g\_1 ** g\_\(2, 1\)\)},
+          {\(g\_\(2, 1\) ** g\_1 \[Rule] 0\)},
+          {\(g\_\(2, 1\) ** 
+                g\_\(1, 2\) \[Rule] \(-\[ThinSpace]g\_\(2, 1\) ** g\_1\)\)},
+          {\(g\_\(2, 1\) ** g\_\(2, 1\) \[Rule] 0\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {NonCommutativeMultiply[ 
+          g[ 1], 
+          g[ 1]] -> 0, NonCommutativeMultiply[ 
+          g[ 1], 
+          g[ 1, 2]] -> NonCommutativeMultiply[ 
+          g[ 1], 
+          g[ 1]], NonCommutativeMultiply[ 
+          g[ 1], 
+          g[ 2, 1]] -> 0, NonCommutativeMultiply[ 
+          g[ 1, 2], 
+          g[ 1]] -> NonCommutativeMultiply[ 
+          g[ 1], 
+          g[ 1]], NonCommutativeMultiply[ 
+          g[ 1, 2], 
+          g[ 1, 2]] -> VPlus[ 
+          NonCommutativeMultiply[ 
+            g[ 1], 
+            g[ 1, 2]], 
+          SVTimes[ -1, 
+            NonCommutativeMultiply[ 
+              g[ 1, 2], 
+              g[ 1]]]], NonCommutativeMultiply[ 
+          g[ 1, 2], 
+          g[ 2, 1]] -> NonCommutativeMultiply[ 
+          g[ 1], 
+          g[ 2, 1]], NonCommutativeMultiply[ 
+          g[ 2, 1], 
+          g[ 1]] -> 0, NonCommutativeMultiply[ 
+          g[ 2, 1], 
+          g[ 1, 2]] -> SVTimes[ -1, 
+          NonCommutativeMultiply[ 
+            g[ 2, 1], 
+            g[ 1]]], NonCommutativeMultiply[ 
+          g[ 2, 1], 
+          g[ 2, 1]] -> 0}],
+      Editable->False]], "Output",
+  CellTags->"b:9.4.0"]
+}, Open  ]],
+
+Cell["\<\
+From this information we can easily restore the structure of undecomposable \
+submodules:\
+\>", "Text",
+  CellTags->"b:9.4.0"],
+
+Cell[BoxData[GridBox[{
+        {" ", " ", " ", " ", \(g\_\(1, 2\) ** g\_\(2, 1\)\), " ", " ", " ", 
+          " "},
+        {\(g\_\(2, 1\) ** g\_\(2, 1\)\), " ", " ", 
+          " ", \(+g\_\(2, 1\) ** g\_\(1, 2\)\), " ", " ", 
+          " ", \(g\_\(1, 2\) ** g\_\(1, 2\)\)},
+        {" ", "\[LowerRightArrow]", " ", "\[LowerLeftArrow]", " ", 
+          "\[LowerRightArrow]", " ", "\[LowerLeftArrow]", " "},
+        {" ", " ", 
+          RowBox[{
+            InterpretationBox[\(g\_1\),
+              Subscripted[ 
+                g[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(g\_\(2, 1\)\),
+              Subscripted[ 
+                g[ 2, 1]],
+              Editable->False]}], " ", " ", " ", 
+          RowBox[{"\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(g\_1\),
+                Subscripted[ 
+                  g[ 1]],
+                Editable->False], "**", 
+              InterpretationBox[\(g\_\(1, 2\)\),
+                Subscripted[ 
+                  g[ 1, 2]],
+                Editable->False]}]}], " ", " "},
+        {" ", " ", \(-g\_\(2, 1\) ** g\_1\), " ", " ", 
+          " ", \(-\(\(g\_\(1, 2\) ** g\_1\)\(\ \)\)\), " ", " "}
+        }]], "Input",
+  CellTags->"b:9.4.0"],
+
+Cell[BoxData[GridBox[{
+        {GridBox[{
+              {" ", 
+                " ", \(g\_\(1, 2\) ** g\_\(2, 1\) - 
+                  g\_\(2, 1\) ** g\_\(1, 2\)\), " "},
+              {" ", "\[LowerLeftArrow]", " ", "\[LowerRightArrow]"},
+              {
+                RowBox[{
+                  RowBox[{
+                    InterpretationBox[\(g\_1\),
+                      Subscripted[ 
+                        g[ 1]],
+                      Editable->False], "**", 
+                    InterpretationBox[\(g\_\(2, 1\)\),
+                      Subscripted[ 
+                        g[ 2, 1]],
+                      Editable->False]}], "+", \(g\_\(2, 1\) ** g\_1\)}], " ",
+                 " ", " "},
+              {" ", "\[LowerRightArrow]", " ", "\[LowerLeftArrow]"},
+              {" ", " ", \(g\_1 ** g\_1\), " "}
+              }], 
+          RowBox[{
+            RowBox[{
+              InterpretationBox[\(g\_1\),
+                Subscripted[ 
+                  g[ 1]],
+                Editable->False], "**", 
+              InterpretationBox[\(g\_\(1, 2\)\),
+                Subscripted[ 
+                  g[ 1, 2]],
+                Editable->False]}], "+", \(g\_\(1, 2\) ** g\_1\)}]}
+        }]], "Input",
+  CellTags->"b:9.4.0"]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"5.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1400}, {0, 967}},
+WindowSize->{1278, 740},
+WindowMargins->{{24, Automatic}, {Automatic, 30}},
+ShowSelection->True,
+Magnification->1.25
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "c:23"->{
+    Cell[1776, 53, 86, 1, 92, "Section",
+      CellTags->{"c:23", "i:21"}]},
+  "i:21"->{
+    Cell[1776, 53, 86, 1, 92, "Section",
+      CellTags->{"c:23", "i:21"}]},
+  "c:24"->{
+    Cell[1887, 58, 111, 1, 48, "Subsection",
+      CellTags->{"c:24", "i:14", "b:9.4.0"}]},
+  "i:14"->{
+    Cell[1887, 58, 111, 1, 48, "Subsection",
+      CellTags->{"c:24", "i:14", "b:9.4.0"}]},
+  "b:9.4.0"->{
+    Cell[1887, 58, 111, 1, 48, "Subsection",
+      CellTags->{"c:24", "i:14", "b:9.4.0"}],
+    Cell[2023, 63, 400, 8, 113, "Input",
+      CellTags->"b:9.4.0"],
+    Cell[2426, 73, 180, 3, 51, "Print",
+      CellTags->"b:9.4.0"],
+    Cell[2609, 78, 58, 2, 35, "Output",
+      CellTags->"b:9.4.0"],
+    Cell[2670, 82, 162, 4, 35, "Output",
+      CellTags->"b:9.4.0"],
+    Cell[8524, 255, 353, 8, 59, "Text",
+      CellTags->"b:9.4.0"],
+    Cell[8880, 265, 161, 4, 77, "Input",
+      CellTags->"b:9.4.0"],
+    Cell[9044, 271, 189, 9, 38, "Text",
+      CellTags->"b:9.4.0"],
+    Cell[9236, 282, 251, 6, 98, "Input",
+      CellTags->"b:9.4.0"],
+    Cell[25050, 714, 706, 17, 80, "Text",
+      CellTags->"b:9.4.0"],
+    Cell[25759, 733, 546, 11, 67, "Input",
+      CellTags->"b:9.4.0"],
+    Cell[26308, 746, 383, 7, 103, "Input",
+      CellTags->"b:9.4.0"],
+    Cell[26694, 755, 201, 4, 38, "Text",
+      CellTags->"b:9.4.0"],
+    Cell[26920, 763, 90, 2, 35, "Input",
+      CellTags->"b:9.4.0"],
+    Cell[27013, 767, 1631, 52, 36, "Output",
+      CellTags->"b:9.4.0"],
+    Cell[28681, 824, 79, 2, 35, "Input",
+      CellTags->"b:9.4.0"],
+    Cell[28763, 828, 1673, 52, 36, "Output",
+      CellTags->"b:9.4.0"],
+    Cell[30451, 883, 252, 9, 59, "Text",
+      CellTags->"b:9.4.0"],
+    Cell[30728, 896, 133, 3, 35, "Input",
+      CellTags->"b:9.4.0"],
+    Cell[30864, 901, 1895, 52, 194, "Output",
+      CellTags->"b:9.4.0"],
+    Cell[32774, 956, 129, 6, 38, "Text",
+      CellTags->"b:9.4.0"],
+    Cell[32928, 966, 133, 3, 35, "Input",
+      CellTags->"b:9.4.0"],
+    Cell[33064, 971, 1895, 52, 194, "Output",
+      CellTags->"b:9.4.0"],
+    Cell[34974, 1026, 136, 4, 38, "Text",
+      CellTags->"b:9.4.0"],
+    Cell[35113, 1032, 1246, 31, 111, "Input",
+      CellTags->"b:9.4.0"],
+    Cell[36362, 1065, 1238, 32, 107, "Input",
+      CellTags->"b:9.4.0"]},
+  "Info3375952809-1307717"->{
+    Cell[6214, 179, 138, 3, 30, "Print",
+      CellTags->"Info3375952809-1307717"],
+    Cell[6355, 184, 1221, 26, 114, "Print",
+      CellTags->"Info3375952809-1307717"]},
+  "Info3375952505-3697644"->{
+    Cell[7859, 228, 103, 2, 30, "Print",
+      CellTags->"Info3375952505-3697644"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"c:23", 38261, 1118},
+  {"i:21", 38350, 1121},
+  {"c:24", 38439, 1124},
+  {"i:14", 38543, 1127},
+  {"b:9.4.0", 38650, 1130},
+  {"Info3375952809-1307717", 40529, 1183},
+  {"Info3375952505-3697644", 40731, 1188}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 86, 1, 92, "Section",
+  CellTags->{"c:23", "i:21"}],
+
+Cell[CellGroupData[{
+Cell[1887, 58, 111, 1, 48, "Subsection",
+  CellTags->{"c:24", "i:14", "b:9.4.0"}],
+
+Cell[CellGroupData[{
+Cell[2023, 63, 400, 8, 113, "Input",
+  CellTags->"b:9.4.0"],
+Cell[2426, 73, 180, 3, 51, "Print",
+  CellTags->"b:9.4.0"],
+Cell[2609, 78, 58, 2, 35, "Output",
+  CellTags->"b:9.4.0"],
+Cell[2670, 82, 162, 4, 35, "Output",
+  CellTags->"b:9.4.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2869, 91, 59, 1, 35, "Input"],
+Cell[2931, 94, 58, 1, 35, "Output"]
+}, Open  ]],
+Cell[3004, 98, 49, 1, 35, "Input"],
+
+Cell[CellGroupData[{
+Cell[3078, 103, 80, 1, 35, "Input"],
+Cell[3161, 106, 277, 5, 30, "Print"],
+Cell[3441, 113, 189, 4, 30, "Print"],
+Cell[3633, 119, 191, 4, 30, "Print"],
+Cell[3827, 125, 59, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3923, 131, 47, 1, 35, "Input"],
+Cell[3973, 134, 1999, 28, 161, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6009, 167, 80, 1, 35, "Input"],
+Cell[6092, 170, 38, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6167, 176, 44, 1, 35, "Input"],
+Cell[6214, 179, 138, 3, 30, "Print",
+  CellTags->"Info3375952809-1307717"],
+Cell[6355, 184, 1221, 26, 114, "Print",
+  CellTags->"Info3375952809-1307717"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7613, 215, 125, 2, 35, "Input"],
+Cell[7741, 219, 39, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7817, 225, 39, 1, 35, "Input"],
+Cell[7859, 228, 103, 2, 30, "Print",
+  CellTags->"Info3375952505-3697644"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7999, 235, 44, 1, 35, "Input"],
+Cell[8046, 238, 290, 5, 29, "Message"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8373, 248, 57, 1, 35, "Input"],
+Cell[8433, 251, 76, 1, 35, "Output"]
+}, Open  ]],
+Cell[8524, 255, 353, 8, 59, "Text",
+  CellTags->"b:9.4.0"],
+Cell[8880, 265, 161, 4, 77, "Input",
+  CellTags->"b:9.4.0"],
+Cell[9044, 271, 189, 9, 38, "Text",
+  CellTags->"b:9.4.0"],
+Cell[9236, 282, 251, 6, 98, "Input",
+  CellTags->"b:9.4.0"],
+Cell[9490, 290, 698, 13, 57, "Input"],
+Cell[10191, 305, 618, 11, 57, "Input"],
+
+Cell[CellGroupData[{
+Cell[10834, 320, 476, 8, 36, "Input"],
+Cell[11313, 330, 74, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[11424, 336, 113, 2, 56, "Input"],
+Cell[11540, 340, 36, 1, 35, "Output"],
+Cell[11579, 343, 37, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[11653, 349, 47, 1, 35, "Input"],
+Cell[11703, 352, 3969, 68, 329, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[15709, 425, 43, 1, 35, "Input"],
+Cell[15755, 428, 37, 1, 35, "Output"]
+}, Open  ]],
+Cell[15807, 432, 52, 1, 35, "Input"],
+
+Cell[CellGroupData[{
+Cell[15884, 437, 44, 1, 35, "Input"],
+Cell[15931, 440, 35, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[16003, 446, 57, 1, 35, "Input"],
+Cell[16063, 449, 1302, 19, 161, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[17402, 473, 86, 1, 35, "Input"],
+Cell[17491, 476, 277, 5, 30, "Print"],
+Cell[17771, 483, 189, 4, 30, "Print"],
+Cell[17963, 489, 191, 4, 30, "Print"],
+Cell[18157, 495, 191, 4, 30, "Print"],
+Cell[18351, 501, 191, 4, 30, "Print"],
+Cell[18545, 507, 191, 4, 30, "Print"],
+Cell[18739, 513, 191, 4, 30, "Print"],
+Cell[18933, 519, 191, 4, 30, "Print"],
+Cell[19127, 525, 191, 4, 30, "Print"],
+Cell[19321, 531, 191, 4, 30, "Print"],
+Cell[19515, 537, 191, 4, 30, "Print"],
+Cell[19709, 543, 304, 4, 29, "Message"],
+Cell[20016, 549, 304, 4, 29, "Message"],
+Cell[20323, 555, 59, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[20419, 561, 40, 1, 35, "Input"],
+Cell[20462, 564, 42, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[20541, 570, 55, 1, 35, "Input"],
+Cell[20599, 573, 36, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[20672, 579, 46, 1, 35, "Input"],
+Cell[20721, 582, 347, 5, 56, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[21105, 592, 50, 1, 35, "Input"],
+Cell[21158, 595, 575, 9, 77, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[21770, 609, 45, 1, 35, "Input"],
+Cell[21818, 612, 35, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[21890, 618, 129, 2, 35, "Input"],
+Cell[22022, 622, 277, 5, 30, "Print"],
+Cell[22302, 629, 189, 4, 30, "Print"],
+Cell[22494, 635, 191, 4, 30, "Print"],
+Cell[22688, 641, 191, 4, 30, "Print"],
+Cell[22882, 647, 191, 4, 30, "Print"],
+Cell[23076, 653, 191, 4, 30, "Print"],
+Cell[23270, 659, 191, 4, 30, "Print"],
+Cell[23464, 665, 191, 4, 30, "Print"],
+Cell[23658, 671, 191, 4, 30, "Print"],
+Cell[23852, 677, 191, 4, 30, "Print"],
+Cell[24046, 683, 191, 4, 30, "Print"],
+Cell[24240, 689, 304, 4, 29, "Message"],
+Cell[24547, 695, 304, 4, 29, "Message"],
+Cell[24854, 701, 59, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[24950, 707, 40, 1, 35, "Input"],
+Cell[24993, 710, 42, 1, 35, "Output"]
+}, Open  ]],
+Cell[25050, 714, 706, 17, 80, "Text",
+  CellTags->"b:9.4.0"],
+Cell[25759, 733, 546, 11, 67, "Input",
+  CellTags->"b:9.4.0"],
+Cell[26308, 746, 383, 7, 103, "Input",
+  CellTags->"b:9.4.0"],
+Cell[26694, 755, 201, 4, 38, "Text",
+  CellTags->"b:9.4.0"],
+
+Cell[CellGroupData[{
+Cell[26920, 763, 90, 2, 35, "Input",
+  CellTags->"b:9.4.0"],
+Cell[27013, 767, 1631, 52, 36, "Output",
+  CellTags->"b:9.4.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[28681, 824, 79, 2, 35, "Input",
+  CellTags->"b:9.4.0"],
+Cell[28763, 828, 1673, 52, 36, "Output",
+  CellTags->"b:9.4.0"]
+}, Open  ]],
+Cell[30451, 883, 252, 9, 59, "Text",
+  CellTags->"b:9.4.0"],
+
+Cell[CellGroupData[{
+Cell[30728, 896, 133, 3, 35, "Input",
+  CellTags->"b:9.4.0"],
+Cell[30864, 901, 1895, 52, 194, "Output",
+  CellTags->"b:9.4.0"]
+}, Open  ]],
+Cell[32774, 956, 129, 6, 38, "Text",
+  CellTags->"b:9.4.0"],
+
+Cell[CellGroupData[{
+Cell[32928, 966, 133, 3, 35, "Input",
+  CellTags->"b:9.4.0"],
+Cell[33064, 971, 1895, 52, 194, "Output",
+  CellTags->"b:9.4.0"]
+}, Open  ]],
+Cell[34974, 1026, 136, 4, 38, "Text",
+  CellTags->"b:9.4.0"],
+Cell[35113, 1032, 1246, 31, 111, "Input",
+  CellTags->"b:9.4.0"],
+Cell[36362, 1065, 1238, 32, 107, "Input",
+  CellTags->"b:9.4.0"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

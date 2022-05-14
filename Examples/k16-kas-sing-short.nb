@@ -1,0 +1,3506 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     99301,       3080]*)
+(*NotebookOutlinePosition[    100046,       3106]*)
+(*  CellTagsIndexPosition[    100002,       3102]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell["\<\
+Singular vectors in \[GothicK](1|6) and \[GothicK]\[GothicA]\[GothicS]\
+\>", "Title"],
+
+Cell[CellGroupData[{
+
+Cell["Initialization", "Section"],
+
+Cell["First load the packages. ", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Needs["\<SuperLie`\>"]\), "\n", 
+    \(Needs["\<SuperLie`Sing`\>"]\), "\[IndentingNewLine]", 
+    \(Off[Solve::svars]\)}], "Input"],
+
+Cell[BoxData[
+    \("SuperLie Package Version 2.06 installed\nDisclaimer: This software is \
+provided \"AS IS\", without a warranty of any kind"\)], "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Algebra K(1|6)", "Subsubsection"],
+
+Cell[TextData[{
+  "Firts we define the the algebra \[GothicK](1|6)  \[LongDash] the contact \
+algebra on polynomial of ",
+  Cell[BoxData[
+      \(TraditionalForm\`t\)]],
+  " and odd variables ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Zeta]\_i\)]],
+  ", ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Eta]\_i\)]],
+  ". As we are working with polynomial, the multiplication ",
+  StyleBox["VTimes", "Program"],
+  " should be declared supersymmetric. "
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    RowBox[{
+      RowBox[{
+        InterpretationBox[
+          ButtonBox["VectorSpace",
+            ButtonStyle->"AddOnsLink"],
+          VectorSpace], "[", \(\[Zeta], Dim \[Rule] {0, 3}\), "]"}], 
+      ";"}], "\n", \(VectorSpace[\[Eta], Dim \[Rule] {0, 3}];\), "\n", 
+    RowBox[{
+      RowBox[{
+        InterpretationBox[
+          ButtonBox["Symmetric",
+            ButtonStyle->"AddOnsLink"],
+          Symmetric], "[", 
+        InterpretationBox[
+          ButtonBox["VTimes",
+            ButtonStyle->"AddOnsLink"],
+          VTimes], "]"}], ";"}], "\[IndentingNewLine]", 
+    RowBox[{
+      InterpretationBox[
+        ButtonBox["ContactAlgebra",
+          ButtonStyle->"AddOnsLink"],
+        ContactAlgebra], "[", \(g, {\[Zeta], \[Eta]}, t\), "]"}]}], "Input"],
+
+Cell[BoxData[
+    \("g is a Contact algebra over {\[Zeta], \[Eta]} and t"\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "The contact algebra is graded, ",
+  Cell[BoxData[
+      \(TraditionalForm\`g = 
+        L\_\(-2\)\[CirclePlus]L\_\(-1\)\[CirclePlus]L\_0\[CirclePlus]L\_1\
+\[CirclePlus] ... \)]],
+  " (direct sum of ",
+  Cell[BoxData[
+      \(TraditionalForm\`L\_0\)]],
+  "-modules). To define this grading (and the weight) we first define a \
+grading ",
+  ButtonBox["Grade",
+    ButtonStyle->"AddOnsLink"],
+  " and weight function ",
+  ButtonBox["Weight",
+    ButtonStyle->"AddOnsLink"],
+  " on the polynomials that is slightly different from the grading and the \
+weight on the contact algebra. These functions have property ",
+  Cell[BoxData[
+      \(TraditionalForm\`Grade[f\[ThinSpace]g] = Grade[f] + Grade[g]\)]],
+  " and the same for weight. Therefore it is enough to define them on \
+monomials. The grading on contact algebra is ",
+  Cell[BoxData[
+      FormBox[
+        StyleBox[\(Grade - 2\),
+          "Program"], TraditionalForm]]],
+  ". The weight on contact algebra is ",
+  Cell[BoxData[
+      FormBox[
+        StyleBox[\(Weight - {2, 0, 0, 0}\),
+          "Program"], TraditionalForm]]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    RowBox[{
+      RowBox[{
+        RowBox[{
+          InterpretationBox[
+            ButtonBox["Grade",
+              ButtonStyle->"AddOnsLink"],
+            Grade], "[", "t", "]"}], "^=", "2"}], 
+      ";"}], "\[IndentingNewLine]", \(Grade[_\[Zeta]] ^= 
+        1;\), "\[IndentingNewLine]", \(Grade[_\[Eta]] ^= 
+        1;\), "\[IndentingNewLine]", 
+    RowBox[{
+      RowBox[{
+        RowBox[{
+          InterpretationBox[
+            ButtonBox["Weight",
+              ButtonStyle->"AddOnsLink"],
+            Weight], "[", "t", "]"}], "^=", \({2, 0, 0, 0}\)}], 
+      ";"}], "\[IndentingNewLine]", 
+    RowBox[{\(Weight[\[Zeta][i_]]\), "^:=", 
+      RowBox[{
+        InterpretationBox[
+          ButtonBox["WeightMark",
+            ButtonStyle->"AddOnsLink"],
+          WeightMark], "[", \(4, 1, i + 1\), 
+        "]"}]}], "\[IndentingNewLine]", \(Weight[\[Eta][i_]] ^:= 
+      WeightMark[4, 
+        1, \(-\((i + 1)\)\)]\), "\[IndentingNewLine]", \(Weight[
+          VTimes[]] ^= {0, 0, 0, 0};\)}], "Input"],
+
+Cell[TextData[{
+  "Now use ",
+  ButtonBox["SubAlgebra",
+    ButtonStyle->"AddOnsLink"],
+  " to define a basis ",
+  Cell[BoxData[
+      \(TraditionalForm\`{a\_1, \ a\_2,  ... }\)]],
+  " in the contact algebra and to calculate the contact bracket in this \
+basis.\nWe will work only with elements of contact grade\[LessEqual]1,so we \
+will define a local subalgebra consisting of elements of polynomial grade\
+\[LessEqual]3 (in the contact algebra they have grade \[LessEqual] 1):"
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(basis3 = 
+      FilterBasis[
+        3, {t, \[Zeta]\_1, \[Zeta]\_2, \[Zeta]\_3, \[Eta]\_1, \[Eta]\_2, \
+\[Eta]\_3}]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        InterpretationBox["1",
+          VTimes[ ]], ",", \(\[Zeta]\_1\), ",", \(\[Zeta]\_2\), 
+        ",", \(\[Zeta]\_3\), ",", \(\[Eta]\_1\), ",", \(\[Eta]\_2\), 
+        ",", \(\[Eta]\_3\), ",", "t", 
+        ",", \(\[Zeta]\_1\[ThinSpace]\[Zeta]\_2\), 
+        ",", \(\[Zeta]\_1\[ThinSpace]\[Zeta]\_3\), 
+        ",", \(\[Zeta]\_1\[ThinSpace]\[Eta]\_1\), 
+        ",", \(\[Zeta]\_1\[ThinSpace]\[Eta]\_2\), 
+        ",", \(\[Zeta]\_1\[ThinSpace]\[Eta]\_3\), 
+        ",", \(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\), 
+        ",", \(\[Zeta]\_2\[ThinSpace]\[Eta]\_1\), 
+        ",", \(\[Zeta]\_2\[ThinSpace]\[Eta]\_2\), 
+        ",", \(\[Zeta]\_2\[ThinSpace]\[Eta]\_3\), 
+        ",", \(\[Zeta]\_3\[ThinSpace]\[Eta]\_1\), 
+        ",", \(\[Zeta]\_3\[ThinSpace]\[Eta]\_2\), 
+        ",", \(\[Zeta]\_3\[ThinSpace]\[Eta]\_3\), 
+        ",", \(\[Eta]\_1\[ThinSpace]\[Eta]\_2\), 
+        ",", \(\[Eta]\_1\[ThinSpace]\[Eta]\_3\), 
+        ",", \(\[Eta]\_2\[ThinSpace]\[Eta]\_3\), 
+        ",", \(t\[ThinSpace]\[Zeta]\_1\), ",", \(t\[ThinSpace]\[Zeta]\_2\), 
+        ",", \(t\[ThinSpace]\[Zeta]\_3\), ",", \(t\[ThinSpace]\[Eta]\_1\), 
+        ",", \(t\[ThinSpace]\[Eta]\_2\), ",", \(t\[ThinSpace]\[Eta]\_3\), 
+        ",", \(\[Zeta]\_1\[ThinSpace]\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\), 
+        ",", \(\[Zeta]\_1\[ThinSpace]\[Zeta]\_2\[ThinSpace]\[Eta]\_1\), 
+        ",", \(\[Zeta]\_1\[ThinSpace]\[Zeta]\_2\[ThinSpace]\[Eta]\_2\), 
+        ",", \(\[Zeta]\_1\[ThinSpace]\[Zeta]\_2\[ThinSpace]\[Eta]\_3\), 
+        ",", \(\[Zeta]\_1\[ThinSpace]\[Zeta]\_3\[ThinSpace]\[Eta]\_1\), 
+        ",", \(\[Zeta]\_1\[ThinSpace]\[Zeta]\_3\[ThinSpace]\[Eta]\_2\), 
+        ",", \(\[Zeta]\_1\[ThinSpace]\[Zeta]\_3\[ThinSpace]\[Eta]\_3\), 
+        ",", \(\[Zeta]\_1\[ThinSpace]\[Eta]\_1\[ThinSpace]\[Eta]\_2\), 
+        ",", \(\[Zeta]\_1\[ThinSpace]\[Eta]\_1\[ThinSpace]\[Eta]\_3\), 
+        ",", \(\[Zeta]\_1\[ThinSpace]\[Eta]\_2\[ThinSpace]\[Eta]\_3\), 
+        ",", \(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\[ThinSpace]\[Eta]\_1\), 
+        ",", \(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\[ThinSpace]\[Eta]\_2\), 
+        ",", \(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\[ThinSpace]\[Eta]\_3\), 
+        ",", \(\[Zeta]\_2\[ThinSpace]\[Eta]\_1\[ThinSpace]\[Eta]\_2\), 
+        ",", \(\[Zeta]\_2\[ThinSpace]\[Eta]\_1\[ThinSpace]\[Eta]\_3\), 
+        ",", \(\[Zeta]\_2\[ThinSpace]\[Eta]\_2\[ThinSpace]\[Eta]\_3\), 
+        ",", \(\[Zeta]\_3\[ThinSpace]\[Eta]\_1\[ThinSpace]\[Eta]\_2\), 
+        ",", \(\[Zeta]\_3\[ThinSpace]\[Eta]\_1\[ThinSpace]\[Eta]\_3\), 
+        ",", \(\[Zeta]\_3\[ThinSpace]\[Eta]\_2\[ThinSpace]\[Eta]\_3\), 
+        ",", \(\[Eta]\_1\[ThinSpace]\[Eta]\_2\[ThinSpace]\[Eta]\_3\)}], 
+      "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SubAlgebra[a, g, basis3, Grade \[Rule] {Grade[#] - 2 &, 1}, 
+      Weight \[Rule] \((Weight[#] - {2, 0, 0, 0} &)\)]\)], "Input"],
+
+Cell[BoxData[
+    \(SubAlgebra::"pmgen" \(\(:\)\(\ \)\) 
+      "The gradings of generators have different signs. Grade restriction may \
+result in loss of sertain elements."\)], "Message"],
+
+Cell[BoxData[
+    \("a is a sublagebra in g"\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "We will not use polynomial. Forget about old ",
+  StyleBox["VTimes", "Program"],
+  ". In the following the ",
+  StyleBox["VTimes", "Program"],
+  " will denote the multiplication in the envelopping algebra"
+}], "Text"],
+
+Cell[BoxData[
+    RowBox[{
+      InterpretationBox[
+        ButtonBox["UnSymmetric",
+          ButtonStyle->"AddOnsLink"],
+        UnSymmetric], "[", "VTimes", "]"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Initialize Sing package", "Subsection"],
+
+Cell[TextData[{
+  "First we tell ",
+  StyleBox["SuperLie`Sing`",
+    FontWeight->"Bold"],
+  " that we a working with algebra ",
+  StyleBox["a",
+    FontSlant->"Italic"],
+  " and divide that algebra in the negative, zero, and positive parts:"
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svSetAlg[a, {an, az, ap}]\)], "Input"],
+
+Cell[BoxData[
+    \(a\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "Declare the scalars to be used in calculations (",
+  StyleBox["c",
+    FontSlant->"Italic"],
+  " for undefinite coefficients, \[Lambda] for undefinite highest weight):"
+}], "Text"],
+
+Cell[BoxData[
+    \(\(svScalars[c, \[Lambda]];\)\)], "Input"],
+
+Cell["\<\
+Make Cartan decompozition of the zero-grade component. To do this, find the \
+elements of appropriate weight in az.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{\((# -> Weight[#] &)\), "/@", 
+      RowBox[{
+        InterpretationBox[
+          ButtonBox["Basis",
+            ButtonStyle->"AddOnsLink"],
+          Basis], "[", "az", "]"}]}]], "Input"],
+
+Cell[BoxData[
+    \({az\_1 \[Rule] {0, 0, 0, 0}, az\_2 \[Rule] {0, 1, 1, 0}, 
+      az\_3 \[Rule] {0, 1, 0, 1}, az\_4 \[Rule] {0, 0, 0, 0}, 
+      az\_5 \[Rule] {0, 1, \(-1\), 0}, az\_6 \[Rule] {0, 1, 0, \(-1\)}, 
+      az\_7 \[Rule] {0, 0, 1, 1}, az\_8 \[Rule] {0, \(-1\), 1, 0}, 
+      az\_9 \[Rule] {0, 0, 0, 0}, az\_10 \[Rule] {0, 0, 1, \(-1\)}, 
+      az\_11 \[Rule] {0, \(-1\), 0, 1}, az\_12 \[Rule] {0, 0, \(-1\), 1}, 
+      az\_13 \[Rule] {0, 0, 0, 0}, az\_14 \[Rule] {0, \(-1\), \(-1\), 0}, 
+      az\_15 \[Rule] {0, \(-1\), 0, \(-1\)}, 
+      az\_16 \[Rule] {0, 0, \(-1\), \(-1\)}}\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "We see that ",
+  Cell[BoxData[
+      \(TraditionalForm\`az\_5\)]],
+  ", ",
+  Cell[BoxData[
+      \(TraditionalForm\`az\_10\)]],
+  ", ",
+  Cell[BoxData[
+      \(TraditionalForm\`az\_7\)]],
+  " are appropriate candidates to raising generators ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_1\)]],
+  ", ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_2\)]],
+  ", ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_3\)]],
+  ", while ",
+  Cell[BoxData[
+      \(TraditionalForm\`az\_8\)]],
+  ", ",
+  Cell[BoxData[
+      \(TraditionalForm\`az\_12\)]],
+  ", ",
+  Cell[BoxData[
+      \(TraditionalForm\`az\_16\)]],
+  " are candidates to lowering generators ",
+  Cell[BoxData[
+      \(TraditionalForm\`y\_1\)]],
+  ", ",
+  Cell[BoxData[
+      \(TraditionalForm\`y\_2\)]],
+  ", ",
+  Cell[BoxData[
+      \(TraditionalForm\`y\_3\)]],
+  " and ",
+  Cell[BoxData[
+      \(TraditionalForm\`az\_1\)]],
+  ", ",
+  Cell[BoxData[
+      \(TraditionalForm\`az\_4\)]],
+  ", ",
+  Cell[BoxData[
+      \(TraditionalForm\`\(\(az\_9\)\(,\)\)\)]],
+  " ",
+  Cell[BoxData[
+      \(TraditionalForm\`az\_13\)]],
+  "form the basis of the Cartan subalgebra."
+}], "Text"],
+
+Cell[TextData[{
+  "Check if the proposed lists of the raising, lowering, and diagonal \
+elements agrees with the weight defined in the algebra, i.e., ",
+  Cell[BoxData[
+      \(TraditionalForm\`\([h\_i, x]\) = \(\(w\_i\)(x)\) x\)]],
+  ". The tables shows the action of the proposed diagonal elements on the \
+proposed raising and lowering elements, and the weight of these elements."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(svCheckRL[{az\_5, az\_10, az\_7}, {az\_8, az\_12, az\_16}, {az\_1, 
+          az\_4, az\_9, az\_13}];\)\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\({0, \(-\[ThinSpace]az\_5\), az\_5, 0} \[Rule] {0, 1, \(-1\), 
+                0}\)},
+          {\({0, 0, \(-\[ThinSpace]az\_10\), az\_10} \[Rule] {0, 0, 
+                1, \(-1\)}\)},
+          {\({0, 
+                0, \(-\[ThinSpace]az\_7\), \(-\[ThinSpace]az\_7\)} \[Rule] \
+{0, 0, 1, 1}\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {{0, 
+        SVTimes[ -1, 
+          az[ 5]], 
+        az[ 5], 0} -> {0, 1, -1, 0}, {0, 0, 
+        SVTimes[ -1, 
+          az[ 10]], 
+        az[ 10]} -> {0, 0, 1, -1}, {0, 0, 
+        SVTimes[ -1, 
+          az[ 7]], 
+        SVTimes[ -1, 
+          az[ 7]]} -> {0, 0, 1, 1}}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\({0, az\_8, \(-\[ThinSpace]az\_8\), 0} \[Rule] {0, \(-1\), 1, 
+                0}\)},
+          {\({0, 0, az\_12, \(-\[ThinSpace]az\_12\)} \[Rule] {0, 0, \(-1\), 
+                1}\)},
+          {\({0, 0, az\_16, az\_16} \[Rule] {0, 0, \(-1\), \(-1\)}\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {{0, 
+        az[ 8], 
+        SVTimes[ -1, 
+          az[ 8]], 0} -> {0, -1, 1, 0}, {0, 0, 
+        az[ 12], 
+        SVTimes[ -1, 
+          az[ 12]]} -> {0, 0, -1, 1}, {0, 0, 
+        az[ 16], 
+        az[ 16]} -> {0, 0, -1, -1}}],
+      Editable->False]], "Print"]
+}, Open  ]],
+
+Cell["\<\
+We see that the actions does not agree with the weight in the signs, so try \
+onse more, with opposite diagonal elements:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(svCheckRL[{az\_5, az\_10, az\_7}, {az\_8, az\_12, 
+          az\_16}, {\(-az\_1\), \(-az\_4\), \(-az\_9\), \(-az\_13\)}];\)\)], \
+"Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\({0, az\_5, \(-\[ThinSpace]az\_5\), 0} \[Rule] {0, 1, \(-1\), 
+                0}\)},
+          {\({0, 0, az\_10, \(-\[ThinSpace]az\_10\)} \[Rule] {0, 0, 
+                1, \(-1\)}\)},
+          {\({0, 0, az\_7, az\_7} \[Rule] {0, 0, 1, 1}\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {{0, 
+        az[ 5], 
+        SVTimes[ -1, 
+          az[ 5]], 0} -> {0, 1, -1, 0}, {0, 0, 
+        az[ 10], 
+        SVTimes[ -1, 
+          az[ 10]]} -> {0, 0, 1, -1}, {0, 0, 
+        az[ 7], 
+        az[ 7]} -> {0, 0, 1, 1}}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\({0, \(-\[ThinSpace]az\_8\), az\_8, 0} \[Rule] {0, \(-1\), 1, 
+                0}\)},
+          {\({0, 0, \(-\[ThinSpace]az\_12\), az\_12} \[Rule] {0, 0, \(-1\), 
+                1}\)},
+          {\({0, 
+                0, \(-\[ThinSpace]az\_16\), \(-\[ThinSpace]az\_16\)} \[Rule] \
+{0, 0, \(-1\), \(-1\)}\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {{0, 
+        SVTimes[ -1, 
+          az[ 8]], 
+        az[ 8], 0} -> {0, -1, 1, 0}, {0, 0, 
+        SVTimes[ -1, 
+          az[ 12]], 
+        az[ 12]} -> {0, 0, -1, 1}, {0, 0, 
+        SVTimes[ -1, 
+          az[ 16]], 
+        SVTimes[ -1, 
+          az[ 16]]} -> {0, 0, -1, -1}}],
+      Editable->False]], "Print"]
+}, Open  ]],
+
+Cell["\<\
+No the actions are correcet, so we can define the Cartan decomposition:\
+\>", "Text"],
+
+Cell[BoxData[
+    \(svCart[{az\_5, az\_10, 
+        az\_7}, {\(-az\_1\), \(-az\_4\), \(-az\_9\), \(-az\_13\)}, {az\_8, 
+        az\_12, az\_16}]\)], "Input"],
+
+Cell[TextData[{
+  "Calculate the Verma module over ",
+  StyleBox["az", "Program"],
+  " with an indefinite highest weight \[Lambda]. But first we define the \
+order of terms in the enveloping algebra.\nWe will sort the terms according \
+to their weight. The terms with the same weight will be sorted in the \
+canonical order defined in ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " (i.e., alphabeticaly)."
+}], "Text"],
+
+Cell[BoxData[{
+    \(WeightLessQ[x_, y_] := 
+      With[{ord = Order[Weight[x], Weight[y]]}, \[IndentingNewLine]Which[
+          ord > 0, True, ord < 0, False, True, \ OrderedQ[{x, y}]]]\), "\n", 
+    \(\(sv$Less = WeightLessQ;\)\)}], "Input"],
+
+Cell[TextData[{
+  "The Verma module ",
+  Cell[BoxData[
+      \(TraditionalForm\`M\^\[Lambda]\)]],
+  " is infinite-dimensional, so we can build only a part of it. But we do not \
+specify this part, it will be determined by the needs for calculations"
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(\[Lambda]\&_ = Array[\[Lambda], 4];\)\), "\n", 
+    \(svVerma[m, \[Lambda]\&_]\)}], "Input"],
+
+Cell[BoxData[
+    \("m is a az-module with highest weight {\[Lambda][1], \[Lambda][2], \
+\[Lambda][3], \[Lambda][4]}"\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+Let us define the output conversion (to show the results in the ordinary \
+basis of the contact algebra)\
+\>", "Text"],
+
+Cell[BoxData[
+    \(\(sv$Out = \((a[
+              i_] \[RuleDelayed] \(Image[a]\)[\([i]\)])\);\)\)], "Input"],
+
+Cell[TextData[{
+  "The algebra ",
+  Cell[BoxData[
+      FormBox[
+        RowBox[{\(L\_0\), "=", 
+          StyleBox["az",
+            "Program"]}], TraditionalForm]]],
+  " is a simple even Lie algebra plus a center. This mean that all \
+finite-dimensional modeles over ",
+  Cell[BoxData[
+      \(TraditionalForm\`L\_0\)]],
+  " are generated by (1) their highest vectors and the lowring elements of ",
+  Cell[BoxData[
+      \(TraditionalForm\`L\_0\)]],
+  " and (2) their lowest vectors and the raising elements of ",
+  Cell[BoxData[
+      \(TraditionalForm\`\(\(L\_0\)\(\ \)\)\)]],
+  ". Therefore it is enough to search highest singular vectors thar arre \
+annulated by the lowest wectors in ",
+  Cell[BoxData[
+      \(TraditionalForm\`L\_1\)]],
+  " (we know that ",
+  Cell[BoxData[
+      \(TraditionalForm\`L\_1\)]],
+  " generates ",
+  Cell[BoxData[
+      \(TraditionalForm\`\(g\_+\) = 
+        L\_1\[CirclePlus]L\_2\[CirclePlus] ... \)]],
+  " as algebra)."
+}], "Text"],
+
+Cell[TextData[{
+  "Now we should find the lowest vectors (with respect to the action of ",
+  Cell[BoxData[
+      \(TraditionalForm\`L\_0\)]],
+  ") in ",
+  Cell[BoxData[
+      \(TraditionalForm\`L\_1\)]],
+  "."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{
+      InterpretationBox[
+        ButtonBox["GeneralZero",
+          ButtonStyle->"AddOnsLink"],
+        GeneralZero], "[", \(sv$l, Basis[ap], c\), "]"}]], "Input"],
+
+Cell[BoxData[
+    \(c\_1\[ThinSpace]ap\_4 + c\_2\[ThinSpace]ap\_23 + 
+      c\_3\[ThinSpace]ap\_26\)], "Output"]
+}, Open  ]],
+
+Cell["Convert to the output form", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svImg[%]\)], "Input"],
+
+Cell[BoxData[
+    \(c\_1\[ThinSpace]\(t\[ThinSpace]\[Eta]\_1\) + 
+      c\_2\[ThinSpace]\(\[Zeta]\_3\[ThinSpace]\[Eta]\_1\[ThinSpace]\[Eta]\_2\)\
+ + c\_3\[ThinSpace]\(\[Eta]\_1\[ThinSpace]\[Eta]\_2\[ThinSpace]\[Eta]\_3\)\)],\
+ "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "We see that the first two vectors are elements of algebra \[GothicK]\
+\[GothicA]\[GothicS], while the last one is element of \[GothicK](1|6) but \
+not of \[GothicK]\[GothicA]\[GothicS]. Set ",
+  StyleBox["sv$z", "Program"],
+  " to this list of lowest vectors. "
+}], "Text"],
+
+Cell[BoxData[
+    \(\(sv$z = {ap\_4, ap\_23, ap\_26};\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["Calculations: deg=1", "Subsubsection"],
+
+Cell["\<\
+We start searching the singular vectors of degree 1 in induced (they \
+correspond to differential operators of degree 1 on tensor fields). To get \
+more information, we set print level 1:\
+\>", "Text"],
+
+Cell[BoxData[
+    \(\(sv$Print = 1;\)\)], "Input"],
+
+Cell["\<\
+First define the equation system of highty and singularity for general vector \
+of degree 1\
+\>", "Text"],
+
+Cell[BoxData[
+    \(svDefEq[1]\)], "Input"],
+
+Cell[TextData[{
+  "General element of I(V) of degree ",
+  "1",
+  " (where ",
+  Cell[BoxData[
+      \(TraditionalForm\`v\_i\)]],
+  " are undefinite elements of an undefinite module V):"
+}], "Text",
+  GeneratedCell->True,
+  CellAutoOverwrite->True],
+
+Cell[BoxData[
+    \(\[Eta]\_1 ** "v"\_1 + \[Eta]\_2 ** "v"\_2 + \[Eta]\_3 ** 
+        "v"\_3 + \[Zeta]\_3 ** "v"\_4 + \[Zeta]\_2 ** "v"\_5 + \[Zeta]\_1 ** 
+        "v"\_6\)], "Print"],
+
+Cell["Partial solution of highness condition:", "Text",
+  GeneratedCell->True,
+  CellAutoOverwrite->True],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{\("v"\_1\), "\[Rule]", 
+          RowBox[{"-", "\[ThinSpace]", 
+            
+            InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_1\[ThinSpace]\
+\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_2\
+\[InvisibleSpace]"]"\),
+              SequenceForm[ "[", 
+                VTimes[ 
+                  \[Zeta][ 1], 
+                  \[Eta][ 2]], ",\[ThinSpace]", 
+                sv$v[ 2], "]"],
+              Editable->False]}]}], ",", 
+        RowBox[{\("v"\_2\), "\[Rule]", 
+          RowBox[{"-", "\[ThinSpace]", 
+            
+            InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_2\[ThinSpace]\
+\[Eta]\_3\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_3\
+\[InvisibleSpace]"]"\),
+              SequenceForm[ "[", 
+                VTimes[ 
+                  \[Zeta][ 2], 
+                  \[Eta][ 3]], ",\[ThinSpace]", 
+                sv$v[ 3], "]"],
+              Editable->False]}]}], ",", 
+        RowBox[{\("v"\_3\), "\[Rule]", 
+          
+          InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_2\[ThinSpace]\
+\[Zeta]\_3\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_5\
+\[InvisibleSpace]"]"\),
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 2], 
+                \[Zeta][ 3]], ",\[ThinSpace]", 
+              sv$v[ 5], "]"],
+            Editable->False]}], ",", 
+        RowBox[{\("v"\_4\), "\[Rule]", 
+          
+          InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_2\[ThinSpace]\
+\[Eta]\_3\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_5\
+\[InvisibleSpace]"]"\),
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 2], 
+                \[Eta][ 3]], ",\[ThinSpace]", 
+              sv$v[ 5], "]"],
+            Editable->False]}], ",", 
+        RowBox[{\("v"\_5\), "\[Rule]", 
+          
+          InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_1\[ThinSpace]\
+\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_6\
+\[InvisibleSpace]"]"\),
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 1], 
+                \[Eta][ 2]], ",\[ThinSpace]", 
+              sv$v[ 6], "]"],
+            Editable->False]}]}], "}"}]], "Print"],
+
+Cell["The remaining highness equations:", "Text",
+  GeneratedCell->True,
+  CellAutoOverwrite->True],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{
+          InterpretationBox[
+            
+            RowBox[{"\<\"[\"\>", 
+              "\[InvisibleSpace]", \(\[Zeta]\_1\[ThinSpace]\[Eta]\_2\), 
+              "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+              "\[InvisibleSpace]", 
+              InterpretationBox[
+                
+                RowBox[{"\<\"[\"\>", 
+                  "\[InvisibleSpace]", \(\[Zeta]\_1\[ThinSpace]\[Eta]\_2\), 
+                  "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                  "\[InvisibleSpace]", 
+                  InterpretationBox[
+                    
+                    RowBox[{"\<\"[\"\>", 
+                      "\[InvisibleSpace]", \
+\(\[Zeta]\_2\[ThinSpace]\[Eta]\_3\), 
+                      "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                      "\[InvisibleSpace]", 
+                      InterpretationBox[
+                        
+                        RowBox[{"\<\"[\"\>", 
+                          "\[InvisibleSpace]", \
+\(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\), 
+                          "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                          "\[InvisibleSpace]", 
+                          
+                          InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_\
+1\[ThinSpace]\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_\
+6\[InvisibleSpace]"]"\),
+                            SequenceForm[ "[", 
+                              VTimes[ 
+                                \[Zeta][ 1], 
+                                \[Eta][ 2]], ",\[ThinSpace]", 
+                              sv$v[ 6], "]"],
+                            Editable->False], 
+                          "\[InvisibleSpace]", "\<\"]\"\>"}],
+                        SequenceForm[ "[", 
+                          VTimes[ 
+                            \[Zeta][ 2], 
+                            \[Zeta][ 3]], ",\[ThinSpace]", 
+                          Act[ 
+                            VTimes[ 
+                              \[Zeta][ 1], 
+                              \[Eta][ 2]], 
+                            sv$v[ 6]], "]"],
+                        Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+                    SequenceForm[ "[", 
+                      VTimes[ 
+                        \[Zeta][ 2], 
+                        \[Eta][ 3]], ",\[ThinSpace]", 
+                      Act[ 
+                        VTimes[ 
+                          \[Zeta][ 2], 
+                          \[Zeta][ 3]], 
+                        Act[ 
+                          VTimes[ 
+                            \[Zeta][ 1], 
+                            \[Eta][ 2]], 
+                          sv$v[ 6]]], "]"],
+                    Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+                SequenceForm[ "[", 
+                  VTimes[ 
+                    \[Zeta][ 1], 
+                    \[Eta][ 2]], ",\[ThinSpace]", 
+                  Act[ 
+                    VTimes[ 
+                      \[Zeta][ 2], 
+                      \[Eta][ 3]], 
+                    Act[ 
+                      VTimes[ 
+                        \[Zeta][ 2], 
+                        \[Zeta][ 3]], 
+                      Act[ 
+                        VTimes[ 
+                          \[Zeta][ 1], 
+                          \[Eta][ 2]], 
+                        sv$v[ 6]]]], "]"],
+                Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 1], 
+                \[Eta][ 2]], ",\[ThinSpace]", 
+              Act[ 
+                VTimes[ 
+                  \[Zeta][ 1], 
+                  \[Eta][ 2]], 
+                Act[ 
+                  VTimes[ 
+                    \[Zeta][ 2], 
+                    \[Eta][ 3]], 
+                  Act[ 
+                    VTimes[ 
+                      \[Zeta][ 2], 
+                      \[Zeta][ 3]], 
+                    Act[ 
+                      VTimes[ 
+                        \[Zeta][ 1], 
+                        \[Eta][ 2]], 
+                      sv$v[ 6]]]]], "]"],
+            Editable->False], "\[Equal]", "0"}], ",", 
+        RowBox[{
+          InterpretationBox[
+            
+            RowBox[{"\<\"[\"\>", 
+              "\[InvisibleSpace]", \(\[Zeta]\_1\[ThinSpace]\[Eta]\_2\), 
+              "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+              "\[InvisibleSpace]", 
+              InterpretationBox[
+                
+                RowBox[{"\<\"[\"\>", 
+                  "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\), 
+                  "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                  "\[InvisibleSpace]", 
+                  
+                  InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_1\
+\[ThinSpace]\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_\
+6\[InvisibleSpace]"]"\),
+                    SequenceForm[ "[", 
+                      VTimes[ 
+                        \[Zeta][ 1], 
+                        \[Eta][ 2]], ",\[ThinSpace]", 
+                      sv$v[ 6], "]"],
+                    Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+                SequenceForm[ "[", 
+                  VTimes[ 
+                    \[Zeta][ 2], 
+                    \[Zeta][ 3]], ",\[ThinSpace]", 
+                  Act[ 
+                    VTimes[ 
+                      \[Zeta][ 1], 
+                      \[Eta][ 2]], 
+                    sv$v[ 6]], "]"],
+                Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 1], 
+                \[Eta][ 2]], ",\[ThinSpace]", 
+              Act[ 
+                VTimes[ 
+                  \[Zeta][ 2], 
+                  \[Zeta][ 3]], 
+                Act[ 
+                  VTimes[ 
+                    \[Zeta][ 1], 
+                    \[Eta][ 2]], 
+                  sv$v[ 6]]], "]"],
+            Editable->False], "\[Equal]", "0"}], ",", 
+        RowBox[{
+          InterpretationBox[
+            
+            RowBox[{"\<\"[\"\>", 
+              "\[InvisibleSpace]", \(\[Zeta]\_1\[ThinSpace]\[Eta]\_2\), 
+              "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+              "\[InvisibleSpace]", 
+              InterpretationBox[
+                
+                RowBox[{"\<\"[\"\>", 
+                  "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Eta]\_3\), 
+                  "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                  "\[InvisibleSpace]", 
+                  
+                  InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_1\
+\[ThinSpace]\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_\
+6\[InvisibleSpace]"]"\),
+                    SequenceForm[ "[", 
+                      VTimes[ 
+                        \[Zeta][ 1], 
+                        \[Eta][ 2]], ",\[ThinSpace]", 
+                      sv$v[ 6], "]"],
+                    Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+                SequenceForm[ "[", 
+                  VTimes[ 
+                    \[Zeta][ 2], 
+                    \[Eta][ 3]], ",\[ThinSpace]", 
+                  Act[ 
+                    VTimes[ 
+                      \[Zeta][ 1], 
+                      \[Eta][ 2]], 
+                    sv$v[ 6]], "]"],
+                Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 1], 
+                \[Eta][ 2]], ",\[ThinSpace]", 
+              Act[ 
+                VTimes[ 
+                  \[Zeta][ 2], 
+                  \[Eta][ 3]], 
+                Act[ 
+                  VTimes[ 
+                    \[Zeta][ 1], 
+                    \[Eta][ 2]], 
+                  sv$v[ 6]]], "]"],
+            Editable->False], "\[Equal]", "0"}], ",", 
+        RowBox[{
+          InterpretationBox[
+            
+            RowBox[{"\<\"[\"\>", 
+              "\[InvisibleSpace]", \(\[Zeta]\_1\[ThinSpace]\[Eta]\_2\), 
+              "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+              "\[InvisibleSpace]", 
+              
+              InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_1\[ThinSpace]\
+\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_6\
+\[InvisibleSpace]"]"\),
+                SequenceForm[ "[", 
+                  VTimes[ 
+                    \[Zeta][ 1], 
+                    \[Eta][ 2]], ",\[ThinSpace]", 
+                  sv$v[ 6], "]"],
+                Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 1], 
+                \[Eta][ 2]], ",\[ThinSpace]", 
+              Act[ 
+                VTimes[ 
+                  \[Zeta][ 1], 
+                  \[Eta][ 2]], 
+                sv$v[ 6]], "]"],
+            Editable->False], "\[Equal]", "0"}], ",", 
+        RowBox[{
+          InterpretationBox[
+            
+            RowBox[{"\<\"[\"\>", 
+              "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\), 
+              "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+              "\[InvisibleSpace]", 
+              InterpretationBox[
+                
+                RowBox[{"\<\"[\"\>", 
+                  "\[InvisibleSpace]", \(\[Zeta]\_1\[ThinSpace]\[Eta]\_2\), 
+                  "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                  "\[InvisibleSpace]", 
+                  InterpretationBox[
+                    
+                    RowBox[{"\<\"[\"\>", 
+                      "\[InvisibleSpace]", \
+\(\[Zeta]\_2\[ThinSpace]\[Eta]\_3\), 
+                      "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                      "\[InvisibleSpace]", 
+                      InterpretationBox[
+                        
+                        RowBox[{"\<\"[\"\>", 
+                          "\[InvisibleSpace]", \
+\(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\), 
+                          "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                          "\[InvisibleSpace]", 
+                          
+                          InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_\
+1\[ThinSpace]\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_\
+6\[InvisibleSpace]"]"\),
+                            SequenceForm[ "[", 
+                              VTimes[ 
+                                \[Zeta][ 1], 
+                                \[Eta][ 2]], ",\[ThinSpace]", 
+                              sv$v[ 6], "]"],
+                            Editable->False], 
+                          "\[InvisibleSpace]", "\<\"]\"\>"}],
+                        SequenceForm[ "[", 
+                          VTimes[ 
+                            \[Zeta][ 2], 
+                            \[Zeta][ 3]], ",\[ThinSpace]", 
+                          Act[ 
+                            VTimes[ 
+                              \[Zeta][ 1], 
+                              \[Eta][ 2]], 
+                            sv$v[ 6]], "]"],
+                        Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+                    SequenceForm[ "[", 
+                      VTimes[ 
+                        \[Zeta][ 2], 
+                        \[Eta][ 3]], ",\[ThinSpace]", 
+                      Act[ 
+                        VTimes[ 
+                          \[Zeta][ 2], 
+                          \[Zeta][ 3]], 
+                        Act[ 
+                          VTimes[ 
+                            \[Zeta][ 1], 
+                            \[Eta][ 2]], 
+                          sv$v[ 6]]], "]"],
+                    Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+                SequenceForm[ "[", 
+                  VTimes[ 
+                    \[Zeta][ 1], 
+                    \[Eta][ 2]], ",\[ThinSpace]", 
+                  Act[ 
+                    VTimes[ 
+                      \[Zeta][ 2], 
+                      \[Eta][ 3]], 
+                    Act[ 
+                      VTimes[ 
+                        \[Zeta][ 2], 
+                        \[Zeta][ 3]], 
+                      Act[ 
+                        VTimes[ 
+                          \[Zeta][ 1], 
+                          \[Eta][ 2]], 
+                        sv$v[ 6]]]], "]"],
+                Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 2], 
+                \[Zeta][ 3]], ",\[ThinSpace]", 
+              Act[ 
+                VTimes[ 
+                  \[Zeta][ 1], 
+                  \[Eta][ 2]], 
+                Act[ 
+                  VTimes[ 
+                    \[Zeta][ 2], 
+                    \[Eta][ 3]], 
+                  Act[ 
+                    VTimes[ 
+                      \[Zeta][ 2], 
+                      \[Zeta][ 3]], 
+                    Act[ 
+                      VTimes[ 
+                        \[Zeta][ 1], 
+                        \[Eta][ 2]], 
+                      sv$v[ 6]]]]], "]"],
+            Editable->False], "\[Equal]", "0"}], ",", 
+        RowBox[{
+          RowBox[{"-", "\[ThinSpace]", 
+            InterpretationBox[
+              
+              RowBox[{"\<\"[\"\>", 
+                "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\), 
+                "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                "\[InvisibleSpace]", 
+                InterpretationBox[
+                  
+                  RowBox[{"\<\"[\"\>", 
+                    "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Eta]\_3\), 
+                    "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                    "\[InvisibleSpace]", 
+                    InterpretationBox[
+                      
+                      RowBox[{"\<\"[\"\>", 
+                        "\[InvisibleSpace]", \
+\(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\), 
+                        "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                        "\[InvisibleSpace]", 
+                        
+                        InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_1\
+\[ThinSpace]\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_\
+6\[InvisibleSpace]"]"\),
+                          SequenceForm[ "[", 
+                            VTimes[ 
+                              \[Zeta][ 1], 
+                              \[Eta][ 2]], ",\[ThinSpace]", 
+                            sv$v[ 6], "]"],
+                          Editable->False], 
+                        "\[InvisibleSpace]", "\<\"]\"\>"}],
+                      SequenceForm[ "[", 
+                        VTimes[ 
+                          \[Zeta][ 2], 
+                          \[Zeta][ 3]], ",\[ThinSpace]", 
+                        Act[ 
+                          VTimes[ 
+                            \[Zeta][ 1], 
+                            \[Eta][ 2]], 
+                          sv$v[ 6]], "]"],
+                      Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+                  SequenceForm[ "[", 
+                    VTimes[ 
+                      \[Zeta][ 2], 
+                      \[Eta][ 3]], ",\[ThinSpace]", 
+                    Act[ 
+                      VTimes[ 
+                        \[Zeta][ 2], 
+                        \[Zeta][ 3]], 
+                      Act[ 
+                        VTimes[ 
+                          \[Zeta][ 1], 
+                          \[Eta][ 2]], 
+                        sv$v[ 6]]], "]"],
+                  Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+              SequenceForm[ "[", 
+                VTimes[ 
+                  \[Zeta][ 2], 
+                  \[Zeta][ 3]], ",\[ThinSpace]", 
+                Act[ 
+                  VTimes[ 
+                    \[Zeta][ 2], 
+                    \[Eta][ 3]], 
+                  Act[ 
+                    VTimes[ 
+                      \[Zeta][ 2], 
+                      \[Zeta][ 3]], 
+                    Act[ 
+                      VTimes[ 
+                        \[Zeta][ 1], 
+                        \[Eta][ 2]], 
+                      sv$v[ 6]]]], "]"],
+              Editable->False]}], "\[Equal]", "0"}], ",", 
+        RowBox[{
+          InterpretationBox[
+            RowBox[{"\<\"[\"\>", 
+              "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\), 
+              "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+              "\[InvisibleSpace]", 
+              InterpretationBox[
+                
+                RowBox[{"\<\"[\"\>", 
+                  "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\), 
+                  "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                  "\[InvisibleSpace]", 
+                  
+                  InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_1\
+\[ThinSpace]\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_\
+6\[InvisibleSpace]"]"\),
+                    SequenceForm[ "[", 
+                      VTimes[ 
+                        \[Zeta][ 1], 
+                        \[Eta][ 2]], ",\[ThinSpace]", 
+                      sv$v[ 6], "]"],
+                    Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+                SequenceForm[ "[", 
+                  VTimes[ 
+                    \[Zeta][ 2], 
+                    \[Zeta][ 3]], ",\[ThinSpace]", 
+                  Act[ 
+                    VTimes[ 
+                      \[Zeta][ 1], 
+                      \[Eta][ 2]], 
+                    sv$v[ 6]], "]"],
+                Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 2], 
+                \[Zeta][ 3]], ",\[ThinSpace]", 
+              Act[ 
+                VTimes[ 
+                  \[Zeta][ 2], 
+                  \[Zeta][ 3]], 
+                Act[ 
+                  VTimes[ 
+                    \[Zeta][ 1], 
+                    \[Eta][ 2]], 
+                  sv$v[ 6]]], "]"],
+            Editable->False], "\[Equal]", "0"}], ",", 
+        RowBox[{
+          InterpretationBox[
+            
+            RowBox[{"\<\"[\"\>", 
+              "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\), 
+              "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+              "\[InvisibleSpace]", 
+              InterpretationBox[
+                
+                RowBox[{"\<\"[\"\>", 
+                  "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Eta]\_3\), 
+                  "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                  "\[InvisibleSpace]", 
+                  
+                  InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_1\
+\[ThinSpace]\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_\
+6\[InvisibleSpace]"]"\),
+                    SequenceForm[ "[", 
+                      VTimes[ 
+                        \[Zeta][ 1], 
+                        \[Eta][ 2]], ",\[ThinSpace]", 
+                      sv$v[ 6], "]"],
+                    Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+                SequenceForm[ "[", 
+                  VTimes[ 
+                    \[Zeta][ 2], 
+                    \[Eta][ 3]], ",\[ThinSpace]", 
+                  Act[ 
+                    VTimes[ 
+                      \[Zeta][ 1], 
+                      \[Eta][ 2]], 
+                    sv$v[ 6]], "]"],
+                Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 2], 
+                \[Zeta][ 3]], ",\[ThinSpace]", 
+              Act[ 
+                VTimes[ 
+                  \[Zeta][ 2], 
+                  \[Eta][ 3]], 
+                Act[ 
+                  VTimes[ 
+                    \[Zeta][ 1], 
+                    \[Eta][ 2]], 
+                  sv$v[ 6]]], "]"],
+            Editable->False], "\[Equal]", 
+          InterpretationBox[
+            
+            RowBox[{"\<\"[\"\>", 
+              "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Eta]\_3\), 
+              "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+              "\[InvisibleSpace]", 
+              InterpretationBox[
+                
+                RowBox[{"\<\"[\"\>", 
+                  "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\), 
+                  "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                  "\[InvisibleSpace]", 
+                  
+                  InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_1\
+\[ThinSpace]\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_\
+6\[InvisibleSpace]"]"\),
+                    SequenceForm[ "[", 
+                      VTimes[ 
+                        \[Zeta][ 1], 
+                        \[Eta][ 2]], ",\[ThinSpace]", 
+                      sv$v[ 6], "]"],
+                    Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+                SequenceForm[ "[", 
+                  VTimes[ 
+                    \[Zeta][ 2], 
+                    \[Zeta][ 3]], ",\[ThinSpace]", 
+                  Act[ 
+                    VTimes[ 
+                      \[Zeta][ 1], 
+                      \[Eta][ 2]], 
+                    sv$v[ 6]], "]"],
+                Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 2], 
+                \[Eta][ 3]], ",\[ThinSpace]", 
+              Act[ 
+                VTimes[ 
+                  \[Zeta][ 2], 
+                  \[Zeta][ 3]], 
+                Act[ 
+                  VTimes[ 
+                    \[Zeta][ 1], 
+                    \[Eta][ 2]], 
+                  sv$v[ 6]]], "]"],
+            Editable->False]}], ",", 
+        RowBox[{
+          
+          InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_2\[ThinSpace]\
+\[Zeta]\_3\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_6\
+\[InvisibleSpace]"]"\),
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 2], 
+                \[Zeta][ 3]], ",\[ThinSpace]", 
+              sv$v[ 6], "]"],
+            Editable->False], "\[Equal]", "0"}], ",", 
+        RowBox[{
+          InterpretationBox[
+            
+            RowBox[{"\<\"[\"\>", 
+              "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Eta]\_3\), 
+              "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+              "\[InvisibleSpace]", 
+              InterpretationBox[
+                
+                RowBox[{"\<\"[\"\>", 
+                  "\[InvisibleSpace]", \(\[Zeta]\_1\[ThinSpace]\[Eta]\_2\), 
+                  "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                  "\[InvisibleSpace]", 
+                  InterpretationBox[
+                    
+                    RowBox[{"\<\"[\"\>", 
+                      "\[InvisibleSpace]", \
+\(\[Zeta]\_2\[ThinSpace]\[Eta]\_3\), 
+                      "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                      "\[InvisibleSpace]", 
+                      InterpretationBox[
+                        
+                        RowBox[{"\<\"[\"\>", 
+                          "\[InvisibleSpace]", \
+\(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\), 
+                          "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                          "\[InvisibleSpace]", 
+                          
+                          InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_\
+1\[ThinSpace]\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_\
+6\[InvisibleSpace]"]"\),
+                            SequenceForm[ "[", 
+                              VTimes[ 
+                                \[Zeta][ 1], 
+                                \[Eta][ 2]], ",\[ThinSpace]", 
+                              sv$v[ 6], "]"],
+                            Editable->False], 
+                          "\[InvisibleSpace]", "\<\"]\"\>"}],
+                        SequenceForm[ "[", 
+                          VTimes[ 
+                            \[Zeta][ 2], 
+                            \[Zeta][ 3]], ",\[ThinSpace]", 
+                          Act[ 
+                            VTimes[ 
+                              \[Zeta][ 1], 
+                              \[Eta][ 2]], 
+                            sv$v[ 6]], "]"],
+                        Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+                    SequenceForm[ "[", 
+                      VTimes[ 
+                        \[Zeta][ 2], 
+                        \[Eta][ 3]], ",\[ThinSpace]", 
+                      Act[ 
+                        VTimes[ 
+                          \[Zeta][ 2], 
+                          \[Zeta][ 3]], 
+                        Act[ 
+                          VTimes[ 
+                            \[Zeta][ 1], 
+                            \[Eta][ 2]], 
+                          sv$v[ 6]]], "]"],
+                    Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+                SequenceForm[ "[", 
+                  VTimes[ 
+                    \[Zeta][ 1], 
+                    \[Eta][ 2]], ",\[ThinSpace]", 
+                  Act[ 
+                    VTimes[ 
+                      \[Zeta][ 2], 
+                      \[Eta][ 3]], 
+                    Act[ 
+                      VTimes[ 
+                        \[Zeta][ 2], 
+                        \[Zeta][ 3]], 
+                      Act[ 
+                        VTimes[ 
+                          \[Zeta][ 1], 
+                          \[Eta][ 2]], 
+                        sv$v[ 6]]]], "]"],
+                Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 2], 
+                \[Eta][ 3]], ",\[ThinSpace]", 
+              Act[ 
+                VTimes[ 
+                  \[Zeta][ 1], 
+                  \[Eta][ 2]], 
+                Act[ 
+                  VTimes[ 
+                    \[Zeta][ 2], 
+                    \[Eta][ 3]], 
+                  Act[ 
+                    VTimes[ 
+                      \[Zeta][ 2], 
+                      \[Zeta][ 3]], 
+                    Act[ 
+                      VTimes[ 
+                        \[Zeta][ 1], 
+                        \[Eta][ 2]], 
+                      sv$v[ 6]]]]], "]"],
+            Editable->False], "\[Equal]", "0"}], ",", 
+        RowBox[{
+          RowBox[{"-", "\[ThinSpace]", 
+            InterpretationBox[
+              RowBox[{"\<\"[\"\>", 
+                "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Eta]\_3\), 
+                "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                "\[InvisibleSpace]", 
+                InterpretationBox[
+                  
+                  RowBox[{"\<\"[\"\>", 
+                    "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Eta]\_3\), 
+                    "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                    "\[InvisibleSpace]", 
+                    InterpretationBox[
+                      
+                      RowBox[{"\<\"[\"\>", 
+                        "\[InvisibleSpace]", \
+\(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\), 
+                        "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                        "\[InvisibleSpace]", 
+                        
+                        InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_1\
+\[ThinSpace]\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_\
+6\[InvisibleSpace]"]"\),
+                          SequenceForm[ "[", 
+                            VTimes[ 
+                              \[Zeta][ 1], 
+                              \[Eta][ 2]], ",\[ThinSpace]", 
+                            sv$v[ 6], "]"],
+                          Editable->False], 
+                        "\[InvisibleSpace]", "\<\"]\"\>"}],
+                      SequenceForm[ "[", 
+                        VTimes[ 
+                          \[Zeta][ 2], 
+                          \[Zeta][ 3]], ",\[ThinSpace]", 
+                        Act[ 
+                          VTimes[ 
+                            \[Zeta][ 1], 
+                            \[Eta][ 2]], 
+                          sv$v[ 6]], "]"],
+                      Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+                  SequenceForm[ "[", 
+                    VTimes[ 
+                      \[Zeta][ 2], 
+                      \[Eta][ 3]], ",\[ThinSpace]", 
+                    Act[ 
+                      VTimes[ 
+                        \[Zeta][ 2], 
+                        \[Zeta][ 3]], 
+                      Act[ 
+                        VTimes[ 
+                          \[Zeta][ 1], 
+                          \[Eta][ 2]], 
+                        sv$v[ 6]]], "]"],
+                  Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+              SequenceForm[ "[", 
+                VTimes[ 
+                  \[Zeta][ 2], 
+                  \[Eta][ 3]], ",\[ThinSpace]", 
+                Act[ 
+                  VTimes[ 
+                    \[Zeta][ 2], 
+                    \[Eta][ 3]], 
+                  Act[ 
+                    VTimes[ 
+                      \[Zeta][ 2], 
+                      \[Zeta][ 3]], 
+                    Act[ 
+                      VTimes[ 
+                        \[Zeta][ 1], 
+                        \[Eta][ 2]], 
+                      sv$v[ 6]]]], "]"],
+              Editable->False]}], "\[Equal]", "0"}], ",", 
+        RowBox[{
+          InterpretationBox[
+            
+            RowBox[{"\<\"[\"\>", 
+              "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Eta]\_3\), 
+              "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+              "\[InvisibleSpace]", 
+              InterpretationBox[
+                
+                RowBox[{"\<\"[\"\>", 
+                  "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Eta]\_3\), 
+                  "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                  "\[InvisibleSpace]", 
+                  
+                  InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_1\
+\[ThinSpace]\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_\
+6\[InvisibleSpace]"]"\),
+                    SequenceForm[ "[", 
+                      VTimes[ 
+                        \[Zeta][ 1], 
+                        \[Eta][ 2]], ",\[ThinSpace]", 
+                      sv$v[ 6], "]"],
+                    Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+                SequenceForm[ "[", 
+                  VTimes[ 
+                    \[Zeta][ 2], 
+                    \[Eta][ 3]], ",\[ThinSpace]", 
+                  Act[ 
+                    VTimes[ 
+                      \[Zeta][ 1], 
+                      \[Eta][ 2]], 
+                    sv$v[ 6]], "]"],
+                Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 2], 
+                \[Eta][ 3]], ",\[ThinSpace]", 
+              Act[ 
+                VTimes[ 
+                  \[Zeta][ 2], 
+                  \[Eta][ 3]], 
+                Act[ 
+                  VTimes[ 
+                    \[Zeta][ 1], 
+                    \[Eta][ 2]], 
+                  sv$v[ 6]]], "]"],
+            Editable->False], "\[Equal]", "0"}], ",", 
+        RowBox[{
+          
+          InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_2\[ThinSpace]\
+\[Eta]\_3\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_6\
+\[InvisibleSpace]"]"\),
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 2], 
+                \[Eta][ 3]], ",\[ThinSpace]", 
+              sv$v[ 6], "]"],
+            Editable->False], "\[Equal]", "0"}]}], "}"}]], "Print"],
+
+Cell["\<\
+The candidate to general highest vector in I(V) after partial solving of \
+highness equations:\
+\>", "Text",
+  GeneratedCell->True,
+  CellAutoOverwrite->True],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{\(\[Eta]\_1\), "**", 
+        RowBox[{"(", 
+          InterpretationBox[
+            
+            RowBox[{"\<\"[\"\>", 
+              "\[InvisibleSpace]", \(\[Zeta]\_1\[ThinSpace]\[Eta]\_2\), 
+              "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+              "\[InvisibleSpace]", 
+              InterpretationBox[
+                
+                RowBox[{"\<\"[\"\>", 
+                  "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Eta]\_3\), 
+                  "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                  "\[InvisibleSpace]", 
+                  InterpretationBox[
+                    
+                    RowBox[{"\<\"[\"\>", 
+                      "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\
+\), "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", 
+                      
+                      InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_1\
+\[ThinSpace]\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_\
+6\[InvisibleSpace]"]"\),
+                        SequenceForm[ "[", 
+                          VTimes[ 
+                            \[Zeta][ 1], 
+                            \[Eta][ 2]], ",\[ThinSpace]", 
+                          sv$v[ 6], "]"],
+                        Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+                    SequenceForm[ "[", 
+                      VTimes[ 
+                        \[Zeta][ 2], 
+                        \[Zeta][ 3]], ",\[ThinSpace]", 
+                      Act[ 
+                        VTimes[ 
+                          \[Zeta][ 1], 
+                          \[Eta][ 2]], 
+                        sv$v[ 6]], "]"],
+                    Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+                SequenceForm[ "[", 
+                  VTimes[ 
+                    \[Zeta][ 2], 
+                    \[Eta][ 3]], ",\[ThinSpace]", 
+                  Act[ 
+                    VTimes[ 
+                      \[Zeta][ 2], 
+                      \[Zeta][ 3]], 
+                    Act[ 
+                      VTimes[ 
+                        \[Zeta][ 1], 
+                        \[Eta][ 2]], 
+                      sv$v[ 6]]], "]"],
+                Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 1], 
+                \[Eta][ 2]], ",\[ThinSpace]", 
+              Act[ 
+                VTimes[ 
+                  \[Zeta][ 2], 
+                  \[Eta][ 3]], 
+                Act[ 
+                  VTimes[ 
+                    \[Zeta][ 2], 
+                    \[Zeta][ 3]], 
+                  Act[ 
+                    VTimes[ 
+                      \[Zeta][ 1], 
+                      \[Eta][ 2]], 
+                    sv$v[ 6]]]], "]"],
+            Editable->False], ")"}]}], "+", 
+      RowBox[{\(\[Eta]\_2\), "**", 
+        RowBox[{"(", 
+          RowBox[{"-", "\[ThinSpace]", 
+            InterpretationBox[
+              
+              RowBox[{"\<\"[\"\>", 
+                "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Eta]\_3\), 
+                "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                "\[InvisibleSpace]", 
+                InterpretationBox[
+                  
+                  RowBox[{"\<\"[\"\>", 
+                    "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\),
+                     "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                    "\[InvisibleSpace]", 
+                    
+                    InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_1\
+\[ThinSpace]\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_\
+6\[InvisibleSpace]"]"\),
+                      SequenceForm[ "[", 
+                        VTimes[ 
+                          \[Zeta][ 1], 
+                          \[Eta][ 2]], ",\[ThinSpace]", 
+                        sv$v[ 6], "]"],
+                      Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+                  SequenceForm[ "[", 
+                    VTimes[ 
+                      \[Zeta][ 2], 
+                      \[Zeta][ 3]], ",\[ThinSpace]", 
+                    Act[ 
+                      VTimes[ 
+                        \[Zeta][ 1], 
+                        \[Eta][ 2]], 
+                      sv$v[ 6]], "]"],
+                  Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+              SequenceForm[ "[", 
+                VTimes[ 
+                  \[Zeta][ 2], 
+                  \[Eta][ 3]], ",\[ThinSpace]", 
+                Act[ 
+                  VTimes[ 
+                    \[Zeta][ 2], 
+                    \[Zeta][ 3]], 
+                  Act[ 
+                    VTimes[ 
+                      \[Zeta][ 1], 
+                      \[Eta][ 2]], 
+                    sv$v[ 6]]], "]"],
+              Editable->False]}], ")"}]}], "+", 
+      RowBox[{\(\[Eta]\_3\), "**", 
+        RowBox[{"(", 
+          InterpretationBox[
+            
+            RowBox[{"\<\"[\"\>", 
+              "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Zeta]\_3\), 
+              "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+              "\[InvisibleSpace]", 
+              
+              InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_1\[ThinSpace]\
+\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_6\
+\[InvisibleSpace]"]"\),
+                SequenceForm[ "[", 
+                  VTimes[ 
+                    \[Zeta][ 1], 
+                    \[Eta][ 2]], ",\[ThinSpace]", 
+                  sv$v[ 6], "]"],
+                Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 2], 
+                \[Zeta][ 3]], ",\[ThinSpace]", 
+              Act[ 
+                VTimes[ 
+                  \[Zeta][ 1], 
+                  \[Eta][ 2]], 
+                sv$v[ 6]], "]"],
+            Editable->False], ")"}]}], "+", 
+      RowBox[{\(\[Zeta]\_3\), "**", 
+        RowBox[{"(", 
+          InterpretationBox[
+            
+            RowBox[{"\<\"[\"\>", 
+              "\[InvisibleSpace]", \(\[Zeta]\_2\[ThinSpace]\[Eta]\_3\), 
+              "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+              "\[InvisibleSpace]", 
+              
+              InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_1\[ThinSpace]\
+\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_6\
+\[InvisibleSpace]"]"\),
+                SequenceForm[ "[", 
+                  VTimes[ 
+                    \[Zeta][ 1], 
+                    \[Eta][ 2]], ",\[ThinSpace]", 
+                  sv$v[ 6], "]"],
+                Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 2], 
+                \[Eta][ 3]], ",\[ThinSpace]", 
+              Act[ 
+                VTimes[ 
+                  \[Zeta][ 1], 
+                  \[Eta][ 2]], 
+                sv$v[ 6]], "]"],
+            Editable->False], ")"}]}], "+", 
+      RowBox[{\(\[Zeta]\_2\), "**", 
+        RowBox[{"(", 
+          
+          InterpretationBox[\("["\[InvisibleSpace]\(\[Zeta]\_1\[ThinSpace]\
+\[Eta]\_2\)\[InvisibleSpace]",\[ThinSpace]"\[InvisibleSpace]"v"\_6\
+\[InvisibleSpace]"]"\),
+            SequenceForm[ "[", 
+              VTimes[ 
+                \[Zeta][ 1], 
+                \[Eta][ 2]], ",\[ThinSpace]", 
+              sv$v[ 6], "]"],
+            Editable->False], ")"}]}], 
+      "+", \(\[Zeta]\_1 ** "v"\_6\)}]], "Print"],
+
+Cell[TextData[{
+  "These highest singular vector of indicated weights are possible (where ",
+  Cell[BoxData[
+      \(TraditionalForm\`v\_\[Lambda]\)]],
+  " is highest vector in V and \[Lambda] is its weight):"
+}], "Text",
+  GeneratedCell->True,
+  CellAutoOverwrite->True],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\("\[Lambda]+"\[InvisibleSpace]{\(-1\), \(-1\), 0, 
+                0}\[InvisibleSpace]": "\[InvisibleSpace]\[Eta]\_1 ** 
+                "v"\_"\[Lambda]"\[InvisibleSpace]"+..."\)},
+          {\("\[Lambda]+"\[InvisibleSpace]{\(-1\), 0, \(-1\), 
+                0}\[InvisibleSpace]": "\[InvisibleSpace]\[Eta]\_2 ** 
+                "v"\_"\[Lambda]"\[InvisibleSpace]"+..."\)},
+          {\("\[Lambda]+"\[InvisibleSpace]{\(-1\), 0, 
+                0, \(-1\)}\[InvisibleSpace]": "\[InvisibleSpace]\[Eta]\_3 ** 
+                "v"\_"\[Lambda]"\[InvisibleSpace]"+..."\)},
+          {\("\[Lambda]+"\[InvisibleSpace]{\(-1\), 0, 0, 
+                1}\[InvisibleSpace]": "\[InvisibleSpace]\[Zeta]\_3 ** 
+                "v"\_"\[Lambda]"\[InvisibleSpace]"+..."\)},
+          {\("\[Lambda]+"\[InvisibleSpace]{\(-1\), 0, 1, 
+                0}\[InvisibleSpace]": "\[InvisibleSpace]\[Zeta]\_2 ** 
+                "v"\_"\[Lambda]"\[InvisibleSpace]"+..."\)},
+          {\("\[Lambda]+"\[InvisibleSpace]{\(-1\), 1, 0, 
+                0}\[InvisibleSpace]": "\[InvisibleSpace]\[Zeta]\_1 ** 
+                "v"\_"\[Lambda]"\[InvisibleSpace]"+..."\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        SequenceForm[ "\[Lambda]+", {-1, -1, 0, 0}, ": ", 
+          NonCommutativeMultiply[ 
+            \[Eta][ 1], 
+            sv$v[ "\[Lambda]"]], "+..."], 
+        SequenceForm[ "\[Lambda]+", {-1, 0, -1, 0}, ": ", 
+          NonCommutativeMultiply[ 
+            \[Eta][ 2], 
+            sv$v[ "\[Lambda]"]], "+..."], 
+        SequenceForm[ "\[Lambda]+", {-1, 0, 0, -1}, ": ", 
+          NonCommutativeMultiply[ 
+            \[Eta][ 3], 
+            sv$v[ "\[Lambda]"]], "+..."], 
+        SequenceForm[ "\[Lambda]+", {-1, 0, 0, 1}, ": ", 
+          NonCommutativeMultiply[ 
+            \[Zeta][ 3], 
+            sv$v[ "\[Lambda]"]], "+..."], 
+        SequenceForm[ "\[Lambda]+", {-1, 0, 1, 0}, ": ", 
+          NonCommutativeMultiply[ 
+            \[Zeta][ 2], 
+            sv$v[ "\[Lambda]"]], "+..."], 
+        SequenceForm[ "\[Lambda]+", {-1, 1, 0, 0}, ": ", 
+          NonCommutativeMultiply[ 
+            \[Zeta][ 1], 
+            sv$v[ "\[Lambda]"]], "+..."]}],
+      Editable->False]], "Print"],
+
+Cell[TextData[{
+  "Now we should find all vectors in irreduceable modules ",
+  Cell[BoxData[
+      \(TraditionalForm\`V\^\[Lambda]\)]],
+  " that satisfy the equations on ",
+  Cell[BoxData[
+      \(TraditionalForm\`v\_6\)]],
+  ". To solve the problem for general \[Lambda], we will regard Verma modules \
+",
+  Cell[BoxData[
+      \(TraditionalForm\`M\^\[Lambda]\)]],
+  " instead of irreduceable modules ",
+  Cell[BoxData[
+      \(TraditionalForm\`V\^\[Lambda]\)]],
+  " and replace \"is equal to 0\" in equation by \"lies in the maximal \
+submodule\"."
+}], "Text"],
+
+Cell["\<\
+Now we should regard each of 6 cases separately. This text contains only for \
+few cases. See the notebook k16-kas-sing.nb in the the folder Examples for \
+full text.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  "Weight ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Lambda]\&_ + {\(-1\), 1, 0, 0}\)]]
+}], "Subsubsection"],
+
+Cell[TextData[{
+  "First we build the general vector of the given weight in ",
+  Cell[BoxData[
+      \(TraditionalForm\`M\^\[Lambda]\)]],
+  ". The basis of ",
+  Cell[BoxData[
+      \(TraditionalForm\`M\^\[Lambda]\)]],
+  " is denoted by ",
+  Cell[BoxData[
+      \(TraditionalForm\`{m\_1, m\_2,  ... }\)]],
+  " where ",
+  Cell[BoxData[
+      \(TraditionalForm\`m\_1\)]],
+  " is the highest vector."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svEq[{\(-1\), 1, 0, 0}]\)], "Input"],
+
+Cell[BoxData[
+    \({"v"\_6 \[Rule] c\_\(6, 1\)\[ThinSpace]m\_1}\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "The result is the substitution rule that transform the \"general\" vector \
+in ",
+  Cell[BoxData[
+      \(TraditionalForm\`V\)]],
+  " or ",
+  Cell[BoxData[
+      \(TraditionalForm\`I(V)\)]],
+  " and a \"general\" weight ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Lambda]\&_ = \((\[Lambda]\_1,  ... , \[Lambda]\_4)\
+\)\)]],
+  " to a more concrete vector in ",
+  Cell[BoxData[
+      \(TraditionalForm\`M\^\[Lambda]\)]],
+  " or ",
+  Cell[BoxData[
+      \(TraditionalForm\`I(M\^\[Lambda])\)]],
+  " and more concrete weight. During the solution, we will concretize the \
+replacement rule so that the result will satisfy the equation we are solwing. \
+At the end, we will get the highest singular vector and the highest weight \
+\[Lambda] of the module ",
+  Cell[BoxData[
+      \(TraditionalForm\`I(V\^\[Lambda])\)]],
+  " where this vector exists."
+}], "Text"],
+
+Cell[TextData[{
+  "Now we can see that the vector ",
+  Cell[BoxData[
+      \(TraditionalForm\`v\_6\)]],
+  " is proportional to the vector ",
+  Cell[BoxData[
+      \(TraditionalForm\`m\_1\)]],
+  ", the highest vector in the Verma module ",
+  Cell[BoxData[
+      \(TraditionalForm\`M\^\[Lambda]\)]],
+  ". We should determine for which \[Lambda] the vector is highest and \
+singular. First we apply the condition of highness:"
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svH\)], "Input"],
+
+Cell[BoxData[
+    \(True\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+No condition. The vector is highest for any \[Lambda]. Now the try the \
+conditions of singularity. We have 2 conditions for algebra \[GothicK]\
+\[GothicA]\[GothicS] and one more for \[GothicK](1|6):\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svZ[1]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] \[Lambda]\_1 - \[Lambda]\_2\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, 
+          Plus[ 
+            \[Lambda][ 1], 
+            Times[ -1, 
+              \[Lambda][ 2]]]]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "All our conditions involve the weight marks ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Lambda]\_i\)]],
+  " and the undeterminate coefficients ",
+  Cell[BoxData[
+      \(TraditionalForm\`c\_\(i, j\)\)]],
+  ". The conditions are linear with respect to ",
+  Cell[BoxData[
+      \(TraditionalForm\`c\_\(i, j\)\)]],
+  " and rational with respect to ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Lambda]\_i\)]],
+  ". In the simple case. ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " can solve the whole equation system at once, but may fail in more \
+complicated case. Therefore we use the following semi-automatic strategy."
+}], "Text"],
+
+Cell[TextData[{
+  "First we try to rewrite every condition as two alternatives: the first a \
+polynomial relation between ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Lambda]\_i\)]],
+  " and the secons one is an equation on ",
+  Cell[BoxData[
+      \(TraditionalForm\`c\_\(i, j\)\)]],
+  " with parameters ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Lambda]\_i\)]],
+  " that have a solution polynomial in ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Lambda]\_i\)]],
+  ". Either of the two alternatives may be also ",
+  StyleBox["False", "Program"],
+  ", that means that there is only one alternative. Than we try to solve each \
+alternative separately, making \"branches\" in the solution process."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svSolve\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] {\[Lambda]\_1 - \[Lambda]\_2 \[Equal] 0, False}\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, {
+          Equal[ 
+            Plus[ 
+              \[Lambda][ 1], 
+              Times[ -1, 
+                \[Lambda][ 2]]], 0], False}]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "Here \"1\" is the equation number and the list ",
+  Cell[BoxData[
+      \(TraditionalForm\`{ ... }\)]],
+  " contains the two alternative condition. In this case the second condition \
+is ",
+  StyleBox["False", "Program"],
+  ", so the single condition is \[Lambda][1]=\[Lambda][2]. Add this solution \
+list of replacement rules:"
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svSub[\[Lambda]\_1 \[Rule] \[Lambda]\_2]\)], "Input"],
+
+Cell[BoxData[
+    \({"v"\_6 \[Rule] 
+        c\_\(6, 1\)\[ThinSpace]m\_1, \[Lambda]\_1 \[Rule] \[Lambda]\_2}\)], \
+"Output"]
+}, Open  ]],
+
+Cell["Now we do the same with the second condition of singularity:", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svZ[2]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] \[Lambda]\_3 - \[Lambda]\_4\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, 
+          Plus[ 
+            \[Lambda][ 3], 
+            Times[ -1, 
+              \[Lambda][ 4]]]]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svSolve\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] {\[Lambda]\_3 - \[Lambda]\_4 \[Equal] 0, False}\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, {
+          Equal[ 
+            Plus[ 
+              \[Lambda][ 3], 
+              Times[ -1, 
+                \[Lambda][ 4]]], 0], False}]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svSub[\[Lambda]\_3 \[Rule] \[Lambda]\_4]\)], "Input"],
+
+Cell[BoxData[
+    \({"v"\_6 \[Rule] 
+        c\_\(6, 1\)\[ThinSpace]m\_1, \[Lambda]\_1 \[Rule] \[Lambda]\_2, \
+\[Lambda]\_3 \[Rule] \[Lambda]\_4}\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+Here is the solution (the highest singular vector in case of algebra \
+\[GothicK]\[GothicA]\[GothicS]):\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(svRep[\[Lambda]\&_]\), "\[IndentingNewLine]", 
+    \(svResult // svImg\)}], "Input"],
+
+Cell[BoxData[
+    \({\[Lambda]\_2, \[Lambda]\_2, \[Lambda]\_4, \[Lambda]\_4}\)], "Output"],
+
+Cell[BoxData[
+    \(\[Zeta]\_1 ** m\_1\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "So ",
+  Cell[BoxData[
+      \(TraditionalForm\`\(\[Zeta]\_1\) m\_1\)]],
+  " is highest and singular if ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Lambda]\&_ = \((k, k, l, l)\)\)]],
+  ".\nNow apply the last condition of singularity (to find the solution for \
+algebra \[GothicK](1|6)):"
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svZ[3]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] 2\ \[Lambda]\_4\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, 
+          Times[ 2, 
+            \[Lambda][ 4]]]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svSolve\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] {2\ \[Lambda]\_4 \[Equal] 0, False}\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, {
+          Equal[ 
+            Times[ 2, 
+              \[Lambda][ 4]], 0], False}]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svSub[\[Lambda]\_4 \[Rule] 0]\)], "Input"],
+
+Cell[BoxData[
+    \({"v"\_6 \[Rule] 
+        c\_\(6, 1\)\[ThinSpace]m\_1, \[Lambda]\_1 \[Rule] \[Lambda]\_2, \
+\[Lambda]\_3 \[Rule] 0, \[Lambda]\_4 \[Rule] 0}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svRep[\[Lambda]\&_]\)], "Input"],
+
+Cell[BoxData[
+    \({\[Lambda]\_2, \[Lambda]\_2, 0, 0}\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "S",
+  "o ",
+  Cell[BoxData[
+      \(TraditionalForm\`\(\[Zeta]\_1\) m\_1\)]],
+  " is highest and singular if ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Lambda]\&_ = \((k, k, 0, 0)\)\)]],
+  "."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  "Weight ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Lambda]\&_ + {\(-1\), 0, 1, 0}\)]]
+}], "Subsubsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svEq[{\(-1\), 0, 1, 0}]\)], "Input"],
+
+Cell[BoxData[
+    \({"v"\_6 \[Rule] c\_\(6, 1\)\[ThinSpace]m\_2}\)], "Output"]
+}, Open  ]],
+
+Cell["First we apply the condition of highness:", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svH\)], "Input"],
+
+Cell[BoxData[
+    \(True\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+No condition. The vector is highest for any \[Lambda]. Now the try the \
+condition of singularity. \
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svZ[1]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] 1 + \[Lambda]\_1 - \[Lambda]\_3\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, 
+          Plus[ 1, 
+            \[Lambda][ 1], 
+            Times[ -1, 
+              \[Lambda][ 3]]]]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svSolve\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] {1 + \[Lambda]\_1 - \[Lambda]\_3 \[Equal] 0, 
+                False}\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        Colon[ 1, {
+          Equal[ 
+            Plus[ 1, 
+              \[Lambda][ 1], 
+              Times[ -1, 
+                \[Lambda][ 3]]], 0], False}]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svSub[\[Lambda]\_3 \[Rule] 1 + \[Lambda]\_1]\)], "Input"],
+
+Cell[BoxData[
+    \({"v"\_6 \[Rule] c\_\(6, 1\)\[ThinSpace]m\_2, \[Lambda]\_3 \[Rule] 
+        1 + \[Lambda]\_1}\)], "Output"]
+}, Open  ]],
+
+Cell["Now we do the same with the second condition of singularity:", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svZ[2]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] \[Lambda]\_1 - \[Lambda]\_2\)},
+          {\(2 \[Colon] \(-\((\[Lambda]\_1 - \[Lambda]\_2)\)\)\ \
+\((\[Lambda]\_2 - \[Lambda]\_4)\)\)},
+          {\(3 \[Colon] 1 + \[Lambda]\_1 - \[Lambda]\_4\)},
+          {\(4 \[Colon] \(-1\) - \[Lambda]\_1 + \[Lambda]\_4\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, 
+          Plus[ 
+            \[Lambda][ 1], 
+            Times[ -1, 
+              \[Lambda][ 2]]]], 
+        sv`Colon[ 2, 
+          Times[ -1, 
+            Plus[ 
+              \[Lambda][ 1], 
+              Times[ -1, 
+                \[Lambda][ 2]]], 
+            Plus[ 
+              \[Lambda][ 2], 
+              Times[ -1, 
+                \[Lambda][ 4]]]]], 
+        sv`Colon[ 3, 
+          Plus[ 1, 
+            \[Lambda][ 1], 
+            Times[ -1, 
+              \[Lambda][ 4]]]], 
+        sv`Colon[ 4, 
+          Plus[ -1, 
+            Times[ -1, 
+              \[Lambda][ 1]], 
+            \[Lambda][ 4]]]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svSolve\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] {\[Lambda]\_1 - \[Lambda]\_2 \[Equal] 0, False}\)},
+          {\(2 \[Colon] {\(-\((\[Lambda]\_1 - \[Lambda]\_2)\)\)\ \((\[Lambda]\
+\_2 - \[Lambda]\_4)\) \[Equal] 0, False}\)},
+          {\(3 \[Colon] {1 + \[Lambda]\_1 - \[Lambda]\_4 \[Equal] 0, 
+                False}\)},
+          {\(4 \[Colon] {\(-1\) - \[Lambda]\_1 + \[Lambda]\_4 \[Equal] 0, 
+                False}\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        Colon[ 1, {
+          Equal[ 
+            Plus[ 
+              \[Lambda][ 1], 
+              Times[ -1, 
+                \[Lambda][ 2]]], 0], False}], 
+        Colon[ 2, {
+          Equal[ 
+            Times[ -1, 
+              Plus[ 
+                \[Lambda][ 1], 
+                Times[ -1, 
+                  \[Lambda][ 2]]], 
+              Plus[ 
+                \[Lambda][ 2], 
+                Times[ -1, 
+                  \[Lambda][ 4]]]], 0], False}], 
+        Colon[ 3, {
+          Equal[ 
+            Plus[ 1, 
+              \[Lambda][ 1], 
+              Times[ -1, 
+                \[Lambda][ 4]]], 0], False}], 
+        Colon[ 4, {
+          Equal[ 
+            Plus[ -1, 
+              Times[ -1, 
+                \[Lambda][ 1]], 
+              \[Lambda][ 4]], 0], False}]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell["\<\
+We can add two conditions and repeat svSolve to check if there are more \
+conditions:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(svSub[\[Lambda]\_2 \[Rule] \[Lambda]\_1, \[Lambda]\_4 \[Rule] 
+          1 + \[Lambda]\_1];\)\), "\n", 
+    \(\(svZ[2];\)\), "\[IndentingNewLine]", 
+    \(svSolve\)}], "Input"],
+
+Cell[BoxData[
+    \(True\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+Here is the solution (the highest singular vector in case of algebra \
+\[GothicK]\[GothicA]\[GothicS]):\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(svRep[\[Lambda]\&_]\), "\[IndentingNewLine]", 
+    \(svResult // svImg\)}], "Input"],
+
+Cell[BoxData[
+    \({\[Lambda]\_1, \[Lambda]\_1, 1 + \[Lambda]\_1, 
+      1 + \[Lambda]\_1}\)], "Output"],
+
+Cell[BoxData[
+    \(\[Zeta]\_1 ** m\_2 - \[Zeta]\_2 ** m\_1\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+Now apply the last condition of singularity (to find the solution for algebra \
+\[GothicK](1|6)):\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svZ[3]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] \(-2\)\ \((1 + \[Lambda]\_1)\)\)},
+          {\(2 \[Colon] \(-2\)\ \((1 + \[Lambda]\_1)\)\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, 
+          Times[ -2, 
+            Plus[ 1, 
+              \[Lambda][ 1]]]], 
+        sv`Colon[ 2, 
+          Times[ -2, 
+            Plus[ 1, 
+              \[Lambda][ 1]]]]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svSolve\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] {\(-2\)\ \((1 + \[Lambda]\_1)\) \[Equal] 0, 
+                False}\)},
+          {\(2 \[Colon] {\(-2\)\ \((1 + \[Lambda]\_1)\) \[Equal] 0, False}\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, {
+          Equal[ 
+            Times[ -2, 
+              Plus[ 1, 
+                \[Lambda][ 1]]], 0], False}], 
+        sv`Colon[ 2, {
+          Equal[ 
+            Times[ -2, 
+              Plus[ 1, 
+                \[Lambda][ 1]]], 0], False}]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svSub[\[Lambda]\_1 \[Rule] \(-1\)]\)], "Input"],
+
+Cell[BoxData[
+    \({"v"\_6 \[Rule] c\_\(6, 1\)\[ThinSpace]m\_2, \[Lambda]\_3 \[Rule] 
+        0, \[Lambda]\_2 \[Rule] \(-1\), \[Lambda]\_4 \[Rule] 
+        0, \[Lambda]\_1 \[Rule] \(-1\)}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svRep[\[Lambda]\&_]\)], "Input"],
+
+Cell[BoxData[
+    \({\(-1\), \(-1\), 0, 0}\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "So the vector ",
+  Cell[BoxData[
+      \(TraditionalForm\`\(\[Zeta]\_1\) m\_2 - \(\[Zeta]\_2\) m\_1\)]],
+  " is singular in case of ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Lambda]\&_ = \((k, k, k + 1, k + 1)\)\)]],
+  " for algebra \[GothicK]\[GothicA]\[GothicS] and ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Lambda]\&_ = \((\(-1\), \(-1\), 0, 0)\)\)]],
+  " for algebra \[GothicK](1|6)."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  "Weight ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Lambda]\&_ + \((\(-1\), 0, 0, 1)\)\)]]
+}], "Subsubsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svEq[{\(-1\), 0, 0, 1}]\)], "Input"],
+
+Cell[BoxData[
+    \({"v"\_6 \[Rule] 
+        c\_\(6, 1\)\[ThinSpace]m\_6 + 
+          c\_\(6, 2\)\[ThinSpace]m\_9}\)], "Output"]
+}, Open  ]],
+
+Cell["First we apply the condition of highness:", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svH\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] \((\[Lambda]\_2 - \[Lambda]\_3)\)\ \((\(-c\_\(6, \
+1\)\) + c\_\(6, 2\)\ \[Lambda]\_3 - c\_\(6, 2\)\ \[Lambda]\_4)\)\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, 
+          Times[ 
+            Plus[ 
+              \[Lambda][ 2], 
+              Times[ -1, 
+                \[Lambda][ 3]]], 
+            Plus[ 
+              Times[ -1, 
+                c[ 6, 1]], 
+              Times[ 
+                c[ 6, 2], 
+                \[Lambda][ 3]], 
+              Times[ -1, 
+                c[ 6, 2], 
+                \[Lambda][ 4]]]]]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svSolve\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] {\[Lambda]\_2 - \[Lambda]\_3 \[Equal] 
+                  0, {c\_\(6, 1\) \[Rule] 
+                    c\_\(6, 2\)\ \((\[Lambda]\_3 - \[Lambda]\_4)\)}}\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, {
+          Equal[ 
+            Plus[ 
+              \[Lambda][ 2], 
+              Times[ -1, 
+                \[Lambda][ 3]]], 0], {c[ 6, 1] -> Times[ 
+            c[ 6, 2], 
+            Plus[ 
+              \[Lambda][ 3], 
+              Times[ -1, 
+                \[Lambda][ 4]]]]}}]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "We should consider two cases. The first is ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Lambda]\_2 \[NotEqual] \[Lambda]\_3\)]],
+  " with the constrain on coeficients and the second one is ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Lambda]\_2 = \[Lambda]\_3\)]],
+  " without constrain. Use ",
+  StyleBox["svBranch", "Program"],
+  " to distinguish between cases and ",
+  StyleBox["svExcl", "Program"],
+  " to add a condition of unequality. After that we call ",
+  StyleBox["svSub", "Program"],
+  " to add the constrain to the solution and call ",
+  StyleBox["svH", "Program"],
+  " again to check the solution."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(svBranch[1];\)\), "\[IndentingNewLine]", 
+    \(\(svExcl[\[Lambda]\_2 - \[Lambda]\_3];\)\), "\[IndentingNewLine]", 
+    \(\(svSub[1];\)\), "\[IndentingNewLine]", 
+    \(svH\)}], "Input"],
+
+Cell[BoxData[
+    \(True\)], "Output"]
+}, Open  ]],
+
+Cell["Now we solve the equations of singularity", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svZ[1]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] \(-2\) - \[Lambda]\_1 + \[Lambda]\_4\)},
+          {\(2 \[Colon] \((2 + \[Lambda]\_1 - \[Lambda]\_4)\)\ \
+\((\(-\[Lambda]\_2\) + \[Lambda]\_4)\)\)},
+          {\(3 \[Colon] 2 + \[Lambda]\_1 - \[Lambda]\_4\)},
+          {\(4 \[Colon] \(-2\) - \[Lambda]\_1 + \[Lambda]\_4\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, 
+          Plus[ -2, 
+            Times[ -1, 
+              \[Lambda][ 1]], 
+            \[Lambda][ 4]]], 
+        sv`Colon[ 2, 
+          Times[ 
+            Plus[ 2, 
+              \[Lambda][ 1], 
+              Times[ -1, 
+                \[Lambda][ 4]]], 
+            Plus[ 
+              Times[ -1, 
+                \[Lambda][ 2]], 
+              \[Lambda][ 4]]]], 
+        sv`Colon[ 3, 
+          Plus[ 2, 
+            \[Lambda][ 1], 
+            Times[ -1, 
+              \[Lambda][ 4]]]], 
+        sv`Colon[ 4, 
+          Plus[ -2, 
+            Times[ -1, 
+              \[Lambda][ 1]], 
+            \[Lambda][ 4]]]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svSolve\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] {\(-2\) - \[Lambda]\_1 + \[Lambda]\_4 \[Equal] 0, 
+                False}\)},
+          {\(2 \[Colon] {\((2 + \[Lambda]\_1 - \[Lambda]\_4)\)\ \((\(-\
+\[Lambda]\_2\) + \[Lambda]\_4)\) \[Equal] 0, False}\)},
+          {\(3 \[Colon] {2 + \[Lambda]\_1 - \[Lambda]\_4 \[Equal] 0, 
+                False}\)},
+          {\(4 \[Colon] {\(-2\) - \[Lambda]\_1 + \[Lambda]\_4 \[Equal] 0, 
+                False}\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, {
+          Equal[ 
+            Plus[ -2, 
+              Times[ -1, 
+                \[Lambda][ 1]], 
+              \[Lambda][ 4]], 0], False}], 
+        sv`Colon[ 2, {
+          Equal[ 
+            Times[ 
+              Plus[ 2, 
+                \[Lambda][ 1], 
+                Times[ -1, 
+                  \[Lambda][ 4]]], 
+              Plus[ 
+                Times[ -1, 
+                  \[Lambda][ 2]], 
+                \[Lambda][ 4]]], 0], False}], 
+        sv`Colon[ 3, {
+          Equal[ 
+            Plus[ 2, 
+              \[Lambda][ 1], 
+              Times[ -1, 
+                \[Lambda][ 4]]], 0], False}], 
+        sv`Colon[ 4, {
+          Equal[ 
+            Plus[ -2, 
+              Times[ -1, 
+                \[Lambda][ 1]], 
+              \[Lambda][ 4]], 0], False}]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(svSub[\[Lambda]\_4 \[Rule] 
+          2 + \[Lambda]\_1];\)\), "\[IndentingNewLine]", 
+    \(svZ[1]\)}], "Input"],
+
+Cell[BoxData[
+    \(True\)], "Output"]
+}, Open  ]],
+
+Cell["Now we do the same with the second condition of singularity:", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svZ[2]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] \(-2\)\ \((2 + \[Lambda]\_2 - \[Lambda]\_3)\)\)},
+          {\(2 \[Colon] \((3 + \[Lambda]\_1 - \[Lambda]\_2)\)\ \((2 + \
+\[Lambda]\_2 - \[Lambda]\_3)\)\)},
+          {\(3 \[Colon] 2\ \((3 + \[Lambda]\_1 - \[Lambda]\_3)\)\)},
+          {\(4 \[Colon] \(-2\)\ \((3 + \[Lambda]\_1 - \[Lambda]\_3)\)\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, 
+          Times[ -2, 
+            Plus[ 2, 
+              \[Lambda][ 2], 
+              Times[ -1, 
+                \[Lambda][ 3]]]]], 
+        sv`Colon[ 2, 
+          Times[ 
+            Plus[ 3, 
+              \[Lambda][ 1], 
+              Times[ -1, 
+                \[Lambda][ 2]]], 
+            Plus[ 2, 
+              \[Lambda][ 2], 
+              Times[ -1, 
+                \[Lambda][ 3]]]]], 
+        sv`Colon[ 3, 
+          Times[ 2, 
+            Plus[ 3, 
+              \[Lambda][ 1], 
+              Times[ -1, 
+                \[Lambda][ 3]]]]], 
+        sv`Colon[ 4, 
+          Times[ -2, 
+            Plus[ 3, 
+              \[Lambda][ 1], 
+              Times[ -1, 
+                \[Lambda][ 3]]]]]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svSolve\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] {\(-2\)\ \((2 + \[Lambda]\_2 - \[Lambda]\_3)\) \
+\[Equal] 0, False}\)},
+          {\(2 \[Colon] {\((3 + \[Lambda]\_1 - \[Lambda]\_2)\)\ \((2 + \
+\[Lambda]\_2 - \[Lambda]\_3)\) \[Equal] 0, False}\)},
+          {\(3 \[Colon] {2\ \((3 + \[Lambda]\_1 - \[Lambda]\_3)\) \[Equal] 0, 
+                False}\)},
+          {\(4 \[Colon] {\(-2\)\ \((3 + \[Lambda]\_1 - \[Lambda]\_3)\) \
+\[Equal] 0, False}\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, {
+          Equal[ 
+            Times[ -2, 
+              Plus[ 2, 
+                \[Lambda][ 2], 
+                Times[ -1, 
+                  \[Lambda][ 3]]]], 0], False}], 
+        sv`Colon[ 2, {
+          Equal[ 
+            Times[ 
+              Plus[ 3, 
+                \[Lambda][ 1], 
+                Times[ -1, 
+                  \[Lambda][ 2]]], 
+              Plus[ 2, 
+                \[Lambda][ 2], 
+                Times[ -1, 
+                  \[Lambda][ 3]]]], 0], False}], 
+        sv`Colon[ 3, {
+          Equal[ 
+            Times[ 2, 
+              Plus[ 3, 
+                \[Lambda][ 1], 
+                Times[ -1, 
+                  \[Lambda][ 3]]]], 0], False}], 
+        sv`Colon[ 4, {
+          Equal[ 
+            Times[ -2, 
+              Plus[ 3, 
+                \[Lambda][ 1], 
+                Times[ -1, 
+                  \[Lambda][ 3]]]], 0], False}]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(svSub[\[Lambda]\_3 \[Rule] 3 + \[Lambda]\_1];\)\), "\n", 
+    \(\(svZ[2];\)\), "\[IndentingNewLine]", 
+    \(svSolve\)}], "Input"],
+
+Cell[BoxData[
+    \("No solutions"\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "One can think that we have lost the solution ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Lambda]\_3 = \[Lambda]\_2 + 2\)]],
+  ", but this solution was excluded due to the condition ",
+  Cell[BoxData[
+      \(TraditionalForm\`\[Lambda]\_2 \[NotEqual] \[Lambda]\_3\)]],
+  ".\nNow we should regard the secund case. By calling ",
+  StyleBox["svBranch[1]", "Program"],
+  " we are back at the same state as at the previous call of ",
+  StyleBox["svBranch[1]", "Program"],
+  "."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(svBranch[1];\)\), "\[IndentingNewLine]", 
+    \(\(svSub[\[Lambda]\_3 \[Rule] \[Lambda]\_2];\)\), "\[IndentingNewLine]", \
+
+    \(svH\)}], "Input"],
+
+Cell[BoxData[
+    \(True\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svZ[1]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] \(-c\_\(6, 1\)\) - c\_\(6, 1\)\ \[Lambda]\_1 - 
+                c\_\(6, 2\)\ \[Lambda]\_2 + c\_\(6, 1\)\ \[Lambda]\_4 + 
+                c\_\(6, 2\)\ \[Lambda]\_4\)},
+          {\(2 \[Colon] 
+              c\_\(6, 1\) + 2\ c\_\(6, 2\) + c\_\(6, 2\)\ \[Lambda]\_1 - 
+                c\_\(6, 2\)\ \[Lambda]\_2\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, 
+          Plus[ 
+            Times[ -1, 
+              c[ 6, 1]], 
+            Times[ -1, 
+              c[ 6, 1], 
+              \[Lambda][ 1]], 
+            Times[ -1, 
+              c[ 6, 2], 
+              \[Lambda][ 2]], 
+            Times[ 
+              c[ 6, 1], 
+              \[Lambda][ 4]], 
+            Times[ 
+              c[ 6, 2], 
+              \[Lambda][ 4]]]], 
+        sv`Colon[ 2, 
+          Plus[ 
+            c[ 6, 1], 
+            Times[ 2, 
+              c[ 6, 2]], 
+            Times[ 
+              c[ 6, 2], 
+              \[Lambda][ 1]], 
+            Times[ -1, 
+              c[ 6, 2], 
+              \[Lambda][ 2]]]]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svSolve\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(2 \[Colon] {False, {c\_\(6, 1\) \[Rule] \(-c\_\(6, 2\)\)\ \((2 + \
+\[Lambda]\_1 - \[Lambda]\_2)\)}}\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 2, {False, {c[ 6, 1] -> Times[ -1, 
+            c[ 6, 2], 
+            Plus[ 2, 
+              \[Lambda][ 1], 
+              Times[ -1, 
+                \[Lambda][ 2]]]]}}]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell["\<\
+Only the second equation was solved. We add the constain and try again\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(svSub[2];\)\), "\[IndentingNewLine]", 
+    \(svZ[1]\)}], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] \(-2\) - \[Lambda]\_1 + \[Lambda]\_4\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, 
+          Plus[ -2, 
+            Times[ -1, 
+              \[Lambda][ 1]], 
+            \[Lambda][ 4]]]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "We can skip calling ",
+  StyleBox["svSolve", "Program"],
+  " again becouse the solution is clear. Continue with singularity \
+equations."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(svSub[\[Lambda]\_4 \[Rule] 
+          2 + \[Lambda]\_1];\)\), "\[IndentingNewLine]", 
+    \(svZ[1]\)}], "Input"],
+
+Cell[BoxData[
+    \(True\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svZ[2]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] 2\ \((3 + \[Lambda]\_1 - \[Lambda]\_2)\)\)},
+          {\(2 \[Colon] \(-2\)\ \((3 + \[Lambda]\_1 - \[Lambda]\_2)\)\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, 
+          Times[ 2, 
+            Plus[ 3, 
+              \[Lambda][ 1], 
+              Times[ -1, 
+                \[Lambda][ 2]]]]], 
+        sv`Colon[ 2, 
+          Times[ -2, 
+            Plus[ 3, 
+              \[Lambda][ 1], 
+              Times[ -1, 
+                \[Lambda][ 2]]]]]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(svSub[\[Lambda]\_2 \[Rule] 
+          3 + \[Lambda]\_1];\)\), "\[IndentingNewLine]", 
+    \(svZ[2]\)}], "Input"],
+
+Cell[BoxData[
+    \(True\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+Here is the solution for algebra \[GothicK]\[GothicA]\[GothicS]:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(svRep[\[Lambda]\&_]\), "\[IndentingNewLine]", 
+    \(svResult // svImg\)}], "Input"],
+
+Cell[BoxData[
+    \({\[Lambda]\_1, 3 + \[Lambda]\_1, 3 + \[Lambda]\_1, 
+      2 + \[Lambda]\_1}\)], "Output"],
+
+Cell[BoxData[
+    \(\[Zeta]\_1 ** \((m\_6 + m\_9)\) + 2\[ThinSpace]\[Zeta]\_2 ** m\_4 + 
+      2\[ThinSpace]\[Zeta]\_3 ** m\_1\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+Now apply the last condition of singularity (to find the solution for algebra \
+\[GothicK](1|6)):\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svZ[3]\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {\(1 \[Colon] 3\)},
+          {\(2 \[Colon] 3\ \((5 + 2\ \[Lambda]\_1)\)\)},
+          {\(3 \[Colon] 3\ \((3 + \[Lambda]\_1)\)\)},
+          {\(4 \[Colon] 3\ \((3 + \[Lambda]\_1)\)\)},
+          {\(5 \[Colon] 3\)},
+          {\(6 \[Colon] \(-5\) - 2\ \[Lambda]\_1\)},
+          {\(7 \[Colon] \(-5\) - 2\ \[Lambda]\_1\)},
+          {\(8 \[Colon] \(-5\) - 2\ \[Lambda]\_1\)},
+          {\(9 \[Colon] \(-5\) - 2\ \[Lambda]\_1\)}
+          },
+        GridBaseline->{Baseline, {1, 1}},
+        ColumnAlignments->{Left}],
+      ColumnForm[ {
+        sv`Colon[ 1, 3], 
+        sv`Colon[ 2, 
+          Times[ 3, 
+            Plus[ 5, 
+              Times[ 2, 
+                \[Lambda][ 1]]]]], 
+        sv`Colon[ 3, 
+          Times[ 3, 
+            Plus[ 3, 
+              \[Lambda][ 1]]]], 
+        sv`Colon[ 4, 
+          Times[ 3, 
+            Plus[ 3, 
+              \[Lambda][ 1]]]], 
+        sv`Colon[ 5, 3], 
+        sv`Colon[ 6, 
+          Plus[ -5, 
+            Times[ -2, 
+              \[Lambda][ 1]]]], 
+        sv`Colon[ 7, 
+          Plus[ -5, 
+            Times[ -2, 
+              \[Lambda][ 1]]]], 
+        sv`Colon[ 8, 
+          Plus[ -5, 
+            Times[ -2, 
+              \[Lambda][ 1]]]], 
+        sv`Colon[ 9, 
+          Plus[ -5, 
+            Times[ -2, 
+              \[Lambda][ 1]]]]}],
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(svSolve\)], "Input"],
+
+Cell[BoxData[
+    \("No solutions"\)], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"5.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1400}, {0, 967}},
+WindowToolbars->"EditBar",
+WindowSize->{978, 905},
+WindowMargins->{{Automatic, 50}, {Automatic, 12}},
+ShowSelection->True,
+Magnification->1.25,
+StyleDefinitions -> "Demo.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 95, 2, 70, "Title"],
+
+Cell[CellGroupData[{
+Cell[1874, 57, 33, 0, 102, "Section"],
+Cell[1910, 59, 41, 0, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[1976, 63, 152, 3, 82, "Input"],
+Cell[2131, 68, 157, 2, 51, "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2325, 75, 39, 0, 54, "Subsubsection"],
+Cell[2367, 77, 463, 14, 52, "Text"],
+
+Cell[CellGroupData[{
+Cell[2855, 95, 785, 22, 103, "Input"],
+Cell[3643, 119, 87, 1, 58, "Output"]
+}, Open  ]],
+Cell[3745, 123, 1121, 32, 86, "Text"],
+Cell[4869, 157, 1026, 28, 166, "Input"],
+Cell[5898, 187, 491, 11, 81, "Text"],
+
+Cell[CellGroupData[{
+Cell[6414, 202, 148, 4, 40, "Input"],
+Cell[6565, 208, 2720, 45, 121, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9322, 258, 148, 2, 40, "Input"],
+Cell[9473, 262, 188, 3, 51, "Message"],
+Cell[9664, 267, 58, 1, 58, "Output"]
+}, Open  ]],
+Cell[9737, 271, 236, 6, 35, "Text"],
+Cell[9976, 279, 176, 5, 40, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[10189, 289, 45, 0, 56, "Subsection"],
+Cell[10237, 291, 253, 8, 36, "Text"],
+
+Cell[CellGroupData[{
+Cell[10515, 303, 58, 1, 40, "Input"],
+Cell[10576, 306, 35, 1, 58, "Output"]
+}, Open  ]],
+Cell[10626, 310, 199, 5, 35, "Text"],
+Cell[10828, 317, 61, 1, 40, "Input"],
+Cell[10892, 320, 139, 3, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[11056, 327, 215, 6, 40, "Input"],
+Cell[11274, 335, 605, 9, 121, "Output"]
+}, Open  ]],
+Cell[11894, 347, 1146, 50, 52, "Text"],
+Cell[13043, 399, 395, 7, 69, "Text"],
+
+Cell[CellGroupData[{
+Cell[13463, 410, 138, 2, 40, "Input"],
+Cell[13604, 414, 777, 23, 65, "Print"],
+Cell[14384, 439, 690, 19, 65, "Print"]
+}, Open  ]],
+Cell[15089, 461, 145, 3, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[15259, 468, 160, 3, 40, "Input"],
+Cell[15422, 473, 674, 19, 65, "Print"],
+Cell[16099, 494, 793, 23, 65, "Print"]
+}, Open  ]],
+Cell[16907, 520, 95, 2, 35, "Text"],
+Cell[17005, 524, 157, 3, 40, "Input"],
+Cell[17165, 529, 429, 10, 81, "Text"],
+Cell[17597, 541, 243, 4, 82, "Input"],
+Cell[17843, 547, 261, 6, 53, "Text"],
+
+Cell[CellGroupData[{
+Cell[18129, 557, 115, 2, 63, "Input"],
+Cell[18247, 561, 131, 2, 58, "Output"]
+}, Open  ]],
+Cell[18393, 566, 128, 3, 35, "Text"],
+Cell[18524, 571, 110, 2, 40, "Input"],
+Cell[18637, 575, 969, 29, 69, "Text"],
+Cell[19609, 606, 221, 8, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[19855, 618, 190, 5, 40, "Input"],
+Cell[20048, 625, 112, 2, 58, "Output"]
+}, Open  ]],
+Cell[20175, 630, 42, 0, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[20242, 634, 41, 1, 40, "Input"],
+Cell[20286, 637, 236, 4, 58, "Output"]
+}, Open  ]],
+Cell[20537, 644, 292, 6, 52, "Text"],
+Cell[20832, 652, 68, 1, 40, "Input"],
+
+Cell[CellGroupData[{
+Cell[20925, 657, 44, 0, 54, "Subsubsection"],
+Cell[20972, 659, 211, 4, 52, "Text"],
+Cell[21186, 665, 50, 1, 40, "Input"],
+Cell[21239, 668, 115, 3, 35, "Text"],
+Cell[21357, 673, 43, 1, 40, "Input"],
+Cell[21403, 676, 246, 9, 35, "Text"],
+Cell[21652, 687, 183, 3, 30, "Print"],
+Cell[21838, 692, 105, 2, 35, "Text"],
+Cell[21946, 696, 2272, 59, 30, "Print"],
+Cell[24221, 757, 99, 2, 35, "Text"],
+Cell[24323, 761, 31326, 784, 135, "Print"],
+Cell[55652, 1547, 168, 5, 35, "Text"],
+Cell[55823, 1554, 7473, 190, 51, "Print"],
+Cell[63299, 1746, 271, 7, 35, "Text"],
+Cell[63573, 1755, 2307, 48, 119, "Print"],
+Cell[65883, 1805, 562, 16, 54, "Text"],
+Cell[66448, 1823, 190, 4, 52, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[66675, 1832, 127, 4, 54, "Subsubsection"],
+Cell[66805, 1838, 408, 14, 36, "Text"],
+
+Cell[CellGroupData[{
+Cell[67238, 1856, 56, 1, 40, "Input"],
+Cell[67297, 1859, 78, 1, 59, "Output"]
+}, Open  ]],
+Cell[67390, 1863, 876, 25, 89, "Text"],
+Cell[68269, 1890, 435, 12, 53, "Text"],
+
+Cell[CellGroupData[{
+Cell[68729, 1906, 36, 1, 40, "Input"],
+Cell[68768, 1909, 38, 1, 58, "Output"]
+}, Open  ]],
+Cell[68821, 1913, 223, 4, 52, "Text"],
+
+Cell[CellGroupData[{
+Cell[69069, 1921, 39, 1, 40, "Input"],
+Cell[69111, 1924, 370, 12, 58, "Output"]
+}, Open  ]],
+Cell[69496, 1939, 666, 18, 70, "Text"],
+Cell[70165, 1959, 713, 18, 70, "Text"],
+
+Cell[CellGroupData[{
+Cell[70903, 1981, 40, 1, 40, "Input"],
+Cell[70946, 1984, 429, 13, 58, "Output"]
+}, Open  ]],
+Cell[71390, 2000, 359, 9, 52, "Text"],
+
+Cell[CellGroupData[{
+Cell[71774, 2013, 73, 1, 40, "Input"],
+Cell[71850, 2016, 124, 3, 59, "Output"]
+}, Open  ]],
+Cell[71989, 2022, 76, 0, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[72090, 2026, 39, 1, 40, "Input"],
+Cell[72132, 2029, 370, 12, 58, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[72539, 2046, 40, 1, 40, "Input"],
+Cell[72582, 2049, 429, 13, 58, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[73048, 2067, 73, 1, 40, "Input"],
+Cell[73124, 2070, 159, 3, 59, "Output"]
+}, Open  ]],
+Cell[73298, 2076, 127, 3, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[73450, 2083, 105, 2, 62, "Input"],
+Cell[73558, 2087, 90, 1, 58, "Output"],
+Cell[73651, 2090, 52, 1, 58, "Output"]
+}, Open  ]],
+Cell[73718, 2094, 319, 9, 65, "Text"],
+
+Cell[CellGroupData[{
+Cell[74062, 2107, 39, 1, 40, "Input"],
+Cell[74104, 2110, 307, 10, 58, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[74448, 2125, 40, 1, 40, "Input"],
+Cell[74491, 2128, 362, 11, 58, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[74890, 2144, 62, 1, 40, "Input"],
+Cell[74955, 2147, 172, 3, 59, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[75164, 2155, 52, 1, 41, "Input"],
+Cell[75219, 2158, 68, 1, 58, "Output"]
+}, Open  ]],
+Cell[75302, 2162, 226, 9, 36, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[75565, 2176, 127, 4, 54, "Subsubsection"],
+
+Cell[CellGroupData[{
+Cell[75717, 2184, 56, 1, 40, "Input"],
+Cell[75776, 2187, 78, 1, 59, "Output"]
+}, Open  ]],
+Cell[75869, 2191, 57, 0, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[75951, 2195, 36, 1, 40, "Input"],
+Cell[75990, 2198, 38, 1, 58, "Output"]
+}, Open  ]],
+Cell[76043, 2202, 123, 3, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[76191, 2209, 39, 1, 40, "Input"],
+Cell[76233, 2212, 377, 12, 58, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[76647, 2229, 40, 1, 40, "Input"],
+Cell[76690, 2232, 450, 14, 58, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[77177, 2251, 77, 1, 40, "Input"],
+Cell[77257, 2254, 126, 2, 59, "Output"]
+}, Open  ]],
+Cell[77398, 2259, 76, 0, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[77499, 2263, 39, 1, 40, "Input"],
+Cell[77541, 2266, 1118, 36, 111, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[78696, 2307, 40, 1, 40, "Input"],
+Cell[78739, 2310, 1386, 42, 111, "Output"]
+}, Open  ]],
+Cell[80140, 2355, 109, 3, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[80274, 2362, 199, 4, 82, "Input"],
+Cell[80476, 2368, 38, 1, 58, "Output"]
+}, Open  ]],
+Cell[80529, 2372, 127, 3, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[80681, 2379, 105, 2, 62, "Input"],
+Cell[80789, 2383, 105, 2, 58, "Output"],
+Cell[80897, 2387, 73, 1, 58, "Output"]
+}, Open  ]],
+Cell[80985, 2391, 121, 3, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[81131, 2398, 39, 1, 40, "Input"],
+Cell[81173, 2401, 506, 16, 75, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[81716, 2422, 40, 1, 40, "Input"],
+Cell[81759, 2425, 637, 19, 75, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[82433, 2449, 67, 1, 40, "Input"],
+Cell[82503, 2452, 202, 3, 59, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[82742, 2460, 52, 1, 41, "Input"],
+Cell[82797, 2463, 56, 1, 58, "Output"]
+}, Open  ]],
+Cell[82868, 2467, 427, 11, 36, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[83332, 2483, 131, 4, 54, "Subsubsection"],
+
+Cell[CellGroupData[{
+Cell[83488, 2491, 56, 1, 40, "Input"],
+Cell[83547, 2494, 128, 3, 59, "Output"]
+}, Open  ]],
+Cell[83690, 2500, 57, 0, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[83772, 2504, 36, 1, 40, "Input"],
+Cell[83811, 2507, 727, 23, 59, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[84575, 2535, 40, 1, 40, "Input"],
+Cell[84618, 2538, 679, 20, 59, "Output"]
+}, Open  ]],
+Cell[85312, 2561, 644, 16, 69, "Text"],
+
+Cell[CellGroupData[{
+Cell[85981, 2581, 209, 4, 103, "Input"],
+Cell[86193, 2587, 38, 1, 58, "Output"]
+}, Open  ]],
+Cell[86246, 2591, 57, 0, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[86328, 2595, 39, 1, 40, "Input"],
+Cell[86370, 2598, 1134, 36, 111, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[87541, 2639, 40, 1, 40, "Input"],
+Cell[87584, 2642, 1431, 43, 111, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[89052, 2690, 135, 3, 61, "Input"],
+Cell[89190, 2695, 38, 1, 58, "Output"]
+}, Open  ]],
+Cell[89243, 2699, 76, 0, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[89344, 2703, 39, 1, 40, "Input"],
+Cell[89386, 2706, 1253, 39, 111, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[90676, 2750, 40, 1, 40, "Input"],
+Cell[90719, 2753, 1526, 46, 111, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[92282, 2804, 153, 3, 82, "Input"],
+Cell[92438, 2809, 48, 1, 58, "Output"]
+}, Open  ]],
+Cell[92501, 2813, 504, 12, 81, "Text"],
+
+Cell[CellGroupData[{
+Cell[93030, 2829, 169, 4, 82, "Input"],
+Cell[93202, 2835, 38, 1, 58, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[93277, 2841, 39, 1, 40, "Input"],
+Cell[93319, 2844, 1198, 39, 79, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[94554, 2888, 40, 1, 40, "Input"],
+Cell[94597, 2891, 500, 14, 59, "Output"]
+}, Open  ]],
+Cell[95112, 2908, 94, 2, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[95231, 2914, 88, 2, 61, "Input"],
+Cell[95322, 2918, 383, 12, 58, "Output"]
+}, Open  ]],
+Cell[95720, 2933, 168, 5, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[95913, 2942, 135, 3, 61, "Input"],
+Cell[96051, 2947, 38, 1, 58, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[96126, 2953, 39, 1, 40, "Input"],
+Cell[96168, 2956, 648, 20, 75, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[96853, 2981, 135, 3, 61, "Input"],
+Cell[96991, 2986, 38, 1, 58, "Output"]
+}, Open  ]],
+Cell[97044, 2990, 88, 2, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[97157, 2996, 105, 2, 62, "Input"],
+Cell[97265, 3000, 109, 2, 58, "Output"],
+Cell[97377, 3004, 140, 2, 58, "Output"]
+}, Open  ]],
+Cell[97532, 3009, 121, 3, 35, "Text"],
+
+Cell[CellGroupData[{
+Cell[97678, 3016, 39, 1, 40, "Input"],
+Cell[97720, 3019, 1401, 46, 201, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[99158, 3070, 40, 1, 40, "Input"],
+Cell[99201, 3073, 48, 1, 58, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

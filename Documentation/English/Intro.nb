@@ -1,0 +1,5309 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[    176382,       5300]
+NotebookOptionsPosition[    105514,       3448]
+NotebookOutlinePosition[    164245,       4869]
+CellTagsIndexPosition[    163012,       4820]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+ "Introduction to ",
+ StyleBox["SuperLie",
+  FontFamily->"Times New Roman"]
+}], "Title",
+ CellHorizontalScrolling->False,
+ TextAlignment->Left,
+ TextJustification->0,
+ CellTags->{"i:1", "Introduction to SuperLie", "c:1"}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "0. Introduction. Peculiarities of ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " important for ",
+ StyleBox["SuperLie",
+  FontFamily->"Times New Roman"],
+ " "
+}], "Section",
+ Evaluatable->False,
+ CellChangeTimes->{{3.4213337339151583`*^9, 3.421333734676253*^9}},
+ CellTags->"c:2"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+0.1. Symbolic representation. Input format, output format, and complete format\
+\>", "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:3", "b:2.0.0"}],
+
+Cell[TextData[{
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " enables one to perform computations in a symbolic form. This is achieved \
+due to the possibility to work with a description of the object. One should \
+always bear in mind that there are at least three formats of description: the \
+",
+ StyleBox["input format",
+  FontSlant->"Italic"],
+ ", the ",
+ StyleBox["screen output format",
+  FontSlant->"Italic"],
+ " and the ",
+ StyleBox["complete format",
+  FontSlant->"Italic"],
+ "; besides, there is usually the output format of the final result into a \
+file, for example, the ",
+ Cell[BoxData[
+  StyleBox[
+   RowBox[{"T", 
+    AdjustmentBox["E",
+     BoxBaselineShift->0.5,
+     BoxMargins->{{-0.075, -0.085}, {0, 0}}], "X"}]]]],
+ " format. "
+}], "Text",
+ CellChangeTimes->{{3.421333761885378*^9, 3.421333762576371*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.0.0"],
+
+Cell[TextData[{
+ "The most important format is the complete one, since all transformations \
+are performed with the description in the complete format. Such a description \
+is cumbersome and is usually concealed from our eyes, but the standard \
+command ",
+ StyleBox["FullForm", "ExerciseText",
+  FontFamily->"Courier"],
+ " will reveal it."
+}], "Text",
+ CellChangeTimes->{{3.4213337686551123`*^9, 3.4213337692559757`*^9}},
+ CellTags->"b:2.0.0"],
+
+Cell[TextData[{
+ "Two objects are considered ",
+ StyleBox["identical",
+  FontSlant->"Italic"],
+ " if their descriptions in the complete format coincide. To make \
+mathematically equal expressions to remain equal in ",
+ StyleBox["Mathematica,",
+  FontSlant->"Italic"],
+ " they should first be reduced to a standard form. In ",
+ StyleBox["SuperLie,",
+  FontWeight->"Bold"],
+ " the functions ",
+ StyleBox["VNormal",
+  FontFamily->"Courier"],
+ " and ",
+ StyleBox["VExpand",
+  FontFamily->"Courier"],
+ " see to that."
+}], "Text",
+ CellTags->"b:2.0.0"],
+
+Cell[TextData[{
+ "In ",
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ ", almost all objects are represented in a symbolic form and almost all \
+computations are performed in a symbolic form. A list of transformation rules \
+is available at all times and the description is transformed according to \
+these rules. Transformations are performed in the order of decrease of \
+preference, returned is the description to which none of the rules is \
+applicable. Therefore, you should not be astonished if the program returns \
+you your input; this means that no appropriate rule is available."
+}], "Text",
+ CellChangeTimes->{{3.421333807631157*^9, 3.4213338619292336`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.0.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["0.2. Small and capital letters. Patterns", "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:4", "b:2.0.1"}],
+
+Cell[TextData[{
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " distinguishes between small and capital letters; e.g., it considers b and \
+B as totally different objects."
+}], "Text",
+ CellChangeTimes->{{3.4213338716031437`*^9, 3.4213338737862835`*^9}},
+ CellTags->"b:2.0.1"],
+
+Cell[TextData[{
+ "There are occasions when one has to have the answer in undercomputed form, \
+e.g., the expression ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"[", 
+     RowBox[{"x", ",", " ", "y"}], "]"}], "=", " ", 
+    RowBox[{"2", "h"}]}], TraditionalForm]]],
+ " demonstrates a relation, whereas if we compute the left hand side we get a \
+useless identity ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"2", "h"}], "=", 
+    RowBox[{"2", "h"}]}], TraditionalForm]]],
+ ". To distinguish such cases, the operations that have to be computed are \
+named with a capital letter, while the names of their not-to-be-computed \
+twins begin with a small letter. For example, the bracket in the Lie algebra \
+is called Act and act, respectively, and the relation above is expressed as \
+",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"act", "[", 
+     RowBox[{"x", ",", " ", "y"}], "]"}], "=", 
+    RowBox[{"Act", "[", 
+     RowBox[{"x", ",", " ", "y"}], "]"}]}], TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.421333898892384*^9, 3.4213339011155806`*^9}},
+ CellTags->"b:2.0.1"],
+
+Cell[TextData[{
+ "One more reason why it is essential to distinguish smalls and capitals: \
+quite a few functions in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " are only applicable to the expressions satisfying a pattern. In ",
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ ", for example, the basis of the vector space is given by means of a \
+pattern; e.g., all the expressions of the form ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"v", "[", "...", "]"}], TraditionalForm]]],
+ " are by default considered as basis elements of the space ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.421333922896901*^9, 3.4213339239984846`*^9}},
+ CellTags->"b:2.0.1"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["0.3. Lists", "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:5", "b:2.0.2"}],
+
+Cell[TextData[{
+ "The ordered lists are expressed in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " in curly brackets, separated by a comma. In particular, vectors are \
+represented as lists with coordinates, as for example, a basis of the \
+3-dimensional space consisting of ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", "0"}], "}"}], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "0"}], "}"}], TraditionalForm]]],
+ StyleBox[" ", "InlineFormula"],
+ "and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "1"}], "}"}], TraditionalForm]]],
+ ". ",
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " freely uses lists, e.g., the lists of basis elements. Coordinate vectors \
+can be used as weights, as well, in which case \[LongDash] important! \
+\[LongDash] ",
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " treats them as scalars!"
+}], "Text",
+ Evaluatable->False,
+ CellChangeTimes->{{3.4213339376481123`*^9, 3.4213339513377967`*^9}},
+ CellTags->"b:2.0.2"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["0.4. Solving equations", "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:6", "b:2.0.3"}],
+
+Cell[TextData[{
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " possesses powerful functions \[LongDash] ",
+ StyleBox["Solve, Eliminate",
+  FontFamily->"Courier"],
+ " and ",
+ StyleBox["Reduce",
+  FontFamily->"Courier"],
+ " \[LongDash] which allow one to solve and simplify the systems of \
+equations, in particular, with parametric coefficients expressed by letters. \
+Many computations concerning Lie algebras and Lie superalgebras can be \
+reduced to this type of problems. For example, \"to determine the kernel of \
+an operator\" is to solve a system of linear equations, while \"to determine \
+the image of an operator\" is to simplify a linear system."
+}], "Text",
+ CellChangeTimes->{{3.421333966769987*^9, 3.4213339724882097`*^9}},
+ CellTags->"b:2.0.3"],
+
+Cell[TextData[{
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " has functions ",
+ StyleBox["GeneralSum, GeneralSolve, GeneralZero",
+  FontFamily->"Courier"],
+ ", as well as ",
+ StyleBox["GeneralReduce, VSolve",
+  FontFamily->"Courier"],
+ " and ",
+ StyleBox["SVSolve",
+  FontFamily->"Courier"],
+ "; these functions allow one to express and solve the equations in a vector \
+(invariant) form."
+}], "Text",
+ CellTags->"b:2.0.3"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["1. General notions of SuperLie", "Section",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"c:7"],
+
+Cell[CellGroupData[{
+
+Cell["1.1. Objects and properties", "Subsection",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->{"c:8", "b:2.1.0"}],
+
+Cell[TextData[{
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " is an object-oriented package. This means that, as a rule, the object with \
+which you wish to work has to be declared first and endowed with properties. \
+For example, a given algebra has to be endowed with an ",
+ StyleBox["operation",
+  FontSlant->"Italic"],
+ "; every homogeneous element of a ",
+ StyleBox["super",
+  FontSlant->"Italic"],
+ "algebra has a ",
+ StyleBox["parity",
+  FontSlant->"Italic"],
+ "; every derivation is extended from the space which generates the algebra \
+to the whole algebra via Leibniz rule, and so on."
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.0"],
+
+Cell[TextData[{
+ "There are powerful commands that endow an object with several properties at \
+a time. For example, the constructor ",
+ StyleBox["CartanMatrixAlgebra",
+  FontFamily->"Courier"],
+ " constructs the Lie algebra from its Cartan matrix by declaring the algebra \
+itself, and its elements, as vector objects, finds its basis (as of a vector \
+space) expressed in terms of the generators (as of an algebra), determines a \
+bilinear anti-symmetric bracket that satisfies the Jacobi identity, computes \
+the relations, and so on. \nMore often, however, one has to add properties \
+one at a time. \nAn extra property pertaining to an object in mathematics may \
+do a harm during computations by the package: In might, first, slow down the \
+computations, second, bring about the answer in a user-unfriendly form. For \
+example, the distributivity property will lead to simplification and getting \
+rid of the parentheses, while the answer in the form ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{"a", "+", "b"}], ")"}], "100"], TraditionalForm]]],
+ " is usually more preferable than the binomial expansion. For this reason, \
+the majority of properties can be \"switched on/off\" when needed, or one can \
+as well apply them manually to a concrete expression."
+}], "Text",
+ CellChangeTimes->{{3.4213339920863905`*^9, 3.4213340328449984`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["1.2. Vectors and scalars", "Subsection",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->{"c:9", "b:2.1.1"}],
+
+Cell[TextData[{
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " divides all the objects into three Domains: Vector, Scalar and Common or, \
+better say, undecided ones. This division essentially differs from the \
+conventional one. The meaning of this division is that for vectors we \
+introduce new transformation rules for expressions, while for scalars the \
+usual rules of ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " are applicable. The rules for common objects are such that the principal \
+questions are put aside until the attribution is determined."
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.1"],
+
+Cell["\<\
+Thus, to avoid confusion, it is necessary to declare in time what are the \
+symbols used: are they vectors or scalars. In particular, all the spaces, \
+algebras, modules and their elements should be declared as vectors.\
+\>", "Text",
+ CellChangeTimes->{{3.4213340490783405`*^9, 3.4213340521227183`*^9}, {
+  3.4232308818422127`*^9, 3.423230882683422*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.1"],
+
+Cell[TextData[{
+ "Suppose we had declared ",
+ Cell[BoxData[
+  FormBox["vv", TraditionalForm]]],
+ " a vector space by means of the command ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"VectorSpace", "[", "vv", "]"}], TraditionalForm]]],
+ " (or, say, we had declared ",
+ Cell[BoxData[
+  FormBox["vv", TraditionalForm]]],
+ " a Lie superalgebra by invoking an appropriate constructor). Then all the \
+objects with name ",
+ Cell[BoxData[
+  FormBox["vv", TraditionalForm]]],
+ " and indices, as well as their linear combinations with scalar coefficients \
+(e.g., ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"vv", "[", "i", "]"}], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"vv", "[", 
+    RowBox[{"2", ",", "j"}], "]"}], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"vv", "[", 
+     RowBox[{"k", "+", "2"}], "]"}], "+", 
+    RowBox[{"2", "*", 
+     RowBox[{"vv", "[", 
+      RowBox[{"1", ",", "1"}], "]"}]}]}], TraditionalForm]]],
+ ") are considered as vectors and elements from the vector space (resp. the \
+Lie superalgebra) ",
+ Cell[BoxData[
+  FormBox["vv", TraditionalForm]]],
+ ". Such a declaration will not, however, affect expressions of the form ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"Vv", "[", "i", "]"}], TraditionalForm]]],
+ " (a capital V is used) or ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"vv2", "[", "j", "]"}], TraditionalForm]]],
+ " (the name vv2 is distinct from vv)."
+}], "Text",
+ CellChangeTimes->{{3.4213340835178623`*^9, 3.4213340971174173`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.1"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["1.3. Spaces and bases", "Subsection",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->{"c:10", "b:2.1.2"}],
+
+Cell["\<\
+To determine a space, we have to indicate what vectors belong to it. To this \
+end, one has to determine a basis of the space. After that, all the linear \
+combinations of the elements of the basis (with scalar coefficients) will be \
+considered as belonging to the space.\
+\>", "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell[TextData[{
+ "The most often used way to construct a space is by means of one or several \
+standard functions called ",
+ StyleBox["constructors",
+  FontSlant->"Italic"],
+ ". These constructors can be divided into two groups: the ones that declare \
+and the ones that construct. The constructors that declare determine \
+definitions and getting along without calculations. The constructors that \
+construct do calculate (and the volume of calculations usually grows \
+depressingly fast with dimension) and generate the space in question by means \
+of the generators given (or checking if the space given is invariant) and \
+recalculating the multiplication (action) table in the new basis."
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell["\<\
+Each constructor has mandatory and optional parameters. The mandatory \
+parameters determine the name and the basis of the space as well as a minimal \
+mandatory collection of properties and operations that determines a structure \
+(of a superspace, algebra, module, and so on.) on it. The properties and \
+operations of the space can be added, altered or switched off later by \
+appropriate separate commands.\
+\>", "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell[TextData[{
+ "The declaring constructors can determine a concrete object, for example, \
+the Lie superalgebra ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[GothicV]\[GothicE]\[GothicC]\[GothicT]", "(", 
+    RowBox[{"m", "|", "n"}], ")"}], TraditionalForm]]],
+ ", or work as functors, e.g., declare the dual space. Certain constructors, \
+however, can do both, depending on the way the parameters are given. For \
+example, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"glAlgebra", "[", 
+    RowBox[{"g", ",", 
+     RowBox[{"Dim", "->", 
+      RowBox[{"(", 
+       RowBox[{"m", "|", "n"}], ")"}]}]}], "]"}], TraditionalForm]]],
+ " constructs ",
+ Cell[BoxData[
+  FormBox["g", TraditionalForm]]],
+ " as a concrete Lie superalgebra, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[GothicG]\[GothicL]", "(", 
+    RowBox[{"m", "|", "n"}], ")"}], TraditionalForm]]],
+ ",  whereas ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"glAlgebra", "[", 
+    RowBox[{"g", ",", "x"}], "]"}], TraditionalForm]]],
+ " acts as a functor on the superspace ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ ": it declares ",
+ Cell[BoxData[
+  FormBox["g", TraditionalForm]]],
+ " the Lie superalgebra of linear operators on ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " and, for free, makes ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " into a ",
+ Cell[BoxData[
+  FormBox["g", TraditionalForm]]],
+ "-module!"
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell[TextData[{
+ "Observe in passing that the parameters ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ " and ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ ", or the (super)dimension of the (super)space, can be infinite or symbolic. \
+If it is symbolic, certain additional structures on ",
+ Cell[BoxData[
+  FormBox["g", TraditionalForm]]],
+ " can not be constructed, e.g., the coaction Der. The same remark applies to \
+the other constructors of Lie (super)algebras."
+}], "Text",
+ CellChangeTimes->{{3.421334122043259*^9, 3.4213341242664557`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell["Let us list the declaring constructors.", "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell[TextData[{
+ StyleBox["VectorSpace",
+  FontFamily->"Courier"],
+ " declares the space. With the help of ",
+ StyleBox["VectorSpace",
+  FontFamily->"Courier"],
+ " one usually stocks the spaces for the constructors of other type."
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell[TextData[{
+ StyleBox["glAlgebra, slAlgebra, pslAlgebra",
+  FontFamily->"Courier"],
+ " construct the matrix Lie (super)algebras ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[GothicG]\[GothicL]", "(", 
+    RowBox[{"m", "|", "n"}], ")"}], TraditionalForm]]],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[GothicS]\[GothicL]", "(", 
+    RowBox[{"m", "|", "n"}], ")"}], TraditionalForm]]],
+ ", and the projectivisation ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[GothicP]\[GothicS]\[GothicL]", "(", 
+    RowBox[{"n", "|", "n"}], ")"}], TraditionalForm]]],
+ ", respectively. If, as a parameter, a superspace ",
+ StyleBox["v",
+  FontSlant->"Italic"],
+ " is given, these constructors endow it  with the structure of a module over \
+one of the above Lie (super)algebras."
+}], "Text",
+ CellChangeTimes->{{3.4213341375255213`*^9, 3.421334178153942*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell[TextData[{
+ StyleBox["VectorAlgebra, ContactAlgebra, PoissonAlgebra",
+  FontFamily->"Courier"],
+ " construct the Lie superalgebras of vector fields with polynomial \
+coefficients: ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[GothicV]\[GothicE]\[GothicC]\[GothicT]", "(", 
+    RowBox[{"m", "|", "n"}], ")"}], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[GothicK]", "(", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"2", "n"}], "+", "1"}], "|", "m"}], ")"}], TraditionalForm]]],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[GothicP]\[GothicO]", "(", 
+    RowBox[{
+     RowBox[{"2", "n"}], "|", "m"}], ")"}], TraditionalForm]]],
+ ", respectively. If, as a parameter, a superspace ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ " is given, these constructors endow the superspace of supersymmetric \
+polynomials on ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ " with the structure of a module over one of the above three Lie \
+(super)algebras constructed."
+}], "Text",
+ CellChangeTimes->{{3.421334222287403*^9, 3.4213342443290977`*^9}, {
+  3.423231101568163*^9, 3.4232311022491426`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell["Constructors-functors:", "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell[TextData[{
+ StyleBox["CommutativeLieAlgebra, FreeLieAlgebr",
+  FontFamily->"Courier"],
+ "a --- their names speak for themselves."
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell[TextData[{
+ "Constructors of  spaces-relatives: the dual space, the superspace with \
+shifted parity and their compositions: ",
+ StyleBox["MLeft, CoLeft, MRight, CoRight, PiRight, DRight, PiLeft, DLeft",
+  FontFamily->"Courier"],
+ ".  The order of relatives in this list is important, it is used in the \
+function ",
+ StyleBox["Relatives",
+  FontFamily->"Courier"],
+ ". The first on the list is ",
+ StyleBox["MLeft",
+  FontFamily->"Courier"],
+ ", i.e., the space itself, the result of application of the identity functor."
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell[TextData[{
+ StyleBox["TensorSpace", "Name"],
+ " builds the tensor product of several spaces-relatives."
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell["\<\
+Constructing constructors:
+... <Not constructed yet>\
+\>", "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell[TextData[{
+ "The simplest way to determine a space is to declare it with the help of the \
+constructor ",
+ StyleBox["VectorSpace",
+  FontFamily->"Courier"],
+ ". Suppose, you executed the command"
+}], "Text",
+ CellChangeTimes->{{3.421334304725944*^9, 3.4213343073897743`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell[BoxData[
+ RowBox[{"VectorSpace", "[", "v", "]"}]], "Input",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell[TextData[{
+ "In this way you have determined a space named ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ ". Having given the name of the space (for example, ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ ", as in this example) we will by default consider all the expressions of \
+the form ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"v", "[", "...", "]"}], TraditionalForm]]],
+ " as its (basis) elements (e.g., ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"v", "[", "2", "]"}], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"v", "[", 
+    RowBox[{"1", ",", " ", 
+     RowBox[{"j", "+", "2"}]}], "]"}], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"v", "[", 
+    RowBox[{"a", "+", 
+     RowBox[{"b", "[", "3", "]"}]}], "]"}], TraditionalForm]]],
+ ", etc.) even if ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ " is declared to be 1-dimensional. If, for some reason, such a definition of \
+a collection of its elements does not suit us, we can define the space ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ " differently, e.g., list its elements explicitly or determine the algorithm \
+of recognising the vectors that belong to ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ ". Actually, the name of the space is the simplest pattern for basis \
+recognition; this algorithm is, certainly, very approximate, but, usually, it \
+ suffices. "
+}], "Text",
+ CellChangeTimes->{{3.421334325415694*^9, 3.4213343533358417`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell[TextData[{
+ "Generally speaking, element recognition is needed for soling vector \
+equations; that is what ",
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " is based upon. The mistakes in the element recognition are the main \
+sources of the mistakes in the computations."
+}], "Text",
+ CellChangeTimes->{{3.421334367796635*^9, 3.421334368357442*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell[TextData[{
+ "Observe, however, that a considerable part of the properties and functions \
+automatically appears only on finite dimensional spaces with a one-index \
+basis of the form ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"x", "[", "1", "]"}], ",", 
+     RowBox[{"x", "[", "2", "]"}], ",", 
+     RowBox[{"...", ",", 
+      RowBox[{"x", "[", "n", "]"}]}]}], "}"}], TraditionalForm]]],
+ ", where ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " is the name and ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " the dimension of the space. This concerns the lists of parities, weights \
+and gradings of the basis elements (",
+ StyleBox["PList", "Name"],
+ ", ",
+ StyleBox["GList", "Name"],
+ ", ",
+ StyleBox["WList", "Name"],
+ "). On the spaces with bases of a more involved form, these functions are to \
+be determined manually."
+}], "Text",
+ CellChangeTimes->{{3.4213343795034685`*^9, 3.4213343860028143`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell["\<\
+A simplest basis will automatically appear if we give the dimension of the \
+space. The best way to do it, is to do it simultaneously with the \
+declaration, e.g., \
+\>", "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell[BoxData[
+ RowBox[{"VectorSpace", "[", 
+  RowBox[{"sl2", ",", 
+   RowBox[{"Dim", "->", "3"}]}], "]"}]], "Input",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell[TextData[{
+ "declares a 3-dimensional space ",
+ Cell[BoxData[
+  FormBox["sl2", TraditionalForm]]],
+ " with basis ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"sl2", "[", "1", "]"}], ",", 
+     RowBox[{"sl2", "[", "2", "]"}], ",", 
+     RowBox[{"sl2", "[", "3", "]"}]}], "}"}], TraditionalForm]]],
+ "."
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell[TextData[{
+ StyleBox["Basis",
+  FontFamily->"Courier"],
+ " is one of the properties of a space. One can endow a space with other \
+properties as well, e.g., determine its (super) dimension; construct and \
+declare the spaces-relatives."
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell["\<\
+Further on, one usually determines functions acting on the elements of the \
+space. For example, no meaningful job in infinite dimensional space is \
+usually possible unless we divide the space into finite dimensional pieces. \
+This is usually achieved by means of imposing gradings and weights. \
+\>", "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"],
+
+Cell["\<\
+On top of that, one has to define a parity in the superspace, a bracket in \
+the Lie (super)algebra and an action of the algebra on the module.\
+\>", "Text",
+ CellChangeTimes->{{3.4213344402708483`*^9, 3.4213344454883504`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.2"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["1.4. Vector operations", "Subsection",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->{"c:11", "b:2.1.3"}],
+
+Cell[TextData[{
+ "While working with scalars we use the usual signs of mathematical \
+operations: ",
+ Cell[BoxData[
+  FormBox["+", TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox["-", TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox["*", TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox["/", TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox["^", TraditionalForm]]],
+ ", and ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " knows how to transform them into the complete format. In ",
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ ", we can use the same symbols to express the operations between vectors, as \
+well as between scalars and vectors. If ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " is a scalar and ",
+ Cell[BoxData[
+  FormBox["u", TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ " are vectors, we can write: ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "*", "u", "*", "v"}], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"u", "/", "n"}], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"u", "^", "n"}], "/", "v"}], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "/", "v"}], TraditionalForm]]],
+ " (this is not a misprint, we do divide by a vector)."
+}], "Text",
+ CellChangeTimes->{{3.421334464145178*^9, 3.421334476773336*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.3"],
+
+Cell[TextData[{
+ "The multiplication of vectors and raising to a power are understood as a \
+(super)symmetric product and power, respectively; the expression ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"/", "v"}], TraditionalForm]]],
+ " is treated as a shorthand for ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"*", 
+    RowBox[{"v", "^", 
+     RowBox[{"(", 
+      RowBox[{"-", "1"}], ")"}]}]}], TraditionalForm]]],
+ " (this is convenient, e.g., when we deal with Laurent polynomials)."
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.3"],
+
+Cell[TextData[{
+ "All these habitual operation signs are used in the input and (some of them) \
+output format, but in the complete format all of them are replaced by the \
+complete names of the operations. These names can be different, they depend \
+on the operands' domains. For example, multiplying scalars we replace ",
+ Cell[BoxData[
+  FormBox["*", TraditionalForm]]],
+ " by a ",
+ StyleBox["Times",
+  FontFamily->"Courier"],
+ ", multiplying a scalar by a vector we replace ",
+ Cell[BoxData[
+  FormBox["*", TraditionalForm]]],
+ " by a ",
+ StyleBox["SVTimes",
+  FontFamily->"Courier"],
+ ", multiplying a vector by a vectors we replace ",
+ Cell[BoxData[
+  FormBox["*", TraditionalForm]]],
+ " by a ",
+ StyleBox["VTimes",
+  FontFamily->"Courier"],
+ ", and if a domain of some of the factors is not defined we replace ",
+ Cell[BoxData[
+  FormBox["*", TraditionalForm]]],
+ " by a ",
+ StyleBox["GTimes",
+  FontFamily->"Courier"],
+ " subsequently substituting a correct name after the domain is determined."
+}], "Text",
+ CellChangeTimes->{{3.4213344955603504`*^9, 3.4213345369298368`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.3"],
+
+Cell[TextData[{
+ "Thus, the vectors can by multiplied symmetrically (",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"u", "*", "v", "*"}], "..."}], TraditionalForm]]],
+ "), tensorially (",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"u", "\[CircleTimes]", "v", "\[CircleTimes]"}], "..."}], 
+   TraditionalForm]]],
+ "), exteriorly (",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"u", "\[Wedge]", "v", "\[Wedge]"}], "..."}], TraditionalForm]]],
+ "), and formally tensorially (",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"u", "**", "v", "**"}], "..."}], TraditionalForm]]],
+ "). One can as well raise to the tensor power (",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"u", "^", 
+    RowBox[{"\[CircleTimes]", "n"}]}], TraditionalForm]]],
+ ", which is the same as ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["u", 
+    RowBox[{"\[CircleTimes]", "n"}]], TraditionalForm]]],
+ ")."
+}], "Text",
+ CellChangeTimes->{{3.4213345527726173`*^9, 3.421334566682619*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.3"],
+
+Cell["\<\
+Be careful with powers! First, the replacement of the product of equal terms \
+by a power can be banned or allowed, second, if we asked the derivation to \
+act on the product via Leibniz rule, this will not automatically ensue the \
+subsequent transformation rule of the powers; this, however, can be \
+determined separately.\
+\>", "Text",
+ CellChangeTimes->{{3.4213345836169696`*^9, 3.421334594021931*^9}, {
+  3.423231205697894*^9, 3.4232312059983263`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.3"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["1.5. Syntax preprocessor", "Subsection",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->{"c:12", "b:2.1.4"}],
+
+Cell[TextData[{
+ "The input format makes it possible to write down the expressions with \
+vectors in the conventional form, with the operation sign between the terms, \
+e.g., ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"u", "+", 
+    RowBox[{"v", "*", "w"}]}], TraditionalForm]]],
+ ". Further on, however, all the expressions are transformed into the \
+complete format, where all the operations are expressed as functions, i.e., \
+in front of the operands. For example, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"u", "+", 
+    RowBox[{"v", "*", "w"}]}], TraditionalForm]]],
+ " turns into ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["VPlus",
+     FontFamily->"Courier"], "[", 
+    RowBox[{"u", ",", 
+     RowBox[{
+      StyleBox["VTimes",
+       FontFamily->"Courier"], "[", 
+      RowBox[{"v", ",", "w"}], "]"}]}], "]"}], TraditionalForm]]],
+ ". Usually, ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " makes all this itself, whereas dealing with vectors inside ",
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " one has to boot first a special preprocessor. Without this preprocessor, \
+",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " will replace the same signs of operations by scalar operations (e.g., ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"u", "+", 
+    RowBox[{"v", "*", "w"}]}], TraditionalForm]]],
+ " will turn into ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["Plus",
+     FontFamily->"Courier"], "[", 
+    RowBox[{"u", ",", 
+     RowBox[{
+      StyleBox["Times",
+       FontFamily->"Courier"], "[", 
+      RowBox[{"v", ",", "w"}], "]"}]}], "]"}], TraditionalForm]]],
+ ") and it will be impossible to apply the specific transformation rules for \
+vectors."
+}], "Text",
+ CellChangeTimes->{{3.4213346340094304`*^9, 3.4213346589753294`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.4"],
+
+Cell["\<\
+Luckily, there is no problem to peruse the final result in the conventional \
+form, since one does not need a preprocessor to transform the complete format \
+to the output one.\
+\>", "Text",
+ CellChangeTimes->{{3.421334671343114*^9, 3.421334671733675*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.4"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["1.6. Objects of SuperLie", "Subsection",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->{"c:13", "b:2.1.5"}],
+
+Cell[TextData[{
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " treats vector spaces, their elements (vectors), scalars, operations (also \
+known as functions) and properties. Elements-vectors belong to spaces, only \
+elements can be arguments of operations and functions. Only operations and \
+functions can  have properties; formally, the properties are realized as \
+functions with spaces as arguments. Properties of operations are, mainly, \
+computation rules."
+}], "Text",
+ CellChangeTimes->{{3.4213346972703953`*^9, 3.4213347004249315`*^9}, {
+  3.4214306121070013`*^9, 3.421430614400299*^9}, {3.423231452212365*^9, 
+  3.423231468035117*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.5"],
+
+Cell["\<\
+Among spaces, we encounter superspaces, algebras and modules. Examples of \
+elements: numbers, elements of a basis, linear combinations of the basis \
+elements. Examples of operations: addition, parity, grading, the bracket in a \
+Lie algebra, the exterior differential. \
+\>", "Text",
+ CellChangeTimes->{3.4213347162276545`*^9},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.5"],
+
+Cell[TextData[{
+ StyleBox["Examples of properties of spaces",
+  FontVariations->{"Underline"->True}],
+ ". Each space has at least three properties: dimension, basis, the list of \
+declared relatives (e.g., the dual space). Another example of a property of a \
+given module is the algebra that acts on it."
+}], "Text",
+ CellChangeTimes->{{3.423231475015154*^9, 3.4232314770180335`*^9}, {
+  3.4232316172496767`*^9, 3.4232316385002337`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.5"],
+
+Cell[TextData[{
+ StyleBox["Examples of properties of operations",
+  FontVariations->{"Underline"->True}],
+ ": linearity, (anti-)symmetry, Jacobi identity, the input format."
+}], "Text",
+ CellChangeTimes->{{3.4213347376083984`*^9, 3.4213347391806593`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.5"],
+
+Cell[TextData[{
+ "The current properties of an object (say, ",
+ Cell[BoxData[
+  FormBox["G", TraditionalForm]]],
+ ") can be found out by typing  ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"??", "G"}], TraditionalForm]]],
+ " (this is ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ "'s command that reveals too many details) or ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"About", "[", "G", "]"}], TraditionalForm]]],
+ ", a command of ",
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.421334745559832*^9, 3.4213347459303646`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.1.5"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["2. First steps", "Section",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"c:14"],
+
+Cell[TextData[{
+ "To work with SuperLie, you  have to either copy the directory ",
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " to one of the subcatalogs (wherefrom your ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " can take other packages) or additionally tune ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " to the catalog containing these files."
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1],
+
+Cell["Load the package with commands", "Text",
+ CellChangeTimes->{3.421430692051957*^9},
+ TextAlignment->Left,
+ TextJustification->1],
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<SuperLie`\>\"", "]"}]], "Input",
+ TextAlignment->Left,
+ TextJustification->1],
+
+Cell["\<\
+The loading of the package will take a while. Success should be announced by \
+the massage\
+\>", "Text",
+ TextAlignment->Left,
+ TextJustification->1],
+
+Cell[BoxData["\<\"SuperLie Package Version 2.06 installed\\\\nDisclaimer: \
+This software is provided \\\"AS IS\\\", without a warranty of any \
+kind\"\>"], "Print",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{3.4214306989518785`*^9}],
+
+Cell["The command does nothing if the package is already loaded.", "Text",
+ TextAlignment->Left,
+ TextJustification->1],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+2.1. How to construct an algebra or a module over an algebra by hand. Lie \
+algebras \[GothicG]\[GothicL](n) and \[GothicS]\[GothicL](n) and the identity \
+modules over them\
+\>", "Subsection",
+ Evaluatable->False,
+ CellChangeTimes->{{3.421430719251067*^9, 3.421430722575848*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->{"c:15", "b:2.2.0"}],
+
+Cell["\<\
+This section is tougher than the neighboring ones. So you can skip it at the \
+first reading. However, having skimmed through it, you will get a better \
+understanding of certain remarks and subtle points from other sections, even \
+if you will not master constructing a module or an algebra on your own. Let \
+me explain how to construct an algebra. In principle, this is easy. One has \
+to declare a space, describe its basis, describe the multiplication operation \
+as a function which to every pair of basis elements assigns an element of the \
+space and endow this function with bilinearity property.\
+\>", "Text",
+ CellChangeTimes->{{3.4214307387290754`*^9, 3.4214307669997263`*^9}, 
+   3.4214308154493933`*^9, {3.4232319583601694`*^9, 3.4232319592514515`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.0"],
+
+Cell["\<\
+For several \[OpenCurlyDoubleQuote]standard\[CloseCurlyDoubleQuote] Lie \
+algebras, the constructor-functions are written. They automatically execute \
+the routine actions required. For example, the command\
+\>", "Text",
+ CellChangeTimes->{{3.4214308751552467`*^9, 3.4214309510443697`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"glAlgebra", "[", 
+   RowBox[{"g", ",", 
+    RowBox[{"Dim", "->", "5"}]}], "]"}], " "}]], "Input",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.0"],
+
+Cell[BoxData["\<\"g = gl(5)\"\>"], "Output",
+ CellTags->"b:2.2.0"]
+}, Open  ]],
+
+Cell[TextData[{
+ "determines the Lie algebra ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"g", "=", 
+    RowBox[{"\[GothicG]\[GothicL]", "(", "5", ")"}]}], TraditionalForm]]],
+ " with basis ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"g", "[", 
+      RowBox[{"1", ",", "1"}], "]"}], ",", 
+     RowBox[{"g", "[", 
+      RowBox[{"1", ",", "2"}], "]"}], ",", 
+     RowBox[{"...", ",", 
+      RowBox[{"g", "[", 
+       RowBox[{"5", ",", "5"}], "]"}]}]}], "}"}], TraditionalForm]]],
+ "."
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.0"],
+
+Cell[TextData[{
+ "Regrettably, the brackets ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"[", 
+    RowBox[{".", 
+     RowBox[{",", "."}]}], "]"}], TraditionalForm]]],
+ " are already occupied in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ", so the bracket in the Lie algebra will look familiar only in the output \
+format. In the input format one has to type its full name. Usually this is ",
+ StyleBox["Act",
+  FontFamily->"Courier"],
+ " (or ",
+ StyleBox["act",
+  FontFamily->"Courier"],
+ " \[LongDash] for the not-to-be-executed bracket). For example, if you type"
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Act", "[", 
+  RowBox[{
+   RowBox[{"g", "[", 
+    RowBox[{"1", ",", "1"}], "]"}], ",", 
+   RowBox[{
+    RowBox[{"g", "[", 
+     RowBox[{"1", ",", "2"}], "]"}], "+", 
+    RowBox[{"2", " ", 
+     RowBox[{"g", "[", 
+      RowBox[{"3", ",", "4"}], "]"}]}]}]}], "]"}]], "Input",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.0"],
+
+Cell[BoxData[
+ SubscriptBox["g", 
+  RowBox[{"1", ",", "2"}]]], "Output",
+ CellTags->"b:2.2.0"]
+}, Open  ]],
+
+Cell["you will get the computed result, whereas if you type", "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"act", "[", 
+   RowBox[{
+    RowBox[{"g", "[", 
+     RowBox[{"1", ",", "1"}], "]"}], ",", 
+    RowBox[{
+     RowBox[{"g", "[", 
+      RowBox[{"1", ",", "2"}], "]"}], "+", 
+     RowBox[{"2", " ", 
+      RowBox[{"g", "[", 
+       RowBox[{"3", ",", "4"}], "]"}]}]}]}], "]"}], " "}]], "Input",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.0"],
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", 
+    SubscriptBox["g", 
+     RowBox[{"1", ",", "1"}]], "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+    "\[InvisibleSpace]", 
+    SubscriptBox["g", 
+     RowBox[{"1", ",", "2"}]], "\[InvisibleSpace]", "\<\"]\"\>"}],
+   SequenceForm["[", 
+    g[1, 1], ",\[ThinSpace]", 
+    g[1, 2], "]"],
+   Editable->False], "+", 
+  RowBox[{"2", "\[ThinSpace]", 
+   InterpretationBox[
+    RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", 
+     SubscriptBox["g", 
+      RowBox[{"1", ",", "1"}]], "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+     "\[InvisibleSpace]", 
+     SubscriptBox["g", 
+      RowBox[{"3", ",", "4"}]], "\[InvisibleSpace]", "\<\"]\"\>"}],
+    SequenceForm["[", 
+     g[1, 1], ",\[ThinSpace]", 
+     g[3, 4], "]"],
+    Editable->False]}]}]], "Output",
+ CellTags->"b:2.2.0"]
+}, Open  ]],
+
+Cell["the action will not be calculated.", "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.0"],
+
+Cell["\<\
+Having differently determined parameters of the constructor, one may, in \
+addition to the Lie algebra, get its standard module. For example, \
+\>", "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"VectorSpace", "[", 
+   RowBox[{"x", ",", 
+    RowBox[{"Dim", "->", "4"}]}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"declares", " ", "x", " ", "as", " ", "a", " ", "4"}], "-", 
+    RowBox[{"dimensional", " ", "space"}]}], " ", "*)"}]}], "\n", 
+ RowBox[{" ", 
+  RowBox[{"glAlgebra", "[", 
+   RowBox[{"g", ",", "x"}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"similarly", " ", "declares", " ", "g"}], "=", 
+     RowBox[{"gl", 
+      RowBox[{"(", "4", ")"}]}]}], ",", " ", 
+    RowBox[{
+     RowBox[{"endowing", " ", "x", " ", "with", " ", "a", " ", "gl", 
+      RowBox[{"(", "4", ")"}]}], "-", 
+     RowBox[{"module", " ", "structure"}]}]}], " ", "*)"}]}]}], "Input",
+ CellChangeTimes->{3.4232319816436496`*^9},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.0"],
+
+Cell[BoxData["\<\"x is a vector space\"\>"], "Output",
+ CellTags->"b:2.2.0"],
+
+Cell[BoxData["\<\"g = gl(4)\"\>"], "Output",
+ CellTags->"b:2.2.0"]
+}, Open  ]],
+
+Cell[TextData[{
+ "The bilinear function that determines the action of the algebra on the \
+module is also called ",
+ StyleBox["Act",
+  FontFamily->"Courier"],
+ ". For example, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["Act",
+     FontFamily->"Courier"], "[", 
+    RowBox[{
+     RowBox[{"g", "[", 
+      RowBox[{"1", ",", "3"}], "]"}], ",", 
+     RowBox[{
+      RowBox[{"x", "[", "3", "]"}], "+", 
+      RowBox[{"x", "[", "4", "]"}]}]}], "]"}], TraditionalForm]]],
+ " returns ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"x", "[", "1", "]"}], TraditionalForm]]],
+ "."
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.0"],
+
+Cell[TextData[{
+ "The constructor ",
+ StyleBox["slAlgebra",
+  FontFamily->"Courier"],
+ " works similarly: it constructs ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[GothicS]\[GothicL]", "(", "n", ")"}], TraditionalForm]]],
+ ". Its parameters are the same as those of ",
+ StyleBox["glAlgebra",
+  FontFamily->"Courier"],
+ ". The only but important difference is a more complicated basis: \
+off-diagonal elements are expressed with two indices, the diagonal ones with \
+one index. Namely, if ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"g", "=", 
+    RowBox[{"\[GothicG]\[GothicL]", "(", "n", ")"}]}], TraditionalForm]]],
+ ", then for a basis we can take all ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"g", "[", 
+    RowBox[{"i", ",", "j"}], "]"}], TraditionalForm]]],
+ ", whereas if ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"g", "=", 
+    RowBox[{"\[GothicS]\[GothicL]", "(", "n", ")"}]}], TraditionalForm]]],
+ ", then for a basis we can take all ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"g", "[", 
+    RowBox[{"i", ",", "j"}], "]"}], TraditionalForm]]],
+ " for ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"i", "\[NotEqual]", "j"}], TraditionalForm]]],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"g", "[", "i", "]"}], TraditionalForm]]],
+ " such that after identification of ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[GothicS]\[GothicL]", "(", "n", ")"}], TraditionalForm]]],
+ " with a subalgebra of ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[GothicG]\[GothicL]", "(", "n", ")"}], TraditionalForm]]],
+ " we have ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"g", "[", "i", "]"}], "=", 
+    RowBox[{
+     RowBox[{"g", "[", 
+      RowBox[{"i", ",", "i"}], "]"}], "-", 
+     RowBox[{"g", "[", 
+      RowBox[{
+       RowBox[{"i", "+", "1"}], ",", 
+       RowBox[{"i", "+", "1"}]}], "]"}]}]}], TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.421430991462488*^9, 3.4214309932250223`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["2.2. Generators and relations", "Subsection",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->{"c:16", "b:2.2.1"}],
+
+Cell["\<\
+The constructors glAlgebra or slAlgebra do not to compute anything; they only \
+declare.\
+\>", "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.1"],
+
+Cell[TextData[{
+ "More involved constructors generate algebras and modules over them by means \
+of generators and defining relations. These constructors explicitly construct \
+the action table and in doing so it is impossible to avoid computations, \
+sometimes of considerable volume. In cases where the object to be generated \
+may be infinite dimensional, the ability to shear calculations is a must. The \
+parameter ",
+ StyleBox["range",
+  FontSlant->"Italic"],
+ " serves to this purpose. By default the generators given are considered to \
+be of degree 1, their brackets of degree 2; the brackets of the elements of \
+degree 1 with the elements of degree 2 are of degree 3, and so on. The \
+computations are performed until the sum of degrees (exponents) of the \
+elements in the product or bracket surpasses range."
+}], "Text",
+ CellChangeTimes->{{3.42143101345411*^9, 3.421431013644384*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.1"],
+
+Cell[TextData[{
+ "Given explicitly generators ",
+ StyleBox["gen",
+  FontSlant->"Italic"],
+ "... and relations ",
+ StyleBox["rel",
+  FontSlant->"Italic"],
+ "... the constructor ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["FreeLieAlgebra",
+     FontFamily->"Courier"], "[", 
+    RowBox[{"g", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       StyleBox["gen",
+        FontSlant->"Italic"], "..."}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       StyleBox["rel",
+        FontSlant->"Italic"], "..."}], "}"}], ",", 
+     StyleBox["range",
+      FontSlant->"Italic"]}], "]"}], TraditionalForm]]],
+ " constructs a Lie algebra g. In other constructors, the generators and/or \
+relations may be given implicitly. For example, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["CartanMatrixAlgebra",
+     FontFamily->"Courier"], "[", 
+    RowBox[{"g", ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "h", ",", "y"}], "}"}], ",", 
+     StyleBox["matr",
+      FontSlant->"Italic"]}], "]"}], TraditionalForm]]],
+ " constructs a Lie algebra ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"g", "=", 
+    RowBox[{"g", "(", 
+     StyleBox["matr",
+      FontSlant->"Italic"], ")"}]}], TraditionalForm]]],
+ " with Cartan matrix ",
+ StyleBox["matr",
+  FontSlant->"Italic"],
+ ". Its basis consists of vectors ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"h", "[", "i", "]"}], TraditionalForm]]],
+ " (they span the Cartan subalgebra), ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"x", "[", "i", "]"}], TraditionalForm]]],
+ " (these are positive weight vectors corresponding to simple roots) and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"y", "[", "i", "]"}], TraditionalForm]]],
+ " (these are negative weight vectors corresponding to opposite of simple \
+roots). The relations obtained are memorized. The relations are returned by \
+the command ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["GenRel",
+     FontFamily->"Courier"], "[", "g", "]"}], TraditionalForm]]],
+ " while ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["GenBasis",
+     FontFamily->"Courier"], "[", "g", "]"}], TraditionalForm]]],
+ " returns the expression of the basis elements of the ",
+ StyleBox["space",
+  FontSlant->"Italic"],
+ " ",
+ Cell[BoxData[
+  FormBox["g", TraditionalForm]]],
+ " in terms of the ",
+ StyleBox["generators",
+  FontSlant->"Italic"],
+ " of the algebra ",
+ Cell[BoxData[
+  FormBox["g", TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.4214310314499874`*^9, 3.421431069524736*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.1"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "2.3. Example: ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "2"], TraditionalForm]]]
+}], "Subsection",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->{"c:17", "b:2.2.2"}],
+
+Cell[TextData[{
+ "Let as constructing the Lie algebra ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "2"], TraditionalForm]]],
+ " from its Cartan matrix. To be on the safe side, we restrict ourselves to \
+elements of degree up to 50; surely, the list of elements will terminate \
+earlier, but suppose we do not know when."
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.2"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CartanMatrixAlgebra", "[", 
+   RowBox[{"g2", ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "h", ",", "y"}], "}"}], ",", 
+    RowBox[{"(", "\[NegativeThinSpace]", GridBox[{
+       {"2", 
+        RowBox[{"-", "1"}]},
+       {
+        RowBox[{"-", "3"}], "2"}
+      }], "\[NegativeThinSpace]", ")"}], ",", 
+    RowBox[{"GRange", "\[Rule]", "50"}]}], "]"}], " "}]], "Input",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.2"],
+
+Cell[BoxData["14"], "Output",
+ CellTags->"b:2.2.2"]
+}, Open  ]],
+
+Cell["\<\
+In the answer stands the dimension of the Lie algebra constructed.\
+\>", "Text",
+ CellTags->"b:2.2.2"],
+
+Cell["\<\
+We can ask the computer to tell us what is now known about the Lie algebra \
+constructed:\
+\>", "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.2"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"About", "[", "g2", "]"}], " "}]], "Input",
+ CellHorizontalScrolling->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.2"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "Domain", "\[InvisibleSpace]", "\<\": \"\>", "\[InvisibleSpace]", "Vector"}],
+  SequenceForm[Domain, ": ", Vector],
+  Editable->False]], "Print",
+ CellTags->"b:2.2.2"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"Flags", "\[InvisibleSpace]", "\<\": \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "VectorQ", "}"}]}],
+  SequenceForm[Flags, ": ", {VectorQ}],
+  Editable->False]], "Print",
+ CellTags->"b:2.2.2"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"Values", "\[InvisibleSpace]", "\<\": \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"BasisPattern", "\[Rule]", 
+      RowBox[{"_x", "|", "_h", "|", "_y"}]}], ",", 
+     RowBox[{"Dim", "\[Rule]", "14"}], ",", 
+     RowBox[{"PDim", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"14", ",", "0"}], "}"}]}], ",", 
+     RowBox[{"Enum", "\[Rule]", "3"}], ",", 
+     RowBox[{"Bracket", "\[Rule]", "Act"}], ",", 
+     RowBox[{"bracket", "\[Rule]", "act"}], ",", 
+     RowBox[{"TheAlgebra", "\[Rule]", "g2"}], ",", 
+     RowBox[{"GenBasis", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        SubscriptBox["x", "1"], ",", 
+        SubscriptBox["x", "2"], ",", 
+        InterpretationBox[
+         RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", 
+          SubscriptBox["x", "1"], 
+          "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", 
+          SubscriptBox["x", "2"], "\[InvisibleSpace]", "\<\"]\"\>"}],
+         SequenceForm["[", 
+          x[1], ",\[ThinSpace]", 
+          x[2], "]"],
+         Editable->False], ",", 
+        InterpretationBox[
+         RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", 
+          SubscriptBox["x", "2"], 
+          "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", 
+          InterpretationBox[
+           RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", 
+            SubscriptBox["x", "1"], 
+            "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", 
+            SubscriptBox["x", "2"], "\[InvisibleSpace]", "\<\"]\"\>"}],
+           SequenceForm["[", 
+            x[1], ",\[ThinSpace]", 
+            x[2], "]"],
+           Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+         SequenceForm["[", 
+          x[2], ",\[ThinSpace]", 
+          act[
+           x[1], 
+           x[2]], "]"],
+         Editable->False], ",", 
+        InterpretationBox[
+         RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", 
+          SubscriptBox["x", "2"], 
+          "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", 
+          InterpretationBox[
+           RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", 
+            SubscriptBox["x", "2"], 
+            "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", 
+            InterpretationBox[
+             RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", 
+              SubscriptBox["x", "1"], 
+              "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+              "\[InvisibleSpace]", 
+              SubscriptBox["x", "2"], "\[InvisibleSpace]", "\<\"]\"\>"}],
+             SequenceForm["[", 
+              x[1], ",\[ThinSpace]", 
+              x[2], "]"],
+             Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+           SequenceForm["[", 
+            x[2], ",\[ThinSpace]", 
+            act[
+             x[1], 
+             x[2]], "]"],
+           Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+         SequenceForm["[", 
+          x[2], ",\[ThinSpace]", 
+          act[
+           x[2], 
+           act[
+            x[1], 
+            x[2]]], "]"],
+         Editable->False], ",", 
+        InterpretationBox[
+         RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", 
+          InterpretationBox[
+           RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", 
+            SubscriptBox["x", "1"], 
+            "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", 
+            SubscriptBox["x", "2"], "\[InvisibleSpace]", "\<\"]\"\>"}],
+           SequenceForm["[", 
+            x[1], ",\[ThinSpace]", 
+            x[2], "]"],
+           Editable->False], "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+          "\[InvisibleSpace]", 
+          InterpretationBox[
+           RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", 
+            SubscriptBox["x", "2"], 
+            "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", 
+            InterpretationBox[
+             RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", 
+              SubscriptBox["x", "1"], 
+              "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+              "\[InvisibleSpace]", 
+              SubscriptBox["x", "2"], "\[InvisibleSpace]", "\<\"]\"\>"}],
+             SequenceForm["[", 
+              x[1], ",\[ThinSpace]", 
+              x[2], "]"],
+             Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+           SequenceForm["[", 
+            x[2], ",\[ThinSpace]", 
+            act[
+             x[1], 
+             x[2]], "]"],
+           Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+         SequenceForm["[", 
+          act[
+           x[1], 
+           x[2]], ",\[ThinSpace]", 
+          act[
+           x[2], 
+           act[
+            x[1], 
+            x[2]]], "]"],
+         Editable->False]}], "}"}]}], ",", 
+     RowBox[{"GenRel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         InterpretationBox[
+          RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", 
+           SubscriptBox["x", "1"], 
+           "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", 
+           
+           InterpretationBox[
+            RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", 
+             SubscriptBox["x", "1"], 
+             "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+             "\[InvisibleSpace]", 
+             SubscriptBox["x", "2"], "\[InvisibleSpace]", "\<\"]\"\>"}],
+            SequenceForm["[", 
+             x[1], ",\[ThinSpace]", 
+             x[2], "]"],
+            Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+          SequenceForm["[", 
+           x[1], ",\[ThinSpace]", 
+           act[
+            x[1], 
+            x[2]], "]"],
+          Editable->False], "\[Rule]", "0"}], ",", 
+        RowBox[{
+         InterpretationBox[
+          RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", 
+           SubscriptBox["x", "2"], 
+           "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", 
+           
+           InterpretationBox[
+            RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", 
+             SubscriptBox["x", "2"], 
+             "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+             "\[InvisibleSpace]", 
+             InterpretationBox[
+              RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", 
+               SubscriptBox["x", "2"], 
+               "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+               "\[InvisibleSpace]", 
+               InterpretationBox[
+                RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", 
+                 SubscriptBox["x", "1"], 
+                 "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", 
+                 "\[InvisibleSpace]", 
+                 SubscriptBox["x", "2"], "\[InvisibleSpace]", "\<\"]\"\>"}],
+                SequenceForm["[", 
+                 x[1], ",\[ThinSpace]", 
+                 x[2], "]"],
+                Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+              SequenceForm["[", 
+               x[2], ",\[ThinSpace]", 
+               act[
+                x[1], 
+                x[2]], "]"],
+              Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+            SequenceForm["[", 
+             x[2], ",\[ThinSpace]", 
+             act[
+              x[2], 
+              act[
+               x[1], 
+               x[2]]], "]"],
+            Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+          SequenceForm["[", 
+           x[2], ",\[ThinSpace]", 
+           act[
+            x[2], 
+            act[
+             x[2], 
+             act[
+              x[1], 
+              x[2]]]], "]"],
+          Editable->False], "\[Rule]", "0"}]}], "}"}]}], ",", 
+     RowBox[{"GRange", "\[Rule]", "50"}]}], "}"}]}],
+  SequenceForm[Values, ": ", {BasisPattern -> Alternatives[
+      Blank[x], 
+      Blank[h], 
+      Blank[y]], Dim -> 14, PDim -> {14, 0}, Enum -> 3, Bracket -> Act, 
+    bracket -> act, TheAlgebra -> g2, GenBasis -> {
+      x[1], 
+      x[2], 
+      act[
+       x[1], 
+       x[2]], 
+      act[
+       x[2], 
+       act[
+        x[1], 
+        x[2]]], 
+      act[
+       x[2], 
+       act[
+        x[2], 
+        act[
+         x[1], 
+         x[2]]]], 
+      act[
+       act[
+        x[1], 
+        x[2]], 
+       act[
+        x[2], 
+        act[
+         x[1], 
+         x[2]]]]}, GenRel -> {act[
+        x[1], 
+        act[
+         x[1], 
+         x[2]]] -> 0, act[
+        x[2], 
+        act[
+         x[2], 
+         act[
+          x[2], 
+          act[
+           x[1], 
+           x[2]]]]] -> 0}, GRange -> 50}],
+  Editable->False]], "Print",
+ CellTags->"b:2.2.2"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["2.4. Subalgebras and submodules", "Subsection",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->{"c:18", "b:2.2.3"}],
+
+Cell[TextData[{
+ "If there is no standard constructor of a Lie algebra or a module you need, \
+the simplest way out is to try to realize the structure needed as a \
+substructure  of one of the standard structures or, which is more difficult, \
+as a quotient. If the dimension is not too high, the basis (or, at least, \
+generators) can be listed explicitly and then you can apply one of the \
+functions ",
+ StyleBox["SubAlgebra, SubModule, RestrictModule, Ideal",
+  FontFamily->"Courier"],
+ ".\nThese functions, as well as ",
+ StyleBox["CartanMatrixAlgebra",
+  FontFamily->"Courier"],
+ ", may be called ",
+ StyleBox["computing constructors",
+  FontSlant->"Italic"],
+ ". By generating the corresponding subspace by generators given  (or testing \
+its invariance) they determine a new basis and recalculate the action table \
+with respect to it (in particular, ",
+ StyleBox["SubAlgebra",
+  FontFamily->"Courier"],
+ " enables one to execute a practically important change of a complicated \
+basis with a one-index one); at the same time, as a by-product,  they compute \
+and memorize the relations obtained."
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.3"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Example 2.4.1. Construct \[GothicS]\[GothicL](2)\[CirclePlus]\[GothicS]\
+\[GothicL](2).\
+\>", "Subsubsection",
+ CellTags->{"c:19", "b:2.2.3"}],
+
+Cell["\<\
+Let us realize \[GothicS]\[GothicL](2)\[CirclePlus]\[GothicS]\[GothicL](2) as \
+a subalgebra of \[GothicG]\[GothicL](4):\
+\>", "Text",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.3"],
+
+Cell["\<\
+We are constructing g=\[GothicG]\[GothicL](4). Its elements are g[i,j]:\
+\>", "Text",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"VectorSpace", "[", 
+  RowBox[{"x", ",", 
+   RowBox[{"Dim", "\[Rule]", "4"}]}], "]"}], "\n", 
+ RowBox[{"glAlgebra", "[", 
+  RowBox[{"g", ",", "x"}], "]"}]}], "Input",
+ CellTags->"b:2.2.3"],
+
+Cell[BoxData["\<\"x is a vector space\"\>"], "Output",
+ CellTags->"b:2.2.3"],
+
+Cell[BoxData["\<\"g = gl(4)\"\>"], "Output",
+ CellTags->"b:2.2.3"]
+}, Open  ]],
+
+Cell["This is a list of 4 generators:", "Text",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"generators", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"s1", "\[Rule]", 
+     RowBox[{"g", "[", 
+      RowBox[{"1", ",", "2"}], "]"}]}], ",", 
+    RowBox[{"s2", "\[Rule]", 
+     RowBox[{"g", "[", 
+      RowBox[{"2", ",", "1"}], "]"}]}], ",", 
+    RowBox[{"s3", "\[Rule]", 
+     RowBox[{"g", "[", 
+      RowBox[{"3", ",", "4"}], "]"}]}], ",", 
+    RowBox[{"s4", "\[Rule]", 
+     RowBox[{"g", "[", 
+      RowBox[{"4", ",", "3"}], "]"}]}]}], "}"}]}]], "Input",
+ CellTags->"b:2.2.3"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"s1", "\[Rule]", 
+    SubscriptBox["g", 
+     RowBox[{"1", ",", "2"}]]}], ",", 
+   RowBox[{"s2", "\[Rule]", 
+    SubscriptBox["g", 
+     RowBox[{"2", ",", "1"}]]}], ",", 
+   RowBox[{"s3", "\[Rule]", 
+    SubscriptBox["g", 
+     RowBox[{"3", ",", "4"}]]}], ",", 
+   RowBox[{"s4", "\[Rule]", 
+    SubscriptBox["g", 
+     RowBox[{"4", ",", "3"}]]}]}], "}"}]], "Output",
+ CellTags->"b:2.2.3"]
+}, Open  ]],
+
+Cell["Compute the subalgebra", "Text",
+ CellTags->"b:2.2.3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SubAlgebra", "[", 
+  RowBox[{"s", ",", "g", ",", "generators"}], "]"}]], "Input",
+ CellTags->"b:2.2.3"],
+
+Cell[BoxData["\<\"s is a sublagebra in g\"\>"], "Output",
+ CellTags->"b:2.2.3"]
+}, Open  ]],
+
+Cell[TextData[{
+ "This is the basis of ",
+ Cell[BoxData[
+  FormBox["s", TraditionalForm]]],
+ ":"
+}], "Text",
+ CellTags->"b:2.2.3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Basis", "[", "s", "]"}]], "Input",
+ CellTags->"b:2.2.3"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   SubscriptBox["s", "1"], ",", 
+   SubscriptBox["s", "2"], ",", 
+   SubscriptBox["s", "3"], ",", 
+   SubscriptBox["s", "4"], ",", 
+   SubscriptBox["s", "5"], ",", 
+   SubscriptBox["s", "6"]}], "}"}]], "Output",
+ CellTags->"b:2.2.3"]
+}, Open  ]],
+
+Cell[TextData[{
+ "This is the image of the basis of ",
+ Cell[BoxData[
+  FormBox["s", TraditionalForm]]],
+ " in ",
+ Cell[BoxData[
+  FormBox["g", TraditionalForm]]],
+ ":"
+}], "Text",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Image", "[", "s", "]"}]], "Input",
+ CellTags->"b:2.2.3"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   SubscriptBox["g", 
+    RowBox[{"1", ",", "2"}]], ",", 
+   SubscriptBox["g", 
+    RowBox[{"2", ",", "1"}]], ",", 
+   SubscriptBox["g", 
+    RowBox[{"3", ",", "4"}]], ",", 
+   SubscriptBox["g", 
+    RowBox[{"4", ",", "3"}]], ",", 
+   RowBox[{
+    SubscriptBox["g", 
+     RowBox[{"1", ",", "1"}]], "-", 
+    SubscriptBox["g", 
+     RowBox[{"2", ",", "2"}]]}], ",", 
+   RowBox[{
+    SubscriptBox["g", 
+     RowBox[{"3", ",", "3"}]], "-", 
+    SubscriptBox["g", 
+     RowBox[{"4", ",", "4"}]]}]}], "}"}]], "Output",
+ CellTags->"b:2.2.3"]
+}, Open  ]],
+
+Cell["This is the basis of s in terms of generators:", "Text",
+ CellTags->"b:2.2.3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"GenBasis", "[", "s", "]"}]], "Input",
+ CellTags->"b:2.2.3"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"s1", ",", "s2", ",", "s3", ",", "s4", ",", 
+   InterpretationBox[
+    RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", "s1", 
+     "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", "s2", 
+     "\[InvisibleSpace]", "\<\"]\"\>"}],
+    SequenceForm["[", s1, ",\[ThinSpace]", s2, "]"],
+    Editable->False], ",", 
+   InterpretationBox[
+    RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", "s3", 
+     "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", "s4", 
+     "\[InvisibleSpace]", "\<\"]\"\>"}],
+    SequenceForm["[", s3, ",\[ThinSpace]", s4, "]"],
+    Editable->False]}], "}"}]], "Output",
+ CellTags->"b:2.2.3"]
+}, Open  ]],
+
+Cell["These are the relations between the generators:", "Text",
+ CellTags->"b:2.2.3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"GenRel", "[", "s", "]"}]], "Input",
+ CellTags->"b:2.2.3"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    InterpretationBox[
+     RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", "s1", 
+      "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", "s3",
+       "\[InvisibleSpace]", "\<\"]\"\>"}],
+     SequenceForm["[", s1, ",\[ThinSpace]", s3, "]"],
+     Editable->False], "\[Equal]", "0"}], ",", 
+   RowBox[{
+    InterpretationBox[
+     RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", "s1", 
+      "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", "s4",
+       "\[InvisibleSpace]", "\<\"]\"\>"}],
+     SequenceForm["[", s1, ",\[ThinSpace]", s4, "]"],
+     Editable->False], "\[Equal]", "0"}], ",", 
+   RowBox[{
+    InterpretationBox[
+     RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", "s2", 
+      "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", "s3",
+       "\[InvisibleSpace]", "\<\"]\"\>"}],
+     SequenceForm["[", s2, ",\[ThinSpace]", s3, "]"],
+     Editable->False], "\[Equal]", "0"}], ",", 
+   RowBox[{
+    InterpretationBox[
+     RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", "s2", 
+      "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", "s4",
+       "\[InvisibleSpace]", "\<\"]\"\>"}],
+     SequenceForm["[", s2, ",\[ThinSpace]", s4, "]"],
+     Editable->False], "\[Equal]", "0"}], ",", 
+   RowBox[{
+    InterpretationBox[
+     RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", "s1", 
+      "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", 
+      InterpretationBox[
+       RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", "s1", 
+        "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", 
+        "s2", "\[InvisibleSpace]", "\<\"]\"\>"}],
+       SequenceForm["[", s1, ",\[ThinSpace]", s2, "]"],
+       Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+     SequenceForm["[", s1, ",\[ThinSpace]", 
+      act[s1, s2], "]"],
+     Editable->False], "\[Equal]", 
+    RowBox[{
+     RowBox[{"-", "2"}], "\[ThinSpace]", "s1"}]}], ",", 
+   RowBox[{
+    InterpretationBox[
+     RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", "s2", 
+      "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", 
+      InterpretationBox[
+       RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", "s1", 
+        "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", 
+        "s2", "\[InvisibleSpace]", "\<\"]\"\>"}],
+       SequenceForm["[", s1, ",\[ThinSpace]", s2, "]"],
+       Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+     SequenceForm["[", s2, ",\[ThinSpace]", 
+      act[s1, s2], "]"],
+     Editable->False], "\[Equal]", 
+    RowBox[{"2", "\[ThinSpace]", "s2"}]}], ",", 
+   RowBox[{
+    InterpretationBox[
+     RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", "s3", 
+      "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", 
+      InterpretationBox[
+       RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", "s3", 
+        "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", 
+        "s4", "\[InvisibleSpace]", "\<\"]\"\>"}],
+       SequenceForm["[", s3, ",\[ThinSpace]", s4, "]"],
+       Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+     SequenceForm["[", s3, ",\[ThinSpace]", 
+      act[s3, s4], "]"],
+     Editable->False], "\[Equal]", 
+    RowBox[{
+     RowBox[{"-", "2"}], "\[ThinSpace]", "s3"}]}], ",", 
+   RowBox[{
+    InterpretationBox[
+     RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", "s4", 
+      "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", 
+      InterpretationBox[
+       RowBox[{"\<\"[\"\>", "\[InvisibleSpace]", "s3", 
+        "\[InvisibleSpace]", "\<\",\[ThinSpace]\"\>", "\[InvisibleSpace]", 
+        "s4", "\[InvisibleSpace]", "\<\"]\"\>"}],
+       SequenceForm["[", s3, ",\[ThinSpace]", s4, "]"],
+       Editable->False], "\[InvisibleSpace]", "\<\"]\"\>"}],
+     SequenceForm["[", s4, ",\[ThinSpace]", 
+      act[s3, s4], "]"],
+     Editable->False], "\[Equal]", 
+    RowBox[{"2", "\[ThinSpace]", "s4"}]}]}], "}"}]], "Output",
+ CellTags->"b:2.2.3"]
+}, Open  ]],
+
+Cell["\<\
+It is possible to bracket the elements of a subalgebra with the elements of \
+the algebra (we get an element of the algebra g):\
+\>", "Text",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Act", "[", 
+  RowBox[{
+   RowBox[{"s", "[", "3", "]"}], ",", 
+   RowBox[{"g", "[", 
+    RowBox[{"1", ",", "3"}], "]"}]}], "]"}]], "Input",
+ CellTags->"b:2.2.3"],
+
+Cell[BoxData[
+ RowBox[{"-", "\[ThinSpace]", 
+  SubscriptBox["g", 
+   RowBox[{"1", ",", "4"}]]}]], "Output",
+ CellTags->"b:2.2.3"]
+}, Open  ]],
+
+Cell["\<\
+One may not, alas!, bracket the elements of the algebra with those of a \
+subalgebra nor act with a subalgebra on a module over the algebra. This \
+action, however, is often needed and we will learn how to do it in a \
+roundabout way by setting:
+Act[s[i_],m[j_]]^:=Act[Image[s][[i]], m[j]].\
+\>", "Text",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.3"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Example 2.4.2. Construct the standard \[GothicO](4)-module.\
+\>", "Subsubsection",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->{"c:20", "b:2.2.3"}],
+
+Cell[TextData[{
+ "Let us realize the standard \[GothicO](4)-module as the restriction of the \
+standard \[GothicG]\[GothicL](4)-module on the subalgebra \[GothicO](4) \
+(consisting, depending on the initial problem, of anti-symmetric matrices or \
+of the matrices X such that ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["X", "t"], TraditionalForm]]],
+ "B+BX=0, where B is not necessarily the identity matrix, just an invertible \
+symmetric matrix)."
+}], "Text",
+ CellChangeTimes->{{3.4214310992775183`*^9, 3.4214311008397646`*^9}},
+ CellTags->"b:2.2.3"],
+
+Cell["<not written yet>", "Text",
+ CellTags->"b:2.2.3"],
+
+Cell["\<\
+(* now x is simultaneously \[GothicG]\[GothicL](4) and \[GothicO](4)-module \
+*)
+\
+\>", "Text",
+ CellTags->"b:2.2.3"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["2.5. Vector equations", "Subsection",
+ Evaluatable->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->{"c:21", "b:2.2.4"}],
+
+Cell["\<\
+Consider \[GothicG]\[GothicL](4) as a module over itself (with respect to the \
+adjoint action).\
+\>", "Text",
+ CellTags->"b:2.2.4"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"glAlgebra", "[", 
+  RowBox[{"g", ",", 
+   RowBox[{"Dim", "\[Rule]", "4"}]}], "]"}]], "Input",
+ CellTags->"b:2.2.4"],
+
+Cell[BoxData["\<\"g = gl(4)\"\>"], "Output",
+ CellTags->"b:2.2.4"]
+}, Open  ]],
+
+Cell[TextData[{
+ "Suppose we wish to decompose it into irreducible submodules. For this, it \
+suffices (since",
+ " \[GothicG]\[GothicL](4) ",
+ "is reductive and the characteristic of the field is not equal to 2) to find \
+the highest and the lowest weight vectors. In our case, it suffices, as is \
+known from the representation theory, to find either highest or lowest weight \
+vectors. Let us find the highest weight ones. \nLet ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ " be the expression of an arbitrary element of \[GothicG]\[GothicL](4) with \
+indefinite coefficients:"
+}], "Text",
+ CellChangeTimes->{{3.421431128189091*^9, 3.4214312042584734`*^9}},
+ CellTags->"b:2.2.4"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"gsum", "=", 
+  RowBox[{"GeneralSum", "[", 
+   RowBox[{"c", ",", 
+    RowBox[{"Basis", "[", "g", "]"}]}], "]"}]}]], "Input",
+ PageWidth->Infinity,
+ CellHorizontalScrolling->False,
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox["c", "1"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"1", ",", "1"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "2"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"2", ",", "2"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "3"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"3", ",", "3"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "4"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"4", ",", "4"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "5"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"1", ",", "2"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "6"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"2", ",", "3"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "7"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"3", ",", "4"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "8"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"1", ",", "3"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "9"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"2", ",", "4"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "10"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"1", ",", "4"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "11"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"2", ",", "1"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "12"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"3", ",", "2"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "13"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"4", ",", "3"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "14"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"3", ",", "1"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "15"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"4", ",", "2"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "16"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"4", ",", "1"}]]}]}]], "Output",
+ CellTags->"b:2.2.4"]
+}, Open  ]],
+
+Cell["\<\
+The highest weight vectors are the vectors annihilated by (bracketing with) \
+g[1,2], g[2,3], g[3,4]:\
+\>", "Text",
+ CellChangeTimes->{{3.421431225889578*^9, 3.4214312275719967`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.4"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"raise", "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"g", "[", 
+     RowBox[{"1", ",", "2"}], "]"}], ",", 
+    RowBox[{"g", "[", 
+     RowBox[{"2", ",", "3"}], "]"}], ",", 
+    RowBox[{"g", "[", 
+     RowBox[{"3", ",", "4"}], "]"}]}], "}"}]}], "\n", 
+ RowBox[{"GeneralZero", "[", 
+  RowBox[{"raise", ",", "gsum", ",", "c"}], "]"}]}], "Input",
+ CellTags->"b:2.2.4"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   SubscriptBox["g", 
+    RowBox[{"1", ",", "2"}]], ",", 
+   SubscriptBox["g", 
+    RowBox[{"2", ",", "3"}]], ",", 
+   SubscriptBox["g", 
+    RowBox[{"3", ",", "4"}]]}], "}"}]], "Output",
+ CellTags->"b:2.2.4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox["c", "1"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"1", ",", "1"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "1"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"2", ",", "2"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "1"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"3", ",", "3"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "1"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"4", ",", "4"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "2"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"1", ",", "4"}]]}]}]], "Output",
+ CellTags->"b:2.2.4"]
+}, Open  ]],
+
+Cell[TextData[{
+ "The latter expression means that there are two highest weight vectors: ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["g", 
+    RowBox[{"1", ",", "4"}]], TraditionalForm]]],
+ " (it generates s\[GothicL](4)) and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"E", "=", 
+    RowBox[{
+     SubscriptBox["g", 
+      RowBox[{"1", ",", "1"}]], "+", 
+     SubscriptBox["g", 
+      RowBox[{"2", ",", "2"}]], "+", 
+     SubscriptBox["g", 
+      RowBox[{"3", ",", "3"}]], "+", 
+     SubscriptBox["g", 
+      RowBox[{"4", ",", "4"}]]}]}], TraditionalForm]]],
+ " (it generates the one-dimensional center)."
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.4"],
+
+Cell[TextData[{
+ "Let us describe the instruments for compiling and solving of equations in \
+more detail.\n\n",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["GeneralSum",
+     FontFamily->"Courier"], "[", 
+    RowBox[{"c", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       SubscriptBox["v", "1"], ",", "..."}], "}"}]}], "]"}], 
+   TraditionalForm]]],
+ " declares the ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"c", "[", "i", "]"}], TraditionalForm]]],
+ " as scalars and returns the vector sum of ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["v", "1"], TraditionalForm]]],
+ ",... with indefinite coefficients ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"c", "[", "1", "]"}], TraditionalForm]]],
+ ",...\n\nLet now ",
+ Cell[BoxData[
+  FormBox["equ", TraditionalForm]]],
+ " be a vector equation ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{"vec1", "\[Equal]", "vec2"}], ")"}], TraditionalForm]]],
+ " containing unknown scalars of the form ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"c", "[", "i", "]"}], TraditionalForm]]],
+ "; let ",
+ Cell[BoxData[
+  FormBox["s", TraditionalForm]]],
+ " be an indefinite sum from the previous paragraph. Then ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["GeneralSolve",
+     FontFamily->"Courier"], "[", 
+    RowBox[{"equ", ",", "s", ",", "c"}], "]"}], TraditionalForm]]],
+ " solves the vector equation equ for unknowns ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"c", "[", "1", "]"}], TraditionalForm]]],
+ ",... , substitutes the solutions found into ",
+ Cell[BoxData[
+  FormBox["s", TraditionalForm]]],
+ ", renumbers the remaining unknowns without gaps and returns the expression \
+obtained. \n\n",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["GeneralZero",
+     FontFamily->"Courier"], "[", 
+    RowBox[{"g", ",", "s", ",", "c"}], "]"}], TraditionalForm]]],
+ " solves the equation ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     StyleBox["Act",
+      FontFamily->"Courier"], "[", 
+     RowBox[{"g", ",", "s"}], "]"}], "\[Equal]", "0"}], TraditionalForm]]],
+ " (or a system of equations if ",
+ Cell[BoxData[
+  FormBox["g", TraditionalForm]]],
+ " is a list). The result is the same as that of ",
+ Cell[BoxData[
+  FormBox["GeneralSolve", TraditionalForm]],
+  FontFamily->"Courier"],
+ ". The parameter ",
+ Cell[BoxData[
+  FormBox["s", TraditionalForm]]],
+ " may be a list of vectors, in which case an indeterminate sum with \
+coefficients ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"c", "[", "i", "]"}], TraditionalForm]]],
+ " is taken.\n\nWe could have spared the computation of, say gsum, in the \
+previous example but write immediately ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["GeneralZero",
+     FontFamily->"Courier"], "[", 
+    RowBox[{"raise", ",", 
+     RowBox[{
+      StyleBox["Basis",
+       FontFamily->"Courier"], "[", "g", "]"}], ",", "c"}], "]"}], 
+   TraditionalForm]]],
+ ". The result would have been the same.\n\n",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["GeneralReduce",
+     FontFamily->"Courier"], "[", 
+    RowBox[{"s", ",", "c"}], "]"}], TraditionalForm]]],
+ " eliminates the surplus coefficients in the indeterminate sum ",
+ Cell[BoxData[
+  FormBox["s", TraditionalForm]]],
+ ", renumbers the remaining coefficients and returns the result. It is \
+convenient to use this function when the dimension of the space with elements \
+of the form ",
+ Cell[BoxData[
+  FormBox["s", TraditionalForm]]],
+ " is smaller than the number of coefficients.\n\nFor example, suppose we \
+wish to find out the dimension of the image of the operator ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"ad", "(", 
+    RowBox[{"g", "[", 
+     RowBox[{"1", ",", "2"}], "]"}], ")"}], TraditionalForm]]],
+ ". Compose ",
+ StyleBox["gsum", "Name"],
+ " as in the last example and execute ",
+ StyleBox["GeneralReduce", "Name"],
+ ":"
+}], "Text",
+ CellChangeTimes->{{3.4214312532989902`*^9, 3.421431259277587*^9}, {
+  3.421431310341013*^9, 3.4214313105112576`*^9}, {3.4232322836278815`*^9, 
+  3.4232323051488276`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:2.2.4"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"gsum", "=", 
+   RowBox[{"GeneralSum", "[", 
+    RowBox[{"c", ",", 
+     RowBox[{"Basis", "[", "g", "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"GeneralReduce", "[", 
+  RowBox[{
+   RowBox[{"Act", "[", 
+    RowBox[{
+     RowBox[{"g", "[", 
+      RowBox[{"1", ",", "2"}], "]"}], ",", "gsum"}], "]"}], ",", "c"}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.42323232129204*^9, 3.4232323238557262`*^9}},
+ CellTags->"b:2.2.4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"-", 
+    SubscriptBox["c", "1"]}], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"1", ",", "2"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "2"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"1", ",", "3"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "3"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"1", ",", "4"}]]}], "+", 
+  RowBox[{
+   SubscriptBox["c", "4"], "\[ThinSpace]", 
+   RowBox[{"(", 
+    RowBox[{
+     SubscriptBox["g", 
+      RowBox[{"1", ",", "1"}]], "-", 
+     SubscriptBox["g", 
+      RowBox[{"2", ",", "2"}]]}], ")"}]}], "-", 
+  RowBox[{
+   SubscriptBox["c", "5"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"3", ",", "2"}]]}], "-", 
+  RowBox[{
+   SubscriptBox["c", "6"], "\[ThinSpace]", 
+   SubscriptBox["g", 
+    RowBox[{"4", ",", "2"}]]}]}]], "Output",
+ CellTags->"b:2.2.4"]
+}, Open  ]],
+
+Cell["\<\
+
+We get an expression with 6 indeterminate coefficients, so, clearly, the \
+dimension of the image is equal to 6.\
+\>", "Text",
+ CellTags->"b:2.2.4"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["3. Algebras and superalgebras: tougher problems ", "Section",
+ Evaluatable->False,
+ CellTags->"c:22"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+3.1. Superspaces: superdimension and parity. Gradings and weights\
+\>", "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:23", "b:2.3.0"}],
+
+Cell[TextData[{
+ "A powerful tool for computation of Lie algebra cohomology are various \
+gradings of both the Lie algebra under the study and the module of \
+coefficients, e.g., parity, degree, weight. In ",
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ ", the gradings are realized as functions on the elements of the spaces. To \
+determine these functions, it suffices to give their values on the basis \
+elements or on the generators (for an algebra or a module); their value on \
+the other elements is defined via linearity by means of the bracketing or by \
+action.\n\nIt goes without saying that a grading thus defined may turn out to \
+be self-contradictory. ",
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " does not trace the contradictions and will return a chance result, so \
+watch out!\n\nTo be graded (to be homogeneous) is a property of the operation \
+that can be appointed or cancelled. If the operation ",
+ Cell[BoxData[
+  FormBox["Op", TraditionalForm]]],
+ " is graded, the following rule applies: \n\n",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"Deg", "[", 
+     RowBox[{"Op", "[", 
+      RowBox[{"a", ",", "b"}], "]"}], "]"}], "=", 
+    RowBox[{
+     RowBox[{"Deg", "[", "a", "]"}], "+", 
+     RowBox[{"Deg", "[", "b", "]"}]}]}], TraditionalForm]]],
+ " \n\nfor all types of gradings. To see if the operation ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox["Op",
+    FontFamily->"Courier"], TraditionalForm]]],
+ " is graded, apply the function ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox["GradedQ",
+    FontFamily->"Courier"], TraditionalForm]]],
+ ".\n\nObserve that the superstructuring or producing constructors endow the \
+space produced with a grading using the gradings of the initial spaces. \
+Therefore to determine, for example, a grading on the Poisson algebra given \
+on a space ",
+ Cell[BoxData[
+  FormBox["sp", TraditionalForm]]],
+ ", amounts to the sequence of the following operations: to define the \
+weights on this space sp, then construct its symmetric algebra ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["S", "*"], "(", "sp", ")"}], TraditionalForm]]],
+ " with the grading induced, and then make ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["S", "*"], "(", "sp", ")"}], TraditionalForm]]],
+ " into the Poisson algebra with the new grading induced from ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["S", "*"], "(", "sp", ")"}], TraditionalForm]]],
+ ".\n\n",
+ StyleBox["Parity",
+  FontWeight->"Bold"],
+ ". This is the grading \[Dash] called P \[Dash] by residues modulo 2, i.e.,  \
+its values are ",
+ Cell[BoxData[
+  FormBox[
+   OverscriptBox["0", "_"], TraditionalForm]]],
+ " or ",
+ Cell[BoxData[
+  FormBox[
+   OverscriptBox["1", "_"], TraditionalForm]]],
+ ". It is given, as any grading is always given, on the basis elements of the \
+space or on the generators of the algebra or the module. When given, the Sign \
+Rule is automatically taken into account in all products (brackets). If the \
+parity is not given but should be taken into account, the answers will \
+contain factors of the form ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{"-", "1"}], ")"}], 
+    RowBox[{"P", "[", "x", "]"}]], TraditionalForm]]],
+ ". \n\nThe simplest way to determine a parity is to declare, simultaneously \
+with the announcement of the space the list of dimensions of the even and odd \
+parts of the space with the help of an optional argument, ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox["Dim",
+    FontFamily->"Courier"], TraditionalForm]]],
+ ". For example, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["VectorSpace", "Name"], "[", 
+    RowBox[{"v", ",", 
+     RowBox[{
+      StyleBox["Dim", "Name"], "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", "14"}], "}"}]}]}], "]"}], TraditionalForm]]],
+ " makes the first 6 elements of the basis \[LongDash] ",
+ StyleBox["v",
+  FontSlant->"Italic"],
+ "[1] to ",
+ StyleBox["v",
+  FontSlant->"Italic"],
+ "[6] \[LongDash] even the other 14 \[LongDash] ",
+ StyleBox["v",
+  FontSlant->"Italic"],
+ "[7] to ",
+ StyleBox["v",
+  FontSlant->"Italic"],
+ "[20] \[LongDash] odd. This was a description of the basis of the superspace \
+in the ",
+ StyleBox["standard",
+  FontSlant->"Italic"],
+ " format. For a ",
+ StyleBox["nonstandard format",
+  FontSlant->"Italic"],
+ " of the basis, ",
+ StyleBox["Dim",
+  FontFamily->"Courier"],
+ " lists the dimensions, starting with even vectors, e.g., ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["Dim", "Name"], "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "3", ",", "14", ",", "15"}], "}"}]}], 
+   TraditionalForm]]],
+ " makes the first 3 and the last 15 elements of the basis odd, the rest of \
+the basis vectors even. \n\nObserve that declaring ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"Dim", "\[Rule]", 
+    RowBox[{"(", 
+     RowBox[{"6", "|", "14"}], ")"}]}], TraditionalForm]]],
+ " we determine a superdimension without affecting the parity of the basis \
+elements!\n\nIn either case the first and/or the last elements of the list of \
+arguments of ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox["Dim",
+    FontFamily->"Courier"], TraditionalForm]]],
+ " may be ",
+ Cell[BoxData[
+  FormBox["Infinity", TraditionalForm]]],
+ ", determining an infinite dimension of the component.\n\nAnother method to \
+determine parity: explicitly determine the list of parities of ",
+ Cell[BoxData[
+  FormBox[
+   OverscriptBox["0", "_"], TraditionalForm]]],
+ "'s and ",
+ Cell[BoxData[
+  FormBox[
+   OverscriptBox["1", "_"], TraditionalForm]]],
+ "'s after the argument ",
+ Cell[BoxData[
+  FormBox["PList", TraditionalForm]]],
+ ". For example, the arguments ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"PList", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1", ",", "1", ",", "0", ",", "0", ",", "0"}], "}"}]}],
+    TraditionalForm]]],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"Dim", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "2", ",", "3"}], "}"}]}], TraditionalForm]]],
+ " are equivalent.\n\nDetermined on a basis, the parity becomes a property of \
+the space ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ ". To see the lists of dimensions and parities determined on ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ ", type ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"PDim", "[", "v", "]"}], TraditionalForm]]],
+ " or ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"PList", "[", "v", "]"}], TraditionalForm]]],
+ ". The function ",
+ StyleBox["P",
+  FontFamily->"Courier"],
+ " returns the parity of the element.\n\n",
+ StyleBox["Grading",
+  FontWeight->"Bold"],
+ " is a generic term to denote any grading by means of scalars. These scalars \
+usually are integers, but noninteger and other scalar variables and \
+expressions may be used. Same as parity, the grading is always given on the \
+basis elements of the space, or on the generators of the algebra or the \
+module. The parameter ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["GList", "Name"], "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      SubscriptBox["g", "1"], ",", " ", 
+      RowBox[{
+       SubscriptBox["g", "2."], ".."}]}], "}"}]}], TraditionalForm]]],
+ " in the constructor determines the grading of the basis elements or \
+generators while the function (property) ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["GList", "Program"], "[", 
+    StyleBox["sp",
+     FontSlant->"Italic"], "]"}], TraditionalForm]]],
+ " returns the list of the gradings of the elements (generators) of the space \
+",
+ Cell[BoxData[
+  FormBox["sp", TraditionalForm]],
+  FontSlant->"Italic"],
+ ". By default the grading of the generators of the algebra are equal to 1, \
+those of the module over the algebra are equal to 0. The function ",
+ StyleBox["Grade",
+  FontFamily->"Courier"],
+ " returns the grading of the element.\n\nThe grading is used as a powerful \
+tool for subdivision of the infinite dimensional space into finite \
+dimensional components. The parameter ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"Grade", "\[Rule]", "d"}], TraditionalForm]]],
+ " restricts the computation of the generators and defining relations with \
+grade ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]]],
+ ". This is convenient in the study of spaces (algebras, modules) whose \
+dimension is infinite or just huge, e.g., enveloping algebras. The function \
+",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["Dim", "Program"], "[", 
+    StyleBox["sp",
+     FontSlant->"Italic"], "]"}], TraditionalForm]]],
+ " returns the dimension of the space, while ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["Dim", "Program"], "[", 
+    RowBox[{
+     StyleBox["sp",
+      FontSlant->"Italic"], ",", "d"}], "]"}], TraditionalForm]]],
+ " returns the dimension of the component of grading ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]]],
+ ". The function ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox["PDim",
+    FontFamily->"Courier"], TraditionalForm]]],
+ " behaves similarly.\n\n",
+ StyleBox["Weight",
+  FontWeight->"Bold"],
+ " is the grading by means of a list of scalars. Weight is determined and \
+called in the same way as parity and grading with the help of the parameter \
+and function ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox["WList",
+    FontFamily->"Courier"], TraditionalForm]]],
+ ". The function ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox["Weight",
+    FontFamily->"Courier"], TraditionalForm]]],
+ " returns the weight of the element."
+}], "Text",
+ CellChangeTimes->{{3.421431338481477*^9, 3.421431392188704*^9}, {
+  3.421431446717112*^9, 3.4214314572422466`*^9}, {3.4214314998735476`*^9, 
+  3.4214315155460835`*^9}, {3.421431564856989*^9, 3.421431593408043*^9}, {
+  3.421431647806264*^9, 3.4214316760368576`*^9}, {3.423232469374973*^9, 
+  3.4232324725695667`*^9}, {3.4232325060677347`*^9, 3.4232325307632446`*^9}, {
+  3.423232628033112*^9, 3.4232326289644513`*^9}},
+ CellTags->"b:2.3.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+3.2. Spaces\[Dash]relatives. The tensor space\
+\>", "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:24", "b:2.3.1"}],
+
+Cell[TextData[{
+ "The space, not a superspace, has two relatives: itself and its dual. For \
+the superspace over real numbers there are 8 relatives: one can (1) change \
+parity, (2) consider linear functions acting on the left or on the right, (3) \
+consider even and odd linear functions. (Over complex numbers, one can \
+additionallly consider different linearities (linear and antilinear). So far, \
+we did not consider these options.)\n\nIf the space is a module over a Lie \
+superalgebra, then all its relatives are also modules over the same Lie \
+superalgebra. There is a constructor for each of the spaces-relatives; all of \
+them are listed above. The list of the declared relatives of the space in the \
+order indicated is a property of the space, one can get it by means of the \
+function ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox["Relatives", "Name"], TraditionalForm]]],
+ ". This list always contains 8 elements; the nondeclared spaces should be \
+replaced with ",
+ StyleBox["None", "Name"],
+ ".\n\nObserve that if a basis of the initial space is a one-indexed one, the \
+respective bases of the spaces-relatives will be indexed accordingly.\n\nAn \
+important example: ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"w", "=", 
+    RowBox[{
+     StyleBox["DLeft",
+      FontFamily->"Courier"], "[", "v", "]"}]}], TraditionalForm]]],
+ ", the space of differential 1-forms on the superspace ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ ". Accordingly, the expression ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"w", "[", "i", "]"}], "\[Wedge]", 
+    RowBox[{"w", "[", "j", "]"}]}], TraditionalForm]]],
+ " is a 2-form, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"w", "[", "i", "]"}], "\[Wedge]", 
+    RowBox[{"w", "[", "j", "]"}], "\[Wedge]", 
+    RowBox[{"w", "[", "k", "]"}]}], TraditionalForm]]],
+ " is a 3-form, and so on. If ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ " is an algebra, then the exterior algebra of exterior forms is \
+automatically endowed with a derivation, the exterior differential, ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox["Der",
+    FontFamily->"Courier"], TraditionalForm]]],
+ ". This ",
+ StyleBox["Der",
+  FontFamily->"Courier"],
+ " is defined on the space of 1-forms and its values lie in the space of \
+2-forms. The extension of ",
+ StyleBox["Der", "Name"],
+ " to higher forms are defined via Leibniz rule."
+}], "Text",
+ CellChangeTimes->{{3.42143174584724*^9, 3.4214318048220415`*^9}, {
+  3.4214318692446766`*^9, 3.4214318793492064`*^9}, {3.423232963165008*^9, 
+  3.423232969454051*^9}, {3.423233031082669*^9, 3.4232330408667374`*^9}},
+ CellTags->"b:2.3.1"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["3.3. Vector operations. Tensor products", "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:25", "b:2.3.2"}],
+
+Cell[TextData[{
+ "The constructor ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["TensorSpace",
+     FontFamily->"Courier"], "[", 
+    RowBox[{"t", ",", 
+     RowBox[{"v", 
+      RowBox[{"{", 
+       RowBox[{"comp", ",", "..."}], "}"}]}], ",", " ", 
+     RowBox[{"options", "..."}]}], "]"}], TraditionalForm]]],
+ " constructs the space ",
+ Cell[BoxData[
+  FormBox["t", TraditionalForm]]],
+ " of tensors over ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ ", by tensoring the components indicated. All these components must be \
+relatives of ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ ". Observe, however, that all the elements of ",
+ Cell[BoxData[
+  FormBox["t", TraditionalForm]]],
+ " are of the form ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"t", "[", 
+    RowBox[{"i", ",", 
+     RowBox[{"j", "..."}]}], "]"}], TraditionalForm]]],
+ ", in other words, their expression never uses the fact that they are tensor \
+products and the sign of tensor product is never used to express them.\n\n",
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " has no ready-to-use constructor for the associative tensor algebra, \
+however, the tensor product operation \[CircleTimes] (other name \[LongDash] \
+tp \[LongDash] is used for compatibility with the version of ",
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " designed to fit ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " 2.2) allows for any number of factors, is associative, multi-linear by \
+default and, possesses a unity ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox["Id", "Name"], TraditionalForm]]],
+ " (i.e., ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     StyleBox["Id", "Name"], "\[CircleTimes]", "v"}], "=", 
+    RowBox[{
+     RowBox[{"v", "\[CircleTimes]", 
+      StyleBox["Id", "Name"]}], "=", "v"}]}], TraditionalForm]]],
+ " for any vector ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ "). So we can, actually, constract the tensor algebra. Usually, one uses \
+\[CircleTimes] to multiply (to tensor) elements of the same space. The tensor \
+product of ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " copies of the same element ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " can be expressed as ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"x", "^", 
+    RowBox[{"\[CircleTimes]", "n"}]}], TraditionalForm]]],
+ " or ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["x", 
+    RowBox[{"\[CircleTimes]", "n"}]], TraditionalForm]]],
+ " (in full format: ",
+ StyleBox["tPower",
+  FontFamily->"Courier"],
+ "[x,n]). Observe, however, that by default ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"x", "^", 
+    RowBox[{"\[CircleTimes]", "0"}]}], TraditionalForm]]],
+ " is not replaced by ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox["Id", "Name"], TraditionalForm]]],
+ ".\n\nWhen we wish to (point out that we) tensor elements of different \
+spaces, we should use the formal tensor product. The operation ",
+ Cell[BoxData[
+  FormBox["**", TraditionalForm]]],
+ " (its full name is ",
+ StyleBox["NonCommutativeMultiply",
+  FontFamily->"Courier"],
+ ") is used in this case. This operation is binary (hence, one should not \
+worry about associativity), is not linear by default, and does not recognize \
+vector unity ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox["Id", "Name"], TraditionalForm]]],
+ " (i.e., neither ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"v", "**", 
+    StyleBox["Id", "Name"]}], TraditionalForm]]],
+ " not ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["Id", "Name"], "**", "v"}], TraditionalForm]]],
+ " are replaced by ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ "). By default its only property is ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox["ZeroArg",
+    FontFamily->"Courier"], TraditionalForm]]],
+ ", i.e., formal tensoring by 0 gives a 0.\n\n",
+ StyleBox["Instructive examples. 1",
+  FontVariations->{"Underline"->True}],
+ ". The constructor ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["VectorLieAlgebra",
+     FontFamily->"Courier"], "[", 
+    RowBox[{"a", ",", "v"}], "]"}], TraditionalForm]]],
+ " constructs the algebra ",
+ StyleBox["a",
+  FontSlant->"Italic"],
+ " with a basis consisting of expressions ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"w", "[", "i", "]"}], ",", " ", 
+    RowBox[{
+     RowBox[{"v", "[", "j", "]"}], "**", 
+     RowBox[{"w", "[", "i", "]"}]}]}], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"v", "[", "j", "]"}], "*", 
+      RowBox[{"v", "[", "k", "]"}]}], ")"}], "**", 
+    RowBox[{"w", "[", "l", "]"}]}], TraditionalForm]]],
+ ", ans so on, where ",
+ Cell[BoxData[
+  FormBox["w", TraditionalForm]]],
+ " is the space of left even linear forms on ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]]],
+ ".\n\n",
+ StyleBox["2. ",
+  FontVariations->{"Underline"->True}],
+ "The space of 2-cochains on a Lie (super)algebra ",
+ Cell[BoxData[
+  FormBox["g", TraditionalForm]]],
+ " with values in the module ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]]],
+ " has for a basis elements of the form ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"a", "**", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"dg", "[", "i", "]"}], "\[Wedge]", 
+      RowBox[{"dg", "[", "j", "]"}]}], ")"}]}], TraditionalForm]]],
+ ", where ",
+ Cell[BoxData[
+  FormBox["dg", TraditionalForm]]],
+ " is the space of left odd forms on ",
+ Cell[BoxData[
+  FormBox["g", TraditionalForm]]],
+ ".\n\nIt is usually convenient to endow ",
+ Cell[BoxData[
+  FormBox["**", TraditionalForm]]],
+ " with \"linearity with respect to one argument\" property (say, in the last \
+example, with respect to the second argument). This enables one to get the \
+answer in a compressed, simplified, form, e.g., ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"4", "a"}], "+", "b"}], ")"}], "**", 
+     RowBox[{"dg", "[", "i", "]"}]}], "\[Wedge]", 
+    RowBox[{"dg", "[", "j", "]"}]}], TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.421432028954328*^9, 3.4214320791865587`*^9}, {
+  3.421432131271453*^9, 3.421432133274333*^9}, {3.421432204386587*^9, 
+  3.4214322046669903`*^9}, {3.421432274807848*^9, 3.4214322751984096`*^9}, {
+  3.4214323379786835`*^9, 3.4214323796486015`*^9}, {3.4214324571099854`*^9, 
+  3.4214325182779408`*^9}, {3.423233268504064*^9, 3.4232332753438993`*^9}, {
+  3.4232333573117633`*^9, 3.42323336629468*^9}},
+ CellTags->"b:2.3.2"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+AutoGeneratedPackage->None,
+ShowPageBreaks->False,
+WindowToolbars->{"RulerBar", "EditBar"},
+WindowSize->{1196, 928},
+WindowMargins->{{57, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingStartingPageNumber->35,
+PrintingPageRange->{Automatic, Automatic},
+PageHeaders->{{
+   Cell[
+    TextData[
+     CounterBox["Page"]], "Header"], None, 
+   Cell["Introduction to SuperLie", "Header"]}, {
+   Cell[
+    TextData[
+     CounterBox[
+     "Section", 
+      CounterFunction :> (
+       Part[{"0. Introduction. Peculiarities of Mathematica important for \
+SuperLie ", "1. General notions of SuperLie", "2. First steps", 
+         "3. Algebras and superalgebras: tougher problems "}, #]& )]], 
+    "Header"], None, 
+   Cell[
+    TextData[
+     CounterBox["Page"]], "Header"]}},
+PageFooters->{{None, None, None}, {None, None, None}},
+PageHeaderLines->{True, True},
+PageFooterLines->{False, False},
+PrintingOptions->{"CellBackgroundHalftoneAngle"->Automatic,
+"CellBackgroundHalftoneDensity"->Automatic,
+"FacingPages"->True,
+"FirstPageFace"->Left,
+"FirstPageFooter"->False,
+"FirstPageHeader"->False,
+"GraphicsPrintingFormat"->"Automatic",
+"IncludePostScriptResourceDirectives"->False,
+"IncludeSpecialFonts"->True,
+"Magnification"->1,
+"PaperOrientation"->"Portrait",
+"PaperSize"->{597.563, 842.375},
+"PostScriptOutputFile":>"Automatic",
+"PrintCellBrackets"->False,
+"PrintMultipleHorizontalPages"->False,
+"PrintRegistrationMarks"->False,
+"PrintSelectionHighlighting"->False,
+"RestPagesFooter"->True,
+"RestPagesHeader"->True,
+"UnixShellPrintingCommand"->"lpr ",
+"UsePostScriptOutputFile"->True,
+"UseUnixShellPrintingCommand"->False},
+ShowSelection->True,
+TaggingRules->{
+ "IndexEntries" -> {{"i:1", "Introduction to SuperLie"}}, "NextIndexNumber" -> 
+  2, "PaginationCache" -> {{2013, 7, 18, 21, 34, 0.875`7.694583042182268}, {
+    35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 36, 36, 36, 36, 36, 36, 36, 36, 
+    36, 37, 37, 37, 37, 37, 37, 37, 37, 37, 38, 38, 38, 38, 38, 38, 38, 38, 
+    38, 38, 38, 38, 38, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 
+    40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 41, 41, 41, 41, 41, 41, 41, 
+    41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 41, 42, 42, 42, 42, 42, 
+    42, 42, 42, 42, 42, 42, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 
+    43, 43, 43, 43, 43, 43, 43, 43, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 
+    44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 45, 45, 45, 45, 45, 
+    45, 45, 45, 45, 45, 45, 45, 46, 46, 46, 46, 46, 46, 48, 48, 48, 48, 49}, 
+    Automatic}},
+Magnification->2.,
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->Notebook[{
+   Cell[
+    CellGroupData[{
+      Cell["Style Definitions", "Subtitle"], 
+      Cell[
+      "\nModify the definitions below to change the default appearance of all \
+cells in \na given style.  Make modifications to any definition using \
+commands in the \nFormat menu.\n", "Text"], 
+      Cell[
+       CellGroupData[{
+         Cell["Style Environment Names", "Section"], 
+         Cell[
+          StyleData[All, "Working"], PageWidth -> WindowWidth, ScriptMinSize -> 
+          9], 
+         Cell[
+          StyleData[All, "Printout"], PageWidth -> PaperWidth, ScriptMinSize -> 
+          7, FontSize -> 10, 
+          PrivateFontOptions -> {"FontType" -> "Outline"}]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Notebook Options", "Section"], 
+         Cell[
+         "\nThe options defined for the style below will be used at the \
+Notebook level.\n", "Text"], 
+         Cell[
+          StyleData["Notebook"], WindowToolbars -> {}, PageHeaders -> {{
+             Cell[
+              TextData[{
+                CounterBox["Page"]}], "PageNumber"], None, 
+             Cell[
+              TextData[{
+                ValueBox[FileName], " \[Bullet]  ", 
+                ValueBox[Date]}], "Header"]}, {
+             Cell[
+              TextData[{
+                ValueBox[FileName], " \[Bullet]  ", 
+                ValueBox[Date]}], "Header"], None, 
+             Cell[
+              TextData[{
+                CounterBox["Page"]}], "PageNumber"]}}, DefaultNewCellStyle -> 
+          "Text", DefaultDuplicateCellStyle -> "Text", 
+          DefaultInlineFormatType -> StandardForm, StyleMenuListing -> None]},
+         Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Favorite styles", "Section"], 
+         Cell[
+          StyleData["Name"], FontFamily -> "Courier New"], 
+         Cell[
+          StyleData["Var"], FontSlant -> "Italic"], 
+         Cell[
+          StyleData["Def"], FontWeight -> "Bold", FontSlant -> "Italic", 
+          FontColor -> RGBColor[0.6, 0.2, 0]]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Headings", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Chapter"], CellDingbat -> "\[FilledSquare]", 
+             CellMargins -> {{24, Inherited}, {8, 24}}, 
+             CellGroupingRules -> {"SectionGrouping", 20}, PageBreakAbove -> 
+             True, CellFrameLabelMargins -> 6, CounterIncrements -> "Chapter",
+              FontFamily -> "Helvetica", FontSize -> 18, FontWeight -> 
+             "Bold"], 
+            Cell[
+             StyleData["Chapter", "Printout"], 
+             CellMargins -> {{15, 0}, {7, 22}}]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Section"], CellDingbat -> "\[FilledSquare]", 
+             CellMargins -> {{24, Inherited}, {8, 24}}, 
+             CellGroupingRules -> {"SectionGrouping", 30}, PageBreakBelow -> 
+             False, CellFrameLabelMargins -> 6, CounterIncrements -> 
+             "Section", FontFamily -> "Helvetica", FontSize -> 14, FontWeight -> 
+             "Bold"], 
+            Cell[
+             StyleData["Section", "Printout"], 
+             CellMargins -> {{15, 0}, {7, 22}}, FontSize -> 14]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsection"], CellDingbat -> "\[FilledSquare]", 
+             CellMargins -> {{24, 4}, {2, 18}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 12}, 
+             CellGroupingRules -> {"SectionGrouping", 40}, PageBreakBelow -> 
+             False, CellFrameLabelMargins -> 6, CounterIncrements -> 
+             "Subsection", CounterAssignments -> {{"Subsubsection", 0}}, 
+             FontFamily -> "Helvetica", FontSize -> 12.5, FontWeight -> 
+             "Bold"], 
+            Cell[
+             StyleData["Subsection", "Printout"], 
+             CellMargins -> {{2, 4}, {2, 18}}, FontSize -> 12.5]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsubsection"], CellDingbat -> "\[EmptySquare]", 
+             CellMargins -> {{24, 4}, {2, 18}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 12}, 
+             CellGroupingRules -> {"SectionGrouping", 50}, PageBreakBelow -> 
+             False, CellFrameLabelMargins -> 6, CounterIncrements -> 
+             "Subsubsection", FontFamily -> "Helvetica", FontSize -> 12, 
+             FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Subsubsection", "Printout"], 
+             CellMargins -> {{2, 4}, {2, 18}}, FontSize -> 12]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["SubsectionIcon"], ShowGroupOpener -> True, 
+             CellMargins -> {{24, 4}, {0, 18}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 8}, 
+             CellGroupingRules -> {"SectionGrouping", 50}, 
+             ConversionRules :> {
+              "HTML" -> {
+                "<LI TYPE=\"SQUARE\"><FONT FACE=\"Helvetica, Arial\"><P><B>", 
+                 "</B></P></FONT>\n"}}, 
+             InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Section", FontFamily -> "Helvetica", 
+             FontSize -> 12.5, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["SubsectionIcon", "Printout"], CellDingbat -> 
+             "\[FilledSquare]", ShowGroupOpener -> False, 
+             CellMargins -> {{16, 0}, {0, 18}}, PageBreakBelow -> False, 
+             FontSize -> 12.5]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["SubsubsectionIcon"], ShowGroupOpener -> True, 
+             CellMargins -> {{24, 4}, {0, 8}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 4}, 
+             CellGroupingRules -> {"SectionGrouping", 60}, 
+             ConversionRules :> {
+              "HTML" -> {
+                "<LI TYPE=\"SQUARE\"><FONT FACE=\"Helvetica, Arial\"><P><B>", 
+                 "</B></P></FONT>\n"}}, 
+             InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Subsection", 
+             CounterAssignments -> {{"Subsubection", 0}}, FontFamily -> 
+             "Helvetica", FontSize -> 12, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["SubsubsectionIcon", "Printout"], CellDingbat -> 
+             "\[EmptySquare]", ShowGroupOpener -> False, 
+             CellMargins -> {{2, 0}, {0, 18}}, PageBreakBelow -> False, 
+             FontSize -> 12]}, Open]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Styles for Text", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Text"], CellMargins -> {{12, 10}, {7, 7}}, 
+             InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, TextAlignment -> 
+             Left, TextJustification -> 1, Hyphenation -> True, 
+             LineSpacing -> {1, 2}, ParagraphIndent -> 24, FontSize -> 12], 
+            Cell[
+             StyleData["Text", "Printout"], CellMargins -> {{2, 2}, {6, 6}}]},
+            Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["MonoText"], CellMargins -> {{12, 10}, {7, 7}}, 
+             Hyphenation -> True, LineSpacing -> {1, 2}, FontFamily -> 
+             "Courier", FontSize -> 12], 
+            Cell[
+             StyleData["MonoText", "Printout"], 
+             CellMargins -> {{2, 2}, {6, 6}}, FontSize -> 9]}, Closed]]}, 
+        Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Styles for Input/Output", "Section"], 
+         Cell[
+         "\nThe cells in this section define styles used for input and output \
+to the \nkernel.  Be careful when modifying, renaming, or removing these \
+styles, \nbecause the front end associates special meanings with these style \
+names.\n", "Text"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Input"], CellMargins -> {{45, 10}, {5, 7}}, 
+             Evaluatable -> True, CellGroupingRules -> "InputGrouping", 
+             CellHorizontalScrolling -> True, 
+             CellLabelMargins -> {{14, Inherited}, {Inherited, Inherited}}, 
+             DefaultFormatType -> DefaultInputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, 
+             AutoItalicWords -> {}, LanguageCategory -> "Formula", FormatType -> 
+             InputForm, ShowStringCharacters -> True, NumberMarks -> True, 
+             LinebreakAdjustments -> {0.85, 2, 10, 0, 1}, CounterIncrements -> 
+             "Input", FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Input", "Printout"], CellMargins -> {{39, 0}, {4, 6}},
+              LinebreakAdjustments -> {0.85, 2, 10, 1, 1}, FontSize -> 9]}, 
+           Closed]], 
+         Cell[
+          StyleData["InlineInput"], Evaluatable -> True, CellGroupingRules -> 
+          "InputGrouping", CellHorizontalScrolling -> True, PageBreakWithin -> 
+          False, GroupPageBreakWithin -> False, DefaultFormatType -> 
+          DefaultInputFormatType, 
+          HyphenationOptions -> {"HyphenationCharacter" -> "\[Continuation]"},
+           AutoItalicWords -> {}, FormatType -> InputForm, 
+          ShowStringCharacters -> True, NumberMarks -> True, 
+          CounterIncrements -> "Input", FontWeight -> "Bold"], 
+         Cell[
+          StyleData["Output"], PageWidth -> PaperWidth, 
+          CellMargins -> {{47, 10}, {7, 5}}, CellEditDuplicate -> True, 
+          CellGroupingRules -> "OutputGrouping", CellHorizontalScrolling -> 
+          True, GeneratedCell -> True, CellAutoOverwrite -> True, 
+          CellLabelMargins -> {{14, Inherited}, {Inherited, Inherited}}, 
+          DefaultFormatType -> DefaultOutputFormatType, 
+          HyphenationOptions -> {"HyphenationCharacter" -> "\[Continuation]"},
+           AutoItalicWords -> {}, LanguageCategory -> "Formula", FormatType -> 
+          InputForm, CounterIncrements -> "Output", StyleMenuListing -> None, 
+          FontSlant -> "Plain"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Message"], 
+             CellMargins -> {{45, Inherited}, {Inherited, Inherited}}, 
+             CellGroupingRules -> "OutputGrouping", PageBreakWithin -> False, 
+             GroupPageBreakWithin -> False, GeneratedCell -> True, 
+             CellAutoOverwrite -> True, ShowCellLabel -> False, 
+             CellLabelMargins -> {{14, Inherited}, {Inherited, Inherited}}, 
+             DefaultFormatType -> DefaultOutputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, 
+             AutoItalicWords -> {}, FormatType -> InputForm, 
+             CounterIncrements -> "Message", StyleMenuListing -> None, 
+             FontColor -> RGBColor[0, 0, 1]], 
+            Cell[
+             StyleData["Message", "Printout"], 
+             CellMargins -> {{39, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 8, FontColor -> GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Print"], 
+             CellMargins -> {{45, Inherited}, {Inherited, Inherited}}, 
+             CellGroupingRules -> "OutputGrouping", CellHorizontalScrolling -> 
+             True, PageBreakWithin -> False, GroupPageBreakWithin -> False, 
+             GeneratedCell -> True, CellAutoOverwrite -> True, ShowCellLabel -> 
+             False, CellLabelMargins -> {{14, Inherited}, {
+               Inherited, Inherited}}, DefaultFormatType -> 
+             DefaultOutputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, 
+             AutoItalicWords -> {}, FormatType -> InputForm, 
+             CounterIncrements -> "Print", StyleMenuListing -> None], 
+            Cell[
+             StyleData["Print", "Printout"], 
+             CellMargins -> {{39, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 8]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Graphics"], 
+             CellMargins -> {{4, Inherited}, {Inherited, Inherited}}, 
+             CellGroupingRules -> "GraphicsGrouping", CellHorizontalScrolling -> 
+             True, PageBreakWithin -> False, GeneratedCell -> True, 
+             CellAutoOverwrite -> True, ShowCellLabel -> False, 
+             DefaultFormatType -> DefaultOutputFormatType, FormatType -> 
+             InputForm, CounterIncrements -> "Graphics", 
+             ImageMargins -> {{43, Inherited}, {Inherited, 0}}, 
+             StyleMenuListing -> None], 
+            Cell[
+             StyleData["Graphics", "Printout"], ImageSize -> {250, 250}, 
+             ImageMargins -> {{30, Inherited}, {Inherited, 0}}, FontSize -> 
+             9]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["CellLabel"], StyleMenuListing -> None, FontFamily -> 
+             "Helvetica", FontSize -> 9, FontColor -> RGBColor[0, 0, 1]], 
+            Cell[
+             StyleData["CellLabel", "Printout"], FontFamily -> "Courier", 
+             FontSize -> 8, FontSlant -> "Italic", FontColor -> 
+             GrayLevel[0]]}, Closed]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Unique Styles", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Author"], ShowCellBracket -> False, 
+             CellMargins -> {{10, 4}, {2, 10}}, FontSize -> 16, FontSlant -> 
+             "Italic"], 
+            Cell[
+             StyleData["Author", "Presentation"], 
+             CellMargins -> {{12, 10}, {2, 12}}, LineSpacing -> {1, 5}, 
+             ParagraphSpacing -> {0, 12}, FontSize -> 20], 
+            Cell[
+             StyleData["Author", "Condensed"], 
+             CellMargins -> {{8, 10}, {1, 4}}, LineSpacing -> {1, 1}, 
+             ParagraphSpacing -> {0, 4}, FontSize -> 12], 
+            Cell[
+             StyleData["Author", "Printout"], 
+             CellMargins -> {{9, 0}, {4, 12}}, ParagraphSpacing -> {0, 6}, 
+             FontSize -> 14]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Copyright"], ShowCellBracket -> False, 
+             CellMargins -> {{10, 10}, {40, 2}}, FontFamily -> "Helvetica", 
+             FontSize -> 9], 
+            Cell[
+             StyleData["Copyright", "Presentation"], 
+             CellMargins -> {{12, 10}, {50, 2}}, LineSpacing -> {1, 5}, 
+             FontSize -> 12], 
+            Cell[
+             StyleData["Copyright", "Condensed"], 
+             CellMargins -> {{8, 10}, {12, 1}}, LineSpacing -> {1, 2}, 
+             FontSize -> 9], 
+            Cell[
+             StyleData["Copyright", "Printout"], 
+             CellMargins -> {{9, 0}, {72, 4}}, FontSize -> 7]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Example"], CellMargins -> {{12, 10}, {5, 12}}, 
+             LineSpacing -> {1, 3}, ParagraphSpacing -> {0, 12}, 
+             CounterIncrements -> "Example", FontFamily -> "Times", 
+             FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Example", "Presentation"], 
+             CellMargins -> {{18, 10}, {8, 20}}, LineSpacing -> {1, 5}, 
+             ParagraphSpacing -> {0, 12}], 
+            Cell[
+             StyleData["Example", "Condensed"], 
+             CellMargins -> {{8, 10}, {4, 8}}, LineSpacing -> {1, 1}, 
+             ParagraphSpacing -> {0, 4}], 
+            Cell[
+             StyleData["Example", "Printout"], 
+             CellMargins -> {{9, 0}, {4, 10}}, ParagraphSpacing -> {0, 6}]}, 
+           Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Definition"], CellFrame -> {{3, 0}, {0, 0}}, 
+             CellMargins -> {{52, 10}, {8, 8}}, PageBreakWithin -> False, 
+             GroupPageBreakWithin -> False, 
+             CellLabelMargins -> {{23, Inherited}, {Inherited, Inherited}}, 
+             Hyphenation -> True, ShowStringCharacters -> True, 
+             CounterIncrements -> "Definition", FontFamily -> "Helvetica", 
+             FontWeight -> "Bold", FontColor -> GrayLevel[1], Background -> 
+             RGBColor[0.2, 0.700008, 0.700008]], 
+            Cell[
+             StyleData["Definition", "Presentation"], 
+             CellMargins -> {{62, Inherited}, {5, 12}}, 
+             LineSpacing -> {1, 0}], 
+            Cell[
+             StyleData["Definition", "Condensed"], 
+             CellMargins -> {{40, 10}, {1, 4}}], 
+            Cell[
+             StyleData["Definition", "Printout"], 
+             CellMargins -> {{44, 0}, {2, 6}}, Background -> GrayLevel[0.6]]},
+            Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Theorem"], CellFrame -> {{3, 0}, {0, 0}}, 
+             CellMargins -> {{52, 10}, {8, 8}}, PageBreakWithin -> False, 
+             GroupPageBreakWithin -> False, 
+             CellLabelMargins -> {{23, Inherited}, {Inherited, Inherited}}, 
+             Hyphenation -> True, ShowStringCharacters -> True, 
+             CounterIncrements -> "Theorem", FontFamily -> "Helvetica", 
+             FontWeight -> "Bold", FontColor -> GrayLevel[1], Background -> 
+             RGBColor[0.571389, 0.19675, 0.570504]], 
+            Cell[
+             StyleData["Theorem", "Presentation"], 
+             CellMargins -> {{62, Inherited}, {5, 12}}, 
+             LineSpacing -> {1, 0}], 
+            Cell[
+             StyleData["Theorem", "Condensed"], 
+             CellMargins -> {{40, 10}, {1, 4}}], 
+            Cell[
+             StyleData["Theorem", "Printout"], 
+             CellMargins -> {{44, 0}, {2, 6}}, Background -> GrayLevel[0.4]]},
+            Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["ExerciseMain"], CellFrame -> {{6, 0}, {0, 1}}, 
+             CellMargins -> {{12, Inherited}, {4, 20}}, 
+             CellGroupingRules -> {"SectionGrouping", 30}, PageBreakBelow -> 
+             False, CellFrameColor -> RGBColor[0.571389, 0.19675, 0.570504], 
+             CounterIncrements -> "Subsection", 
+             CounterAssignments -> {{"Subsubsection", 0}}, FontFamily -> 
+             "Helvetica", FontSize -> 16, FontWeight -> "Bold", FontColor -> 
+             RGBColor[0.571389, 0.19675, 0.570504]], 
+            Cell[
+             StyleData["ExerciseMain", "Presentation"], 
+             CellMargins -> {{18, 10}, {8, 32}}, LineSpacing -> {1, 2}, 
+             FontSize -> 24, FontTracking -> "Condensed"], 
+            Cell[
+             StyleData["ExerciseMain", "Condensed"], 
+             CellMargins -> {{8, Inherited}, {2, 12}}, FontSize -> 12], 
+            Cell[
+             StyleData["ExerciseMain", "Printout"], 
+             CellMargins -> {{9, 0}, {2, 50}}, CellFrameColor -> 
+             GrayLevel[0.500008], FontSize -> 14, FontTracking -> "Plain", 
+             FontColor -> GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Exercise"], CellDingbat -> "\[FilledDownTriangle]", 
+             CellMargins -> {{23, Inherited}, {4, 18}}, 
+             CellGroupingRules -> {"SectionGrouping", 50}, PageBreakBelow -> 
+             False, Hyphenation -> True, CounterIncrements -> "Subsubsection",
+              FontFamily -> "Times", FontSize -> 13, FontWeight -> "Bold", 
+             FontColor -> RGBColor[0.571389, 0.19675, 0.570504]], 
+            Cell[
+             StyleData["Exercise", "Presentation"], 
+             CellMargins -> {{33, 10}, {8, 26}}, LineSpacing -> {1, 0}, 
+             FontSize -> 18], 
+            Cell[
+             StyleData["Exercise", "Condensed"], 
+             CellMargins -> {{17, Inherited}, {2, 12}}, FontSize -> 10], 
+            Cell[
+             StyleData["Exercise", "Printout"], 
+             CellFrame -> {{0, 0}, {0.5, 0}}, CellDingbat -> None, 
+             CellMargins -> {{9, 0}, {6, 20}}, FontSize -> 11, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["ExerciseText"], CellMargins -> {{62, 10}, {5, 5}}, 
+             Hyphenation -> True, LineSpacing -> {1, 3}, 
+             ParagraphSpacing -> {0, 8}, CounterIncrements -> "ExcersiceText",
+              FontFamily -> "Times"], 
+            Cell[
+             StyleData["ExerciseText", "Presentation"], 
+             CellMargins -> {{74, 10}, {8, 8}}, LineSpacing -> {1, 5}, 
+             ParagraphSpacing -> {0, 12}], 
+            Cell[
+             StyleData["ExerciseText", "Condensed"], 
+             CellMargins -> {{52, 10}, {2, 2}}, LineSpacing -> {1, 1}, 
+             ParagraphSpacing -> {0, 4}], 
+            Cell[
+             StyleData["ExerciseText", "Printout"], 
+             CellMargins -> {{54, 0}, {4, 4}}, ParagraphSpacing -> {0, 6}]}, 
+           Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["ObjectName"], CellMargins -> {{10, 4}, {1, 10}}, 
+             FontFamily -> "Courier", FontSize -> 16, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["ObjectName", "Brackets"], 
+             CellMargins -> {{72, 4}, {1, 14}}, 
+             CellGroupingRules -> {"SectionGrouping", 90}, StyleMenuListing -> 
+             None, FontFamily -> "Courier", FontSize -> 12, FontWeight -> 
+             "Bold"], 
+            Cell[
+             StyleData["ObjectName", "Printout"], 
+             CellMargins -> {{2, 0}, {1, 10}}, FontSize -> 12]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Usage"], CellFrame -> {{0, 0}, {0.5, 0.5}}, 
+             CellMargins -> {{10, 4}, {0, 4}}, CellFrameMargins -> 5, 
+             TextAlignment -> Left, TextJustification -> 1, Hyphenation -> 
+             True, ParagraphSpacing -> {0, 6}, ParagraphIndent -> -10, 
+             StyleMenuListing -> None], 
+            Cell[
+             StyleData["Usage", "Brackets"], 
+             CellFrame -> {{0, 0}, {0.5, 0.5}}, 
+             CellMargins -> {{72, 4}, {0, 4}}, CellFrameMargins -> 5, 
+             ParagraphSpacing -> {0, 6}, ParagraphIndent -> -10, 
+             StyleMenuListing -> None], 
+            Cell[
+             StyleData["Usage", "Printout"], CellMargins -> {{2, 0}, {0, 4}}, 
+             FontSize -> 10, FontWeight -> "Plain"]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Notes"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, TextAlignment -> Left, 
+             TextJustification -> 1, Hyphenation -> True, 
+             ParagraphSpacing -> {0, 6}, ParagraphIndent -> -10, 
+             StyleMenuListing -> None, FontFamily -> "Times"], 
+            Cell[
+             StyleData["Notes", "Brackets"], CellMargins -> {{72, 4}, {0, 8}},
+              CellHorizontalScrolling -> True, ParagraphSpacing -> {0, 6}, 
+             ParagraphIndent -> -10, StyleMenuListing -> None, FontFamily -> 
+             "Times"], 
+            Cell[
+             StyleData["Notes", "Printout"], CellMargins -> {{2, 0}, {0, 8}}, 
+             FontSize -> 9]}, Closed]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Title", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Title"], CellMargins -> {{12, Inherited}, {2, 20}}, 
+             CellGroupingRules -> {"TitleGrouping", 0}, PageBreakBelow -> 
+             False, InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Title", 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}, {"Subtitle", 0}, {"Subsubtitle", 0}}, FontFamily -> 
+             "Helvetica", FontSize -> 30, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Title", "Printout"], 
+             CellMargins -> {{2, 10}, {2, 30}}, FontSize -> 24]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subtitle"], CellMargins -> {{12, Inherited}, {2, 2}}, 
+             CellGroupingRules -> {"TitleGrouping", 10}, PageBreakBelow -> 
+             False, InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Subtitle", 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}, {"Subsubtitle", 0}}, FontFamily -> "Helvetica", 
+             FontSize -> 14, FontColor -> RGBColor[0, 0, 0.6]], 
+            Cell[
+             StyleData["Subtitle", "Printout"], 
+             CellMargins -> {{2, 10}, {2, 4}}, FontSize -> 18, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsubtitle"], 
+             CellMargins -> {{12, Inherited}, {2, 12}}, 
+             CellGroupingRules -> {"TitleGrouping", 20}, PageBreakBelow -> 
+             False, InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Subsubtitle", 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}}, FontFamily -> "Helvetica", FontSize -> 14, 
+             FontSlant -> "Italic", FontColor -> RGBColor[0, 0, 0.6]], 
+            Cell[
+             StyleData["Subsubtitle", "Printout"], 
+             CellMargins -> {{2, 10}, {2, 8}}, FontSize -> 12, FontColor -> 
+             GrayLevel[0]]}, Closed]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Hyperlink Styles", "Section"], 
+         Cell[
+         "The cells below define styles useful for making hypertext \
+ButtonBoxes.  The \"Hyperlink\" style is for links within the same Notebook, \
+or between Notebooks.", "Text"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Hyperlink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`NotebookLocate[#2]}]& ), ButtonNote -> 
+               ButtonData}], 
+            Cell[
+             StyleData["Hyperlink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+         "The following styles are for linking automatically to the on-line \
+help system.", "Text"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["MainBookLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["MainBook", #]}]& )}], 
+            Cell[
+             StyleData["MainBookLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["AddOnsLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, FontFamily -> "Courier", 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["AddOns", #]}]& )}], 
+            Cell[
+             StyleData["AddOnsLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["RefGuideLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, FontFamily -> "Courier", 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["RefGuide", #]}]& )}], 
+            Cell[
+             StyleData["RefGuideLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["GettingStartedLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["GettingStarted", #]}]& )}], 
+            Cell[
+             StyleData["GettingStartedLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["OtherInformationLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["OtherInformation", #]}]& )}], 
+            Cell[
+             StyleData["OtherInformationLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Palette Styles", "Section"], 
+         Cell[
+         "The cells below define styles that define standard ButtonFunctions, \
+for use in palette buttons.", "Text"], 
+         Cell[
+          StyleData["Paste"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, After]}]& )}], 
+         Cell[
+          StyleData["Evaluate"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, All], 
+               SelectionEvaluate[
+                FrontEnd`InputNotebook[], All]}]& )}], 
+         Cell[
+          StyleData["EvaluateCell"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, All], 
+               FrontEnd`SelectionMove[
+                FrontEnd`InputNotebook[], All, Cell, 1], 
+               FrontEnd`SelectionEvaluateCreateCell[
+                FrontEnd`InputNotebook[], All]}]& )}], 
+         Cell[
+          StyleData["CopyEvaluate"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`SelectionCreateCell[
+                FrontEnd`InputNotebook[], All], 
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, All], 
+               FrontEnd`SelectionEvaluate[
+                FrontEnd`InputNotebook[], All]}]& )}], 
+         Cell[
+          StyleData["CopyEvaluateCell"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`SelectionCreateCell[
+                FrontEnd`InputNotebook[], All], 
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, All], 
+               FrontEnd`SelectionEvaluateCreateCell[
+                FrontEnd`InputNotebook[], All]}]& )}]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Formulas and Programming", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["InlineFormula"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, ScriptLevel -> 1, 
+             SingleLetterItalics -> True, SpanMaxSize -> Infinity, 
+             StyleMenuListing -> None, 
+             GridBoxOptions -> {
+              GridBoxItemSize -> {
+                "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {{1.}}, "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["InlineFormula", "Printout"], 
+             CellMargins -> {{2, 0}, {0, 8}}, FontSize -> 10]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["InlineOutput"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, StyleMenuListing -> 
+             None, FontFamily -> "Courier"], 
+            Cell[
+             StyleData["InlineOutput", "Printout"], 
+             CellMargins -> {{2, 0}, {0, 8}}, FontSize -> 9.5]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["DisplayFormula"], 
+             CellMargins -> {{42, Inherited}, {Inherited, Inherited}}, 
+             CellHorizontalScrolling -> True, DefaultFormatType -> 
+             DefaultInputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, LanguageCategory -> 
+             "Formula", ScriptLevel -> 0, SingleLetterItalics -> True, 
+             SpanMaxSize -> Infinity, 
+             UnderoverscriptBoxOptions -> {LimitsPositioning -> True}, 
+             GridBoxOptions -> {
+              GridBoxItemSize -> {
+                "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {{1.}}, "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["DisplayFormula", "Printout"], 
+             CellMargins -> {{34, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 10]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["DisplayMath"], CellMargins -> {{42, 10}, {7, 7}}, 
+             Evaluatable -> False, CellGroupingRules -> "InputGrouping", 
+             CellHorizontalScrolling -> True, PageBreakWithin -> False, 
+             GroupPageBreakWithin -> False, DefaultFormatType -> 
+             DefaultInputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, 
+             AutoItalicWords -> {}, LanguageCategory -> "Formula", FormatType -> 
+             InputForm, ShowStringCharacters -> True, NumberMarks -> True, 
+             CounterIncrements -> "Input"], 
+            Cell[
+             StyleData["DisplayMath", "Printout"], 
+             CellMargins -> {{39, 0}, {6, 6}}, FontSize -> 9]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Program"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, LanguageCategory -> "Formula", 
+             FontFamily -> "Courier"], 
+            Cell[
+             StyleData["Program", "Printout"], 
+             CellMargins -> {{2, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 9.5]}, Closed]], 
+         Cell[
+          StyleData["List"], CellMargins -> {{12, 0}, {2, 8}}, 
+          CellElementSpacings -> {"ClosedGroupTopMargin" -> 12}, 
+          CellGroupingRules -> {"SectionGrouping", 60}, PageBreakBelow -> 
+          False, FontWeight -> "Bold"]}, Closed]]}, Open]]}, Visible -> False,
+   FrontEndVersion -> 
+  "8.0 for Microsoft Windows (32-bit) (February 23, 2011)", StyleDefinitions -> 
+  "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "i:1"->{
+  Cell[567, 22, 237, 8, 114, "Title",
+   CellTags->{"i:1", "Introduction to SuperLie", "c:1"}]},
+ "Introduction to SuperLie"->{
+  Cell[567, 22, 237, 8, 114, "Title",
+   CellTags->{"i:1", "Introduction to SuperLie", "c:1"}]},
+ "c:1"->{
+  Cell[567, 22, 237, 8, 114, "Title",
+   CellTags->{"i:1", "Introduction to SuperLie", "c:1"}]},
+ "c:2"->{
+  Cell[829, 34, 306, 11, 97, "Section",
+   Evaluatable->False,
+   CellTags->"c:2"]},
+ "c:3"->{
+  Cell[1160, 49, 160, 4, 70, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:3", "b:2.0.0"}]},
+ "b:2.0.0"->{
+  Cell[1160, 49, 160, 4, 70, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:3", "b:2.0.0"}],
+  Cell[1323, 55, 901, 28, 149, "Text",
+   CellTags->"b:2.0.0"],
+  Cell[2227, 85, 444, 10, 120, "Text",
+   CellTags->"b:2.0.0"],
+  Cell[2674, 97, 546, 19, 118, "Text",
+   CellTags->"b:2.0.0"],
+  Cell[3223, 118, 735, 15, 179, "Text",
+   CellTags->"b:2.0.0"]},
+ "c:4"->{
+  Cell[3995, 138, 114, 2, 70, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:4", "b:2.0.1"}]},
+ "b:2.0.1"->{
+  Cell[3995, 138, 114, 2, 70, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:4", "b:2.0.1"}],
+  Cell[4112, 142, 280, 7, 86, "Text",
+   CellTags->"b:2.0.1"],
+  Cell[4395, 151, 1106, 31, 212, "Text",
+   CellTags->"b:2.0.1"],
+  Cell[5504, 184, 706, 19, 145, "Text",
+   CellTags->"b:2.0.1"]},
+ "c:5"->{
+  Cell[6247, 208, 84, 2, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:5", "b:2.0.2"}]},
+ "b:2.0.2"->{
+  Cell[6247, 208, 84, 2, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:5", "b:2.0.2"}],
+  Cell[6334, 212, 1077, 34, 177, "Text",
+   Evaluatable->False,
+   CellTags->"b:2.0.2"]},
+ "c:6"->{
+  Cell[7448, 251, 96, 2, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:6", "b:2.0.3"}]},
+ "b:2.0.3"->{
+  Cell[7448, 251, 96, 2, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:6", "b:2.0.3"}],
+  Cell[7547, 255, 764, 17, 208, "Text",
+   CellTags->"b:2.0.3"],
+  Cell[8314, 274, 425, 15, 116, "Text",
+   CellTags->"b:2.0.3"]},
+ "c:7"->{
+  Cell[8788, 295, 133, 4, 90, "Section",
+   Evaluatable->False,
+   CellTags->"c:7"]},
+ "c:8"->{
+  Cell[8946, 303, 146, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:8", "b:2.1.0"}]},
+ "b:2.1.0"->{
+  Cell[8946, 303, 146, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:8", "b:2.1.0"}],
+  Cell[9095, 309, 676, 19, 177, "Text",
+   CellTags->"b:2.1.0"],
+  Cell[9774, 330, 1450, 27, 397, "Text",
+   CellTags->"b:2.1.0"]},
+ "c:9"->{
+  Cell[11261, 362, 143, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:9", "b:2.1.1"}]},
+ "b:2.1.1"->{
+  Cell[11261, 362, 143, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:9", "b:2.1.1"}],
+  Cell[11407, 368, 646, 15, 177, "Text",
+   CellTags->"b:2.1.1"],
+  Cell[12056, 385, 431, 9, 114, "Text",
+   CellTags->"b:2.1.1"],
+  Cell[12490, 396, 1574, 51, 214, "Text",
+   CellTags->"b:2.1.1"]},
+ "c:10"->{
+  Cell[14101, 452, 141, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:10", "b:2.1.2"}]},
+ "b:2.1.2"->{
+  Cell[14101, 452, 141, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:10", "b:2.1.2"}],
+  Cell[14245, 458, 363, 8, 114, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[14611, 468, 772, 15, 239, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[15386, 485, 501, 10, 176, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[15890, 497, 1469, 49, 219, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[17362, 548, 629, 17, 147, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[17994, 567, 122, 3, 51, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[18119, 572, 309, 10, 83, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[18431, 584, 914, 27, 148, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[19348, 613, 1193, 36, 179, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[20544, 651, 105, 3, 51, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[20652, 656, 213, 7, 52, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[20868, 665, 606, 16, 147, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[21477, 683, 187, 6, 52, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[21667, 691, 143, 6, 82, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[21813, 699, 347, 10, 84, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[22163, 711, 131, 4, 44, "Input",
+   CellTags->"b:2.1.2"],
+  Cell[22297, 717, 1554, 46, 241, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[23854, 765, 423, 11, 114, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[24280, 778, 1025, 31, 177, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[25308, 811, 255, 7, 82, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[25566, 820, 183, 6, 44, "Input",
+   CellTags->"b:2.1.2"],
+  Cell[25752, 828, 412, 16, 51, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[26167, 846, 320, 9, 83, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[26490, 857, 387, 8, 114, "Text",
+   CellTags->"b:2.1.2"],
+  Cell[26880, 867, 304, 7, 82, "Text",
+   CellTags->"b:2.1.2"]},
+ "c:11"->{
+  Cell[27221, 879, 142, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:11", "b:2.1.3"}]},
+ "b:2.1.3"->{
+  Cell[27221, 879, 142, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:11", "b:2.1.3"}],
+  Cell[27366, 885, 1434, 55, 177, "Text",
+   CellTags->"b:2.1.3"],
+  Cell[28803, 942, 557, 17, 114, "Text",
+   CellTags->"b:2.1.3"],
+  Cell[29363, 961, 1151, 33, 210, "Text",
+   CellTags->"b:2.1.3"],
+  Cell[30517, 996, 1043, 37, 114, "Text",
+   CellTags->"b:2.1.3"],
+  Cell[31563, 1035, 535, 11, 145, "Text",
+   CellTags->"b:2.1.3"]},
+ "c:12"->{
+  Cell[32135, 1051, 144, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:12", "b:2.1.4"}]},
+ "b:2.1.4"->{
+  Cell[32135, 1051, 144, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:12", "b:2.1.4"}],
+  Cell[32282, 1057, 1843, 58, 302, "Text",
+   CellTags->"b:2.1.4"],
+  Cell[34128, 1117, 333, 8, 82, "Text",
+   CellTags->"b:2.1.4"]},
+ "c:13"->{
+  Cell[34498, 1130, 144, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:13", "b:2.1.5"}]},
+ "b:2.1.5"->{
+  Cell[34498, 1130, 144, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:13", "b:2.1.5"}],
+  Cell[34645, 1136, 714, 15, 177, "Text",
+   CellTags->"b:2.1.5"],
+  Cell[35362, 1153, 406, 9, 114, "Text",
+   CellTags->"b:2.1.5"],
+  Cell[35771, 1164, 505, 11, 114, "Text",
+   CellTags->"b:2.1.5"],
+  Cell[36279, 1177, 322, 8, 82, "Text",
+   CellTags->"b:2.1.5"],
+  Cell[36604, 1187, 631, 23, 83, "Text",
+   CellTags->"b:2.1.5"]},
+ "c:14"->{
+  Cell[37284, 1216, 118, 4, 90, "Section",
+   Evaluatable->False,
+   CellTags->"c:14"]},
+ "c:15"->{
+  Cell[38659, 1267, 367, 9, 99, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:15", "b:2.2.0"}]},
+ "b:2.2.0"->{
+  Cell[38659, 1267, 367, 9, 99, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:15", "b:2.2.0"}],
+  Cell[39029, 1278, 844, 14, 208, "Text",
+   CellTags->"b:2.2.0"],
+  Cell[39876, 1294, 367, 8, 82, "Text",
+   CellTags->"b:2.2.0"],
+  Cell[40268, 1306, 199, 7, 44, "Input",
+   CellTags->"b:2.2.0"],
+  Cell[40470, 1315, 66, 1, 40, "Output",
+   CellTags->"b:2.2.0"],
+  Cell[40551, 1319, 584, 22, 53, "Text",
+   CellTags->"b:2.2.0"],
+  Cell[41138, 1343, 649, 21, 114, "Text",
+   CellTags->"b:2.2.0"],
+  Cell[41812, 1368, 363, 13, 44, "Input",
+   CellTags->"b:2.2.0"],
+  Cell[42178, 1383, 94, 3, 40, "Output",
+   CellTags->"b:2.2.0"],
+  Cell[42287, 1389, 136, 3, 51, "Text",
+   CellTags->"b:2.2.0"],
+  Cell[42448, 1396, 390, 14, 44, "Input",
+   CellTags->"b:2.2.0"],
+  Cell[42841, 1412, 863, 25, 40, "Output",
+   CellTags->"b:2.2.0"],
+  Cell[43719, 1440, 117, 3, 51, "Text",
+   CellTags->"b:2.2.0"],
+  Cell[43839, 1445, 233, 6, 82, "Text",
+   CellTags->"b:2.2.0"],
+  Cell[44097, 1455, 863, 25, 93, "Input",
+   CellTags->"b:2.2.0"],
+  Cell[44963, 1482, 76, 1, 40, "Output",
+   CellTags->"b:2.2.0"],
+  Cell[45042, 1485, 66, 1, 40, "Output",
+   CellTags->"b:2.2.0"],
+  Cell[45123, 1489, 652, 25, 85, "Text",
+   CellTags->"b:2.2.0"],
+  Cell[45778, 1516, 1954, 66, 218, "Text",
+   CellTags->"b:2.2.0"]},
+ "c:16"->{
+  Cell[47769, 1587, 149, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:16", "b:2.2.1"}]},
+ "b:2.2.1"->{
+  Cell[47769, 1587, 149, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:16", "b:2.2.1"}],
+  Cell[47921, 1593, 179, 6, 51, "Text",
+   CellTags->"b:2.2.1"],
+  Cell[48103, 1601, 964, 18, 270, "Text",
+   CellTags->"b:2.2.1"],
+  Cell[49070, 1621, 2542, 89, 313, "Text",
+   CellTags->"b:2.2.1"]},
+ "c:17"->{
+  Cell[51649, 1715, 231, 9, 71, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:17", "b:2.2.2"}]},
+ "b:2.2.2"->{
+  Cell[51649, 1715, 231, 9, 71, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:17", "b:2.2.2"}],
+  Cell[51883, 1726, 413, 11, 116, "Text",
+   CellTags->"b:2.2.2"],
+  Cell[52321, 1741, 473, 15, 63, "Input",
+   CellTags->"b:2.2.2"],
+  Cell[52797, 1758, 51, 1, 40, "Output",
+   CellTags->"b:2.2.2"],
+  Cell[52863, 1762, 112, 3, 51, "Text",
+   CellTags->"b:2.2.2"],
+  Cell[52978, 1767, 180, 6, 51, "Text",
+   CellTags->"b:2.2.2"],
+  Cell[53183, 1777, 177, 6, 44, "Input",
+   CellTags->"b:2.2.2"],
+  Cell[53363, 1785, 214, 6, 40, "Print",
+   CellTags->"b:2.2.2"],
+  Cell[53580, 1793, 237, 6, 40, "Print",
+   CellTags->"b:2.2.2"],
+  Cell[53820, 1801, 8479, 242, 108, "Print",
+   CellTags->"b:2.2.2"]},
+ "c:18"->{
+  Cell[62348, 2049, 151, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:18", "b:2.2.3"}]},
+ "b:2.2.3"->{
+  Cell[62348, 2049, 151, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:18", "b:2.2.3"}],
+  Cell[62502, 2055, 1184, 26, 337, "Text",
+   CellTags->"b:2.2.3"],
+  Cell[63711, 2085, 152, 4, 67, "Subsubsection",
+   CellTags->{"c:19", "b:2.2.3"}],
+  Cell[63866, 2091, 232, 7, 51, "Text",
+   Evaluatable->False,
+   CellTags->"b:2.2.3"],
+  Cell[64101, 2100, 183, 6, 51, "Text",
+   Evaluatable->False,
+   CellTags->"b:2.2.3"],
+  Cell[64309, 2110, 212, 6, 67, "Input",
+   CellTags->"b:2.2.3"],
+  Cell[64524, 2118, 76, 1, 40, "Output",
+   CellTags->"b:2.2.3"],
+  Cell[64603, 2121, 66, 1, 40, "Output",
+   CellTags->"b:2.2.3"],
+  Cell[64684, 2125, 135, 4, 51, "Text",
+   Evaluatable->False,
+   CellTags->"b:2.2.3"],
+  Cell[64844, 2133, 517, 16, 44, "Input",
+   CellTags->"b:2.2.3"],
+  Cell[65364, 2151, 439, 15, 40, "Output",
+   CellTags->"b:2.2.3"],
+  Cell[65818, 2169, 60, 1, 51, "Text",
+   CellTags->"b:2.2.3"],
+  Cell[65903, 2174, 127, 3, 44, "Input",
+   CellTags->"b:2.2.3"],
+  Cell[66033, 2179, 79, 1, 40, "Output",
+   CellTags->"b:2.2.3"],
+  Cell[66127, 2183, 130, 6, 51, "Text",
+   CellTags->"b:2.2.3"],
+  Cell[66282, 2193, 80, 2, 44, "Input",
+   CellTags->"b:2.2.3"],
+  Cell[66365, 2197, 273, 9, 40, "Output",
+   CellTags->"b:2.2.3"],
+  Cell[66653, 2209, 268, 12, 53, "Text",
+   Evaluatable->False,
+   CellTags->"b:2.2.3"],
+  Cell[66946, 2225, 80, 2, 44, "Input",
+   CellTags->"b:2.2.3"],
+  Cell[67029, 2229, 575, 21, 40, "Output",
+   CellTags->"b:2.2.3"],
+  Cell[67619, 2253, 84, 1, 51, "Text",
+   CellTags->"b:2.2.3"],
+  Cell[67728, 2258, 83, 2, 44, "Input",
+   CellTags->"b:2.2.3"],
+  Cell[67814, 2262, 671, 15, 40, "Output",
+   CellTags->"b:2.2.3"],
+  Cell[68500, 2280, 85, 1, 51, "Text",
+   CellTags->"b:2.2.3"],
+  Cell[68610, 2285, 81, 2, 44, "Input",
+   CellTags->"b:2.2.3"],
+  Cell[68694, 2289, 3937, 89, 65, "Output",
+   CellTags->"b:2.2.3"],
+  Cell[72646, 2381, 239, 7, 82, "Text",
+   Evaluatable->False,
+   CellTags->"b:2.2.3"],
+  Cell[72910, 2392, 184, 6, 44, "Input",
+   CellTags->"b:2.2.3"],
+  Cell[73097, 2400, 129, 4, 40, "Output",
+   CellTags->"b:2.2.3"],
+  Cell[73241, 2407, 402, 10, 145, "Text",
+   Evaluatable->False,
+   CellTags->"b:2.2.3"],
+  Cell[73680, 2422, 190, 6, 67, "Subsubsection",
+   Evaluatable->False,
+   CellTags->{"c:20", "b:2.2.3"}],
+  Cell[73873, 2430, 556, 12, 145, "Text",
+   CellTags->"b:2.2.3"],
+  Cell[74432, 2444, 55, 1, 51, "Text",
+   CellTags->"b:2.2.3"],
+  Cell[74490, 2447, 127, 5, 82, "Text",
+   CellTags->"b:2.2.3"]},
+ "c:19"->{
+  Cell[63711, 2085, 152, 4, 67, "Subsubsection",
+   CellTags->{"c:19", "b:2.2.3"}]},
+ "c:20"->{
+  Cell[73680, 2422, 190, 6, 67, "Subsubsection",
+   Evaluatable->False,
+   CellTags->{"c:20", "b:2.2.3"}]},
+ "c:21"->{
+  Cell[74666, 2458, 141, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:21", "b:2.2.4"}]},
+ "b:2.2.4"->{
+  Cell[74666, 2458, 141, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:21", "b:2.2.4"}],
+  Cell[74810, 2464, 142, 4, 51, "Text",
+   CellTags->"b:2.2.4"],
+  Cell[74977, 2472, 139, 4, 44, "Input",
+   CellTags->"b:2.2.4"],
+  Cell[75119, 2478, 66, 1, 40, "Output",
+   CellTags->"b:2.2.4"],
+  Cell[75200, 2482, 690, 14, 176, "Text",
+   CellTags->"b:2.2.4"],
+  Cell[75915, 2500, 269, 9, 44, "Input",
+   CellTags->"b:2.2.4"],
+  Cell[76187, 2511, 1899, 66, 65, "Output",
+   CellTags->"b:2.2.4"],
+  Cell[78101, 2580, 260, 7, 82, "Text",
+   CellTags->"b:2.2.4"],
+  Cell[78386, 2591, 390, 12, 67, "Input",
+   CellTags->"b:2.2.4"],
+  Cell[78779, 2605, 249, 9, 40, "Output",
+   CellTags->"b:2.2.4"],
+  Cell[79031, 2616, 627, 22, 40, "Output",
+   CellTags->"b:2.2.4"],
+  Cell[79673, 2641, 682, 23, 90, "Text",
+   CellTags->"b:2.2.4"],
+  Cell[80358, 2666, 4045, 130, 815, "Text",
+   CellTags->"b:2.2.4"],
+  Cell[84428, 2800, 472, 15, 67, "Input",
+   CellTags->"b:2.2.4"],
+  Cell[84903, 2817, 867, 31, 40, "Output",
+   CellTags->"b:2.2.4"],
+  Cell[85785, 2851, 159, 5, 114, "Text",
+   CellTags->"b:2.2.4"]},
+ "c:22"->{
+  Cell[85993, 2862, 107, 2, 90, "Section",
+   Evaluatable->False,
+   CellTags->"c:22"]},
+ "c:23"->{
+  Cell[86125, 2868, 148, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:23", "b:2.3.0"}]},
+ "b:2.3.0"->{
+  Cell[86125, 2868, 148, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:23", "b:2.3.0"}],
+  Cell[86276, 2874, 9855, 283, 2226, "Text",
+   CellTags->"b:2.3.0"]},
+ "c:24"->{
+  Cell[96168, 3162, 128, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:24", "b:2.3.1"}]},
+ "b:2.3.1"->{
+  Cell[96168, 3162, 128, 4, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:24", "b:2.3.1"}],
+  Cell[96299, 3168, 2628, 63, 652, "Text",
+   CellTags->"b:2.3.1"]},
+ "c:25"->{
+  Cell[98964, 3236, 114, 2, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:25", "b:2.3.2"}]},
+ "b:2.3.2"->{
+  Cell[98964, 3236, 114, 2, 68, "Subsection",
+   Evaluatable->False,
+   CellTags->{"c:25", "b:2.3.2"}],
+  Cell[99081, 3240, 6393, 203, 981, "Text",
+   CellTags->"b:2.3.2"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"i:1", 148870, 4367},
+ {"Introduction to SuperLie", 148998, 4370},
+ {"c:1", 149105, 4373},
+ {"c:2", 149212, 4376},
+ {"c:3", 149307, 4380},
+ {"b:2.0.0", 149422, 4384},
+ {"c:4", 149790, 4396},
+ {"b:2.0.1", 149906, 4400},
+ {"c:5", 150212, 4410},
+ {"b:2.0.2", 150327, 4414},
+ {"c:6", 150527, 4421},
+ {"b:2.0.3", 150642, 4425},
+ {"c:7", 150883, 4433},
+ {"c:8", 150979, 4437},
+ {"b:2.1.0", 151095, 4441},
+ {"c:9", 151338, 4449},
+ {"b:2.1.1", 151455, 4453},
+ {"c:10", 151767, 4463},
+ {"b:2.1.2", 151885, 4467},
+ {"c:11", 153631, 4521},
+ {"b:2.1.3", 153749, 4525},
+ {"c:12", 154198, 4539},
+ {"b:2.1.4", 154317, 4543},
+ {"c:13", 154566, 4551},
+ {"b:2.1.5", 154685, 4555},
+ {"c:14", 155132, 4569},
+ {"c:15", 155232, 4573},
+ {"b:2.2.0", 155351, 4577},
+ {"c:16", 156660, 4617},
+ {"b:2.2.1", 156779, 4621},
+ {"c:17", 157095, 4631},
+ {"b:2.2.2", 157214, 4635},
+ {"c:18", 157928, 4657},
+ {"b:2.2.3", 158047, 4661},
+ {"c:19", 160536, 4738},
+ {"c:20", 160632, 4741},
+ {"c:21", 160751, 4745},
+ {"b:2.2.4", 160870, 4749},
+ {"c:22", 161988, 4783},
+ {"c:23", 162088, 4787},
+ {"b:2.3.0", 162207, 4791},
+ {"c:24", 162393, 4797},
+ {"b:2.3.1", 162512, 4801},
+ {"c:25", 162696, 4807},
+ {"b:2.3.2", 162815, 4811}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 237, 8, 114, "Title",
+ CellTags->{"i:1", "Introduction to SuperLie", "c:1"}],
+Cell[CellGroupData[{
+Cell[829, 34, 306, 11, 97, "Section",
+ Evaluatable->False,
+ CellTags->"c:2"],
+Cell[CellGroupData[{
+Cell[1160, 49, 160, 4, 70, "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:3", "b:2.0.0"}],
+Cell[1323, 55, 901, 28, 149, "Text",
+ CellTags->"b:2.0.0"],
+Cell[2227, 85, 444, 10, 120, "Text",
+ CellTags->"b:2.0.0"],
+Cell[2674, 97, 546, 19, 118, "Text",
+ CellTags->"b:2.0.0"],
+Cell[3223, 118, 735, 15, 179, "Text",
+ CellTags->"b:2.0.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3995, 138, 114, 2, 70, "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:4", "b:2.0.1"}],
+Cell[4112, 142, 280, 7, 86, "Text",
+ CellTags->"b:2.0.1"],
+Cell[4395, 151, 1106, 31, 212, "Text",
+ CellTags->"b:2.0.1"],
+Cell[5504, 184, 706, 19, 145, "Text",
+ CellTags->"b:2.0.1"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6247, 208, 84, 2, 68, "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:5", "b:2.0.2"}],
+Cell[6334, 212, 1077, 34, 177, "Text",
+ Evaluatable->False,
+ CellTags->"b:2.0.2"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7448, 251, 96, 2, 68, "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:6", "b:2.0.3"}],
+Cell[7547, 255, 764, 17, 208, "Text",
+ CellTags->"b:2.0.3"],
+Cell[8314, 274, 425, 15, 116, "Text",
+ CellTags->"b:2.0.3"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8788, 295, 133, 4, 90, "Section",
+ Evaluatable->False,
+ CellTags->"c:7"],
+Cell[CellGroupData[{
+Cell[8946, 303, 146, 4, 68, "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:8", "b:2.1.0"}],
+Cell[9095, 309, 676, 19, 177, "Text",
+ CellTags->"b:2.1.0"],
+Cell[9774, 330, 1450, 27, 397, "Text",
+ CellTags->"b:2.1.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11261, 362, 143, 4, 68, "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:9", "b:2.1.1"}],
+Cell[11407, 368, 646, 15, 177, "Text",
+ CellTags->"b:2.1.1"],
+Cell[12056, 385, 431, 9, 114, "Text",
+ CellTags->"b:2.1.1"],
+Cell[12490, 396, 1574, 51, 214, "Text",
+ CellTags->"b:2.1.1"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14101, 452, 141, 4, 68, "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:10", "b:2.1.2"}],
+Cell[14245, 458, 363, 8, 114, "Text",
+ CellTags->"b:2.1.2"],
+Cell[14611, 468, 772, 15, 239, "Text",
+ CellTags->"b:2.1.2"],
+Cell[15386, 485, 501, 10, 176, "Text",
+ CellTags->"b:2.1.2"],
+Cell[15890, 497, 1469, 49, 219, "Text",
+ CellTags->"b:2.1.2"],
+Cell[17362, 548, 629, 17, 147, "Text",
+ CellTags->"b:2.1.2"],
+Cell[17994, 567, 122, 3, 51, "Text",
+ CellTags->"b:2.1.2"],
+Cell[18119, 572, 309, 10, 83, "Text",
+ CellTags->"b:2.1.2"],
+Cell[18431, 584, 914, 27, 148, "Text",
+ CellTags->"b:2.1.2"],
+Cell[19348, 613, 1193, 36, 179, "Text",
+ CellTags->"b:2.1.2"],
+Cell[20544, 651, 105, 3, 51, "Text",
+ CellTags->"b:2.1.2"],
+Cell[20652, 656, 213, 7, 52, "Text",
+ CellTags->"b:2.1.2"],
+Cell[20868, 665, 606, 16, 147, "Text",
+ CellTags->"b:2.1.2"],
+Cell[21477, 683, 187, 6, 52, "Text",
+ CellTags->"b:2.1.2"],
+Cell[21667, 691, 143, 6, 82, "Text",
+ CellTags->"b:2.1.2"],
+Cell[21813, 699, 347, 10, 84, "Text",
+ CellTags->"b:2.1.2"],
+Cell[22163, 711, 131, 4, 44, "Input",
+ CellTags->"b:2.1.2"],
+Cell[22297, 717, 1554, 46, 241, "Text",
+ CellTags->"b:2.1.2"],
+Cell[23854, 765, 423, 11, 114, "Text",
+ CellTags->"b:2.1.2"],
+Cell[24280, 778, 1025, 31, 177, "Text",
+ CellTags->"b:2.1.2"],
+Cell[25308, 811, 255, 7, 82, "Text",
+ CellTags->"b:2.1.2"],
+Cell[25566, 820, 183, 6, 44, "Input",
+ CellTags->"b:2.1.2"],
+Cell[25752, 828, 412, 16, 51, "Text",
+ CellTags->"b:2.1.2"],
+Cell[26167, 846, 320, 9, 83, "Text",
+ CellTags->"b:2.1.2"],
+Cell[26490, 857, 387, 8, 114, "Text",
+ CellTags->"b:2.1.2"],
+Cell[26880, 867, 304, 7, 82, "Text",
+ CellTags->"b:2.1.2"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27221, 879, 142, 4, 68, "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:11", "b:2.1.3"}],
+Cell[27366, 885, 1434, 55, 177, "Text",
+ CellTags->"b:2.1.3"],
+Cell[28803, 942, 557, 17, 114, "Text",
+ CellTags->"b:2.1.3"],
+Cell[29363, 961, 1151, 33, 210, "Text",
+ CellTags->"b:2.1.3"],
+Cell[30517, 996, 1043, 37, 114, "Text",
+ CellTags->"b:2.1.3"],
+Cell[31563, 1035, 535, 11, 145, "Text",
+ CellTags->"b:2.1.3"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32135, 1051, 144, 4, 68, "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:12", "b:2.1.4"}],
+Cell[32282, 1057, 1843, 58, 302, "Text",
+ CellTags->"b:2.1.4"],
+Cell[34128, 1117, 333, 8, 82, "Text",
+ CellTags->"b:2.1.4"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34498, 1130, 144, 4, 68, "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:13", "b:2.1.5"}],
+Cell[34645, 1136, 714, 15, 177, "Text",
+ CellTags->"b:2.1.5"],
+Cell[35362, 1153, 406, 9, 114, "Text",
+ CellTags->"b:2.1.5"],
+Cell[35771, 1164, 505, 11, 114, "Text",
+ CellTags->"b:2.1.5"],
+Cell[36279, 1177, 322, 8, 82, "Text",
+ CellTags->"b:2.1.5"],
+Cell[36604, 1187, 631, 23, 83, "Text",
+ CellTags->"b:2.1.5"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[37284, 1216, 118, 4, 90, "Section",
+ Evaluatable->False,
+ CellTags->"c:14"],
+Cell[37405, 1222, 425, 13, 114, "Text"],
+Cell[37833, 1237, 133, 3, 51, "Text"],
+Cell[37969, 1242, 119, 3, 44, "Input"],
+Cell[38091, 1247, 159, 5, 51, "Text"],
+Cell[38253, 1254, 259, 5, 56, "Print"],
+Cell[38515, 1261, 119, 2, 51, "Text"],
+Cell[CellGroupData[{
+Cell[38659, 1267, 367, 9, 99, "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:15", "b:2.2.0"}],
+Cell[39029, 1278, 844, 14, 208, "Text",
+ CellTags->"b:2.2.0"],
+Cell[39876, 1294, 367, 8, 82, "Text",
+ CellTags->"b:2.2.0"],
+Cell[CellGroupData[{
+Cell[40268, 1306, 199, 7, 44, "Input",
+ CellTags->"b:2.2.0"],
+Cell[40470, 1315, 66, 1, 40, "Output",
+ CellTags->"b:2.2.0"]
+}, Open  ]],
+Cell[40551, 1319, 584, 22, 53, "Text",
+ CellTags->"b:2.2.0"],
+Cell[41138, 1343, 649, 21, 114, "Text",
+ CellTags->"b:2.2.0"],
+Cell[CellGroupData[{
+Cell[41812, 1368, 363, 13, 44, "Input",
+ CellTags->"b:2.2.0"],
+Cell[42178, 1383, 94, 3, 40, "Output",
+ CellTags->"b:2.2.0"]
+}, Open  ]],
+Cell[42287, 1389, 136, 3, 51, "Text",
+ CellTags->"b:2.2.0"],
+Cell[CellGroupData[{
+Cell[42448, 1396, 390, 14, 44, "Input",
+ CellTags->"b:2.2.0"],
+Cell[42841, 1412, 863, 25, 40, "Output",
+ CellTags->"b:2.2.0"]
+}, Open  ]],
+Cell[43719, 1440, 117, 3, 51, "Text",
+ CellTags->"b:2.2.0"],
+Cell[43839, 1445, 233, 6, 82, "Text",
+ CellTags->"b:2.2.0"],
+Cell[CellGroupData[{
+Cell[44097, 1455, 863, 25, 93, "Input",
+ CellTags->"b:2.2.0"],
+Cell[44963, 1482, 76, 1, 40, "Output",
+ CellTags->"b:2.2.0"],
+Cell[45042, 1485, 66, 1, 40, "Output",
+ CellTags->"b:2.2.0"]
+}, Open  ]],
+Cell[45123, 1489, 652, 25, 85, "Text",
+ CellTags->"b:2.2.0"],
+Cell[45778, 1516, 1954, 66, 218, "Text",
+ CellTags->"b:2.2.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[47769, 1587, 149, 4, 68, "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:16", "b:2.2.1"}],
+Cell[47921, 1593, 179, 6, 51, "Text",
+ CellTags->"b:2.2.1"],
+Cell[48103, 1601, 964, 18, 270, "Text",
+ CellTags->"b:2.2.1"],
+Cell[49070, 1621, 2542, 89, 313, "Text",
+ CellTags->"b:2.2.1"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[51649, 1715, 231, 9, 71, "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:17", "b:2.2.2"}],
+Cell[51883, 1726, 413, 11, 116, "Text",
+ CellTags->"b:2.2.2"],
+Cell[CellGroupData[{
+Cell[52321, 1741, 473, 15, 63, "Input",
+ CellTags->"b:2.2.2"],
+Cell[52797, 1758, 51, 1, 40, "Output",
+ CellTags->"b:2.2.2"]
+}, Open  ]],
+Cell[52863, 1762, 112, 3, 51, "Text",
+ CellTags->"b:2.2.2"],
+Cell[52978, 1767, 180, 6, 51, "Text",
+ CellTags->"b:2.2.2"],
+Cell[CellGroupData[{
+Cell[53183, 1777, 177, 6, 44, "Input",
+ CellTags->"b:2.2.2"],
+Cell[53363, 1785, 214, 6, 40, "Print",
+ CellTags->"b:2.2.2"],
+Cell[53580, 1793, 237, 6, 40, "Print",
+ CellTags->"b:2.2.2"],
+Cell[53820, 1801, 8479, 242, 108, "Print",
+ CellTags->"b:2.2.2"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[62348, 2049, 151, 4, 68, "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:18", "b:2.2.3"}],
+Cell[62502, 2055, 1184, 26, 337, "Text",
+ CellTags->"b:2.2.3"],
+Cell[CellGroupData[{
+Cell[63711, 2085, 152, 4, 67, "Subsubsection",
+ CellTags->{"c:19", "b:2.2.3"}],
+Cell[63866, 2091, 232, 7, 51, "Text",
+ Evaluatable->False,
+ CellTags->"b:2.2.3"],
+Cell[64101, 2100, 183, 6, 51, "Text",
+ Evaluatable->False,
+ CellTags->"b:2.2.3"],
+Cell[CellGroupData[{
+Cell[64309, 2110, 212, 6, 67, "Input",
+ CellTags->"b:2.2.3"],
+Cell[64524, 2118, 76, 1, 40, "Output",
+ CellTags->"b:2.2.3"],
+Cell[64603, 2121, 66, 1, 40, "Output",
+ CellTags->"b:2.2.3"]
+}, Open  ]],
+Cell[64684, 2125, 135, 4, 51, "Text",
+ Evaluatable->False,
+ CellTags->"b:2.2.3"],
+Cell[CellGroupData[{
+Cell[64844, 2133, 517, 16, 44, "Input",
+ CellTags->"b:2.2.3"],
+Cell[65364, 2151, 439, 15, 40, "Output",
+ CellTags->"b:2.2.3"]
+}, Open  ]],
+Cell[65818, 2169, 60, 1, 51, "Text",
+ CellTags->"b:2.2.3"],
+Cell[CellGroupData[{
+Cell[65903, 2174, 127, 3, 44, "Input",
+ CellTags->"b:2.2.3"],
+Cell[66033, 2179, 79, 1, 40, "Output",
+ CellTags->"b:2.2.3"]
+}, Open  ]],
+Cell[66127, 2183, 130, 6, 51, "Text",
+ CellTags->"b:2.2.3"],
+Cell[CellGroupData[{
+Cell[66282, 2193, 80, 2, 44, "Input",
+ CellTags->"b:2.2.3"],
+Cell[66365, 2197, 273, 9, 40, "Output",
+ CellTags->"b:2.2.3"]
+}, Open  ]],
+Cell[66653, 2209, 268, 12, 53, "Text",
+ Evaluatable->False,
+ CellTags->"b:2.2.3"],
+Cell[CellGroupData[{
+Cell[66946, 2225, 80, 2, 44, "Input",
+ CellTags->"b:2.2.3"],
+Cell[67029, 2229, 575, 21, 40, "Output",
+ CellTags->"b:2.2.3"]
+}, Open  ]],
+Cell[67619, 2253, 84, 1, 51, "Text",
+ CellTags->"b:2.2.3"],
+Cell[CellGroupData[{
+Cell[67728, 2258, 83, 2, 44, "Input",
+ CellTags->"b:2.2.3"],
+Cell[67814, 2262, 671, 15, 40, "Output",
+ CellTags->"b:2.2.3"]
+}, Open  ]],
+Cell[68500, 2280, 85, 1, 51, "Text",
+ CellTags->"b:2.2.3"],
+Cell[CellGroupData[{
+Cell[68610, 2285, 81, 2, 44, "Input",
+ CellTags->"b:2.2.3"],
+Cell[68694, 2289, 3937, 89, 65, "Output",
+ CellTags->"b:2.2.3"]
+}, Open  ]],
+Cell[72646, 2381, 239, 7, 82, "Text",
+ Evaluatable->False,
+ CellTags->"b:2.2.3"],
+Cell[CellGroupData[{
+Cell[72910, 2392, 184, 6, 44, "Input",
+ CellTags->"b:2.2.3"],
+Cell[73097, 2400, 129, 4, 40, "Output",
+ CellTags->"b:2.2.3"]
+}, Open  ]],
+Cell[73241, 2407, 402, 10, 145, "Text",
+ Evaluatable->False,
+ CellTags->"b:2.2.3"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[73680, 2422, 190, 6, 67, "Subsubsection",
+ Evaluatable->False,
+ CellTags->{"c:20", "b:2.2.3"}],
+Cell[73873, 2430, 556, 12, 145, "Text",
+ CellTags->"b:2.2.3"],
+Cell[74432, 2444, 55, 1, 51, "Text",
+ CellTags->"b:2.2.3"],
+Cell[74490, 2447, 127, 5, 82, "Text",
+ CellTags->"b:2.2.3"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[74666, 2458, 141, 4, 68, "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:21", "b:2.2.4"}],
+Cell[74810, 2464, 142, 4, 51, "Text",
+ CellTags->"b:2.2.4"],
+Cell[CellGroupData[{
+Cell[74977, 2472, 139, 4, 44, "Input",
+ CellTags->"b:2.2.4"],
+Cell[75119, 2478, 66, 1, 40, "Output",
+ CellTags->"b:2.2.4"]
+}, Open  ]],
+Cell[75200, 2482, 690, 14, 176, "Text",
+ CellTags->"b:2.2.4"],
+Cell[CellGroupData[{
+Cell[75915, 2500, 269, 9, 44, "Input",
+ CellTags->"b:2.2.4"],
+Cell[76187, 2511, 1899, 66, 65, "Output",
+ CellTags->"b:2.2.4"]
+}, Open  ]],
+Cell[78101, 2580, 260, 7, 82, "Text",
+ CellTags->"b:2.2.4"],
+Cell[CellGroupData[{
+Cell[78386, 2591, 390, 12, 67, "Input",
+ CellTags->"b:2.2.4"],
+Cell[78779, 2605, 249, 9, 40, "Output",
+ CellTags->"b:2.2.4"],
+Cell[79031, 2616, 627, 22, 40, "Output",
+ CellTags->"b:2.2.4"]
+}, Open  ]],
+Cell[79673, 2641, 682, 23, 90, "Text",
+ CellTags->"b:2.2.4"],
+Cell[80358, 2666, 4045, 130, 815, "Text",
+ CellTags->"b:2.2.4"],
+Cell[CellGroupData[{
+Cell[84428, 2800, 472, 15, 67, "Input",
+ CellTags->"b:2.2.4"],
+Cell[84903, 2817, 867, 31, 40, "Output",
+ CellTags->"b:2.2.4"]
+}, Open  ]],
+Cell[85785, 2851, 159, 5, 114, "Text",
+ CellTags->"b:2.2.4"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[85993, 2862, 107, 2, 90, "Section",
+ Evaluatable->False,
+ CellTags->"c:22"],
+Cell[CellGroupData[{
+Cell[86125, 2868, 148, 4, 68, "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:23", "b:2.3.0"}],
+Cell[86276, 2874, 9855, 283, 2226, "Text",
+ CellTags->"b:2.3.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[96168, 3162, 128, 4, 68, "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:24", "b:2.3.1"}],
+Cell[96299, 3168, 2628, 63, 652, "Text",
+ CellTags->"b:2.3.1"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[98964, 3236, 114, 2, 68, "Subsection",
+ Evaluatable->False,
+ CellTags->{"c:25", "b:2.3.2"}],
+Cell[99081, 3240, 6393, 203, 981, "Text",
+ CellTags->"b:2.3.2"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

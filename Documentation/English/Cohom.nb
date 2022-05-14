@@ -1,0 +1,3845 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[    120967,       3836]
+NotebookOptionsPosition[     59272,       2318]
+NotebookOutlinePosition[    111510,       3522]
+CellTagsIndexPosition[    110642,       3487]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+ "Package ",
+ StyleBox["SuperLie`Cohom`:",
+  FontFamily->"Courier New"],
+ " Calculation of cohomology"
+}], "Title",
+ FontSize->24,
+ CellTags->{"Cohom", "c:1"}],
+
+Cell["\<\
+This package helps to calculate cohomology of Lie [super]algebras with \
+coefficients in any module (split into a sum of finite-dimensional subspaces).\
+\>", "Text",
+ CellChangeTimes->{3.421513688564848*^9}],
+
+Cell[TextData[{
+ "The main algebra ",
+ Cell[BoxData[
+  FormBox["\[GothicA]", TraditionalForm]]],
+ " should be defined in ",
+ ButtonBox["Tabular",
+  BaseStyle->"AddOnsLink"],
+ " mode, i.e., with basis ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicA]", "1"], TraditionalForm]]],
+ ",... ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicA]", "n"], TraditionalForm]]],
+ " and the bracket defined via multiplication table. If it is not the case, \
+one should first define ",
+ Cell[BoxData[
+  FormBox["\[GothicA]", TraditionalForm]]],
+ " as ",
+ ButtonBox["SubAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " of the original algebra. "
+}], "Text"],
+
+Cell[TextData[{
+ "If another (super)algebra ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ " acts on both the main algebra ",
+ Cell[BoxData[
+  FormBox["\[GothicA]", TraditionalForm]]],
+ " and on the module of coefficients ",
+ Cell[BoxData[
+  FormBox["\[GothicM]", TraditionalForm]]],
+ " so that ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[GothicA]", "+", 
+    SubscriptBox["\[GothicG]", "0"]}], TraditionalForm]]],
+ " acts on ",
+ Cell[BoxData[
+  FormBox["\[GothicM]", TraditionalForm]]],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"d", "(", 
+     RowBox[{"g", "(", "f", ")"}], ")"}], "==", 
+    RowBox[{"g", "(", 
+     RowBox[{"d", "(", "f", ")"}], ")"}]}], TraditionalForm]]],
+ " then the space of cohomology will also be a ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ "-module. The package contains functions that help to describe the structure \
+of this module."
+}], "Text",
+ CellChangeTimes->{{3.421513720300482*^9, 3.4215137367240973`*^9}}],
+
+Cell[TextData[{
+ "If ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ " contains a subalgebra \[GothicH] whose finite-dimensional modules are \
+always direct sums of modules with highest weights (for example, an even \
+semisimple subalgebra \[GothicH] over a field of charactristics 0), the \
+calculation of cohomology is simplified because it suffices to calculate the \
+highest (with respect to the action of \[GothicH]) vectors in cohomology."
+}], "Text",
+ CellChangeTimes->{{3.421513755230709*^9, 3.4215137604582253`*^9}, {
+  3.4215138009965167`*^9, 3.421513860431981*^9}}],
+
+Cell[TextData[{
+ "See ",
+ ButtonBox["example",
+  BaseStyle->"Hyperlink",
+  ButtonData:>"Example"],
+ " below."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Reference", "Section",
+ CellTags->"c:2"],
+
+Cell[CellGroupData[{
+
+Cell["Variables", "SubsectionIcon"],
+
+Cell[CellGroupData[{
+
+Cell["Input data", "SubsubsectionIcon"],
+
+Cell["ch$raise", "ObjectName",
+ CellTags->"ch$raise"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["ch$raise", "Program"],
+ " should hold the list of rising elenents in even semisimple part of ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ ". It is used when calculating highest weight vectors."
+}], "Usage",
+ CellChangeTimes->{{3.421513882864237*^9, 3.4215138846868577`*^9}},
+ CellTags->"ch$raise"],
+
+Cell["ch$lower", "ObjectName"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["ch$lower", "Program"],
+ " should hold the list of lowering elenents in even semisimple part of ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ ". It is used when calculating lowest weight vectors."
+}], "Usage",
+ CellChangeTimes->{{3.4215138928986654`*^9, 3.421513895242035*^9}}],
+
+Cell["ch$gen", "ObjectName"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["ch$gen", "Program"],
+ " holds the list of generators of the algebra ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ ". This list is used to speed up the calculation of different ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ "-modules by skipping calculating the full action table. Set ",
+ StyleBox["ch$gen=All", "Program"],
+ " to calculate the full action table (this is the default value)."
+}], "Usage",
+ CellChangeTimes->{{3.421513911014715*^9, 3.4215139316944513`*^9}}],
+
+Cell["ch$basis", "ObjectName",
+ CellTags->"ch$basis"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] The value of ch$basis if the name of the function ",
+ StyleBox["fn",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["d",
+  FontSlant->"Italic"],
+ "] that  returns the list of all ",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "-forms of degree ",
+ StyleBox["d.",
+  FontSlant->"Italic"],
+ " The default name is ",
+ ButtonBox["chBasis",
+  BaseStyle->"AddOnsLink"],
+ "."
+}], "Usage",
+ CellTags->"ch$basis"],
+
+Cell["ch$Split", "ObjectName",
+ CellTags->"ch$Split"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] The value of ",
+ StyleBox["ch$Split", "Program"],
+ " is the name of the function that should be passed to ",
+ ButtonBox["SplitList",
+  BaseStyle->"AddOnsLink"],
+ " or ",
+ ButtonBox["SplitSum",
+  BaseStyle->"AddOnsLink"],
+ " when splitting expressions to homogenous parts. The default name is ",
+ ButtonBox["chSplit",
+  BaseStyle->"Hyperlink",
+  ButtonData:>"chSplit"],
+ ".\n\[FilledSmallSquare] The values of this function are used for indexing \
+the results of calculations. They are referred to as ",
+ StyleBox["selectors",
+  FontSlant->"Italic"],
+ " in this documents."
+}], "Usage",
+ CellTags->"ch$Split"],
+
+Cell["ch$Wt", "ObjectName",
+ CellTags->"ch$Wt"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] The value of ",
+ StyleBox["ch$Wt", "Program"],
+ " is a (possibly user-defined) weight function relative to a fixed Cartan \
+subalgebra of ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ ".\n\[FilledSmallSquare] The default value is ",
+ ButtonBox["Weight",
+  BaseStyle->"AddOnsLink"],
+ "."
+}], "Usage",
+ CellTags->"ch$Wt"],
+
+Cell["ch$Out", "ObjectName",
+ CellTags->"ch$Out"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] The value of ",
+ StyleBox["ch$Out", "Program"],
+ " is a function that is applied to cohomology when printing. The default \
+value is ",
+ StyleBox["Identity", "Program"],
+ ". This function is useful when the algebra \[GothicA] whose cohomology is \
+calculated is constructed as a subalgebra in some algebra \[GothicG] and the \
+user want to express the results in a basis of \[GothicG] rather than in a \
+basis of \[GothicA]."
+}], "Usage",
+ CellChangeTimes->{{3.421513982988208*^9, 3.4215140225150447`*^9}, {
+  3.423737320419051*^9, 3.423737323313213*^9}},
+ CellTags->"ch$Out"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Storage", "SubsubsectionIcon"],
+
+Cell["\<\
+The following symbols are used to store the information required for \
+calculation. Normally, their values are assigned automatically, but the user \
+can change them if required. \
+\>", "Text",
+ CellChangeTimes->{{3.4215140410717278`*^9, 3.4215140515167475`*^9}}],
+
+Cell["ch$alg", "ObjectName"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["ch$alg", "Program"],
+ " holds the name of the algebra ",
+ Cell[BoxData[
+  FormBox["\[GothicA]", TraditionalForm]]],
+ " those cohomology are calculated."
+}], "Usage"],
+
+Cell["ch$d", "ObjectName"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["ch$d", "Program"],
+ " holds the name of the module ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    ButtonBox["DLeft",
+     BaseStyle->"AddOnsLink"], "[", "\[GothicA]", "]"}], TraditionalForm]]],
+ " of differential 1-forms on the main algebra ",
+ Cell[BoxData[
+  FormBox["\[GothicA]", TraditionalForm]]],
+ " with trivial coefficients."
+}], "Usage"],
+
+Cell["ch$g0", "ObjectName"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["ch$g0", "Program"],
+ " holds the name of the algebra ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ " acting on the main algebra ",
+ Cell[BoxData[
+  FormBox["\[GothicA]", TraditionalForm]]],
+ ". This action is used to simplify the calculations: it suffices  to \
+calculate only cohomology of the highest weight with respect to some even \
+semisimple subalgebra \[GothicH] of ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ ".\n\[FilledSmallSquare] See also ",
+ Cell[BoxData[
+  ButtonBox["ch$raise",
+   BaseStyle->"Hyperlink",
+   ButtonData:>"ch$raise"]], "Input",
+  GeneratedCell->True],
+ " and ",
+ Cell[BoxData[
+  ButtonBox["chSplit",
+   BaseStyle->"Hyperlink",
+   ButtonData:>"chSplit"]], "Input",
+  GeneratedCell->True],
+ "."
+}], "Usage",
+ CellChangeTimes->{{3.4215141351870594`*^9, 3.421514156267371*^9}}],
+
+Cell["ch$M", "ObjectName"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["ch$M", "Program"],
+ " denotes the module of differential forms, possibly with values in a module."
+}], "Usage",
+ CellChangeTimes->{{3.4237374057016816`*^9, 3.4237374225659313`*^9}}],
+
+Cell["ch$ex", "ObjectName"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["ch$ex", "Program"],
+ " denotes the \[GothicG]-module of exact forms (the last component \
+calculated by ",
+ Cell[BoxData[
+  ButtonBox["chExMod",
+   BaseStyle->"Hyperlink",
+   ButtonData:>"chExMod"]], "Input",
+  GeneratedCell->True],
+ ")",
+ ", possibly with values in a module",
+ "."
+}], "Usage",
+ CellChangeTimes->{3.423737446850851*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Results", "SubsubsectionIcon"],
+
+Cell[TextData[{
+ "The results of calculations are stored as values of ",
+ StyleBox["ch$tab", "Program"],
+ "[...], ",
+ StyleBox["ch$res", "Program"],
+ "[...], and ",
+ StyleBox["ch$book", "Program"],
+ "[...]."
+}], "Text"],
+
+Cell[TextData[{
+ "To avoid reusing the same storage for solutions of different problems, bind \
+the variables ",
+ StyleBox["ch$tab", "Program"],
+ ", ",
+ StyleBox["ch$res", "Program"],
+ ", and/or ",
+ StyleBox["ch$book", "Program"],
+ " to different symbols, as follow:"
+}], "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ch$book", "=", "answer1"}], ";"}], "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{"solve", " ", "problem", " ", "1"}], " ", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ch$book", "=", "answer2"}], ";"}], "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{"solve", " ", "problem", " ", "2"}], " ", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"compare", " ", "the", " ", "results"}], " ", "*)"}]}]}], "Input"],
+
+Cell["ch$tab", "ObjectName"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["ch$tab", "Program"],
+ "[",
+ StyleBox["degree",
+  FontSlant->"Italic"],
+ "]={",
+ StyleBox["selector",
+  FontSlant->"Italic"],
+ "\[Rule]{{",
+ StyleBox["Dim[", "Program"],
+ StyleBox["ker0", "Text",
+  FontSlant->"Italic"],
+ StyleBox["]", "Program"],
+ ",",
+ StyleBox["Dim[", "Program"],
+ StyleBox["im0", "Text",
+  FontSlant->"Italic"],
+ StyleBox["]", "Program"],
+ "},...},...} stores the dimensions of the spaces stored in ",
+ ButtonBox["ch$res",
+  BaseStyle->"AddOnsLink"],
+ "."
+}], "Usage",
+ CellMargins->{{10, Inherited}, {Inherited, Inherited}},
+ CellChangeTimes->{3.4215142273495827`*^9}],
+
+Cell["ch$res", "ObjectName"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["ch$res", "Program"],
+ "[",
+ StyleBox["degree",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["rank",
+  FontSlant->"Italic"],
+ "]={",
+ StyleBox["selector",
+  FontSlant->"Italic"],
+ "\[Rule]{",
+ StyleBox["ker",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["im",
+  FontSlant->"Italic"],
+ "}, ...} stores the results of ",
+ ButtonBox["chCoHom",
+  BaseStyle->"AddOnsLink"],
+ "[",
+ StyleBox["s",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "]."
+}], "Usage"],
+
+Cell["ch$book", "ObjectName"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] The final results are stored as ",
+ StyleBox["ch$book", "Program"],
+ "[",
+ StyleBox["degree",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["rank",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["selector",
+  FontSlant->"Italic"],
+ "]=cohomology or a list of cohomologies.\n\[FilledSmallSquare] To see all \
+stored results, invoke ",
+ ButtonBox["DownValues",
+  BaseStyle->"RefGuideLink"],
+ StyleBox["[ch$book]", "Program"],
+ "."
+}], "Usage"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Functions", "SubsectionIcon"],
+
+Cell["chSetAlg", "ObjectName",
+ CellTags->"chSetAlg"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["chSetAlg", "Program"], 
+    StyleBox["[", "Program"], 
+    StyleBox[
+     RowBox[{"\[GothicA]", ",", "\[GothicD]"}], "Text"], 
+    StyleBox["]", "Program"]}], TraditionalForm]]],
+ " defines ",
+ Cell[BoxData[
+  FormBox["\[GothicD]", TraditionalForm]]],
+ " as ",
+ Cell[BoxData[
+  ButtonBox["DLeft",
+   BaseStyle->"AddOnsLink"]], "Input",
+  GeneratedCell->True],
+ "[",
+ Cell[BoxData[
+  FormBox["\[GothicA]", TraditionalForm]]],
+ "] and stores ",
+ Cell[BoxData[
+  FormBox["\[GothicA]", TraditionalForm]]],
+ " as algebra for calculation of cohomology. \n\[FilledSmallSquare] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["chSetAlg", "Program"], 
+    StyleBox["[", "Program"], 
+    StyleBox[
+     RowBox[{"\[GothicA]", ",", "\[GothicD]", ",", 
+      SubscriptBox["\[GothicG]", "0"], ",", "\[GothicM]"}], "Text"], 
+    StyleBox["]", "Program"]}], TraditionalForm]]],
+ " specifies also the algebra ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ " that acts on ",
+ Cell[BoxData[
+  FormBox["\[GothicA]", TraditionalForm]]],
+ " and the module of coefficients \[GothicM].\n\[FilledSmallSquare] The \
+argument ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ " is either the name of an algebra or ",
+ StyleBox["None", "Name"],
+ ".\n\[FilledSmallSquare] Algebras ",
+ Cell[BoxData[
+  FormBox["\[GothicA]", TraditionalForm]]],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ " should be already defined as well as the action of ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ " on ",
+ Cell[BoxData[
+  FormBox["\[GothicA]", TraditionalForm]]],
+ ".\n\[FilledSmallSquare] The argument \[GothicM] may be (a) a number, for \
+trivial coefficients, (b) a name of an (already defined) \[GothicA]- and ",
+ Cell[BoxData[
+  SubscriptBox["\[GothicG]", "0"]]],
+ "-module, or (c) a basis (list of vectors) in such module.  The user may \
+also omit the argument \[GothicM] and define instead the function ",
+ ButtonBox["chBasis",
+  BaseStyle->"AddOnsLink"],
+ " that builds the basis of forms.\n\[FilledSmallSquare] ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox["chSetAlg", "Program"], TraditionalForm]]],
+ " may be called with options that are passed to ",
+ StyleBox["DLeft", "Program"],
+ ". "
+}], "Usage",
+ CellMargins->{{10, Inherited}, {Inherited, Inherited}},
+ CellChangeTimes->{{3.5828186012808876`*^9, 3.5828186030933876`*^9}, {
+  3.5828186729683876`*^9, 3.5828187552808876`*^9}},
+ CellTags->"chSetAlg"],
+
+Cell["chScalars", "ObjectName",
+ CellTags->"chScalars"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["chScalars[", "Program"],
+ StyleBox["b", "Text",
+  FontSlant->"Italic"],
+ StyleBox[",", "Text"],
+ StyleBox["c", "Text",
+  FontSlant->"Italic"],
+ StyleBox["]", "Program"],
+ " declares the names of scalar coefficients to be used in calculations."
+}], "Usage",
+ CellMargins->{{9.25, Inherited}, {Inherited, Inherited}},
+ CellTags->"chScalars"],
+
+Cell["chHVect", "ObjectName"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["chHVect[", "Program"],
+ StyleBox["f", "Text",
+  FontSlant->"Italic"],
+ StyleBox["]", "Program"],
+ " calculates the highest weight vectors in the space given as a ",
+ StyleBox[ButtonBox["general sum",
+  BaseStyle->"AddOnsLink",
+  Active->True,
+  ButtonData:>GeneralSum],
+  FontFamily->"Times New Roman"],
+ " ",
+ StyleBox["f",
+  FontSlant->"Italic"],
+ ". The result is also a general sum."
+}], "Usage",
+ CellMargins->{{9.25, Inherited}, {Inherited, Inherited}},
+ CellChangeTimes->{{3.4215142807263346`*^9, 3.421514283350107*^9}, 
+   3.4215143138239264`*^9}],
+
+Cell["chLVect", "ObjectName"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["chLVect[", "Program"],
+ StyleBox["f", "Text",
+  FontSlant->"Italic"],
+ StyleBox["] ", "Program"],
+ "calculates the lowest weight vectors in the space given as a  ",
+ StyleBox[ButtonBox["general sum",
+  BaseStyle->"AddOnsLink",
+  Active->True,
+  ButtonData:>GeneralSum],
+  FontFamily->"Times New Roman"],
+ " ",
+ StyleBox["f",
+  FontSlant->"Italic"],
+ ". The result is also a general sum."
+}], "Usage",
+ CellMargins->{{9.25, Inherited}, {Inherited, Inherited}},
+ CellChangeTimes->{{3.4215143246494927`*^9, 3.421514330978594*^9}}],
+
+Cell["chGenDim", "ObjectName"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["chGenDim[", "Program"],
+ StyleBox["f", "Text",
+  FontSlant->"Italic"],
+ StyleBox["]", "Program"],
+ " tells how many indeterminate coefficients are there in the ",
+ StyleBox[ButtonBox["general sum",
+  BaseStyle->"AddOnsLink",
+  Active->True,
+  ButtonData:>GeneralSum],
+  FontFamily->"Times New Roman"],
+ " ",
+ StyleBox["f",
+  FontSlant->"Italic"],
+ " with coefficients defined by ",
+ ButtonBox["chScalars",
+  BaseStyle->"AddOnsLink"],
+ "."
+}], "Usage",
+ CellMargins->{{10, Inherited}, {Inherited, Inherited}},
+ CellChangeTimes->{{3.421514357496725*^9, 3.421514393077888*^9}, {
+   3.423737903637678*^9, 3.4237379040382547`*^9}, 3.423737946228922*^9}],
+
+Cell["chCoHom", "ObjectName"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["chCoHom[", "Program"],
+ StyleBox["s", "Text",
+  FontSlant->"Italic"],
+ StyleBox[", ", "Text"],
+ StyleBox["r", "Text",
+  FontSlant->"Italic"],
+ StyleBox["]", "Program"],
+ " calculates the component of grade ",
+ StyleBox["s",
+  FontSlant->"Italic"],
+ " of the kernel and the image of the operator ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"d", ":", 
+    RowBox[{
+     SuperscriptBox["\[CapitalOmega]", "r"], "\[LongRightArrow]", 
+     SuperscriptBox["\[CapitalOmega]", 
+      RowBox[{"r", "+", "1"}]]}]}], TraditionalForm]]],
+ ". The result is stored in ",
+ StyleBox["ch$res[", "Program"],
+ StyleBox["s", "Text",
+  FontSlant->"Italic"],
+ StyleBox[", ", "Text"],
+ StyleBox["r", "Text",
+  FontSlant->"Italic"],
+ StyleBox["]", "Program"],
+ " as a list of two ",
+ StyleBox[ButtonBox["general sums",
+  BaseStyle->"AddOnsLink",
+  Active->True,
+  ButtonData:>GeneralSum],
+  FontFamily->"Times New Roman"],
+ ".\n\[FilledSmallSquare] This function is called from ",
+ Cell[BoxData[
+  ButtonBox["chCalc",
+   BaseStyle->"Hyperlink",
+   ButtonData:>"chCalc"]], "Input",
+  GeneratedCell->True],
+ "."
+}], "Usage",
+ CellMargins->{{9.25, Inherited}, {Inherited, Inherited}},
+ CellChangeTimes->{{3.421514410573045*^9, 3.4215144256847744`*^9}}],
+
+Cell["chRes", "ObjectName"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["chRes", "Program"],
+ "[",
+ StyleBox["s",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "] prints the results of calculations of (\[LessEqual]",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ ")-cohomologies of grade ",
+ StyleBox["s.",
+  FontSlant->"Italic"]
+}], "Usage",
+ CellChangeTimes->{{3.423737982010373*^9, 3.423737983061885*^9}}],
+
+Cell["chEqu", "ObjectName"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["chEqu", "Program"],
+ "[",
+ StyleBox["s",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["w",
+  FontSlant->"Italic"],
+ "] solves the exactness equations for the coefficients of a generic closed \
+",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "-form of grade ",
+ StyleBox["s",
+  FontSlant->"Italic"],
+ " and weight ",
+ StyleBox["w",
+  FontSlant->"Italic"],
+ "."
+}], "Usage",
+ CellChangeTimes->{{3.4237380142166834`*^9, 3.4237380259235168`*^9}}],
+
+Cell["chCalc", "ObjectName",
+ CellTags->"chCalc"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["chCalc", "Program"],
+ "[",
+ StyleBox["s",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "] calculates (\[LessEqual]",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ ")-cohomologies of grade ",
+ StyleBox["s",
+  FontSlant->"Italic"],
+ " and prints a short summary.\n\[FilledSmallSquare] ",
+ StyleBox["chCalc", "Program"],
+ "[",
+ StyleBox["s",
+  FontSlant->"Italic"],
+ ",{",
+ StyleBox["p",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["q",
+  FontSlant->"Italic"],
+ "}] calculates ",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "-cohomologies (",
+ StyleBox["p",
+  FontSlant->"Italic"],
+ "\[LessEqual]",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "\[LessEqual]",
+ StyleBox["q",
+  FontSlant->"Italic"],
+ ") of grade ",
+ StyleBox["s",
+  FontSlant->"Italic"],
+ " and prints a short summary.\n\[FilledSmallSquare] ",
+ StyleBox["chCalc", "Program"],
+ "[",
+ StyleBox["s",
+  FontSlant->"Italic"],
+ ",-",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "] with -",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "<0 is equivalent to ",
+ StyleBox["chCalc", "Program"],
+ "[",
+ StyleBox["s",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "], but uses less memory. It does not stores results required to continue \
+calculetions with next ",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ " (using ",
+ StyleBox["chCalcMode", "Program"],
+ ").\n\[FilledSmallSquare] The summary contains the total number of \
+independent highest vectors in the kernel and image of the exterior \
+differential. \n\[FilledSmallSquare] Use ",
+ Cell[BoxData[
+  ButtonBox[
+   RowBox[{"chNext", "[", "]"}],
+   BaseStyle->"Hyperlink",
+   ButtonData:>"chNext"]], "Input",
+  GeneratedCell->True],
+ " to enumerate the cohomologies calculate."
+}], "Usage",
+ CellChangeTimes->{{3.421588107616789*^9, 3.4215881159187264`*^9}, {
+  3.42158814815508*^9, 3.4215881534727263`*^9}, {3.4237380413857503`*^9, 
+  3.423738042297061*^9}},
+ CellTags->"chCalc"],
+
+Cell["chCalcMore", "ObjectName",
+ CellTags->"chCalc"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["chCalcMore", "Program"],
+ "[",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "] continues calculations made with last  ",
+ Cell[BoxData[
+  ButtonBox["chCalc",
+   BaseStyle->"Hyperlink",
+   ButtonData:>"chCalc"]], "Input",
+  GeneratedCell->True],
+ " or ",
+ StyleBox["chCalcMore", "Program"],
+ " up to ",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "-cohomologies and prints  a short summary.\n\[FilledSmallSquare] ",
+ StyleBox["chCalcMore", "Program"],
+ "[-",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "] with -",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "<0 is equivalent to ",
+ StyleBox["chCalcMore", "Program"],
+ "[",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "], but uses less memory. It does not stores results required to continue \
+calculetions with next ",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ ".\n\[FilledSmallSquare] ",
+ StyleBox["chCalcMode", "Program"],
+ "[",
+ StyleBox[" ",
+  FontSlant->"Italic"],
+ "] calculates one (next) cohomology."
+}], "Usage",
+ CellChangeTimes->{{3.5828208762965126`*^9, 3.5828209589215126`*^9}},
+ CellTags->"chCalc"],
+
+Cell["chNext", "ObjectName",
+ CellTags->"chNext"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["chNext", "Program"],
+ "[] shows the next calculated cohomology of the current degree. If the \
+cohomology is pure, the result is stored (using ",
+ Cell[BoxData[
+  ButtonBox["chBook",
+   BaseStyle->"Hyperlink",
+   ButtonData:>"chBook"]], "Input",
+  GeneratedCell->True],
+ "[]) and returned. Otherwise the function returns the conditions of \
+exactness (see ",
+ Cell[BoxData[
+  ButtonBox["chEqu",
+   BaseStyle->"Hyperlink",
+   ButtonData:>"chEqu"]], "Input",
+  GeneratedCell->True],
+ ") and the rates of coefficients (see ",
+ Cell[BoxData[
+  ButtonBox["chRate",
+   BaseStyle->"Hyperlink",
+   ButtonData:>"chRate"]], "Input",
+  GeneratedCell->True],
+ ") for the next cohomology. To store the results in this case, the user \
+should manually invoke ",
+ Cell[BoxData[
+  ButtonBox["chBook",
+   BaseStyle->"Hyperlink",
+   ButtonData:>"chBook"]], "Input",
+  GeneratedCell->True],
+ " with appropriate arguments. Even for pure cohomologies, one can call ",
+ Cell[BoxData[
+  ButtonBox["chBook",
+   BaseStyle->"Hyperlink",
+   ButtonData:>"chBook"]], "Input",
+  GeneratedCell->True],
+ " to overwrite the results stored automatically (e.g., ",
+ StyleBox["chBook", "Program"],
+ "[",
+ StyleBox["c",
+  FontSlant->"Italic"],
+ "[1]\[Rule]2] will store the cohomology in a different scale).\n\
+\[FilledSmallSquare] ",
+ StyleBox["chNext", "Program"],
+ "[",
+ StyleBox["degree",
+  FontSlant->"Italic"],
+ "] begins enumerating the cohomology of the given degree (they should be \
+already calculated using ",
+ Cell[BoxData[
+  ButtonBox["chCalc",
+   BaseStyle->"Hyperlink",
+   ButtonData:>"chCalc"]], "Input",
+  GeneratedCell->True],
+ ")."
+}], "Usage",
+ CellChangeTimes->{{3.421588204556181*^9, 3.4215882050268574`*^9}, 
+   3.4237381508731856`*^9},
+ CellTags->"chNext"],
+
+Cell["chBook", "ObjectName",
+ CellTags->"chBook"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["chBook", "Program"],
+ "[",
+ StyleBox["rule",
+  FontSlant->"Italic"],
+ "] takes the last calculated cohomology (pointed by ",
+ Cell[BoxData[
+  ButtonBox["chNext",
+   BaseStyle->"Hyperlink",
+   ButtonData:>"chNext"]], "Input",
+  GeneratedCell->True],
+ "), replaces the indeterminate scalar coefficients (first, using the given \
+replacement rule (it may be also a list of rules) and replacing then the \
+remaining ones by 0), and stores the result in ",
+ Cell[BoxData[
+  ButtonBox["ch$book",
+   BaseStyle->"Hyperlink",
+   ButtonData:>"ch$book"]], "Input",
+  GeneratedCell->True],
+ "[",
+ StyleBox["grade",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["rank",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["selector",
+  FontSlant->"Italic"],
+ "].\n\[FilledSmallSquare] ",
+ StyleBox["chBook", "Program"],
+ "[",
+ StyleBox["rule1",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["rule2",
+  FontSlant->"Italic"],
+ ",...] stores a list of cohomologies, one for each argument. The number of \
+rules should be equal to the multiplicity of the cohomology.\n\
+\[FilledSmallSquare] ",
+ StyleBox["chBook", "Program"],
+ "[] stores a cohomology for every indeterminate scalar coefficient. This \
+form should be used for pure cohomology only."
+}], "Usage",
+ CellChangeTimes->{{3.4215882599257984`*^9, 3.421588275888752*^9}, {
+  3.421588332600299*^9, 3.4215883334515233`*^9}},
+ CellTags->"chBook"],
+
+Cell["chPos", "ObjectName",
+ CellTags->"chBook"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["chPos", "Program"],
+ "[] returns the current position in the enumeration of cohomologies, i.e., \
+the sequence ",
+ StyleBox["grade",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["rank",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["selector",
+  FontSlant->"Italic"],
+ ". This position is advanced by function chNext[]"
+}], "Usage",
+ CellTags->"chBook"],
+
+Cell["chExMod", "ObjectName",
+ CellTags->"chExMod"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["chExMod", "Program"],
+ "[",
+ StyleBox["s",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "] builds the ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ "-module of exact ",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "-forms of grade ",
+ StyleBox["s",
+  FontSlant->"Italic"],
+ " using the default list ",
+ Cell[BoxData[
+  ButtonBox["ch$gen",
+   BaseStyle->"Hyperlink",
+   ButtonData:>"ch$gen"]], "Input",
+  GeneratedCell->True],
+ " of generators of ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ ".\n\[FilledSmallSquare] ",
+ StyleBox["chExMod", "Program"],
+ "[",
+ StyleBox["s",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["gen",
+  FontSlant->"Italic"],
+ "] uses the given list of generators of ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ ".\n\[FilledSmallSquare] ",
+ StyleBox["chExMod", "Program"],
+ "[",
+ StyleBox["s",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["All", "Program"],
+ "] builds the module of exact forms and the full table of the ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ "-action on this module. This version of ",
+ StyleBox["chExMod", "Program"],
+ " is more slow and should be used only if the ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ "-action is required for calculations.\n\[FilledSmallSquare] The name of the \
+module of exact forms is ",
+ StyleBox["ch$ex", "Program"],
+ " (or the value of ",
+ StyleBox["ch$ex", "Program"],
+ " if a value is assigned to ",
+ StyleBox["ch$ex", "Program"],
+ ")."
+}], "Usage",
+ CellChangeTimes->{{3.423738311714464*^9, 3.423738348267024*^9}},
+ CellTags->"chExMod"],
+
+Cell["chMod", "ObjectName",
+ CellTags->"chMod"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["chMod", "Program"],
+ "[",
+ StyleBox["m",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["v",
+  FontSlant->"Italic"],
+ "] builds the ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ "-module ",
+ StyleBox["m",
+  FontSlant->"Italic"],
+ " generated by the form (or list of forms) ",
+ StyleBox["v",
+  FontSlant->"Italic"],
+ " and returns the dimension of the qoutient modulo the submodule of exact \
+forms, see ",
+ Cell[BoxData[
+  ButtonBox["chDim",
+   BaseStyle->"Hyperlink",
+   ButtonData:>"chDim"]], "Input",
+  GeneratedCell->True],
+ ". The module of exact forms should be already calculated for the required \
+grade and \"arity\", see ",
+ Cell[BoxData[
+  ButtonBox["chExMod",
+   BaseStyle->"Hyperlink",
+   ButtonData:>"chExMod"]], "Input",
+  GeneratedCell->True],
+ ". To simplify the calculations, the default list ",
+ Cell[BoxData[
+  ButtonBox["ch$gen",
+   BaseStyle->"Hyperlink",
+   ButtonData:>"ch$gen"]], "Input",
+  GeneratedCell->True],
+ " of generators of ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ " is used.\n\[FilledSmallSquare] ",
+ StyleBox["chMod", "Program"],
+ "[",
+ StyleBox["m",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["v",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["gen",
+  FontSlant->"Italic"],
+ "] uses the given list of generators of ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ ".\n\[FilledSmallSquare] ",
+ StyleBox["chMod", "Program"],
+ "[",
+ StyleBox["m",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["v",
+  FontSlant->"Italic"],
+ ",",
+ StyleBox["All", "Program"],
+ "] builds the module generated by ",
+ StyleBox["v",
+  FontSlant->"Italic"],
+ " and the full table of the  ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ "-action on this module. Thisversion of ",
+ StyleBox["chMod", "Program"],
+ " is more slow  and should be used only if the  ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ "-action is required for calculations."
+}], "Usage",
+ CellChangeTimes->{{3.4215884478560286`*^9, 3.42158844883744*^9}, {
+  3.42373840590991*^9, 3.42373844596751*^9}},
+ CellTags->"chMod"],
+
+Cell["chDim", "ObjectName",
+ CellTags->"chDim"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     StyleBox["chDim", "Program"], "[", 
+     RowBox[{"\[GothicM]", ",", "..."}], "]"}], " "}], TraditionalForm]]],
+ "calculates the dimension of the [sum of] the given ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ "-module(s) of forms modulo the submodule of the exact forms.\n\
+\[FilledSmallSquare] The module of exact forms should be already calculated \
+for the required grade and \"arity\", see ",
+ Cell[BoxData[
+  ButtonBox["chExMod",
+   BaseStyle->"Hyperlink",
+   ButtonData:>"chExMod"]], "Input",
+  GeneratedCell->True],
+ ". \n\[FilledSmallSquare] This function is used to determine the ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ "-structure on the space of cohomology in case where ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ " is not a semisimple Lie algebra over a field of charcteristic 0."
+}], "Usage",
+ CellChangeTimes->{{3.421588470558674*^9, 3.4215884724914527`*^9}},
+ CellTags->"chDim"],
+
+Cell["chInMod", "ObjectName",
+ CellTags->"chInMod"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["chInMod", "Program"], 
+    StyleBox["[", "Program"], 
+    StyleBox[
+     RowBox[{"\[GothicM]", ",", "v"}], "Text"], 
+    StyleBox["]", "Program"]}], TraditionalForm]]],
+ " checks if ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"v", "\[Element]", "\[GothicM]"}], TraditionalForm]]],
+ " (modulo the submodule of exact forms)."
+}], "Usage",
+ CellChangeTimes->{{3.421588557423579*^9, 3.4215885926141806`*^9}, {
+  3.421588929077992*^9, 3.421588929738942*^9}},
+ CellTags->"chInMod"],
+
+Cell["chInSol", "ObjectName",
+ CellTags->"chInSol"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["chInSol", "Program"], 
+    StyleBox["[", "Program"], 
+    StyleBox[
+     RowBox[{"\[GothicM]", ",", "v"}], "Text"], 
+    StyleBox["]", "Name"]}], TraditionalForm]]],
+ ", where v is an expression with indeterminate coefficients, solves the \
+condition ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"v", "\[Element]", "\[GothicM]"}], TraditionalForm]]],
+ " (modulo the module of exact forms)."
+}], "Usage",
+ CellChangeTimes->{{3.42158899462224*^9, 3.4215889955135217`*^9}, {
+  3.4237385236792545`*^9, 3.423738527975432*^9}, {3.423738619386875*^9, 
+  3.4237387150344095`*^9}},
+ CellTags->"chInSol"],
+
+Cell["chRate", "ObjectName",
+ CellTags->"chRate"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["chRate[", "Program"],
+ StyleBox["v", "Text",
+  FontSlant->"Italic"],
+ StyleBox["]", "Program"],
+ " returns the table of ratings for indeterminate coefficients in general sum \
+",
+ StyleBox["v",
+  FontSlant->"Italic"],
+ ". The ",
+ StyleBox["rating",
+  FontSlant->"Italic"],
+ " is the number of occurrences of the coefficients in given expression ",
+ StyleBox["v",
+  FontSlant->"Italic"],
+ ". The ratings may help to find a relatively simple expression for basis \
+vectors of a given mixed cohomology."
+}], "Usage",
+ CellChangeTimes->{{3.42158911454468*^9, 3.4215891264918594`*^9}},
+ CellTags->{"rating", "chRate"}],
+
+Cell[CellGroupData[{
+
+Cell["User-defined functions", "SubsubsectionIcon"],
+
+Cell["chBasis", "ObjectName",
+ CellTags->"chBasis"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] The function ",
+ StyleBox["chBasis",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["r", "Text",
+  FontSlant->"Italic"],
+ StyleBox[",", "Text"],
+ StyleBox["s", "Text",
+  FontSlant->"Italic"],
+ "] should return the list of all ",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "-forms of degree ",
+ StyleBox["s",
+  FontSlant->"Italic"],
+ ". This function is defined automatically if the module of coefficients was \
+defined by ",
+ ButtonBox["chSetAlg",
+  BaseStyle->"AddOnsLink"],
+ " with 4-th argument. If the 4-st argument of ",
+ ButtonBox["chSetAlg",
+  BaseStyle->"AddOnsLink"],
+ " was omitted, the user should define ",
+ StyleBox["chBasis",
+  FontFamily->"Courier"],
+ " as described below.\n\[FilledSmallSquare] The default definition builds \
+this list from the list of 0-forms, i.e., elements of the module of \
+coefficients.\n\[FilledSmallSquare] The user should either redefine ",
+ StyleBox["chBasis[", "Program"],
+ StyleBox["r,s", "Text"],
+ StyleBox["]", "Program"],
+ ", or define ",
+ StyleBox["chBasis",
+  FontFamily->"Courier"],
+ "[",
+ StyleBox["s", "Text",
+  FontSlant->"Italic"],
+ "] that should return the list of 0-forms of degree ",
+ StyleBox["s",
+  FontSlant->"Italic"],
+ ". "
+}], "Usage",
+ CellMargins->{{10, Inherited}, {Inherited, Inherited}},
+ CellTags->"chBasis"],
+
+Cell["chSplit", "ObjectName",
+ CellTags->"chSplit"],
+
+Cell[TextData[{
+ "\[FilledSmallSquare] ",
+ StyleBox["chSplit",
+  FontFamily->"Courier"],
+ " it the user-defined function that is passed to ",
+ ButtonBox["SplitList",
+  BaseStyle->"AddOnsLink"],
+ " and ",
+ ButtonBox["SplitSum",
+  BaseStyle->"AddOnsLink"],
+ " when splitting expressions into homogenous parts.\n\[FilledSmallSquare] \
+The values of this function are used for indexing the results of \
+calculations. They are referred to as ",
+ StyleBox["selectors",
+  FontSlant->"Italic"],
+ " in this documents."
+}], "Usage",
+ CellTags->"chSplit"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Example: Cohomology related with ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[GothicS]\[GothicL]", "(", 
+    RowBox[{"2", "|", "3"}], ")"}], TraditionalForm]]]
+}], "Subsection",
+ CellTags->{"Example", "c:3", "b:5.0.0"}],
+
+Cell[TextData[{
+ "Let ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[GothicG]", "=", 
+    FormBox[
+     RowBox[{"\[GothicS]\[GothicL]", "(", 
+      RowBox[{"2", "|", "3"}], ")"}],
+     TraditionalForm]}], TraditionalForm]]],
+ ". Calculate the cohomology of the lower odd block of \[GothicG] (in some \
+format) with coefficients in \[GothicG]."
+}], "Text",
+ CellTags->"b:5.0.0"],
+
+Cell[CellGroupData[{
+
+Cell["First, load packages", "Subsubsection",
+ CellTags->{"c:4", "b:5.0.0"}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Needs", "[", "\"\<SuperLie`\>\"", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Needs", "[", "\"\<SuperLie`Cohom`\>\"", "]"}]}], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData["\<\"SuperLie Package Version 2.06 installed\\nDisclaimer: This \
+software is provided \\\"AS IS\\\", without a warranty of any kind\"\>"], \
+"Print",
+ CellTags->"b:5.0.0"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Set operation properties", "Subsubsection",
+ CellTags->{"c:5", "b:5.0.0"}],
+
+Cell["\<\
+For our task, we need automatic expansions of 
+\t(1) linear expressions in tensor products (i.e., x**(a+b)\[Rule]x**a+x**b) \
+and
+\t(2) action of any algebra on tensor products and exterior products:\
+\>", "Text",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   InterpretationBox[
+    ButtonBox["Linear",
+     BaseStyle->"AddOnsLink"],
+    Linear], "[", 
+   InterpretationBox[
+    ButtonBox["Tp",
+     BaseStyle->"AddOnsLink"],
+    NonCommutativeMultiply], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   InterpretationBox[
+    ButtonBox["Jacobi",
+     BaseStyle->"AddOnsLink"],
+    Jacobi], "[", 
+   RowBox[{
+    InterpretationBox[
+     ButtonBox["Act",
+      BaseStyle->"AddOnsLink"],
+     Act], "->", 
+    InterpretationBox[
+     ButtonBox["Tp",
+      BaseStyle->"AddOnsLink"],
+     NonCommutativeMultiply]}], "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   InterpretationBox[
+    ButtonBox["Jacobi",
+     BaseStyle->"AddOnsLink"],
+    Jacobi], "[", 
+   RowBox[{
+    InterpretationBox[
+     ButtonBox["Act",
+      BaseStyle->"AddOnsLink"],
+     Act], "->", 
+    InterpretationBox[
+     ButtonBox["wedge",
+      BaseStyle->"AddOnsLink"],
+     wedge]}], "]"}], ";"}]}], "Input",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Define algebras", "Subsubsection",
+ CellTags->{"c:6", "b:5.0.0"}],
+
+Cell[TextData[{
+ "Next, build the algebra \[GothicG] and subalgebras ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"y", "=", 
+    SubscriptBox["\[GothicG]", "-"]}], TraditionalForm]]],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"h", "=", 
+    RowBox[{
+     SubscriptBox["\[GothicG]", "0"], "=", 
+     RowBox[{
+      RowBox[{"\[GothicS]\[GothicL]", "(", "2", ")"}], "\[CirclePlus]", 
+      RowBox[{"\[GothicS]\[GothicL]", "(", "3", ")"}], "\[CirclePlus]", 
+      "\[GothicC]"}]}]}], TraditionalForm]]],
+ ".\nThe subalgebra ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ " acts on \[GothicG] and ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "-"], TraditionalForm]]],
+ "; this action commutes with the exterior derivative, so the cohomologies \
+are ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["g", "0"], TraditionalForm]]],
+ "-modules and it suffices to find the highest weight vectors.\nWe should \
+also redefine the grading on \[GothicG] so that the subalgebra ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ "  has grade 0."
+}], "Text",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   InterpretationBox[
+    ButtonBox["slAlgebra",
+     BaseStyle->"AddOnsLink"],
+    slAlgebra], "[", 
+   RowBox[{"g", ",", 
+    RowBox[{
+     InterpretationBox[
+      ButtonBox["Dim",
+       BaseStyle->"AddOnsLink"],
+      Dim], "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}]}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    InterpretationBox[
+     ButtonBox["Grade",
+      BaseStyle->"AddOnsLink"],
+     Grade], "[", 
+    RowBox[{"g", "[", 
+     RowBox[{"i_", ",", "j_"}], "]"}], "]"}], "^:=", 
+   RowBox[{
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"i", "\[LessEqual]", "2"}], ",", 
+      RowBox[{"-", "1"}], ",", "0"}], "]"}], "+", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"j", "\[LessEqual]", "2"}], ",", "1", ",", "0"}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   InterpretationBox[
+    ButtonBox["SubAlgebra",
+     BaseStyle->"AddOnsLink"],
+    SubAlgebra], "[", 
+   RowBox[{"y", ",", "g", ",", 
+    RowBox[{"Select", "[", 
+     RowBox[{
+      RowBox[{
+       InterpretationBox[
+        ButtonBox["Basis",
+         BaseStyle->"AddOnsLink"],
+        Basis], "[", "g", "]"}], ",", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         InterpretationBox[
+          ButtonBox["Grade",
+           BaseStyle->"AddOnsLink"],
+          Grade], "[", "#", "]"}], "<", "0"}], "&"}]}], "]"}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   InterpretationBox[
+    ButtonBox["SubAlgebra",
+     BaseStyle->"AddOnsLink"],
+    SubAlgebra], "[", 
+   RowBox[{"h", ",", "g", ",", 
+    RowBox[{"Select", "[", 
+     RowBox[{
+      RowBox[{
+       InterpretationBox[
+        ButtonBox["Basis",
+         BaseStyle->"AddOnsLink"],
+        Basis], "[", "g", "]"}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         InterpretationBox[
+          ButtonBox["Grade",
+           BaseStyle->"AddOnsLink"],
+          Grade], "[", "#", "]"}], "==", "0"}], "&"}]}], "]"}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   InterpretationBox[
+    ButtonBox["RestrictModule",
+     BaseStyle->"AddOnsLink"],
+    RestrictModule], "[", 
+   RowBox[{"y", ",", "h"}], "]"}], ";"}]}], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[TextData[{
+ "The function ",
+ StyleBox["RestrictModule", "Program"],
+ " defines action o",
+ "f ",
+ StyleBox["h",
+  FontSlant->"Italic"],
+ " on ",
+ StyleBox["y",
+  FontSlant->"Italic"],
+ "."
+}], "Text",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Set the task", "Subsubsection",
+ CellTags->{"c:7", "b:5.0.0"}],
+
+Cell[TextData[{
+ "Now we explain our task to ",
+ StyleBox["Cohom",
+  FontWeight->"Bold"],
+ " package.\nThe forms on ",
+ StyleBox["y",
+  FontSlant->"Italic"],
+ " will be denoted as ",
+ StyleBox["dy",
+  FontSlant->"Italic"],
+ ".\nThe function ",
+ StyleBox["chBasis",
+  FontFamily->"Courier"],
+ " should build the basis of coefficients of the given degree.\nThe weight in \
+\[GothicG] is defined as a \[GothicG]\[GothicL]-weight (that is a \
+5-dimensional vector). A weight ",
+ Cell[BoxData[
+  FormBox["w", TraditionalForm]]],
+ " may be ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[GothicG]", "0"], TraditionalForm]]],
+ "-highest only if ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["w", "1"], "\[GreaterEqual]", 
+    SubscriptBox["w", "2"]}], TraditionalForm]]],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["w", "3"], "\[GreaterEqual]", 
+    SubscriptBox["w", "4"], "\[GreaterEqual]", 
+    SubscriptBox["w", "5"]}], TraditionalForm]]],
+ ". Therefore we ignore all other weights (value ",
+ StyleBox["SkipVal",
+  FontFamily->"Courier"],
+ " in ",
+ StyleBox["chSplit",
+  FontFamily->"Courier"],
+ " function)."
+}], "Text",
+ CellChangeTimes->{{3.4237388181927443`*^9, 3.4237388314217663`*^9}},
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   InterpretationBox[
+    ButtonBox["chSetAlg",
+     BaseStyle->"Hyperlink",
+     ButtonData:>"chSetAlg"],
+    chSetAlg], "[", 
+   RowBox[{"y", ",", "dy", ",", "h"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   InterpretationBox[
+    ButtonBox["chScalars",
+     BaseStyle->"Hyperlink",
+     ButtonData:>"chScalars"],
+    chScalars], "[", 
+   RowBox[{"b", ",", "c"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   InterpretationBox[
+    ButtonBox["ch$Wt",
+     BaseStyle->"Hyperlink",
+     ButtonData:>"ch$Wt"],
+    chWt], "=", 
+   InterpretationBox[
+    ButtonBox["Weight",
+     BaseStyle->"AddOnsLink"],
+    Weight]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    InterpretationBox[
+     ButtonBox["chBasis",
+      BaseStyle->"Hyperlink",
+      ButtonData:>"chBasis"],
+     chBasis], "[", "d_", "]"}], ":=", 
+   RowBox[{"Select", "[", 
+    RowBox[{
+     RowBox[{
+      InterpretationBox[
+       ButtonBox["Basis",
+        BaseStyle->"AddOnsLink"],
+       Basis], "[", "g", "]"}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        InterpretationBox[
+         ButtonBox["Grade",
+          BaseStyle->"AddOnsLink"],
+         Grade], "[", "#", "]"}], "\[Equal]", "d"}], "&"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    InterpretationBox[
+     ButtonBox["chSplit",
+      BaseStyle->"Hyperlink",
+      ButtonData:>"chSplit"],
+     chSplit], "[", "x_", "]"}], ":=", 
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"w", "=", 
+       RowBox[{
+        InterpretationBox[
+         ButtonBox["Weight",
+          BaseStyle->"AddOnsLink"],
+         Weight], "[", "x", "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"w", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+         "\[GreaterEqual]", 
+         RowBox[{
+         "w", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}], 
+        "\[And]", 
+        RowBox[{
+         RowBox[{"w", "\[LeftDoubleBracket]", "3", "\[RightDoubleBracket]"}], 
+         "\[GreaterEqual]", 
+         RowBox[{"w", "\[LeftDoubleBracket]", "4", "\[RightDoubleBracket]"}], 
+         "\[GreaterEqual]", 
+         RowBox[{
+         "w", "\[LeftDoubleBracket]", "5", "\[RightDoubleBracket]"}]}]}], ",",
+        "w", ",", "SkipVal"}], "]"}]}], "]"}]}], ";"}]}], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[TextData[{
+ "To find the highest vectors, we need the list of raising operator in h. \
+These are elements whose images in g are ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["g", 
+    RowBox[{"1", ",", "2"}]], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["g", 
+    RowBox[{"3", ",", "4"}]], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["g", 
+    RowBox[{"4", ",", "5"}]], TraditionalForm]]],
+ ":"
+}], "Text",
+ CellTags->"b:5.0.0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"pos", "=", 
+  RowBox[{"Position", "[", 
+   RowBox[{
+    RowBox[{
+     InterpretationBox[
+      ButtonBox["Image",
+       BaseStyle->"AddOnsLink"],
+      Image], "[", "h", "]"}], ",", 
+    RowBox[{
+     RowBox[{"g", "[", 
+      RowBox[{"i_", ",", "j_"}], "]"}], "/;", 
+     RowBox[{"j", "\[Equal]", 
+      RowBox[{"i", "+", "1"}]}]}]}], "]"}]}]], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", "5", "}"}], ",", 
+   RowBox[{"{", "6", "}"}], ",", 
+   RowBox[{"{", "7", "}"}]}], "}"}]], "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   ButtonBox["ch$raise",
+    BaseStyle->"Hyperlink",
+    ButtonData:>"ch$raise"],
+   ch$raise], "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"h", "[", "5", "]"}], ",", 
+    RowBox[{"h", "[", "6", "]"}], ",", 
+    RowBox[{"h", "[", "7", "]"}]}], "}"}]}]], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   SubscriptBox["h", "5"], ",", 
+   SubscriptBox["h", "6"], ",", 
+   SubscriptBox["h", "7"]}], "}"}]], "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Output format", "Subsubsection",
+ CellTags->{"c:8", "b:5.0.0"}],
+
+Cell[TextData[{
+ "For the output, replace ",
+ StyleBox["dy",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["i",
+  FontSlant->"Italic"],
+ "] by ",
+ StyleBox["d",
+  FontSlant->"Italic"],
+ "[",
+ StyleBox["g",
+  FontSlant->"Italic"],
+ "[..]]:"
+}], "Text",
+ CellChangeTimes->{{3.421589234066544*^9, 3.4215892343569613`*^9}},
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   InterpretationBox[
+    ButtonBox["ch$Out",
+     BaseStyle->"Hyperlink",
+     ButtonData:>"ch$Out"],
+    ch$Out], "=", "OutMap"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"OutMap", "[", "v_", "]"}], ":=", 
+  RowBox[{"v", "/.", 
+   RowBox[{
+    RowBox[{"dy", "[", "i_", "]"}], "\[RuleDelayed]", 
+    RowBox[{"d", "[", 
+     RowBox[{
+      RowBox[{
+       InterpretationBox[
+        ButtonBox["Image",
+         BaseStyle->"AddOnsLink"],
+        Image], "[", "y", "]"}], "\[LeftDoubleBracket]", "i", 
+      "\[RightDoubleBracket]"}], "]"}]}]}]}]}], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[TextData[{
+ "Now we are ready to calculate cohomology. \nAll the ",
+ StyleBox["dy",
+  FontSlant->"Italic"],
+ "'s have degree 1, the degrees of coefficients range from -1 to 1, so the \
+degrees of ",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ "-forms range from ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"r", "-", "1"}], TraditionalForm]]],
+ " to ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"r", "+", "1"}], TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.421589263018174*^9, 3.4215893323779087`*^9}},
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Calculations", "Subsubsection",
+ CellTags->{"c:9", "b:5.0.0"}],
+
+Cell[TextData[{
+ StyleBox["Degree  -1",
+  FontVariations->{"Underline"->True}],
+ ": only 0-cohomologies are possible:"
+}], "Text",
+ CellTags->"b:5.0.0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   ButtonBox["chCalc",
+    BaseStyle->"Hyperlink",
+    ButtonData:>"chCalc"],
+   chCalc], "[", 
+  RowBox[{
+   RowBox[{"-", "1"}], ",", "0"}], "]"}]], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Total: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "0"}], "}"}], "}"}]}],
+  SequenceForm["Total: ", {{1, 0}}],
+  Editable->False]], "Print",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   ButtonBox["chNext",
+    BaseStyle->"Hyperlink",
+    ButtonData:>"chNext"],
+   chNext], "[", "]"}]], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"1", ",", "0", ",", "0", ",", "0", ",", 
+    RowBox[{"-", "1"}]}], "}"}], "\[Rule]", 
+  SubscriptBox["g", 
+   RowBox[{"1", ",", "5"}]]}]], "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   ButtonBox["chNext",
+    BaseStyle->"Hyperlink",
+    ButtonData:>"chNext"],
+   chNext], "[", "]"}]], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData["\<\"No more cohomologies\"\>"], "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+
+Cell[TextData[{
+ StyleBox["Degree 0",
+  FontVariations->{"Underline"->True}],
+ ": 0- and 1-cohomologies:"
+}], "Text",
+ CellTags->"b:5.0.0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   ButtonBox["chCalc",
+    BaseStyle->"Hyperlink",
+    ButtonData:>"chCalc"],
+   chCalc], "[", 
+  RowBox[{"0", ",", "1"}], "]"}]], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Total: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"4", ",", "0"}], "}"}]}], "}"}]}],
+  SequenceForm["Total: ", {{0, 3}, {4, 0}}],
+  Editable->False]], "Print",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   ButtonBox["chNext",
+    BaseStyle->"Hyperlink",
+    ButtonData:>"chNext"],
+   chNext], "[", "]"}]], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"1", ",", 
+    RowBox[{"-", "1"}], ",", "1", ",", "0", ",", 
+    RowBox[{"-", "1"}]}], "}"}], "\[Rule]", 
+  RowBox[{
+   SubscriptBox["g", 
+    RowBox[{"1", ",", "5"}]], "**", 
+   RowBox[{"d", "[", 
+    SubscriptBox["g", 
+     RowBox[{"2", ",", "3"}]], "]"}]}]}]], "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   ButtonBox["chNext",
+    BaseStyle->"Hyperlink",
+    ButtonData:>"chNext"],
+   chNext], "[", "]"}]], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData["\<\"No more cohomologies\"\>"], "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+
+Cell[TextData[{
+ StyleBox["Degree 1",
+  FontVariations->{"Underline"->True}],
+ ":  0- , 1-, and 2-cohomologies:"
+}], "Text",
+ CellTags->"b:5.0.0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   ButtonBox["chCalc",
+    BaseStyle->"Hyperlink",
+    ButtonData:>"chCalc"],
+   chCalc], "[", 
+  RowBox[{"1", ",", "2"}], "]"}]], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Total: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "5"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"6", ",", "0"}], "}"}]}], "}"}]}],
+  SequenceForm["Total: ", {{0, 1}, {1, 5}, {6, 0}}],
+  Editable->False]], "Print",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   ButtonBox["chNext",
+    BaseStyle->"Hyperlink",
+    ButtonData:>"chNext"],
+   chNext], "[", "]"}]], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"1", ",", 
+    RowBox[{"-", "2"}], ",", "2", ",", "0", ",", 
+    RowBox[{"-", "1"}]}], "}"}], "\[Rule]", 
+  RowBox[{
+   SubscriptBox["g", 
+    RowBox[{"1", ",", "5"}]], "**", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"d", "[", 
+      SubscriptBox["g", 
+       RowBox[{"2", ",", "3"}]], "]"}], "\[Wedge]", 
+     RowBox[{"d", "[", 
+      SubscriptBox["g", 
+       RowBox[{"2", ",", "3"}]], "]"}]}], ")"}]}]}]], "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   ButtonBox["chNext",
+    BaseStyle->"Hyperlink",
+    ButtonData:>"chNext"],
+   chNext], "[", "]"}]], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData["\<\"No more cohomologies\"\>"], "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+
+Cell[TextData[{
+ StyleBox["Degree 2",
+  FontVariations->{"Underline"->True}],
+ ": 1- , 2-, and 3-cohomologies:"
+}], "Text",
+ CellTags->"b:5.0.0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   ButtonBox["chCalc",
+    BaseStyle->"Hyperlink",
+    ButtonData:>"chCalc"],
+   chCalc], "[", 
+  RowBox[{"2", ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "3"}], "}"}]}], "]"}]], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Total: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "4"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"4", ",", "9"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"10", ",", "0"}], "}"}]}], "}"}]}],
+  SequenceForm["Total: ", {{0, 4}, {4, 9}, {10, 0}}],
+  Editable->False]], "Print",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   ButtonBox["chNext",
+    BaseStyle->"Hyperlink",
+    ButtonData:>"chNext"],
+   chNext], "[", "]"}]], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"1", ",", 
+    RowBox[{"-", "3"}], ",", "3", ",", "0", ",", 
+    RowBox[{"-", "1"}]}], "}"}], "\[Rule]", 
+  RowBox[{
+   SubscriptBox["g", 
+    RowBox[{"1", ",", "5"}]], "**", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"d", "[", 
+      SubscriptBox["g", 
+       RowBox[{"2", ",", "3"}]], "]"}], "\[Wedge]", 
+     RowBox[{"d", "[", 
+      SubscriptBox["g", 
+       RowBox[{"2", ",", "3"}]], "]"}], "\[Wedge]", 
+     RowBox[{"d", "[", 
+      SubscriptBox["g", 
+       RowBox[{"2", ",", "3"}]], "]"}]}], ")"}]}]}]], "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   ButtonBox["chNext",
+    BaseStyle->"Hyperlink",
+    ButtonData:>"chNext"],
+   chNext], "[", "]"}]], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData["\<\"No more cohomologies\"\>"], "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+
+Cell[TextData[{
+ StyleBox["Degree 3",
+  FontVariations->{"Underline"->True}],
+ ": 2- , 3-, and 4-cohomologies:"
+}], "Text",
+ CellTags->"b:5.0.0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   ButtonBox["chCalc",
+    BaseStyle->"Hyperlink",
+    ButtonData:>"chCalc"],
+   chCalc], "[", 
+  RowBox[{"3", ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "4"}], "}"}]}], "]"}]], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Total: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "6"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"6", ",", "11"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"12", ",", "0"}], "}"}]}], "}"}]}],
+  SequenceForm["Total: ", {{0, 6}, {6, 11}, {12, 0}}],
+  Editable->False]], "Print",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   ButtonBox["chNext",
+    BaseStyle->"Hyperlink",
+    ButtonData:>"chNext"],
+   chNext], "[", "]"}]], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"1", ",", 
+    RowBox[{"-", "4"}], ",", "4", ",", "0", ",", 
+    RowBox[{"-", "1"}]}], "}"}], "\[Rule]", 
+  RowBox[{
+   SubscriptBox["g", 
+    RowBox[{"1", ",", "5"}]], "**", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"d", "[", 
+      SubscriptBox["g", 
+       RowBox[{"2", ",", "3"}]], "]"}], "\[Wedge]", 
+     RowBox[{"d", "[", 
+      SubscriptBox["g", 
+       RowBox[{"2", ",", "3"}]], "]"}], "\[Wedge]", 
+     RowBox[{"d", "[", 
+      SubscriptBox["g", 
+       RowBox[{"2", ",", "3"}]], "]"}], "\[Wedge]", 
+     RowBox[{"d", "[", 
+      SubscriptBox["g", 
+       RowBox[{"2", ",", "3"}]], "]"}]}], ")"}]}]}]], "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  InterpretationBox[
+   ButtonBox["chNext",
+    BaseStyle->"Hyperlink",
+    ButtonData:>"chNext"],
+   chNext], "[", "]"}]], "Input",
+ CellTags->"b:5.0.0"],
+
+Cell[BoxData["\<\"No more cohomologies\"\>"], "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+AutoGeneratedPackage->None,
+ShowPageBreaks->False,
+WindowToolbars->{"RulerBar", "EditBar"},
+WindowSize->{895, 668},
+WindowMargins->{{41, Automatic}, {Automatic, 60}},
+PrintingStartingPageNumber->113,
+PrintingPageRange->{Automatic, Automatic},
+PageHeaders->{{
+   Cell[
+    TextData[
+     CounterBox["Page"]], "Header"], None, 
+   Cell[
+    TextData[{"Package ", 
+      StyleBox["SuperLie`Cohom`", FontFamily -> "Courier New"]}], "Header"]}, {
+   Cell["Calculation of cohomology", "Header"], None, 
+   Cell[
+    TextData[
+     CounterBox["Page"]], "Header"]}},
+PageFooters->{{None, None, None}, {None, None, None}},
+PageHeaderLines->{True, True},
+PageFooterLines->{False, False},
+PrintingOptions->{"CellBackgroundHalftoneAngle"->Automatic,
+"CellBackgroundHalftoneDensity"->Automatic,
+"FacingPages"->True,
+"FirstPageFace"->Right,
+"FirstPageFooter"->False,
+"FirstPageHeader"->False,
+"GraphicsPrintingFormat"->"Automatic",
+"IncludePostScriptResourceDirectives"->False,
+"IncludeSpecialFonts"->True,
+"Magnification"->1,
+"PaperOrientation"->"Portrait",
+"PaperSize"->{597.563, 842.375},
+"PostScriptOutputFile":>"Automatic",
+"PrintCellBrackets"->False,
+"PrintMultipleHorizontalPages"->False,
+"PrintRegistrationMarks"->False,
+"PrintSelectionHighlighting"->False,
+"RestPagesFooter"->True,
+"RestPagesHeader"->True,
+"UnixShellPrintingCommand"->"lpr ",
+"UsePostScriptOutputFile"->True,
+"UseUnixShellPrintingCommand"->False},
+ShowSelection->True,
+TaggingRules->{
+ "PaginationCache" -> {{2013, 7, 18, 21, 34, 6.21875`8.546278070884576}, {113,
+     113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 
+    113, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114, 114,
+     114, 114, 114, 114, 114, 115, 115, 115, 115, 115, 115, 115, 115, 115, 
+    115, 115, 115, 115, 115, 115, 115, 115, 116, 116, 116, 116, 116, 116, 116,
+     116, 116, 116, 116, 116, 116, 116, 116, 117, 117, 117, 117, 117, 117, 
+    117, 117, 117, 117, 117, 117, 117, 118, 118, 118, 118, 118, 118, 118, 118,
+     118, 118, 118, 118, 118, 118, 118, 118, 119, 119, 119, 119, 119, 119, 
+    119, 119, 119, 119, 119, 119, 119, 119, 119, 120, 120, 120, 120, 120, 120,
+     120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120, 
+    120, 120, 120, 120, 120, 120, 120, 120, 121, 121, 121, 121, 121, 121, 121,
+     121, 121, 121}, Automatic}},
+Magnification->1.5,
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->Notebook[{
+   Cell[
+    CellGroupData[{
+      Cell["Style Definitions", "Subtitle"], 
+      Cell[
+      "\nModify the definitions below to change the default appearance of all \
+cells in \na given style.  Make modifications to any definition using \
+commands in the \nFormat menu.\n", "Text"], 
+      Cell[
+       CellGroupData[{
+         Cell["Style Environment Names", "Section"], 
+         Cell[
+          StyleData[All, "Working"], PageWidth -> WindowWidth, ScriptMinSize -> 
+          9], 
+         Cell[
+          StyleData[All, "Printout"], PageWidth -> PaperWidth, ScriptMinSize -> 
+          7, FontSize -> 10, 
+          PrivateFontOptions -> {"FontType" -> "Outline"}]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Notebook Options", "Section"], 
+         Cell[
+         "\nThe options defined for the style below will be used at the \
+Notebook level.\n", "Text"], 
+         Cell[
+          StyleData["Notebook"], WindowToolbars -> {}, PageHeaders -> {{
+             Cell[
+              TextData[{
+                CounterBox["Page"]}], "PageNumber"], None, 
+             Cell[
+              TextData[{
+                ValueBox[FileName], " \[Bullet]  ", 
+                ValueBox[Date]}], "Header"]}, {
+             Cell[
+              TextData[{
+                ValueBox[FileName], " \[Bullet]  ", 
+                ValueBox[Date]}], "Header"], None, 
+             Cell[
+              TextData[{
+                CounterBox["Page"]}], "PageNumber"]}}, DefaultNewCellStyle -> 
+          "Text", DefaultDuplicateCellStyle -> "Text", 
+          DefaultInlineFormatType -> StandardForm, StyleMenuListing -> None]},
+         Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Favorite styles", "Section"], 
+         Cell[
+          StyleData["Name"], FontFamily -> "Courier New"], 
+         Cell[
+          StyleData["Var"], FontSlant -> "Italic"], 
+         Cell[
+          StyleData["Def"], FontWeight -> "Bold", FontSlant -> "Italic", 
+          FontColor -> RGBColor[0.6, 0.2, 0]]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Headings", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Chapter"], CellDingbat -> "\[FilledSquare]", 
+             CellMargins -> {{24, Inherited}, {8, 24}}, 
+             CellGroupingRules -> {"SectionGrouping", 20}, PageBreakAbove -> 
+             True, CellFrameLabelMargins -> 6, CounterIncrements -> "Chapter",
+              FontFamily -> "Helvetica", FontSize -> 18, FontWeight -> 
+             "Bold"], 
+            Cell[
+             StyleData["Chapter", "Printout"], 
+             CellMargins -> {{15, 0}, {7, 22}}]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Section"], CellDingbat -> "\[FilledSquare]", 
+             CellMargins -> {{24, Inherited}, {8, 24}}, 
+             CellGroupingRules -> {"SectionGrouping", 30}, PageBreakBelow -> 
+             False, CellFrameLabelMargins -> 6, CounterIncrements -> 
+             "Section", FontFamily -> "Helvetica", FontSize -> 14, FontWeight -> 
+             "Bold"], 
+            Cell[
+             StyleData["Section", "Printout"], 
+             CellMargins -> {{15, 0}, {7, 22}}, FontSize -> 14]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsection"], CellDingbat -> "\[FilledSquare]", 
+             CellMargins -> {{24, 4}, {2, 18}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 12}, 
+             CellGroupingRules -> {"SectionGrouping", 40}, PageBreakBelow -> 
+             False, CellFrameLabelMargins -> 6, CounterIncrements -> 
+             "Subsection", CounterAssignments -> {{"Subsubsection", 0}}, 
+             FontFamily -> "Helvetica", FontSize -> 12.5, FontWeight -> 
+             "Bold"], 
+            Cell[
+             StyleData["Subsection", "Printout"], 
+             CellMargins -> {{2, 4}, {2, 18}}, FontSize -> 12.5]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsubsection"], CellDingbat -> "\[FilledSquare]", 
+             CellMargins -> {{24, 4}, {2, 18}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 12}, 
+             CellGroupingRules -> {"SectionGrouping", 50}, PageBreakBelow -> 
+             False, CellFrameLabelMargins -> 6, CounterIncrements -> 
+             "Subsubsection", FontFamily -> "Helvetica", FontSize -> 12, 
+             FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Subsubsection", "Printout"], 
+             CellMargins -> {{2, 4}, {2, 18}}, FontSize -> 12]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["SubsectionIcon"], ShowGroupOpener -> True, 
+             CellMargins -> {{24, 4}, {0, 18}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 8}, 
+             CellGroupingRules -> {"SectionGrouping", 50}, 
+             ConversionRules :> {
+              "HTML" -> {
+                "<LI TYPE=\"SQUARE\"><FONT FACE=\"Helvetica, Arial\"><P><B>", 
+                 "</B></P></FONT>\n"}}, 
+             InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Section", FontFamily -> "Helvetica", 
+             FontSize -> 12.5, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["SubsectionIcon", "Printout"], CellDingbat -> 
+             "\[FilledSquare]", ShowGroupOpener -> False, 
+             CellMargins -> {{16, 0}, {0, 18}}, PageBreakBelow -> False, 
+             FontSize -> 12.5]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["SubsubsectionIcon"], ShowGroupOpener -> True, 
+             CellMargins -> {{24, 4}, {0, 8}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 4}, 
+             CellGroupingRules -> {"SectionGrouping", 60}, 
+             ConversionRules :> {
+              "HTML" -> {
+                "<LI TYPE=\"SQUARE\"><FONT FACE=\"Helvetica, Arial\"><P><B>", 
+                 "</B></P></FONT>\n"}}, 
+             InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Subsection", 
+             CounterAssignments -> {{"Subsubection", 0}}, FontFamily -> 
+             "Helvetica", FontSize -> 12, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["SubsubsectionIcon", "Printout"], CellDingbat -> 
+             "\[FilledSquare]", ShowGroupOpener -> False, 
+             CellMargins -> {{2, 0}, {0, 18}}, PageBreakBelow -> False, 
+             FontSize -> 12]}, Open]]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Styles for Text", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Text"], CellMargins -> {{12, 10}, {7, 7}}, 
+             InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, TextAlignment -> 
+             Left, TextJustification -> 1, Hyphenation -> True, 
+             LineSpacing -> {1, 2}, ParagraphIndent -> 24, FontSize -> 12], 
+            Cell[
+             StyleData["Text", "Printout"], CellMargins -> {{2, 2}, {6, 6}}]},
+            Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["MonoText"], CellMargins -> {{12, 10}, {7, 7}}, 
+             Hyphenation -> True, LineSpacing -> {1, 2}, FontFamily -> 
+             "Courier", FontSize -> 12], 
+            Cell[
+             StyleData["MonoText", "Printout"], 
+             CellMargins -> {{2, 2}, {6, 6}}, FontSize -> 9]}, Closed]]}, 
+        Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Styles for Input/Output", "Section"], 
+         Cell[
+         "\nThe cells in this section define styles used for input and output \
+to the \nkernel.  Be careful when modifying, renaming, or removing these \
+styles, \nbecause the front end associates special meanings with these style \
+names.\n", "Text"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Input"], CellMargins -> {{45, 10}, {5, 7}}, 
+             Evaluatable -> True, CellGroupingRules -> "InputGrouping", 
+             CellHorizontalScrolling -> True, 
+             CellLabelMargins -> {{14, Inherited}, {Inherited, Inherited}}, 
+             DefaultFormatType -> DefaultInputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, 
+             AutoItalicWords -> {}, LanguageCategory -> "Formula", FormatType -> 
+             InputForm, ShowStringCharacters -> True, NumberMarks -> True, 
+             LinebreakAdjustments -> {0.85, 2, 10, 0, 1}, CounterIncrements -> 
+             "Input", FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Input", "Printout"], CellMargins -> {{39, 0}, {4, 6}},
+              LinebreakAdjustments -> {0.85, 2, 10, 1, 1}, FontSize -> 9]}, 
+           Closed]], 
+         Cell[
+          StyleData["InlineInput"], Evaluatable -> True, CellGroupingRules -> 
+          "InputGrouping", CellHorizontalScrolling -> True, PageBreakWithin -> 
+          False, GroupPageBreakWithin -> False, DefaultFormatType -> 
+          DefaultInputFormatType, 
+          HyphenationOptions -> {"HyphenationCharacter" -> "\[Continuation]"},
+           AutoItalicWords -> {}, FormatType -> InputForm, 
+          ShowStringCharacters -> True, NumberMarks -> True, 
+          CounterIncrements -> "Input", FontWeight -> "Bold"], 
+         Cell[
+          StyleData["Output"], PageWidth -> PaperWidth, 
+          CellMargins -> {{47, 10}, {7, 5}}, CellEditDuplicate -> True, 
+          CellGroupingRules -> "OutputGrouping", CellHorizontalScrolling -> 
+          True, GeneratedCell -> True, CellAutoOverwrite -> True, 
+          CellLabelMargins -> {{14, Inherited}, {Inherited, Inherited}}, 
+          DefaultFormatType -> DefaultOutputFormatType, 
+          HyphenationOptions -> {"HyphenationCharacter" -> "\[Continuation]"},
+           AutoItalicWords -> {}, LanguageCategory -> "Formula", FormatType -> 
+          InputForm, CounterIncrements -> "Output", StyleMenuListing -> None, 
+          FontSlant -> "Plain"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Message"], 
+             CellMargins -> {{45, Inherited}, {Inherited, Inherited}}, 
+             CellGroupingRules -> "OutputGrouping", PageBreakWithin -> False, 
+             GroupPageBreakWithin -> False, GeneratedCell -> True, 
+             CellAutoOverwrite -> True, ShowCellLabel -> False, 
+             CellLabelMargins -> {{14, Inherited}, {Inherited, Inherited}}, 
+             DefaultFormatType -> DefaultOutputFormatType, HyphenationOptions -> 
+             {"HyphenationCharacter" -> "\[Continuation]"}, 
+             AutoItalicWords -> {}, FormatType -> InputForm, 
+             CounterIncrements -> "Message", StyleMenuListing -> None, 
+             FontColor -> RGBColor[0, 0, 1]], 
+            Cell[
+             StyleData["Message", "Printout"], 
+             CellMargins -> {{39, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 8, FontColor -> GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Print"], 
+             CellMargins -> {{45, Inherited}, {Inherited, Inherited}}, 
+             CellGroupingRules -> "OutputGrouping", CellHorizontalScrolling -> 
+             True, PageBreakWithin -> False, GroupPageBreakWithin -> False, 
+             GeneratedCell -> True, CellAutoOverwrite -> True, ShowCellLabel -> 
+             False, CellLabelMargins -> {{14, Inherited}, {
+               Inherited, Inherited}}, DefaultFormatType -> 
+             DefaultOutputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, 
+             AutoItalicWords -> {}, FormatType -> InputForm, 
+             CounterIncrements -> "Print", StyleMenuListing -> None], 
+            Cell[
+             StyleData["Print", "Printout"], 
+             CellMargins -> {{39, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 8]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Graphics"], 
+             CellMargins -> {{4, Inherited}, {Inherited, Inherited}}, 
+             CellGroupingRules -> "GraphicsGrouping", CellHorizontalScrolling -> 
+             True, PageBreakWithin -> False, GeneratedCell -> True, 
+             CellAutoOverwrite -> True, ShowCellLabel -> False, 
+             DefaultFormatType -> DefaultOutputFormatType, FormatType -> 
+             InputForm, CounterIncrements -> "Graphics", 
+             ImageMargins -> {{43, Inherited}, {Inherited, 0}}, 
+             StyleMenuListing -> None], 
+            Cell[
+             StyleData["Graphics", "Printout"], ImageSize -> {250, 250}, 
+             ImageMargins -> {{30, Inherited}, {Inherited, 0}}, FontSize -> 
+             9]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["CellLabel"], StyleMenuListing -> None, FontFamily -> 
+             "Helvetica", FontSize -> 9, FontColor -> RGBColor[0, 0, 1]], 
+            Cell[
+             StyleData["CellLabel", "Printout"], FontFamily -> "Courier", 
+             FontSize -> 8, FontSlant -> "Italic", FontColor -> 
+             GrayLevel[0]]}, Closed]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Unique Styles", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Author"], ShowCellBracket -> False, 
+             CellMargins -> {{10, 4}, {2, 10}}, FontSize -> 16, FontSlant -> 
+             "Italic"], 
+            Cell[
+             StyleData["Author", "Presentation"], 
+             CellMargins -> {{12, 10}, {2, 12}}, LineSpacing -> {1, 5}, 
+             ParagraphSpacing -> {0, 12}, FontSize -> 20], 
+            Cell[
+             StyleData["Author", "Condensed"], 
+             CellMargins -> {{8, 10}, {1, 4}}, LineSpacing -> {1, 1}, 
+             ParagraphSpacing -> {0, 4}, FontSize -> 12], 
+            Cell[
+             StyleData["Author", "Printout"], 
+             CellMargins -> {{9, 0}, {4, 12}}, ParagraphSpacing -> {0, 6}, 
+             FontSize -> 14]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Copyright"], ShowCellBracket -> False, 
+             CellMargins -> {{10, 10}, {40, 2}}, FontFamily -> "Helvetica", 
+             FontSize -> 9], 
+            Cell[
+             StyleData["Copyright", "Presentation"], 
+             CellMargins -> {{12, 10}, {50, 2}}, LineSpacing -> {1, 5}, 
+             FontSize -> 12], 
+            Cell[
+             StyleData["Copyright", "Condensed"], 
+             CellMargins -> {{8, 10}, {12, 1}}, LineSpacing -> {1, 2}, 
+             FontSize -> 9], 
+            Cell[
+             StyleData["Copyright", "Printout"], 
+             CellMargins -> {{9, 0}, {72, 4}}, FontSize -> 7]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Example"], CellMargins -> {{12, 10}, {5, 12}}, 
+             LineSpacing -> {1, 3}, ParagraphSpacing -> {0, 12}, 
+             CounterIncrements -> "Example", FontFamily -> "Times", 
+             FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Example", "Presentation"], 
+             CellMargins -> {{18, 10}, {8, 20}}, LineSpacing -> {1, 5}, 
+             ParagraphSpacing -> {0, 12}], 
+            Cell[
+             StyleData["Example", "Condensed"], 
+             CellMargins -> {{8, 10}, {4, 8}}, LineSpacing -> {1, 1}, 
+             ParagraphSpacing -> {0, 4}], 
+            Cell[
+             StyleData["Example", "Printout"], 
+             CellMargins -> {{9, 0}, {4, 10}}, ParagraphSpacing -> {0, 6}]}, 
+           Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Definition"], CellFrame -> {{3, 0}, {0, 0}}, 
+             CellMargins -> {{52, 10}, {8, 8}}, PageBreakWithin -> False, 
+             GroupPageBreakWithin -> False, 
+             CellLabelMargins -> {{23, Inherited}, {Inherited, Inherited}}, 
+             Hyphenation -> True, ShowStringCharacters -> True, 
+             CounterIncrements -> "Definition", FontFamily -> "Helvetica", 
+             FontWeight -> "Bold", FontColor -> GrayLevel[1], Background -> 
+             RGBColor[0.2, 0.700008, 0.700008]], 
+            Cell[
+             StyleData["Definition", "Presentation"], 
+             CellMargins -> {{62, Inherited}, {5, 12}}, 
+             LineSpacing -> {1, 0}], 
+            Cell[
+             StyleData["Definition", "Condensed"], 
+             CellMargins -> {{40, 10}, {1, 4}}], 
+            Cell[
+             StyleData["Definition", "Printout"], 
+             CellMargins -> {{44, 0}, {2, 6}}, Background -> GrayLevel[0.6]]},
+            Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Theorem"], CellFrame -> {{3, 0}, {0, 0}}, 
+             CellMargins -> {{52, 10}, {8, 8}}, PageBreakWithin -> False, 
+             GroupPageBreakWithin -> False, 
+             CellLabelMargins -> {{23, Inherited}, {Inherited, Inherited}}, 
+             Hyphenation -> True, ShowStringCharacters -> True, 
+             CounterIncrements -> "Theorem", FontFamily -> "Helvetica", 
+             FontWeight -> "Bold", FontColor -> GrayLevel[1], Background -> 
+             RGBColor[0.571389, 0.19675, 0.570504]], 
+            Cell[
+             StyleData["Theorem", "Presentation"], 
+             CellMargins -> {{62, Inherited}, {5, 12}}, 
+             LineSpacing -> {1, 0}], 
+            Cell[
+             StyleData["Theorem", "Condensed"], 
+             CellMargins -> {{40, 10}, {1, 4}}], 
+            Cell[
+             StyleData["Theorem", "Printout"], 
+             CellMargins -> {{44, 0}, {2, 6}}, Background -> GrayLevel[0.4]]},
+            Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["ExerciseMain"], CellFrame -> {{6, 0}, {0, 1}}, 
+             CellMargins -> {{12, Inherited}, {4, 20}}, 
+             CellGroupingRules -> {"SectionGrouping", 30}, PageBreakBelow -> 
+             False, CellFrameColor -> RGBColor[0.571389, 0.19675, 0.570504], 
+             CounterIncrements -> "Subsection", 
+             CounterAssignments -> {{"Subsubsection", 0}}, FontFamily -> 
+             "Helvetica", FontSize -> 16, FontWeight -> "Bold", FontColor -> 
+             RGBColor[0.571389, 0.19675, 0.570504]], 
+            Cell[
+             StyleData["ExerciseMain", "Presentation"], 
+             CellMargins -> {{18, 10}, {8, 32}}, LineSpacing -> {1, 2}, 
+             FontSize -> 24, FontTracking -> "Condensed"], 
+            Cell[
+             StyleData["ExerciseMain", "Condensed"], 
+             CellMargins -> {{8, Inherited}, {2, 12}}, FontSize -> 12], 
+            Cell[
+             StyleData["ExerciseMain", "Printout"], 
+             CellMargins -> {{9, 0}, {2, 50}}, CellFrameColor -> 
+             GrayLevel[0.500008], FontSize -> 14, FontTracking -> "Plain", 
+             FontColor -> GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Exercise"], CellDingbat -> "\[FilledDownTriangle]", 
+             CellMargins -> {{23, Inherited}, {4, 18}}, 
+             CellGroupingRules -> {"SectionGrouping", 50}, PageBreakBelow -> 
+             False, Hyphenation -> True, CounterIncrements -> "Subsubsection",
+              FontFamily -> "Times", FontSize -> 13, FontWeight -> "Bold", 
+             FontColor -> RGBColor[0.571389, 0.19675, 0.570504]], 
+            Cell[
+             StyleData["Exercise", "Presentation"], 
+             CellMargins -> {{33, 10}, {8, 26}}, LineSpacing -> {1, 0}, 
+             FontSize -> 18], 
+            Cell[
+             StyleData["Exercise", "Condensed"], 
+             CellMargins -> {{17, Inherited}, {2, 12}}, FontSize -> 10], 
+            Cell[
+             StyleData["Exercise", "Printout"], 
+             CellFrame -> {{0, 0}, {0.5, 0}}, CellDingbat -> None, 
+             CellMargins -> {{9, 0}, {6, 20}}, FontSize -> 11, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["ExerciseText"], CellMargins -> {{62, 10}, {5, 5}}, 
+             Hyphenation -> True, LineSpacing -> {1, 3}, 
+             ParagraphSpacing -> {0, 8}, CounterIncrements -> "ExcersiceText",
+              FontFamily -> "Times"], 
+            Cell[
+             StyleData["ExerciseText", "Presentation"], 
+             CellMargins -> {{74, 10}, {8, 8}}, LineSpacing -> {1, 5}, 
+             ParagraphSpacing -> {0, 12}], 
+            Cell[
+             StyleData["ExerciseText", "Condensed"], 
+             CellMargins -> {{52, 10}, {2, 2}}, LineSpacing -> {1, 1}, 
+             ParagraphSpacing -> {0, 4}], 
+            Cell[
+             StyleData["ExerciseText", "Printout"], 
+             CellMargins -> {{54, 0}, {4, 4}}, ParagraphSpacing -> {0, 6}]}, 
+           Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["ObjectName"], CellMargins -> {{10, 4}, {1, 10}}, 
+             FontFamily -> "Courier", FontSize -> 16, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["ObjectName", "Brackets"], 
+             CellMargins -> {{72, 4}, {1, 14}}, 
+             CellGroupingRules -> {"SectionGrouping", 90}, StyleMenuListing -> 
+             None, FontFamily -> "Courier", FontSize -> 12, FontWeight -> 
+             "Bold"], 
+            Cell[
+             StyleData["ObjectName", "Printout"], 
+             CellMargins -> {{2, 0}, {1, 10}}, FontSize -> 12]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Usage"], CellFrame -> {{0, 0}, {0.5, 0.5}}, 
+             CellMargins -> {{10, 4}, {0, 4}}, CellFrameMargins -> 5, 
+             TextAlignment -> Left, TextJustification -> 1, Hyphenation -> 
+             True, ParagraphSpacing -> {0, 6}, ParagraphIndent -> -10, 
+             StyleMenuListing -> None], 
+            Cell[
+             StyleData["Usage", "Brackets"], 
+             CellFrame -> {{0, 0}, {0.5, 0.5}}, 
+             CellMargins -> {{72, 4}, {0, 4}}, CellFrameMargins -> 5, 
+             ParagraphSpacing -> {0, 6}, ParagraphIndent -> -10, 
+             StyleMenuListing -> None], 
+            Cell[
+             StyleData["Usage", "Printout"], CellMargins -> {{2, 0}, {0, 4}}, 
+             FontSize -> 10, FontWeight -> "Plain"]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Notes"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, TextAlignment -> Left, 
+             TextJustification -> 1, Hyphenation -> True, 
+             ParagraphSpacing -> {0, 6}, ParagraphIndent -> -10, 
+             StyleMenuListing -> None, FontFamily -> "Times"], 
+            Cell[
+             StyleData["Notes", "Brackets"], CellMargins -> {{72, 4}, {0, 8}},
+              CellHorizontalScrolling -> True, ParagraphSpacing -> {0, 6}, 
+             ParagraphIndent -> -10, StyleMenuListing -> None, FontFamily -> 
+             "Times"], 
+            Cell[
+             StyleData["Notes", "Printout"], CellMargins -> {{2, 0}, {0, 8}}, 
+             FontSize -> 9]}, Closed]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Title", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Title"], CellMargins -> {{12, Inherited}, {2, 20}}, 
+             CellGroupingRules -> {"TitleGrouping", 0}, PageBreakBelow -> 
+             False, InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Title", 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}, {"Subtitle", 0}, {"Subsubtitle", 0}}, FontFamily -> 
+             "Helvetica", FontSize -> 30, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Title", "Printout"], 
+             CellMargins -> {{2, 10}, {2, 30}}, FontSize -> 24]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subtitle"], CellMargins -> {{12, Inherited}, {2, 2}}, 
+             CellGroupingRules -> {"TitleGrouping", 10}, PageBreakBelow -> 
+             False, InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Subtitle", 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}, {"Subsubtitle", 0}}, FontFamily -> "Helvetica", 
+             FontSize -> 14, FontColor -> RGBColor[0, 0, 0.6]], 
+            Cell[
+             StyleData["Subtitle", "Printout"], 
+             CellMargins -> {{2, 10}, {2, 4}}, FontSize -> 18, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsubtitle"], 
+             CellMargins -> {{12, Inherited}, {2, 12}}, 
+             CellGroupingRules -> {"TitleGrouping", 20}, PageBreakBelow -> 
+             False, InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Subsubtitle", 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}}, FontFamily -> "Helvetica", FontSize -> 14, 
+             FontSlant -> "Italic", FontColor -> RGBColor[0, 0, 0.6]], 
+            Cell[
+             StyleData["Subsubtitle", "Printout"], 
+             CellMargins -> {{2, 10}, {2, 8}}, FontSize -> 12, FontColor -> 
+             GrayLevel[0]]}, Closed]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Hyperlink Styles", "Section"], 
+         Cell[
+         "The cells below define styles useful for making hypertext \
+ButtonBoxes.  The \"Hyperlink\" style is for links within the same Notebook, \
+or between Notebooks.", "Text"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Hyperlink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`NotebookLocate[#2]}]& ), ButtonNote -> 
+               ButtonData}], 
+            Cell[
+             StyleData["Hyperlink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+         "The following styles are for linking automatically to the on-line \
+help system.", "Text"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["MainBookLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["MainBook", #]}]& )}], 
+            Cell[
+             StyleData["MainBookLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["AddOnsLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, FontFamily -> "Courier", 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["AddOns", #]}]& )}], 
+            Cell[
+             StyleData["AddOnsLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["RefGuideLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, FontFamily -> "Courier", 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["RefGuide", #]}]& )}], 
+            Cell[
+             StyleData["RefGuideLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["GettingStartedLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["GettingStarted", #]}]& )}], 
+            Cell[
+             StyleData["GettingStartedLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["OtherInformationLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["OtherInformation", #]}]& )}], 
+            Cell[
+             StyleData["OtherInformationLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Palette Styles", "Section"], 
+         Cell[
+         "The cells below define styles that define standard ButtonFunctions, \
+for use in palette buttons.", "Text"], 
+         Cell[
+          StyleData["Paste"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, After]}]& )}], 
+         Cell[
+          StyleData["Evaluate"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, All], 
+               SelectionEvaluate[
+                FrontEnd`InputNotebook[], All]}]& )}], 
+         Cell[
+          StyleData["EvaluateCell"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, All], 
+               FrontEnd`SelectionMove[
+                FrontEnd`InputNotebook[], All, Cell, 1], 
+               FrontEnd`SelectionEvaluateCreateCell[
+                FrontEnd`InputNotebook[], All]}]& )}], 
+         Cell[
+          StyleData["CopyEvaluate"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`SelectionCreateCell[
+                FrontEnd`InputNotebook[], All], 
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, All], 
+               FrontEnd`SelectionEvaluate[
+                FrontEnd`InputNotebook[], All]}]& )}], 
+         Cell[
+          StyleData["CopyEvaluateCell"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`SelectionCreateCell[
+                FrontEnd`InputNotebook[], All], 
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, All], 
+               FrontEnd`SelectionEvaluateCreateCell[
+                FrontEnd`InputNotebook[], All]}]& )}]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Formulas and Programming", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["InlineFormula"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, ScriptLevel -> 1, 
+             SingleLetterItalics -> True, SpanMaxSize -> Infinity, 
+             StyleMenuListing -> None, 
+             GridBoxOptions -> {
+              GridBoxItemSize -> {
+                "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {{1.}}, "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["InlineFormula", "Printout"], 
+             CellMargins -> {{2, 0}, {0, 8}}, FontSize -> 10]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["InlineOutput"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, StyleMenuListing -> 
+             None, FontFamily -> "Courier"], 
+            Cell[
+             StyleData["InlineOutput", "Printout"], 
+             CellMargins -> {{2, 0}, {0, 8}}, FontSize -> 9.5]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["DisplayFormula"], 
+             CellMargins -> {{42, Inherited}, {Inherited, Inherited}}, 
+             CellHorizontalScrolling -> True, DefaultFormatType -> 
+             DefaultInputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, LanguageCategory -> 
+             "Formula", ScriptLevel -> 0, SingleLetterItalics -> True, 
+             SpanMaxSize -> Infinity, 
+             UnderoverscriptBoxOptions -> {LimitsPositioning -> True}, 
+             GridBoxOptions -> {
+              GridBoxItemSize -> {
+                "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {{1.}}, "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["DisplayFormula", "Printout"], 
+             CellMargins -> {{34, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 10]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["DisplayMath"], CellMargins -> {{42, 10}, {7, 7}}, 
+             Evaluatable -> False, CellGroupingRules -> "InputGrouping", 
+             CellHorizontalScrolling -> True, PageBreakWithin -> False, 
+             GroupPageBreakWithin -> False, DefaultFormatType -> 
+             DefaultInputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, 
+             AutoItalicWords -> {}, LanguageCategory -> "Formula", FormatType -> 
+             InputForm, ShowStringCharacters -> True, NumberMarks -> True, 
+             CounterIncrements -> "Input"], 
+            Cell[
+             StyleData["DisplayMath", "Printout"], 
+             CellMargins -> {{39, 0}, {6, 6}}, FontSize -> 9]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Program"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, LanguageCategory -> "Formula", 
+             FontFamily -> "Courier"], 
+            Cell[
+             StyleData["Program", "Printout"], 
+             CellMargins -> {{2, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 9.5]}, Closed]], 
+         Cell[
+          StyleData["List"], CellMargins -> {{12, 0}, {2, 8}}, 
+          CellElementSpacings -> {"ClosedGroupTopMargin" -> 12}, 
+          CellGroupingRules -> {"SectionGrouping", 60}, PageBreakBelow -> 
+          False, FontWeight -> "Bold"]}, Closed]]}, Open]]}, Visible -> False,
+   FrontEndVersion -> 
+  "8.0 for Microsoft Windows (32-bit) (February 23, 2011)", StyleDefinitions -> 
+  "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "Cohom"->{
+  Cell[567, 22, 175, 7, 123, "Title",
+   CellTags->{"Cohom", "c:1"}]},
+ "c:1"->{
+  Cell[567, 22, 175, 7, 123, "Title",
+   CellTags->{"Cohom", "c:1"}]},
+ "c:2"->{
+  Cell[3419, 122, 46, 1, 72, "Section",
+   CellTags->"c:2"]},
+ "ch$raise"->{
+  Cell[3592, 133, 53, 1, 43, "ObjectName",
+   CellTags->"ch$raise"],
+  Cell[3648, 136, 391, 10, 65, "Usage",
+   CellTags->"ch$raise"]},
+ "ch$basis"->{
+  Cell[5084, 180, 53, 1, 37, "ObjectName",
+   CellTags->"ch$basis"],
+  Cell[5140, 183, 476, 21, 58, "Usage",
+   CellTags->"ch$basis"]},
+ "ch$Split"->{
+  Cell[5619, 206, 53, 1, 37, "ObjectName",
+   CellTags->"ch$Split"],
+  Cell[5675, 209, 647, 19, 104, "Usage",
+   CellTags->"ch$Split"]},
+ "ch$Wt"->{
+  Cell[6325, 230, 47, 1, 37, "ObjectName",
+   CellTags->"ch$Wt"],
+  Cell[6375, 233, 398, 13, 69, "Usage",
+   CellTags->"ch$Wt"]},
+ "ch$Out"->{
+  Cell[6776, 248, 49, 1, 37, "ObjectName",
+   CellTags->"ch$Out"],
+  Cell[6828, 251, 615, 13, 76, "Usage",
+   CellTags->"ch$Out"]},
+ "chSetAlg"->{
+  Cell[12992, 497, 53, 1, 37, "ObjectName",
+   CellTags->"chSetAlg"],
+  Cell[13048, 500, 2634, 81, 227, "Usage",
+   CellTags->"chSetAlg"]},
+ "chScalars"->{
+  Cell[15685, 583, 55, 1, 37, "ObjectName",
+   CellTags->"chScalars"],
+  Cell[15743, 586, 392, 12, 43, "Usage",
+   CellTags->"chScalars"]},
+ "chCalc"->{
+  Cell[20446, 766, 49, 1, 37, "ObjectName",
+   CellTags->"chCalc"],
+  Cell[20498, 769, 1958, 80, 188, "Usage",
+   CellTags->"chCalc"],
+  Cell[22459, 851, 53, 1, 37, "ObjectName",
+   CellTags->"chCalc"],
+  Cell[22515, 854, 1093, 42, 134, "Usage",
+   CellTags->"chCalc"]},
+ "chNext"->{
+  Cell[23611, 898, 49, 1, 37, "ObjectName",
+   CellTags->"chNext"],
+  Cell[23663, 901, 1796, 58, 170, "Usage",
+   CellTags->"chNext"]},
+ "chBook"->{
+  Cell[25462, 961, 49, 1, 37, "ObjectName",
+   CellTags->"chBook"],
+  Cell[25514, 964, 1415, 46, 173, "Usage",
+   CellTags->"chBook"],
+  Cell[26932, 1012, 48, 1, 37, "ObjectName",
+   CellTags->"chBook"],
+  Cell[26983, 1015, 397, 15, 58, "Usage",
+   CellTags->"chBook"]},
+ "chExMod"->{
+  Cell[27383, 1032, 51, 1, 37, "ObjectName",
+   CellTags->"chExMod"],
+  Cell[27437, 1035, 1876, 74, 151, "Usage",
+   CellTags->"chExMod"]},
+ "chMod"->{
+  Cell[29316, 1111, 47, 1, 37, "ObjectName",
+   CellTags->"chMod"],
+  Cell[29366, 1114, 2233, 85, 184, "Usage",
+   CellTags->"chMod"]},
+ "chDim"->{
+  Cell[31602, 1201, 47, 1, 37, "ObjectName",
+   CellTags->"chDim"],
+  Cell[31652, 1204, 1121, 31, 136, "Usage",
+   CellTags->"chDim"]},
+ "chInMod"->{
+  Cell[32776, 1237, 51, 1, 37, "ObjectName",
+   CellTags->"chInMod"],
+  Cell[32830, 1240, 565, 18, 40, "Usage",
+   CellTags->"chInMod"]},
+ "chInSol"->{
+  Cell[33398, 1260, 51, 1, 37, "ObjectName",
+   CellTags->"chInSol"],
+  Cell[33452, 1263, 683, 20, 57, "Usage",
+   CellTags->"chInSol"]},
+ "chRate"->{
+  Cell[34138, 1285, 49, 1, 37, "ObjectName",
+   CellTags->"chRate"],
+  Cell[34190, 1288, 666, 20, 79, "Usage",
+   CellTags->{"rating", "chRate"}]},
+ "rating"->{
+  Cell[34190, 1288, 666, 20, 79, "Usage",
+   CellTags->{"rating", "chRate"}]},
+ "chBasis"->{
+  Cell[34935, 1314, 51, 1, 37, "ObjectName",
+   CellTags->"chBasis"],
+  Cell[34989, 1317, 1311, 44, 156, "Usage",
+   CellTags->"chBasis"]},
+ "chSplit"->{
+  Cell[36303, 1363, 51, 1, 37, "ObjectName",
+   CellTags->"chSplit"],
+  Cell[36357, 1366, 544, 17, 104, "Usage",
+   CellTags->"chSplit"]},
+ "Example"->{
+  Cell[36950, 1389, 235, 7, 53, "Subsection",
+   CellTags->{"Example", "c:3", "b:5.0.0"}]},
+ "c:3"->{
+  Cell[36950, 1389, 235, 7, 53, "Subsection",
+   CellTags->{"Example", "c:3", "b:5.0.0"}]},
+ "b:5.0.0"->{
+  Cell[36950, 1389, 235, 7, 53, "Subsection",
+   CellTags->{"Example", "c:3", "b:5.0.0"}],
+  Cell[37188, 1398, 373, 12, 63, "Text",
+   CellTags->"b:5.0.0"],
+  Cell[37586, 1414, 76, 1, 50, "Subsubsection",
+   CellTags->{"c:4", "b:5.0.0"}],
+  Cell[37687, 1419, 179, 3, 50, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[37869, 1424, 185, 3, 42, "Print",
+   CellTags->"b:5.0.0"],
+  Cell[38103, 1433, 80, 1, 50, "Subsubsection",
+   CellTags->{"c:5", "b:5.0.0"}],
+  Cell[38186, 1436, 245, 6, 85, "Text",
+   CellTags->"b:5.0.0"],
+  Cell[38434, 1444, 989, 41, 84, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[39460, 1490, 71, 1, 50, "Subsubsection",
+   CellTags->{"c:6", "b:5.0.0"}],
+  Cell[39534, 1493, 1148, 36, 115, "Text",
+   CellTags->"b:5.0.0"],
+  Cell[40685, 1531, 2271, 84, 129, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[42959, 1617, 228, 12, 38, "Text",
+   CellTags->"b:5.0.0"],
+  Cell[43224, 1634, 68, 1, 50, "Subsubsection",
+   CellTags->{"c:7", "b:5.0.0"}],
+  Cell[43295, 1637, 1244, 44, 160, "Text",
+   CellTags->"b:5.0.0"],
+  Cell[44542, 1683, 2475, 85, 150, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[47020, 1770, 482, 19, 65, "Text",
+   CellTags->"b:5.0.0"],
+  Cell[47527, 1793, 400, 14, 37, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[47930, 1809, 177, 6, 30, "Output",
+   CellTags->"b:5.0.0"],
+  Cell[48144, 1820, 331, 12, 36, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[48478, 1834, 174, 6, 30, "Output",
+   CellTags->"b:5.0.0"],
+  Cell[48701, 1846, 69, 1, 50, "Subsubsection",
+   CellTags->{"c:8", "b:5.0.0"}],
+  Cell[48773, 1849, 335, 16, 38, "Text",
+   CellTags->"b:5.0.0"],
+  Cell[49111, 1867, 625, 21, 59, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[49739, 1890, 529, 19, 85, "Text",
+   CellTags->"b:5.0.0"],
+  Cell[50305, 1914, 68, 1, 50, "Subsubsection",
+   CellTags->{"c:9", "b:5.0.0"}],
+  Cell[50376, 1917, 152, 5, 38, "Text",
+   CellTags->"b:5.0.0"],
+  Cell[50553, 1926, 225, 9, 36, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[50781, 1937, 254, 8, 30, "Print",
+   CellTags->"b:5.0.0"],
+  Cell[51072, 1950, 178, 7, 36, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[51253, 1959, 221, 7, 30, "Output",
+   CellTags->"b:5.0.0"],
+  Cell[51511, 1971, 178, 7, 36, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[51692, 1980, 77, 1, 30, "Output",
+   CellTags->"b:5.0.0"],
+  Cell[51784, 1984, 139, 5, 38, "Text",
+   CellTags->"b:5.0.0"],
+  Cell[51948, 1993, 206, 8, 36, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[52157, 2003, 342, 11, 30, "Print",
+   CellTags->"b:5.0.0"],
+  Cell[52536, 2019, 178, 7, 36, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[52717, 2028, 346, 12, 30, "Output",
+   CellTags->"b:5.0.0"],
+  Cell[53100, 2045, 178, 7, 36, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[53281, 2054, 77, 1, 30, "Output",
+   CellTags->"b:5.0.0"],
+  Cell[53373, 2058, 146, 5, 38, "Text",
+   CellTags->"b:5.0.0"],
+  Cell[53544, 2067, 206, 8, 36, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[53753, 2077, 413, 13, 30, "Print",
+   CellTags->"b:5.0.0"],
+  Cell[54203, 2095, 178, 7, 36, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[54384, 2104, 493, 17, 30, "Output",
+   CellTags->"b:5.0.0"],
+  Cell[54914, 2126, 178, 7, 36, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[55095, 2135, 77, 1, 30, "Output",
+   CellTags->"b:5.0.0"],
+  Cell[55187, 2139, 145, 5, 38, "Text",
+   CellTags->"b:5.0.0"],
+  Cell[55357, 2148, 255, 10, 36, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[55615, 2160, 415, 13, 30, "Print",
+   CellTags->"b:5.0.0"],
+  Cell[56067, 2178, 178, 7, 36, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[56248, 2187, 595, 20, 30, "Output",
+   CellTags->"b:5.0.0"],
+  Cell[56880, 2212, 178, 7, 36, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[57061, 2221, 77, 1, 30, "Output",
+   CellTags->"b:5.0.0"],
+  Cell[57153, 2225, 145, 5, 38, "Text",
+   CellTags->"b:5.0.0"],
+  Cell[57323, 2234, 255, 10, 36, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[57581, 2246, 417, 13, 30, "Print",
+   CellTags->"b:5.0.0"],
+  Cell[58035, 2264, 178, 7, 36, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[58216, 2273, 697, 23, 30, "Output",
+   CellTags->"b:5.0.0"],
+  Cell[58950, 2301, 178, 7, 36, "Input",
+   CellTags->"b:5.0.0"],
+  Cell[59131, 2310, 77, 1, 30, "Output",
+   CellTags->"b:5.0.0"]},
+ "c:4"->{
+  Cell[37586, 1414, 76, 1, 50, "Subsubsection",
+   CellTags->{"c:4", "b:5.0.0"}]},
+ "c:5"->{
+  Cell[38103, 1433, 80, 1, 50, "Subsubsection",
+   CellTags->{"c:5", "b:5.0.0"}]},
+ "c:6"->{
+  Cell[39460, 1490, 71, 1, 50, "Subsubsection",
+   CellTags->{"c:6", "b:5.0.0"}]},
+ "c:7"->{
+  Cell[43224, 1634, 68, 1, 50, "Subsubsection",
+   CellTags->{"c:7", "b:5.0.0"}]},
+ "c:8"->{
+  Cell[48701, 1846, 69, 1, 50, "Subsubsection",
+   CellTags->{"c:8", "b:5.0.0"}]},
+ "c:9"->{
+  Cell[50305, 1914, 68, 1, 50, "Subsubsection",
+   CellTags->{"c:9", "b:5.0.0"}]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"Cohom", 102425, 3229},
+ {"c:1", 102506, 3232},
+ {"c:2", 102587, 3235},
+ {"ch$raise", 102664, 3238},
+ {"ch$basis", 102815, 3243},
+ {"ch$Split", 102966, 3248},
+ {"ch$Wt", 103115, 3253},
+ {"ch$Out", 103258, 3258},
+ {"chSetAlg", 103405, 3263},
+ {"chScalars", 103561, 3268},
+ {"chCalc", 103714, 3273},
+ {"chNext", 103998, 3282},
+ {"chBook", 104147, 3287},
+ {"chExMod", 104432, 3296},
+ {"chMod", 104584, 3301},
+ {"chDim", 104732, 3306},
+ {"chInMod", 104882, 3311},
+ {"chInSol", 105034, 3316},
+ {"chRate", 105185, 3321},
+ {"rating", 105346, 3326},
+ {"chBasis", 105439, 3329},
+ {"chSplit", 105593, 3334},
+ {"Example", 105746, 3339},
+ {"c:3", 105848, 3342},
+ {"b:5.0.0", 105954, 3345},
+ {"c:4", 110071, 3466},
+ {"c:5", 110164, 3469},
+ {"c:6", 110257, 3472},
+ {"c:7", 110350, 3475},
+ {"c:8", 110443, 3478},
+ {"c:9", 110536, 3481}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 175, 7, 123, "Title",
+ CellTags->{"Cohom", "c:1"}],
+Cell[745, 31, 217, 4, 64, "Text"],
+Cell[965, 37, 644, 23, 66, "Text"],
+Cell[1612, 62, 1041, 34, 87, "Text"],
+Cell[2656, 98, 614, 12, 87, "Text"],
+Cell[3273, 112, 121, 6, 41, "Text"],
+Cell[CellGroupData[{
+Cell[3419, 122, 46, 1, 72, "Section",
+ CellTags->"c:2"],
+Cell[CellGroupData[{
+Cell[3490, 127, 35, 0, 49, "SubsectionIcon"],
+Cell[CellGroupData[{
+Cell[3550, 131, 39, 0, 33, "SubsubsectionIcon"],
+Cell[3592, 133, 53, 1, 43, "ObjectName",
+ CellTags->"ch$raise"],
+Cell[3648, 136, 391, 10, 65, "Usage",
+ CellTags->"ch$raise"],
+Cell[4042, 148, 30, 0, 37, "ObjectName"],
+Cell[4075, 150, 369, 9, 60, "Usage"],
+Cell[4447, 161, 28, 0, 37, "ObjectName"],
+Cell[4478, 163, 603, 15, 79, "Usage"],
+Cell[5084, 180, 53, 1, 37, "ObjectName",
+ CellTags->"ch$basis"],
+Cell[5140, 183, 476, 21, 58, "Usage",
+ CellTags->"ch$basis"],
+Cell[5619, 206, 53, 1, 37, "ObjectName",
+ CellTags->"ch$Split"],
+Cell[5675, 209, 647, 19, 104, "Usage",
+ CellTags->"ch$Split"],
+Cell[6325, 230, 47, 1, 37, "ObjectName",
+ CellTags->"ch$Wt"],
+Cell[6375, 233, 398, 13, 69, "Usage",
+ CellTags->"ch$Wt"],
+Cell[6776, 248, 49, 1, 37, "ObjectName",
+ CellTags->"ch$Out"],
+Cell[6828, 251, 615, 13, 76, "Usage",
+ CellTags->"ch$Out"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7480, 269, 36, 0, 47, "SubsubsectionIcon"],
+Cell[7519, 271, 273, 5, 62, "Text"],
+Cell[7795, 278, 28, 0, 37, "ObjectName"],
+Cell[7826, 280, 218, 7, 40, "Usage"],
+Cell[8047, 289, 26, 0, 37, "ObjectName"],
+Cell[8076, 291, 397, 13, 41, "Usage"],
+Cell[8476, 306, 27, 0, 37, "ObjectName"],
+Cell[8506, 308, 939, 30, 90, "Usage"],
+Cell[9448, 340, 26, 0, 37, "ObjectName"],
+Cell[9477, 342, 234, 5, 40, "Usage"],
+Cell[9714, 349, 27, 0, 37, "ObjectName"],
+Cell[9744, 351, 390, 14, 60, "Usage"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10171, 370, 36, 0, 47, "SubsubsectionIcon"],
+Cell[10210, 372, 219, 8, 38, "Text"],
+Cell[10432, 382, 279, 9, 62, "Text"],
+Cell[10714, 393, 458, 13, 108, "Input"],
+Cell[11175, 408, 28, 0, 37, "ObjectName"],
+Cell[11206, 410, 641, 25, 61, "Usage"],
+Cell[11850, 437, 28, 0, 37, "ObjectName"],
+Cell[11881, 439, 521, 28, 40, "Usage"],
+Cell[12405, 469, 29, 0, 37, "ObjectName"],
+Cell[12437, 471, 468, 18, 67, "Usage"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12954, 495, 35, 0, 48, "SubsectionIcon"],
+Cell[12992, 497, 53, 1, 37, "ObjectName",
+ CellTags->"chSetAlg"],
+Cell[13048, 500, 2634, 81, 227, "Usage",
+ CellTags->"chSetAlg"],
+Cell[15685, 583, 55, 1, 37, "ObjectName",
+ CellTags->"chScalars"],
+Cell[15743, 586, 392, 12, 43, "Usage",
+ CellTags->"chScalars"],
+Cell[16138, 600, 29, 0, 37, "ObjectName"],
+Cell[16170, 602, 608, 19, 61, "Usage"],
+Cell[16781, 623, 29, 0, 37, "ObjectName"],
+Cell[16813, 625, 580, 18, 61, "Usage"],
+Cell[17396, 645, 30, 0, 37, "ObjectName"],
+Cell[17429, 647, 701, 22, 61, "Usage"],
+Cell[18133, 671, 29, 0, 37, "ObjectName"],
+Cell[18165, 673, 1274, 43, 94, "Usage"],
+Cell[19442, 718, 27, 0, 37, "ObjectName"],
+Cell[19472, 720, 406, 16, 40, "Usage"],
+Cell[19881, 738, 27, 0, 37, "ObjectName"],
+Cell[19911, 740, 532, 24, 40, "Usage"],
+Cell[20446, 766, 49, 1, 37, "ObjectName",
+ CellTags->"chCalc"],
+Cell[20498, 769, 1958, 80, 188, "Usage",
+ CellTags->"chCalc"],
+Cell[22459, 851, 53, 1, 37, "ObjectName",
+ CellTags->"chCalc"],
+Cell[22515, 854, 1093, 42, 134, "Usage",
+ CellTags->"chCalc"],
+Cell[23611, 898, 49, 1, 37, "ObjectName",
+ CellTags->"chNext"],
+Cell[23663, 901, 1796, 58, 170, "Usage",
+ CellTags->"chNext"],
+Cell[25462, 961, 49, 1, 37, "ObjectName",
+ CellTags->"chBook"],
+Cell[25514, 964, 1415, 46, 173, "Usage",
+ CellTags->"chBook"],
+Cell[26932, 1012, 48, 1, 37, "ObjectName",
+ CellTags->"chBook"],
+Cell[26983, 1015, 397, 15, 58, "Usage",
+ CellTags->"chBook"],
+Cell[27383, 1032, 51, 1, 37, "ObjectName",
+ CellTags->"chExMod"],
+Cell[27437, 1035, 1876, 74, 151, "Usage",
+ CellTags->"chExMod"],
+Cell[29316, 1111, 47, 1, 37, "ObjectName",
+ CellTags->"chMod"],
+Cell[29366, 1114, 2233, 85, 184, "Usage",
+ CellTags->"chMod"],
+Cell[31602, 1201, 47, 1, 37, "ObjectName",
+ CellTags->"chDim"],
+Cell[31652, 1204, 1121, 31, 136, "Usage",
+ CellTags->"chDim"],
+Cell[32776, 1237, 51, 1, 37, "ObjectName",
+ CellTags->"chInMod"],
+Cell[32830, 1240, 565, 18, 40, "Usage",
+ CellTags->"chInMod"],
+Cell[33398, 1260, 51, 1, 37, "ObjectName",
+ CellTags->"chInSol"],
+Cell[33452, 1263, 683, 20, 57, "Usage",
+ CellTags->"chInSol"],
+Cell[34138, 1285, 49, 1, 37, "ObjectName",
+ CellTags->"chRate"],
+Cell[34190, 1288, 666, 20, 79, "Usage",
+ CellTags->{"rating", "chRate"}],
+Cell[CellGroupData[{
+Cell[34881, 1312, 51, 0, 47, "SubsubsectionIcon"],
+Cell[34935, 1314, 51, 1, 37, "ObjectName",
+ CellTags->"chBasis"],
+Cell[34989, 1317, 1311, 44, 156, "Usage",
+ CellTags->"chBasis"],
+Cell[36303, 1363, 51, 1, 37, "ObjectName",
+ CellTags->"chSplit"],
+Cell[36357, 1366, 544, 17, 104, "Usage",
+ CellTags->"chSplit"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36950, 1389, 235, 7, 53, "Subsection",
+ CellTags->{"Example", "c:3", "b:5.0.0"}],
+Cell[37188, 1398, 373, 12, 63, "Text",
+ CellTags->"b:5.0.0"],
+Cell[CellGroupData[{
+Cell[37586, 1414, 76, 1, 50, "Subsubsection",
+ CellTags->{"c:4", "b:5.0.0"}],
+Cell[CellGroupData[{
+Cell[37687, 1419, 179, 3, 50, "Input",
+ CellTags->"b:5.0.0"],
+Cell[37869, 1424, 185, 3, 42, "Print",
+ CellTags->"b:5.0.0"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[38103, 1433, 80, 1, 50, "Subsubsection",
+ CellTags->{"c:5", "b:5.0.0"}],
+Cell[38186, 1436, 245, 6, 85, "Text",
+ CellTags->"b:5.0.0"],
+Cell[38434, 1444, 989, 41, 84, "Input",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39460, 1490, 71, 1, 50, "Subsubsection",
+ CellTags->{"c:6", "b:5.0.0"}],
+Cell[39534, 1493, 1148, 36, 115, "Text",
+ CellTags->"b:5.0.0"],
+Cell[40685, 1531, 2271, 84, 129, "Input",
+ CellTags->"b:5.0.0"],
+Cell[42959, 1617, 228, 12, 38, "Text",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[43224, 1634, 68, 1, 50, "Subsubsection",
+ CellTags->{"c:7", "b:5.0.0"}],
+Cell[43295, 1637, 1244, 44, 160, "Text",
+ CellTags->"b:5.0.0"],
+Cell[44542, 1683, 2475, 85, 150, "Input",
+ CellTags->"b:5.0.0"],
+Cell[47020, 1770, 482, 19, 65, "Text",
+ CellTags->"b:5.0.0"],
+Cell[CellGroupData[{
+Cell[47527, 1793, 400, 14, 37, "Input",
+ CellTags->"b:5.0.0"],
+Cell[47930, 1809, 177, 6, 30, "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[48144, 1820, 331, 12, 36, "Input",
+ CellTags->"b:5.0.0"],
+Cell[48478, 1834, 174, 6, 30, "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[48701, 1846, 69, 1, 50, "Subsubsection",
+ CellTags->{"c:8", "b:5.0.0"}],
+Cell[48773, 1849, 335, 16, 38, "Text",
+ CellTags->"b:5.0.0"],
+Cell[49111, 1867, 625, 21, 59, "Input",
+ CellTags->"b:5.0.0"],
+Cell[49739, 1890, 529, 19, 85, "Text",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[50305, 1914, 68, 1, 50, "Subsubsection",
+ CellTags->{"c:9", "b:5.0.0"}],
+Cell[50376, 1917, 152, 5, 38, "Text",
+ CellTags->"b:5.0.0"],
+Cell[CellGroupData[{
+Cell[50553, 1926, 225, 9, 36, "Input",
+ CellTags->"b:5.0.0"],
+Cell[50781, 1937, 254, 8, 30, "Print",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[51072, 1950, 178, 7, 36, "Input",
+ CellTags->"b:5.0.0"],
+Cell[51253, 1959, 221, 7, 30, "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[51511, 1971, 178, 7, 36, "Input",
+ CellTags->"b:5.0.0"],
+Cell[51692, 1980, 77, 1, 30, "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+Cell[51784, 1984, 139, 5, 38, "Text",
+ CellTags->"b:5.0.0"],
+Cell[CellGroupData[{
+Cell[51948, 1993, 206, 8, 36, "Input",
+ CellTags->"b:5.0.0"],
+Cell[52157, 2003, 342, 11, 30, "Print",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[52536, 2019, 178, 7, 36, "Input",
+ CellTags->"b:5.0.0"],
+Cell[52717, 2028, 346, 12, 30, "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[53100, 2045, 178, 7, 36, "Input",
+ CellTags->"b:5.0.0"],
+Cell[53281, 2054, 77, 1, 30, "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+Cell[53373, 2058, 146, 5, 38, "Text",
+ CellTags->"b:5.0.0"],
+Cell[CellGroupData[{
+Cell[53544, 2067, 206, 8, 36, "Input",
+ CellTags->"b:5.0.0"],
+Cell[53753, 2077, 413, 13, 30, "Print",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[54203, 2095, 178, 7, 36, "Input",
+ CellTags->"b:5.0.0"],
+Cell[54384, 2104, 493, 17, 30, "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[54914, 2126, 178, 7, 36, "Input",
+ CellTags->"b:5.0.0"],
+Cell[55095, 2135, 77, 1, 30, "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+Cell[55187, 2139, 145, 5, 38, "Text",
+ CellTags->"b:5.0.0"],
+Cell[CellGroupData[{
+Cell[55357, 2148, 255, 10, 36, "Input",
+ CellTags->"b:5.0.0"],
+Cell[55615, 2160, 415, 13, 30, "Print",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[56067, 2178, 178, 7, 36, "Input",
+ CellTags->"b:5.0.0"],
+Cell[56248, 2187, 595, 20, 30, "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[56880, 2212, 178, 7, 36, "Input",
+ CellTags->"b:5.0.0"],
+Cell[57061, 2221, 77, 1, 30, "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+Cell[57153, 2225, 145, 5, 38, "Text",
+ CellTags->"b:5.0.0"],
+Cell[CellGroupData[{
+Cell[57323, 2234, 255, 10, 36, "Input",
+ CellTags->"b:5.0.0"],
+Cell[57581, 2246, 417, 13, 30, "Print",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[58035, 2264, 178, 7, 36, "Input",
+ CellTags->"b:5.0.0"],
+Cell[58216, 2273, 697, 23, 30, "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[58950, 2301, 178, 7, 36, "Input",
+ CellTags->"b:5.0.0"],
+Cell[59131, 2310, 77, 1, 30, "Output",
+ CellTags->"b:5.0.0"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

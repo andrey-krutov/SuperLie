@@ -1,0 +1,4138 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[    133383,       4129]
+NotebookOptionsPosition[     43769,       1992]
+NotebookOutlinePosition[    119565,       3716]
+CellTagsIndexPosition[    117638,       3641]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["SuperLie: a Fast Introduction", "Title",
+ FontSize->24,
+ CellTags->{"i:1", "Fast Introduction", "c:1"}],
+
+Cell[CellGroupData[{
+
+Cell["Purpose", "Section",
+ CellTags->{"c:2", "b:0.0"}],
+
+Cell[TextData[{
+ "The ",
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " Package is a tool for calculating various data for Lie algebras and Lie \
+superalgebras. Using ",
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " Package you can\n\[Bullet] make the numeric and symbolic calculations with \
+vectors;\n\[Bullet] build vector (super)spaces, algebras and modules over \
+algebras;\n\[Bullet] convert the results to ",
+ Cell[BoxData[
+  StyleBox[
+   RowBox[{"T", 
+    AdjustmentBox["E",
+     BoxBaselineShift->0.5,
+     BoxMargins->{{-0.075, -0.085}, {0, 0}}], "X"}]]]],
+ " format."
+}], "Text",
+ CellChangeTimes->{{3.4213241409010816`*^9, 3.4213241714249725`*^9}},
+ CellTags->"b:0.0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Principles", "Section",
+ CellTags->"c:3"],
+
+Cell[CellGroupData[{
+
+Cell["Vectors and vector expressions", "Subsection",
+ CellTags->{"c:4", "b:0.1.0"}],
+
+Cell[CellGroupData[{
+
+Cell["Vectors and scalars", "Subsubsection",
+ CellTags->{"_sli_vect_scal", "c:5", "b:0.1.0"}],
+
+Cell[TextData[{
+ StyleBox["Vectors", "Def"],
+ " in ",
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " are:\n\[Bullet] Symbols declared as vectors; such symbols with indices, as \
+",
+ Cell[BoxData[
+  SubscriptBox["v", "i"]]],
+ " or ",
+ Cell[BoxData[
+  RowBox[{"v", "[", 
+   RowBox[{"i", ",", "j"}], "]"}]]],
+ ";\n\[Bullet] Linear combinations of vectors with scalar coefficients;\n\
+\[Bullet] Vector expressions, like ",
+ Cell[BoxData[
+  RowBox[{
+   SubscriptBox["v", "1"], "\[CircleTimes]", 
+   SubscriptBox["v", "2"]}]]],
+ ";\n\[Bullet] The results of vector-valued functions and operators."
+}], "Text",
+ CellTags->{"_sli_vect_scal", "b:0.1.0"}],
+
+Cell[TextData[{
+ StyleBox["Scalars", "Def"],
+ " in ",
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " are:\n\[Bullet] Symbols declared as scalars; such symbols with indices, as \
+",
+ Cell[BoxData[
+  SubscriptBox["c", "i"]]],
+ " or ",
+ Cell[BoxData[
+  RowBox[{"c", "[", 
+   RowBox[{"i", ",", "j"}], "]"}]]],
+ ";\n\[Bullet] Numbers and in-built ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " constants;\n\[Bullet] Scalar expressions, like ",
+ Cell[BoxData[
+  RowBox[{
+   SubscriptBox["c", "1"], "+", 
+   RowBox[{
+    SubscriptBox["c", "2"], "*", 
+    RowBox[{"Sin", "[", "\[Alpha]", "]"}]}]}]]],
+ ";\n\[Bullet] The results (values) of scalar-valued functions and \
+operators."
+}], "Text",
+ CellChangeTimes->{{3.4232277372404976`*^9, 3.4232277401847315`*^9}},
+ CellTags->{"_sli_vect_scal", "b:0.1.0"}],
+
+Cell[CellGroupData[{
+
+Cell["Declaring vectors and scalars", "List",
+ CellTags->{"_sli_vect_scal", "i:1", "b:0.1.0"}],
+
+Cell[TextData[{
+ ButtonBox["Vector",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Scalar",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VectorQ",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["ScalarQ",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnVector",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnScalar",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_vect_scal", "b:0.1.0"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Declaring the characteristic of the base field", "List",
+ CellTags->{"_sli_vect_scal", "i:1", "b:0.1.0"}],
+
+Cell[TextData[{
+ ButtonBox["FieldChar",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["DivPowers",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Squaring",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_vect_scal", "b:0.1.0"}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Vector operations", "Subsubsection",
+ CellTags->{"_sli_vect_op", "c:6", "i:2", "b:0.1.0"}],
+
+Cell[TextData[{
+ "The arithmetic operations ",
+ Cell[BoxData[
+  FormBox["+", TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox["-", TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox["*", TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox["/", TraditionalForm]]],
+ " and ",
+ Cell[BoxData[
+  FormBox["^", TraditionalForm]]],
+ " can be used with vectors as well as with scalars.\nThe multiplication ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"u", "*", "v", "*"}], "..."}], TraditionalForm]]],
+ " of vectors is usually interpreted as operation in an associative algebra. \
+It may be, e.g., (super)symmetric product, composition of differential \
+operators, and so on.\nThere are also defined operations of tensor \
+multiplications ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"u", "\[CircleTimes]", "v", "\[CircleTimes]"}], "..."}], 
+   TraditionalForm]]],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"u", "**", "v", "**"}], "..."}], TraditionalForm]]],
+ " , exterior multiplication ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"u", "\[Wedge]", "v", "\[Wedge]"}], "..."}], TraditionalForm]]],
+ ", tensor power  ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["v", 
+    RowBox[{"\[CircleTimes]", "n"}]], TraditionalForm]]],
+ ".\nOther operators available in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " may also be defined as vector operations."
+}], "Text",
+ CellTags->{"_sli_vect_op", "b:0.1.0"}],
+
+Cell[CellGroupData[{
+
+Cell["Vector operations", "List",
+ CellTags->{"_sli_vect_op", "b:0.1.0"}],
+
+Cell[TextData[{
+ ButtonBox["CircleTimes",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Tp",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["tPower",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VPlus",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VPower",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VTimes",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Wedge",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["wedge",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_vect_op", "b:0.1.0"}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Functions and evaluation rules for vector expressions", "Subsubsection",
+ CellTags->{"_sli_vect_eval", "c:7", "i:3", "b:0.1.0"}],
+
+Cell[TextData[{
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " defines a list of rules and functions used to evaluate or simplify vector \
+expressions.\n\[Bullet] A rule may be applied manually, using ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " replacement operator ",
+ StyleBox["expr ", "Var"],
+ ButtonBox["/.",
+  BaseStyle->"RefGuideLink"],
+ StyleBox[" rule", "Var"],
+ " or ",
+ StyleBox["expr", "Var"],
+ " ",
+ ButtonBox["//.",
+  BaseStyle->"RefGuideLink"],
+ " ",
+ StyleBox["rule", "Var"],
+ "\n\[Bullet] A rule may be declared as an operation property; then it will \
+be applied automatically whenever possible."
+}], "Text",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+
+Cell[CellGroupData[{
+
+Cell["Functions", "List",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+
+Cell[TextData[{
+ ButtonBox["dNormal",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["EnvNormal",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["ExpandOp",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SymmetricNormal",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["TCollect",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VCollect",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VExpand",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VNormal",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VSort",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Rules",
+ FontWeight->"Bold"]], "List",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+
+Cell[TextData[{
+ ButtonBox["AdditiveRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["AntiSkewSymmetricRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["AntiSymmetricRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["dSortRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["EnvSortRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["ExpandOpRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["HomogenRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["JacobiRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["LeibnizRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["LinearCollectRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["LinearRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["LogPowerRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SkewSymmetricRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SymmetricRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["TestFirstRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["ThreadGradedRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VExpandRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["ZeroArgRule",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Property declarations",
+ FontWeight->"Bold"]], "List",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+
+Cell[TextData[{
+ ButtonBox["Additive",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["AntiSkewSymmetric",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["AntiSymmetric",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["DegTimes",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["DivPowers",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Graded",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Homogen",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Jacobi",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Leibniz",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Linear",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["LogPower",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SkewSymmetric",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Symmetric",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["TestFirst",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["ThreadGraded",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["ZeroArg",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Testing properties",
+ FontWeight->"Bold"]], "List",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+
+Cell[TextData[{
+ ButtonBox["AntiSkewSymmetricQ",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["AntiSymmetricQ",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GradedQ",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SkewSymmetricQ",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SymmetricQ",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Cancelling properties",
+ FontWeight->"Bold"]], "List",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+
+Cell[TextData[{
+ ButtonBox["UnAdditive",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnAntiSkewSymmetric",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnAntiSymmetric",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnDegTimes",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnGraded",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnHomogen",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnJacobi",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnLeibniz",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnLinear",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnLogPower",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnSkewSymmetric",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnSymmetric",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnTestFirst",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnThreadGraded",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnZeroArg",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Functions and evaluation rules for scalar coefficients", "List",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+
+Cell[TextData[{
+ ButtonBox["SimplifySign",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SimplifySignRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SVExpandRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SVFactorRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SVNormalRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SVSimplifyRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["$SNormal",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Algebras and modules", "Subsection",
+ CellTags->{"c:8", "b:0.1.1"}],
+
+Cell[CellGroupData[{
+
+Cell["Space constructors", "Subsubsection",
+ CellTags->{"_sli_mod_constr", "c:9", "i:4", "b:0.1.1"}],
+
+Cell["\<\
+Space constructors are commands to build (or declare) vector spaces, algebras \
+and modules. There are constructors of vector and tensor spaces; algebra \
+constructors (of matrices, polynomials, vector fields; free algebras; \
+algebras with a Cartan matrix; subalgebras); module constructors (tensor \
+modules, free modules, submodules, comodules, and so on.). More constructors \
+can be added.\
+\>", "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["General constructors",
+ FontWeight->"Bold"]], "List",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["Algebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["CommutativeLieAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SpacePlus",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["TensorSpace",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["TrivialSpace",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VectorSpace",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Matrix algebras", "List",
+ CellTags->{"_sli_mod_constr", "i:5", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["glAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["pslAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["psq2Algebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["psqAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["q2Algebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["qAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["slAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["sqAlgebra",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Algebra structures on the space of polynomials and related structures\
+\>", "List",
+ CellTags->{"_sli_mod_constr", "i:6", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["ButtinAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["ContactAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["DiffAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["ExteriorAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["MoebiusAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["OKAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["PoissonAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["RamondAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VectorLieAlgebra",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Algebras and modules from generators", "List",
+ CellTags->{"_sli_mod_constr", "i:7", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["CartanMatrixAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["FreeLieAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["HWModule",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Related modules", "List",
+ CellTags->{"_sli_mod_constr", "i:8", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["CoLeft",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["CoRight",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["DLeft",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["DRight",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["MRight",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["NewRelative",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["PiLeft",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["PiRight",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Sub- and quotientspaces",
+ FontWeight->"Bold"]], "List",
+ CellTags->{"_sli_mod_constr", "i:9", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["AlgebraDecomposition",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["DefSubAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GradedKerSpace",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Ideal",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["KerSpace",
+  BaseStyle->"AddOnsLink"],
+ "  ",
+ ButtonBox["QuotientAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["QuotientModule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["RestrictModule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SubAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SubModule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SubSpace",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Modifications of vector spaces", "List",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+
+Cell[TextData[ButtonBox["ReGrade",
+ BaseStyle->"AddOnsLink"]], "MonoText",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Constructor options", "Subsubsection",
+ CellTags->{"_sli_mod_opt", "c:10", "i:10", "b:0.1.1"}],
+
+Cell[TextData[{
+ "Space constructors allow you to give additional arguments that specify \
+options with rules of the form ",
+ StyleBox["name ", "Var"],
+ "\[Rule] ",
+ StyleBox["value", "Var"],
+ ".  Several common options used by different constructors are listed below."
+}], "Text",
+ CellChangeTimes->{{3.421324311676645*^9, 3.421324364752965*^9}},
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+
+Cell[CellGroupData[{
+
+Cell["Action", "List",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["Algebra",
+  BaseStyle->"AddOnsLink"],
+ " "
+}], "MonoText",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Dimension and grading options", "List",
+ CellTags->{"_sli_mod_opt", "i:11", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["Dim",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GList",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Grade",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GRange",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["PList",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Implementation details", "List",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["CTimes",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Split",
+  BaseStyle->"AddOnsLink"],
+ " "
+}], "MonoText",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Naming options", "List",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["Bracket",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["bracket",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Div",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Mapping",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Format options", "List",
+ CellTags->{"_sli_mod_opt", "i:12", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["Output",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Standard",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["TeX",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Traditional",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Relation options", "List",
+ CellTags->{"_sli_mod_opt", "i:13", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["CoLeft",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["CoRight",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["DLeft",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["DRight",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["MRight",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["PiLeft",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["PiRight",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Space properties", "Subsubsection",
+ CellTags->{"_sli_mod_prop", "c:11", "i:14", "b:0.1.1"}],
+
+Cell[TextData[{
+ "A ",
+ StyleBox["space property", "Def"],
+ " is a function whose argument is the name of the space. The properties \
+reflect the results of the space constructor."
+}], "Text",
+ CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+
+Cell[CellGroupData[{
+
+Cell["Properties that reflect the definition of the space", "List",
+ CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["Basis",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["BasisPattern",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Bracket",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["bracket",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["BracketMode",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["CartanTriade",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["CompList",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Components",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["DecompositionList",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GRange",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["InSpace",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["NGen",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Rank",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Regular",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Tabular",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["TheAlgebra",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["TheModule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["TheSpace",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_mod_prop", "b:0.1.1"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Properties that represent the results of calculations", "List",
+ CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["DecompositionRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Dim",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["FDim",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GenBasis",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GenRel",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GList",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Image",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["PDim",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["PList",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_mod_prop", "b:0.1.1"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Modules-relatives", "List",
+ CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["CoLeft",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["CoRight",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["DLeft",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["DRight",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["MLeft",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["MRight",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["PiLeft",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["PiRight",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_mod_prop", "b:0.1.1"}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Functions and operators on vector spaces", "Subsubsection",
+ CellTags->{"_sli_mod_op", "c:12", "i:15", "b:0.1.1"}],
+
+Cell[TextData[{
+ "The following functions are defined by the space constructor. Their \
+arguments should be either even or odd vectors. The result of application of \
+these functions to non-vector arguments is unpredictable. A linear \
+combination of vector-valued functions is also a vector-valued function of \
+the same arguments. A given polynomial in scalar-valued functions is also \
+treated as a scalar-valued function of the same arguments if all the \
+functions involved are defined as having scalar values and scalar or vector \
+arguments (see ",
+ StyleBox[ButtonBox["Vectors and Scalars",
+  BaseStyle->"AddOnsLink",
+  ButtonData:>"sli_vect_scal"],
+  FontFamily->"Times New Roman"],
+ ")."
+}], "Text",
+ CellChangeTimes->{{3.4213244241684*^9, 3.4213244351942544`*^9}},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->{"_sli_mod_op", "b:0.1.1"}],
+
+Cell[CellGroupData[{
+
+Cell["Bracket and action on modules", "List",
+ CellTags->{"_sli_mod_op", "i:16", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["Act",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["act",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Bb",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["bb",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Kb",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["kb",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Lb",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["lb",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Mb",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["mb",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Ob",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["ob",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Pb",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["pb",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Rb",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["rb",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_mod_op", "b:0.1.1"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Operators related to concrete algebras", "List",
+ CellTags->{"_sli_mod_op", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["ContactK",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["\[CapitalDelta]",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Der",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["der",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Der0",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Div",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["EulerOp",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["HamiltonianH",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Mapping",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["RamondD",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["RamondK",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["ZRamondD",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_mod_op", "b:0.1.1"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Scalar functions defined on vector spaces", "List",
+ CellTags->{"_sli_mod_op", "i:17", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["Grade",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["P",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Parity",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["PolyGrade",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Weight",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_mod_op", "b:0.1.1"}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Defining new operation on existing spaces", "Subsubsection",
+ CellTags->{"_sli_mod_struc", "c:13", "b:0.1.1"}],
+
+Cell["\<\
+Sometimes, algebras are defined on already existing vector spaces. In this \
+case, no constructor is required; it suffices just to define the algebra \
+operation. \
+\>", "Text",
+ CellChangeTimes->{3.421324466379096*^9},
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->{"_sli_mod_struc", "b:0.1.1"}],
+
+Cell[CellGroupData[{
+
+Cell["Enveloping algebra", "List",
+ CellTags->{"_sli_mod_struc", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["EnvelopingOperation",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["EnvelopingSymbol",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["$EnvLess",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_mod_struc", "b:0.1.1"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Algebra of differential operators", "List",
+ CellTags->{"_sli_mod_struc", "b:0.1.1"}],
+
+Cell[TextData[{
+ ButtonBox["CleardSymbol",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["dSymbol",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_mod_struc", "b:0.1.1"}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Tools", "Subsection",
+ CellTags->{"c:14", "i:18", "b:0.1.2"}],
+
+Cell[TextData[{
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " package provides a number of functions for manipulation with vector \
+expressions, including\n\[Bullet] Evaluating and simplifying vector \
+expressions;\n\[Bullet] Solving vector equations (with either scalar or \
+vector unknowns);\n\[Bullet] Working with expressions with indefinite \
+coefficients;\n\[Bullet] Preparing output in ",
+ Cell[BoxData[
+  StyleBox[
+   RowBox[{"T", 
+    AdjustmentBox["E",
+     BoxBaselineShift->0.5,
+     BoxMargins->{{-0.075, -0.085}, {0, 0}}], "X"}]]]],
+ " format."
+}], "Text",
+ TextAlignment->Left,
+ TextJustification->1,
+ CellTags->"b:0.1.2"],
+
+Cell[CellGroupData[{
+
+Cell["Working with vector expressions", "Subsubsection",
+ CellTags->{"_sli_tool_eval", "c:15", "b:0.1.2"}],
+
+Cell[CellGroupData[{
+
+Cell["Normalization", "List",
+ CellTags->{"_sli_tool_eval", "i:19", "b:0.1.2"}],
+
+Cell[TextData[{
+ "The following functions and rules may be used to convert vector expressions \
+to the ",
+ StyleBox["normal form", "Def"],
+ ", i.e., to linear combination of basis elements. These functions do not \
+change the value of vector expressions."
+}], "Text",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+
+Cell[TextData[{
+ ButtonBox["dNormal",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["dSortRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["EnvNormal",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["EnvSortRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["ExpandOp",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["ExpandOpRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["LinearCollectRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SymmetricNormal",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["TCollect",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VCollect",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VExpand",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VExpandRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VNormal",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VSort",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Maps", "List",
+ CellTags->{"_sli_tool_eval", "i:20", "b:0.1.2"}],
+
+Cell["\<\
+These functions are used to map vectors to a different vector space or to \
+change the basis in vector expressions.\
+\>", "Text",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+
+Cell[TextData[{
+ ButtonBox["LinearChange",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Mapping",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["MappingRule",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Polynomials", "List",
+ CellTags->{"_sli_tool_eval", "i:21", "b:0.1.2"}],
+
+Cell["\<\
+These are functions for working with (super)symmetric polynomials.  \
+\>", "Text",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+
+Cell[TextData[{
+ ButtonBox["Deg",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["DegreeBasis",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["FilterBasis",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GradeBasis",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["LDer",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UpToDegreeBasis",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Symbolic operators", "List",
+ CellTags->{"_sli_tool_eval", "i:22", "b:0.1.2"}],
+
+Cell[TextData[{
+ "The following functions return linear operators. These operators may be \
+used in symbolic calculations, because any linear combination of \
+vector-valued functions is also treated as a function: ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"f", "+", 
+      RowBox[{"\[Alpha]", " ", "g"}]}], ")"}], "[", "x", "]"}], "=", 
+   RowBox[{
+    RowBox[{"f", "[", "x", "]"}], "+", 
+    RowBox[{"\[Alpha]", " ", 
+     RowBox[{"g", "[", "x", "]"}]}]}]}]]],
+ "."
+}], "Text",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+
+Cell[TextData[{
+ ButtonBox["ZId",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["ZLDer",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["ZRDer",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Conditions and iterations", "List",
+ CellTags->{"_sli_tool_eval", "i:23", "b:0.1.2"}],
+
+Cell["\<\
+A number of rules of symbolic evaluation works with unexpanded conditions and \
+iterations.\
+\>", "Text",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+
+Cell[TextData[{
+ ButtonBox["VIf",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VSum",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Linear expressions with indefinite coefficients", "List",
+ CellTags->{"_sli_tool_eval", "i:24", "b:0.1.2"}],
+
+Cell["\<\
+A linear expression with indefinite scalar coefficients represents a subspace \
+in a vector space, e.g., a solution of a linear system.\
+\>", "Text",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+
+Cell[TextData[{
+ ButtonBox["GeneralAct",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GeneralBasis",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GeneralDim",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GeneralImage",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GeneralIntersection",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GeneralInverseImage",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GeneralKernel",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GeneralPlus",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GeneralPreImage",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GeneralReduce",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GeneralSolve",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GeneralSum",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GeneralZero",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Other functions", "List",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+
+Cell[TextData[{
+ ButtonBox["Delta",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["MatchList",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VBasis",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VOrder",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VOrderQ",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VSameQ",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Scalar functions", "List",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+
+Cell[TextData[{
+ ButtonBox["Plus2",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SimplifySign",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SimplifySignRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SVExpandRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SVFactorRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SVNormalRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SVSimplifyRule",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Times2",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["WeightMark",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["$SNormal",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["$Solve",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Solving vector equations", "Subsubsection",
+ CellTags->{"_sli_tool_eq", "c:16", "i:25", "b:0.1.2"}],
+
+Cell[TextData[{
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " provides functions for solving vector equations with either vector or \
+scalar unknowns."
+}], "Text",
+ CellTags->{"_sli_tool_eq", "b:0.1.2"}],
+
+Cell[TextData[{
+ " ",
+ ButtonBox["GeneralSolve",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GeneralZero",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["ParamSolve",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["ScalarEquation",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SVSolve",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["VSolve",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["$Solve",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_tool_eq", "b:0.1.2"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Splitting vector lists and expressions", "Subsubsection",
+ CellTags->{"_sli_tool_split", "c:17", "b:0.1.2"}],
+
+Cell[TextData[{
+ StyleBox["Splitting",
+  FontSlant->"Italic"],
+ " is used to divide large vector expressions into homogeneous parts (e.g., \
+of the same weight or degree).\nA ",
+ StyleBox["splitted sum", "Def"],
+ " is the list ",
+ Cell[BoxData[
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox[
+      StyleBox["key",
+       FontSlant->"Italic"], "1"], "\[Rule]", 
+     SubscriptBox[
+      StyleBox["expr",
+       FontSlant->"Italic"], "1"]}], ",", 
+    RowBox[{
+     SubscriptBox[
+      StyleBox["key",
+       FontSlant->"Italic"], "2"], "\[Rule]", 
+     SubscriptBox[
+      StyleBox["expr",
+       FontSlant->"Italic"], "2"]}], ",", "..."}], "}"}]]],
+ ", where the keys are all different and sorted in canonical order, and ",
+ Cell[BoxData[
+  SubscriptBox[
+   StyleBox["expr",
+    FontSlant->"Italic"], "i"]]],
+ StyleBox["  ",
+  FontSize->6],
+ "are vector expressions.\nA ",
+ StyleBox["splitted list", "Def"],
+ " is an expression of the same form, where the ",
+ Cell[BoxData[
+  SubscriptBox[
+   StyleBox["expr",
+    FontSlant->"Italic"], 
+   StyleBox["i",
+    FontSlant->"Italic"]]]],
+ StyleBox[" ",
+  FontSize->6],
+ " are lists of vectors."
+}], "Text",
+ CellChangeTimes->{{3.4232278450154705`*^9, 3.4232278476092*^9}},
+ CellTags->{"_sli_tool_split", "b:0.1.2"}],
+
+Cell[CellGroupData[{
+
+Cell["Splitting expressions", "List",
+ CellTags->{"_sli_tool_split", "b:0.1.2"}],
+
+Cell[TextData[{
+ ButtonBox["SkipVal",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SplitList",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SplitSum",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_tool_split", "b:0.1.2"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Accessing members of splitted expressions", "List",
+ CellTags->{"_sli_tool_split", "b:0.1.2"}],
+
+Cell[TextData[{
+ ButtonBox["ForSplit",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["PartSplit",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_tool_split", "b:0.1.2"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Manipulations with splitted expressions", "List",
+ CellTags->{"_sli_tool_split", "b:0.1.2"}],
+
+Cell[TextData[{
+ ButtonBox["AddSplit",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["ApplySplit",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["JoinSplit",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["MapSplit",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["MergeSplit",
+  BaseStyle->"AddOnsLink"],
+ " "
+}], "MonoText",
+ CellTags->{"_sli_tool_split", "b:0.1.2"}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Preparing output", "Subsubsection",
+ CellTags->{"_sli_tool_out", "c:18", "b:0.1.2"}],
+
+Cell[CellGroupData[{
+
+Cell["Defining output format", "List",
+ CellTags->{"_sli_tool_out", "b:0.1.2"}],
+
+Cell[TextData[{
+ ButtonBox["Output",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Standard",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["TeX",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Traditional",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnOutput",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnStandard",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnTeX",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UnTraditional",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_tool_out", "b:0.1.2"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Formatting functions ", "List",
+ CellTags->{"_sli_tool_out", "b:0.1.2"}],
+
+Cell[TextData[{
+ ButtonBox["ArgForm",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SeqForm",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_tool_out", "b:0.1.2"}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Programming", "Subsection",
+ CellTags->{"_sli_prog", "c:19", "i:26", "b:0.1.3"}],
+
+Cell[TextData[{
+ StyleBox["SuperLie",
+  FontWeight->"Bold"],
+ " provides tools that facilitate writing new functions."
+}], "Text",
+ CellTags->{"_sli_prog", "b:0.1.3"}],
+
+Cell[CellGroupData[{
+
+Cell["Domain definition", "Subsubsection",
+ CellTags->{"_sli_prog", "c:20", "b:0.1.3"}],
+
+Cell[TextData[{
+ ButtonBox["CondOp",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["PlusOp",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["PowerOp",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["SumOp",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_prog", "b:0.1.3"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Notations", "Subsubsection",
+ CellTags->{"_sli_prog", "c:21", "b:0.1.3"}],
+
+Cell[TextData[{
+ ButtonBox["CTimes",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["NewBracket",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["NewBrace",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["NewOverscript",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["NewPower",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["NewSuperscript",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Operator",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["OpSymbol",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["RemoveOverscript",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["RemovePower",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["RemoveSuperscript",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["StopUseAsSymbol",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["UseAsSymbol",
+  BaseStyle->"AddOnsLink"],
+ " "
+}], "MonoText",
+ CellTags->{"_sli_prog", "b:0.1.3"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Iterations", "Subsubsection",
+ CellTags->{"_sli_prog", "c:22", "b:0.1.3"}],
+
+Cell[TextData[{
+ ButtonBox["UniqueCounters",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["WithUnique",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_prog", "b:0.1.3"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Debug", "Subsubsection",
+ CellTags->{"_sli_prog", "c:23", "b:0.1.3"}],
+
+Cell[TextData[{
+ ButtonBox["DateString",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["DPrint",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["TimeString",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["$DPrint",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["$DPrintLabel",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_prog", "b:0.1.3"}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Preprocessor", "Subsubsection",
+ CellTags->{"_sli_prog", "c:24", "b:0.1.3"}],
+
+Cell[TextData[{
+ ButtonBox["GPlus",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GPower",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["GTimes",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Plus$",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Power$",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["PreSL",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["Times$",
+  BaseStyle->"AddOnsLink"],
+ " ",
+ ButtonBox["WithoutPreSL",
+  BaseStyle->"AddOnsLink"]
+}], "MonoText",
+ CellTags->{"_sli_prog", "b:0.1.3"}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Derived packages", "Subsection",
+ CellTags->{"c:25", "b:0.1.4"}],
+
+Cell["The following subpackages are included in the delivery:", "Text",
+ CellTags->"b:0.1.4"],
+
+Cell[TextData[{
+ ButtonBox["SuperLie`Cohom`",
+  BaseStyle->"Hyperlink",
+  ButtonData:>{"Cohom.nb", None}],
+ " is a package for calculating cohomology;"
+}], "Text",
+ CellChangeTimes->{{3.4213252309785357`*^9, 3.421325235194598*^9}},
+ CellTags->"b:0.1.4"],
+
+Cell[TextData[{
+ ButtonBox["SuperLie`Sing",
+  BaseStyle->"Hyperlink",
+  ButtonData:>{"Sing.nb", None}],
+ ButtonBox["`",
+  BaseStyle->"Hyperlink",
+  ButtonData:>{"Cohom.nb", None}],
+ " is a package for calculating singular vectors."
+}], "Text",
+ CellChangeTimes->{3.4213252418842173`*^9},
+ CellTags->"b:0.1.4"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+AutoGeneratedPackage->None,
+ShowPageBreaks->False,
+WindowToolbars->{"RulerBar", "EditBar"},
+WindowSize->{994, 829},
+WindowMargins->{{137, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingStartingPageNumber->1,
+PrintingPageRange->{Automatic, Automatic},
+PageHeaders->{{
+   Cell[
+    TextData[
+     CounterBox["Page"]], "Header"], None, 
+   Cell["Fast Introduction", "Header"]}, {
+   Cell[
+    TextData[
+     CounterBox[
+     "Subsection", 
+      CounterFunction :> (
+       Part[{"Vectors and vector expressions", "Algebras and modules", 
+         "Tools", "Programming", "Derived packages"}, #]& )]], "Header"], 
+   None, 
+   Cell[
+    TextData[
+     CounterBox["Page"]], "Header"]}},
+PageFooters->{{None, None, None}, {None, None, None}},
+PageHeaderLines->{True, True},
+PageFooterLines->{False, False},
+PrintingOptions->{"CellBackgroundHalftoneAngle"->Automatic,
+"CellBackgroundHalftoneDensity"->Automatic,
+"FacingPages"->True,
+"FirstPageFace"->Right,
+"FirstPageFooter"->False,
+"FirstPageHeader"->False,
+"GraphicsPrintingFormat"->"Automatic",
+"IncludePostScriptResourceDirectives"->True,
+"IncludeSpecialFonts"->True,
+"Magnification"->1,
+"PaperOrientation"->"Portrait",
+"PaperSize"->{597.563, 842.375},
+"PostScriptOutputFile":>FrontEnd`FileName[{
+  "home", "guests", "grozman", "sLie", "Documentation"}, "Fast.nb.ps", 
+  CharacterEncoding -> "WindowsCyrillic"],
+"PrintCellBrackets"->False,
+"PrintMultipleHorizontalPages"->False,
+"PrintRegistrationMarks"->False,
+"PrintSelectionHighlighting"->False,
+"PrintingMargins"->{{54, 54}, {72, 72}},
+"RestPagesFooter"->True,
+"RestPagesHeader"->True,
+"UnixShellPrintingCommand"->"lpr ",
+"UsePostScriptOutputFile"->True,
+"UseUnixShellPrintingCommand"->False},
+ShowSelection->True,
+TaggingRules->{
+ "NextIndexNumber" -> 2, "NextIndexingNumber" -> 27, 
+  "IndexEntries" -> {{"i:1", "Declaring vectors and scalars"}, {
+    "i:1", "Fast Introduction"}, {"i:10", "Constructor options"}, {
+    "i:11", "Dimension"}, {"i:11", "grading"}, {"i:12", "Format options"}, {
+    "i:13", "Relation options"}, {"i:14", "Space properties"}, {
+    "i:15", "Functions and operators on vector spaces"}, {
+    "i:16", "action on modules"}, {"i:16", "Bracket"}, {
+    "i:17", "Scalar functions"}, {"i:18", "Tools"}, {
+    "i:19", "Normalization"}, {"i:2", "Vector operations"}, {
+    "i:20", "Maps"}, {"i:21", "Polynomials"}, {
+    "i:22", "Symbolic operators"}, {"i:23", "Conditions and iterations"}, {
+    "i:24", "Linear expressions with indefinite coefficients"}, {
+    "i:25", "Solving vector equations"}, {"i:25", "vector equations"}, {
+    "i:26", "Programming"}, {
+    "i:3", "Functions and evaluation rules for vector expressions"}, {
+    "i:4", "Space constructors"}, {"i:5", "Matrix algebras"}, {
+    "i:6", "polynomials"}, {"i:7", "generators"}, {"i:8", "modules"}, {
+    "i:9", "Sub- and quotientspaces", "", ""}}, 
+  "PaginationCache" -> {{2013, 7, 18, 21, 33, 57.78125`9.514361766530042}, {1,
+     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 
+    2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+     3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+    4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+     5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 
+    6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7}, Automatic}},
+CellLabelAutoDelete->True,
+Magnification->1.5,
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (February 23, 2011)",
+StyleDefinitions->Notebook[{
+   Cell[
+    CellGroupData[{
+      Cell["Style Definitions", "Subtitle"], 
+      Cell[
+      "\nModify the definitions below to change the default appearance of all \
+cells in \na given style.  Make modifications to any definition using \
+commands in the \nFormat menu.\n", "Text"], 
+      Cell[
+       CellGroupData[{
+         Cell["Style Environment Names", "Section"], 
+         Cell[
+          StyleData[All, "Working"], PageWidth -> WindowWidth, ScriptMinSize -> 
+          9], 
+         Cell[
+          StyleData[All, "Printout"], PageWidth -> PaperWidth, ScriptMinSize -> 
+          7, FontSize -> 10, 
+          PrivateFontOptions -> {"FontType" -> "Outline"}]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Notebook Options", "Section"], 
+         Cell[
+         "\nThe options defined for the style below will be used at the \
+Notebook level.\n", "Text"], 
+         Cell[
+          StyleData["Notebook"], WindowToolbars -> {}, PageHeaders -> {{
+             Cell[
+              TextData[{
+                CounterBox["Page"]}], "PageNumber"], None, 
+             Cell[
+              TextData[{
+                ValueBox[FileName], " \[Bullet]  ", 
+                ValueBox[Date]}], "Header"]}, {
+             Cell[
+              TextData[{
+                ValueBox[FileName], " \[Bullet]  ", 
+                ValueBox[Date]}], "Header"], None, 
+             Cell[
+              TextData[{
+                CounterBox["Page"]}], "PageNumber"]}}, DefaultNewCellStyle -> 
+          "Text", DefaultDuplicateCellStyle -> "Text", 
+          DefaultInlineFormatType -> StandardForm, StyleMenuListing -> None]},
+         Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Favorite styles", "Section"], 
+         Cell[
+          StyleData["Name"], FontFamily -> "Courier New"], 
+         Cell[
+          StyleData["Var"], FontSlant -> "Italic"], 
+         Cell[
+          StyleData["Def"], FontWeight -> "Bold", FontSlant -> "Italic", 
+          FontColor -> RGBColor[0.6, 0.2, 0]]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Headings", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Chapter"], CellDingbat -> "\[FilledSquare]", 
+             CellMargins -> {{24, Inherited}, {8, 24}}, 
+             CellGroupingRules -> {"SectionGrouping", 20}, PageBreakAbove -> 
+             True, CellFrameLabelMargins -> 6, CounterIncrements -> "Chapter",
+              FontFamily -> "Helvetica", FontSize -> 18, FontWeight -> 
+             "Bold"], 
+            Cell[
+             StyleData["Chapter", "Printout"], 
+             CellMargins -> {{15, 0}, {7, 22}}]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Section"], CellDingbat -> "\[FilledSquare]", 
+             CellMargins -> {{24, Inherited}, {8, 24}}, 
+             CellGroupingRules -> {"SectionGrouping", 30}, PageBreakBelow -> 
+             False, CellFrameLabelMargins -> 6, CounterIncrements -> 
+             "Section", FontFamily -> "Helvetica", FontSize -> 14, FontWeight -> 
+             "Bold"], 
+            Cell[
+             StyleData["Section", "Printout"], 
+             CellMargins -> {{15, 0}, {7, 22}}, FontSize -> 14]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsection"], CellDingbat -> "\[FilledSquare]", 
+             CellMargins -> {{24, 4}, {2, 18}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 12}, 
+             CellGroupingRules -> {"SectionGrouping", 40}, PageBreakBelow -> 
+             False, CellFrameLabelMargins -> 6, CounterIncrements -> 
+             "Subsection", CounterAssignments -> {{"Subsubsection", 0}}, 
+             FontFamily -> "Helvetica", FontSize -> 12.5, FontWeight -> 
+             "Bold"], 
+            Cell[
+             StyleData["Subsection", "Printout"], 
+             CellMargins -> {{2, 4}, {2, 18}}, FontSize -> 12.5]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsubsection"], CellDingbat -> "\[EmptySquare]", 
+             CellMargins -> {{24, 4}, {2, 18}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 12}, 
+             CellGroupingRules -> {"SectionGrouping", 50}, PageBreakBelow -> 
+             False, CellFrameLabelMargins -> 6, CounterIncrements -> 
+             "Subsubsection", FontFamily -> "Helvetica", FontSize -> 12, 
+             FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Subsubsection", "Printout"], 
+             CellMargins -> {{2, 4}, {2, 18}}, FontSize -> 12]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["SubsectionIcon"], ShowGroupOpener -> True, 
+             CellMargins -> {{24, 4}, {0, 18}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 8}, 
+             CellGroupingRules -> {"SectionGrouping", 50}, 
+             ConversionRules :> {
+              "HTML" -> {
+                "<LI TYPE=\"SQUARE\"><FONT FACE=\"Helvetica, Arial\"><P><B>", 
+                 "</B></P></FONT>\n"}}, 
+             InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Section", FontFamily -> "Helvetica", 
+             FontSize -> 12.5, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["SubsectionIcon", "Printout"], CellDingbat -> 
+             "\[FilledSquare]", ShowGroupOpener -> False, 
+             CellMargins -> {{16, 0}, {0, 18}}, PageBreakBelow -> False, 
+             FontSize -> 12.5]}, Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["SubsubsectionIcon"], ShowGroupOpener -> True, 
+             CellMargins -> {{24, 4}, {0, 8}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 4}, 
+             CellGroupingRules -> {"SectionGrouping", 60}, 
+             ConversionRules :> {
+              "HTML" -> {
+                "<LI TYPE=\"SQUARE\"><FONT FACE=\"Helvetica, Arial\"><P><B>", 
+                 "</B></P></FONT>\n"}}, 
+             InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Subsection", 
+             CounterAssignments -> {{"Subsubection", 0}}, FontFamily -> 
+             "Helvetica", FontSize -> 12, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["SubsubsectionIcon", "Printout"], CellDingbat -> 
+             "\[EmptySquare]", ShowGroupOpener -> False, 
+             CellMargins -> {{2, 0}, {0, 18}}, PageBreakBelow -> False, 
+             FontSize -> 12]}, Open]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Styles for Text", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Text"], CellMargins -> {{12, 10}, {7, 7}}, 
+             InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, TextAlignment -> 
+             Left, TextJustification -> 1, Hyphenation -> True, 
+             LineSpacing -> {1, 2}, ParagraphIndent -> 24, FontSize -> 12], 
+            Cell[
+             StyleData["Text", "Printout"], CellMargins -> {{2, 2}, {6, 6}}]},
+            Open]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["MonoText"], CellMargins -> {{12, 10}, {7, 7}}, 
+             Hyphenation -> True, LineSpacing -> {1, 2}, FontFamily -> 
+             "Courier", FontSize -> 12], 
+            Cell[
+             StyleData["MonoText", "Printout"], 
+             CellMargins -> {{2, 2}, {6, 6}}, FontSize -> 9]}, Closed]]}, 
+        Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Styles for Input/Output", "Section"], 
+         Cell[
+         "\nThe cells in this section define styles used for input and output \
+to the \nkernel.  Be careful when modifying, renaming, or removing these \
+styles, \nbecause the front end associates special meanings with these style \
+names.\n", "Text"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Input"], CellMargins -> {{45, 10}, {5, 7}}, 
+             Evaluatable -> True, CellGroupingRules -> "InputGrouping", 
+             CellHorizontalScrolling -> True, 
+             CellLabelMargins -> {{14, Inherited}, {Inherited, Inherited}}, 
+             DefaultFormatType -> DefaultInputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, 
+             AutoItalicWords -> {}, LanguageCategory -> "Formula", FormatType -> 
+             InputForm, ShowStringCharacters -> True, NumberMarks -> True, 
+             LinebreakAdjustments -> {0.85, 2, 10, 0, 1}, CounterIncrements -> 
+             "Input", FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Input", "Printout"], CellMargins -> {{39, 0}, {4, 6}},
+              LinebreakAdjustments -> {0.85, 2, 10, 1, 1}, FontSize -> 9]}, 
+           Closed]], 
+         Cell[
+          StyleData["InlineInput"], Evaluatable -> True, CellGroupingRules -> 
+          "InputGrouping", CellHorizontalScrolling -> True, PageBreakWithin -> 
+          False, GroupPageBreakWithin -> False, DefaultFormatType -> 
+          DefaultInputFormatType, 
+          HyphenationOptions -> {"HyphenationCharacter" -> "\[Continuation]"},
+           AutoItalicWords -> {}, FormatType -> InputForm, 
+          ShowStringCharacters -> True, NumberMarks -> True, 
+          CounterIncrements -> "Input", FontWeight -> "Bold"], 
+         Cell[
+          StyleData["Output"], PageWidth -> PaperWidth, 
+          CellMargins -> {{47, 10}, {7, 5}}, CellEditDuplicate -> True, 
+          CellGroupingRules -> "OutputGrouping", CellHorizontalScrolling -> 
+          True, GeneratedCell -> True, CellAutoOverwrite -> True, 
+          CellLabelMargins -> {{14, Inherited}, {Inherited, Inherited}}, 
+          DefaultFormatType -> DefaultOutputFormatType, 
+          HyphenationOptions -> {"HyphenationCharacter" -> "\[Continuation]"},
+           AutoItalicWords -> {}, LanguageCategory -> "Formula", FormatType -> 
+          InputForm, CounterIncrements -> "Output", StyleMenuListing -> None, 
+          FontSlant -> "Plain"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Message"], 
+             CellMargins -> {{45, Inherited}, {Inherited, Inherited}}, 
+             CellGroupingRules -> "OutputGrouping", PageBreakWithin -> False, 
+             GroupPageBreakWithin -> False, GeneratedCell -> True, 
+             CellAutoOverwrite -> True, ShowCellLabel -> False, 
+             CellLabelMargins -> {{14, Inherited}, {Inherited, Inherited}}, 
+             DefaultFormatType -> DefaultOutputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, 
+             AutoItalicWords -> {}, FormatType -> InputForm, 
+             CounterIncrements -> "Message", StyleMenuListing -> None, 
+             FontColor -> RGBColor[0, 0, 1]], 
+            Cell[
+             StyleData["Message", "Printout"], 
+             CellMargins -> {{39, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 8, FontColor -> GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Print"], 
+             CellMargins -> {{45, Inherited}, {Inherited, Inherited}}, 
+             CellGroupingRules -> "OutputGrouping", CellHorizontalScrolling -> 
+             True, PageBreakWithin -> False, GroupPageBreakWithin -> False, 
+             GeneratedCell -> True, CellAutoOverwrite -> True, ShowCellLabel -> 
+             False, CellLabelMargins -> {{14, Inherited}, {
+               Inherited, Inherited}}, DefaultFormatType -> 
+             DefaultOutputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, 
+             AutoItalicWords -> {}, FormatType -> InputForm, 
+             CounterIncrements -> "Print", StyleMenuListing -> None], 
+            Cell[
+             StyleData["Print", "Printout"], 
+             CellMargins -> {{39, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 8]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Graphics"], 
+             CellMargins -> {{4, Inherited}, {Inherited, Inherited}}, 
+             CellGroupingRules -> "GraphicsGrouping", CellHorizontalScrolling -> 
+             True, PageBreakWithin -> False, GeneratedCell -> True, 
+             CellAutoOverwrite -> True, ShowCellLabel -> False, 
+             DefaultFormatType -> DefaultOutputFormatType, FormatType -> 
+             InputForm, CounterIncrements -> "Graphics", 
+             ImageMargins -> {{43, Inherited}, {Inherited, 0}}, 
+             StyleMenuListing -> None], 
+            Cell[
+             StyleData["Graphics", "Printout"], ImageSize -> {250, 250}, 
+             ImageMargins -> {{30, Inherited}, {Inherited, 0}}, FontSize -> 
+             9]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["CellLabel"], StyleMenuListing -> None, FontFamily -> 
+             "Helvetica", FontSize -> 9, FontColor -> RGBColor[0, 0, 1]], 
+            Cell[
+             StyleData["CellLabel", "Printout"], FontFamily -> "Courier", 
+             FontSize -> 8, FontSlant -> "Italic", FontColor -> 
+             GrayLevel[0]]}, Closed]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Unique Styles", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Author"], ShowCellBracket -> False, 
+             CellMargins -> {{10, 4}, {2, 10}}, FontSize -> 16, FontSlant -> 
+             "Italic"], 
+            Cell[
+             StyleData["Author", "Presentation"], 
+             CellMargins -> {{12, 10}, {2, 12}}, LineSpacing -> {1, 5}, 
+             ParagraphSpacing -> {0, 12}, FontSize -> 20], 
+            Cell[
+             StyleData["Author", "Condensed"], 
+             CellMargins -> {{8, 10}, {1, 4}}, LineSpacing -> {1, 1}, 
+             ParagraphSpacing -> {0, 4}, FontSize -> 12], 
+            Cell[
+             StyleData["Author", "Printout"], 
+             CellMargins -> {{9, 0}, {4, 12}}, ParagraphSpacing -> {0, 6}, 
+             FontSize -> 14]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Copyright"], ShowCellBracket -> False, 
+             CellMargins -> {{10, 10}, {40, 2}}, FontFamily -> "Helvetica", 
+             FontSize -> 9], 
+            Cell[
+             StyleData["Copyright", "Presentation"], 
+             CellMargins -> {{12, 10}, {50, 2}}, LineSpacing -> {1, 5}, 
+             FontSize -> 12], 
+            Cell[
+             StyleData["Copyright", "Condensed"], 
+             CellMargins -> {{8, 10}, {12, 1}}, LineSpacing -> {1, 2}, 
+             FontSize -> 9], 
+            Cell[
+             StyleData["Copyright", "Printout"], 
+             CellMargins -> {{9, 0}, {72, 4}}, FontSize -> 7]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Example"], CellMargins -> {{12, 10}, {5, 12}}, 
+             LineSpacing -> {1, 3}, ParagraphSpacing -> {0, 12}, 
+             CounterIncrements -> "Example", FontFamily -> "Times", 
+             FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Example", "Presentation"], 
+             CellMargins -> {{18, 10}, {8, 20}}, LineSpacing -> {1, 5}, 
+             ParagraphSpacing -> {0, 12}], 
+            Cell[
+             StyleData["Example", "Condensed"], 
+             CellMargins -> {{8, 10}, {4, 8}}, LineSpacing -> {1, 1}, 
+             ParagraphSpacing -> {0, 4}], 
+            Cell[
+             StyleData["Example", "Printout"], 
+             CellMargins -> {{9, 0}, {4, 10}}, ParagraphSpacing -> {0, 6}]}, 
+           Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Definition"], CellFrame -> {{3, 0}, {0, 0}}, 
+             CellMargins -> {{52, 10}, {8, 8}}, PageBreakWithin -> False, 
+             GroupPageBreakWithin -> False, 
+             CellLabelMargins -> {{23, Inherited}, {Inherited, Inherited}}, 
+             Hyphenation -> True, ShowStringCharacters -> True, 
+             CounterIncrements -> "Definition", FontFamily -> "Helvetica", 
+             FontWeight -> "Bold", FontColor -> GrayLevel[1], Background -> 
+             RGBColor[0.2, 0.700008, 0.700008]], 
+            Cell[
+             StyleData["Definition", "Presentation"], 
+             CellMargins -> {{62, Inherited}, {5, 12}}, 
+             LineSpacing -> {1, 0}], 
+            Cell[
+             StyleData["Definition", "Condensed"], 
+             CellMargins -> {{40, 10}, {1, 4}}], 
+            Cell[
+             StyleData["Definition", "Printout"], 
+             CellMargins -> {{44, 0}, {2, 6}}, Background -> GrayLevel[0.6]]},
+            Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Theorem"], CellFrame -> {{3, 0}, {0, 0}}, 
+             CellMargins -> {{52, 10}, {8, 8}}, PageBreakWithin -> False, 
+             GroupPageBreakWithin -> False, 
+             CellLabelMargins -> {{23, Inherited}, {Inherited, Inherited}}, 
+             Hyphenation -> True, ShowStringCharacters -> True, 
+             CounterIncrements -> "Theorem", FontFamily -> "Helvetica", 
+             FontWeight -> "Bold", FontColor -> GrayLevel[1], Background -> 
+             RGBColor[0.571389, 0.19675, 0.570504]], 
+            Cell[
+             StyleData["Theorem", "Presentation"], 
+             CellMargins -> {{62, Inherited}, {5, 12}}, 
+             LineSpacing -> {1, 0}], 
+            Cell[
+             StyleData["Theorem", "Condensed"], 
+             CellMargins -> {{40, 10}, {1, 4}}], 
+            Cell[
+             StyleData["Theorem", "Printout"], 
+             CellMargins -> {{44, 0}, {2, 6}}, Background -> GrayLevel[0.4]]},
+            Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["ExerciseMain"], CellFrame -> {{6, 0}, {0, 1}}, 
+             CellMargins -> {{12, Inherited}, {4, 20}}, 
+             CellGroupingRules -> {"SectionGrouping", 30}, PageBreakBelow -> 
+             False, CellFrameColor -> RGBColor[0.571389, 0.19675, 0.570504], 
+             CounterIncrements -> "Subsection", 
+             CounterAssignments -> {{"Subsubsection", 0}}, FontFamily -> 
+             "Helvetica", FontSize -> 16, FontWeight -> "Bold", FontColor -> 
+             RGBColor[0.571389, 0.19675, 0.570504]], 
+            Cell[
+             StyleData["ExerciseMain", "Presentation"], 
+             CellMargins -> {{18, 10}, {8, 32}}, LineSpacing -> {1, 2}, 
+             FontSize -> 24, FontTracking -> "Condensed"], 
+            Cell[
+             StyleData["ExerciseMain", "Condensed"], 
+             CellMargins -> {{8, Inherited}, {2, 12}}, FontSize -> 12], 
+            Cell[
+             StyleData["ExerciseMain", "Printout"], 
+             CellMargins -> {{9, 0}, {2, 50}}, CellFrameColor -> 
+             GrayLevel[0.500008], FontSize -> 14, FontTracking -> "Plain", 
+             FontColor -> GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Exercise"], CellDingbat -> "\[FilledDownTriangle]", 
+             CellMargins -> {{23, Inherited}, {4, 18}}, 
+             CellGroupingRules -> {"SectionGrouping", 50}, PageBreakBelow -> 
+             False, Hyphenation -> True, CounterIncrements -> "Subsubsection",
+              FontFamily -> "Times", FontSize -> 13, FontWeight -> "Bold", 
+             FontColor -> RGBColor[0.571389, 0.19675, 0.570504]], 
+            Cell[
+             StyleData["Exercise", "Presentation"], 
+             CellMargins -> {{33, 10}, {8, 26}}, LineSpacing -> {1, 0}, 
+             FontSize -> 18], 
+            Cell[
+             StyleData["Exercise", "Condensed"], 
+             CellMargins -> {{17, Inherited}, {2, 12}}, FontSize -> 10], 
+            Cell[
+             StyleData["Exercise", "Printout"], 
+             CellFrame -> {{0, 0}, {0.5, 0}}, CellDingbat -> None, 
+             CellMargins -> {{9, 0}, {6, 20}}, FontSize -> 11, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["ExerciseText"], CellMargins -> {{62, 10}, {5, 5}}, 
+             Hyphenation -> True, LineSpacing -> {1, 3}, 
+             ParagraphSpacing -> {0, 8}, CounterIncrements -> "ExcersiceText",
+              FontFamily -> "Times"], 
+            Cell[
+             StyleData["ExerciseText", "Presentation"], 
+             CellMargins -> {{74, 10}, {8, 8}}, LineSpacing -> {1, 5}, 
+             ParagraphSpacing -> {0, 12}], 
+            Cell[
+             StyleData["ExerciseText", "Condensed"], 
+             CellMargins -> {{52, 10}, {2, 2}}, LineSpacing -> {1, 1}, 
+             ParagraphSpacing -> {0, 4}], 
+            Cell[
+             StyleData["ExerciseText", "Printout"], 
+             CellMargins -> {{54, 0}, {4, 4}}, ParagraphSpacing -> {0, 6}]}, 
+           Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["ObjectName"], CellMargins -> {{10, 4}, {1, 10}}, 
+             FontFamily -> "Courier", FontSize -> 16, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["ObjectName", "Brackets"], 
+             CellMargins -> {{72, 4}, {1, 14}}, 
+             CellGroupingRules -> {"SectionGrouping", 90}, StyleMenuListing -> 
+             None, FontFamily -> "Courier", FontSize -> 12, FontWeight -> 
+             "Bold"], 
+            Cell[
+             StyleData["ObjectName", "Printout"], 
+             CellMargins -> {{2, 0}, {1, 10}}, FontSize -> 12]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Usage"], CellFrame -> {{0, 0}, {0.5, 0.5}}, 
+             CellMargins -> {{10, 4}, {0, 4}}, CellFrameMargins -> 5, 
+             TextAlignment -> Left, TextJustification -> 1, Hyphenation -> 
+             True, ParagraphSpacing -> {0, 6}, ParagraphIndent -> -10, 
+             StyleMenuListing -> None], 
+            Cell[
+             StyleData["Usage", "Brackets"], 
+             CellFrame -> {{0, 0}, {0.5, 0.5}}, 
+             CellMargins -> {{72, 4}, {0, 4}}, CellFrameMargins -> 5, 
+             ParagraphSpacing -> {0, 6}, ParagraphIndent -> -10, 
+             StyleMenuListing -> None], 
+            Cell[
+             StyleData["Usage", "Printout"], CellMargins -> {{2, 0}, {0, 4}}, 
+             FontSize -> 10, FontWeight -> "Plain"]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Notes"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, TextAlignment -> Left, 
+             TextJustification -> 1, Hyphenation -> True, 
+             ParagraphSpacing -> {0, 6}, ParagraphIndent -> -10, 
+             StyleMenuListing -> None, FontFamily -> "Times"], 
+            Cell[
+             StyleData["Notes", "Brackets"], CellMargins -> {{72, 4}, {0, 8}},
+              CellHorizontalScrolling -> True, ParagraphSpacing -> {0, 6}, 
+             ParagraphIndent -> -10, StyleMenuListing -> None, FontFamily -> 
+             "Times"], 
+            Cell[
+             StyleData["Notes", "Printout"], CellMargins -> {{2, 0}, {0, 8}}, 
+             FontSize -> 9]}, Closed]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Title", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Title"], CellMargins -> {{12, Inherited}, {2, 20}}, 
+             CellGroupingRules -> {"TitleGrouping", 0}, PageBreakBelow -> 
+             False, InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Title", 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}, {"Subtitle", 0}, {"Subsubtitle", 0}}, FontFamily -> 
+             "Helvetica", FontSize -> 30, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Title", "Printout"], 
+             CellMargins -> {{2, 10}, {2, 30}}, FontSize -> 24]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subtitle"], CellMargins -> {{12, Inherited}, {2, 2}}, 
+             CellGroupingRules -> {"TitleGrouping", 10}, PageBreakBelow -> 
+             False, InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Subtitle", 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}, {"Subsubtitle", 0}}, FontFamily -> "Helvetica", 
+             FontSize -> 14, FontColor -> RGBColor[0, 0, 0.6]], 
+            Cell[
+             StyleData["Subtitle", "Printout"], 
+             CellMargins -> {{2, 10}, {2, 4}}, FontSize -> 18, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsubtitle"], 
+             CellMargins -> {{12, Inherited}, {2, 12}}, 
+             CellGroupingRules -> {"TitleGrouping", 20}, PageBreakBelow -> 
+             False, InputAutoReplacements -> {"TeX" -> StyleBox[
+                 RowBox[{"T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "LaTeX" -> StyleBox[
+                 RowBox[{"L", 
+                   StyleBox[
+                    AdjustmentBox[
+                    "A", BoxMargins -> {{-0.36, -0.1}, {0, 0}}, 
+                    BoxBaselineShift -> -0.2], FontSize -> Smaller], "T", 
+                   AdjustmentBox[
+                   "E", BoxMargins -> {{-0.075, -0.085}, {0, 0}}, 
+                    BoxBaselineShift -> 0.5], "X"}]], "mma" -> "Mathematica", 
+               "Mma" -> "Mathematica", "MMA" -> "Mathematica"}, 
+             CounterIncrements -> "Subsubtitle", 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}}, FontFamily -> "Helvetica", FontSize -> 14, 
+             FontSlant -> "Italic", FontColor -> RGBColor[0, 0, 0.6]], 
+            Cell[
+             StyleData["Subsubtitle", "Printout"], 
+             CellMargins -> {{2, 10}, {2, 8}}, FontSize -> 12, FontColor -> 
+             GrayLevel[0]]}, Closed]]}, Open]], 
+      Cell[
+       CellGroupData[{
+         Cell["Hyperlink Styles", "Section"], 
+         Cell[
+         "The cells below define styles useful for making hypertext \
+ButtonBoxes.  The \"Hyperlink\" style is for links within the same Notebook, \
+or between Notebooks.", "Text"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Hyperlink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`NotebookLocate[#2]}]& ), ButtonNote -> 
+               ButtonData}], 
+            Cell[
+             StyleData["Hyperlink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+         "The following styles are for linking automatically to the on-line \
+help system.", "Text"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["MainBookLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["MainBook", #]}]& )}], 
+            Cell[
+             StyleData["MainBookLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["AddOnsLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, FontFamily -> "Courier", 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["AddOns", #]}]& )}], 
+            Cell[
+             StyleData["AddOnsLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["RefGuideLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, FontFamily -> "Courier", 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["RefGuide", #]}]& )}], 
+            Cell[
+             StyleData["RefGuideLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["GettingStartedLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["GettingStarted", #]}]& )}], 
+            Cell[
+             StyleData["GettingStartedLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["OtherInformationLink"], StyleMenuListing -> None, 
+             ButtonStyleMenuListing -> Automatic, 
+             FontVariations -> {"Underline" -> True}, FontColor -> 
+             RGBColor[0, 0, 1], 
+             ButtonBoxOptions -> {
+              Active -> True, Appearance -> {Automatic, None}, 
+               ButtonFunction :> (FrontEndExecute[{
+                  FrontEnd`HelpBrowserLookup["OtherInformation", #]}]& )}], 
+            Cell[
+             StyleData["OtherInformationLink", "Printout"], FontSize -> 10, 
+             FontVariations -> {"Underline" -> False}, FontColor -> 
+             GrayLevel[0]]}, Closed]]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Palette Styles", "Section"], 
+         Cell[
+         "The cells below define styles that define standard ButtonFunctions, \
+for use in palette buttons.", "Text"], 
+         Cell[
+          StyleData["Paste"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, After]}]& )}], 
+         Cell[
+          StyleData["Evaluate"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, All], 
+               SelectionEvaluate[
+                FrontEnd`InputNotebook[], All]}]& )}], 
+         Cell[
+          StyleData["EvaluateCell"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, All], 
+               FrontEnd`SelectionMove[
+                FrontEnd`InputNotebook[], All, Cell, 1], 
+               FrontEnd`SelectionEvaluateCreateCell[
+                FrontEnd`InputNotebook[], All]}]& )}], 
+         Cell[
+          StyleData["CopyEvaluate"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`SelectionCreateCell[
+                FrontEnd`InputNotebook[], All], 
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, All], 
+               FrontEnd`SelectionEvaluate[
+                FrontEnd`InputNotebook[], All]}]& )}], 
+         Cell[
+          StyleData["CopyEvaluateCell"], StyleMenuListing -> None, 
+          ButtonStyleMenuListing -> Automatic, 
+          ButtonBoxOptions -> {ButtonFunction :> (FrontEndExecute[{
+               FrontEnd`SelectionCreateCell[
+                FrontEnd`InputNotebook[], All], 
+               FrontEnd`NotebookApply[
+                FrontEnd`InputNotebook[], #, All], 
+               FrontEnd`SelectionEvaluateCreateCell[
+                FrontEnd`InputNotebook[], All]}]& )}]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Formulas and Programming", "Section"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["InlineFormula"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, ScriptLevel -> 1, 
+             SingleLetterItalics -> True, SpanMaxSize -> Infinity, 
+             StyleMenuListing -> None, 
+             GridBoxOptions -> {
+              GridBoxItemSize -> {
+                "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {{1.}}, "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["InlineFormula", "Printout"], 
+             CellMargins -> {{2, 0}, {0, 8}}, FontSize -> 10]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["InlineOutput"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, StyleMenuListing -> 
+             None, FontFamily -> "Courier"], 
+            Cell[
+             StyleData["InlineOutput", "Printout"], 
+             CellMargins -> {{2, 0}, {0, 8}}, FontSize -> 9.5]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["DisplayFormula"], 
+             CellMargins -> {{42, Inherited}, {Inherited, Inherited}}, 
+             CellHorizontalScrolling -> True, DefaultFormatType -> 
+             DefaultInputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, LanguageCategory -> 
+             "Formula", ScriptLevel -> 0, SingleLetterItalics -> True, 
+             SpanMaxSize -> Infinity, 
+             UnderoverscriptBoxOptions -> {LimitsPositioning -> True}, 
+             GridBoxOptions -> {
+              GridBoxItemSize -> {
+                "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {{1.}}, "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["DisplayFormula", "Printout"], 
+             CellMargins -> {{34, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 10]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["DisplayMath"], CellMargins -> {{42, 10}, {7, 7}}, 
+             Evaluatable -> False, CellGroupingRules -> "InputGrouping", 
+             CellHorizontalScrolling -> True, PageBreakWithin -> False, 
+             GroupPageBreakWithin -> False, DefaultFormatType -> 
+             DefaultInputFormatType, 
+             HyphenationOptions -> {
+              "HyphenationCharacter" -> "\[Continuation]"}, 
+             AutoItalicWords -> {}, LanguageCategory -> "Formula", FormatType -> 
+             InputForm, ShowStringCharacters -> True, NumberMarks -> True, 
+             CounterIncrements -> "Input"], 
+            Cell[
+             StyleData["DisplayMath", "Printout"], 
+             CellMargins -> {{39, 0}, {6, 6}}, FontSize -> 9]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Program"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, LanguageCategory -> "Formula", 
+             FontFamily -> "Courier"], 
+            Cell[
+             StyleData["Program", "Printout"], 
+             CellMargins -> {{2, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 9.5]}, Closed]], 
+         Cell[
+          StyleData["List"], CellMargins -> {{12, 0}, {2, 8}}, 
+          CellElementSpacings -> {"ClosedGroupTopMargin" -> 12}, 
+          CellGroupingRules -> {"SectionGrouping", 60}, PageBreakBelow -> 
+          False, FontWeight -> "Bold"]}, Closed]]}, Open]]}, Visible -> False,
+   FrontEndVersion -> 
+  "8.0 for Microsoft Windows (32-bit) (February 23, 2011)", StyleDefinitions -> 
+  "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "i:1"->{
+  Cell[567, 22, 109, 2, 76, "Title",
+   CellTags->{"i:1", "Fast Introduction", "c:1"}],
+  Cell[3235, 123, 94, 1, 35, "List",
+   CellTags->{"_sli_vect_scal", "i:1", "b:0.1.0"}],
+  Cell[3771, 150, 111, 1, 35, "List",
+   CellTags->{"_sli_vect_scal", "i:1", "b:0.1.0"}]},
+ "Fast Introduction"->{
+  Cell[567, 22, 109, 2, 76, "Title",
+   CellTags->{"i:1", "Fast Introduction", "c:1"}]},
+ "c:1"->{
+  Cell[567, 22, 109, 2, 76, "Title",
+   CellTags->{"i:1", "Fast Introduction", "c:1"}]},
+ "c:2"->{
+  Cell[701, 28, 55, 1, 72, "Section",
+   CellTags->{"c:2", "b:0.0"}]},
+ "b:0.0"->{
+  Cell[701, 28, 55, 1, 72, "Section",
+   CellTags->{"c:2", "b:0.0"}],
+  Cell[759, 31, 683, 20, 134, "Text",
+   CellTags->"b:0.0"]},
+ "c:3"->{
+  Cell[1479, 56, 47, 1, 72, "Section",
+   CellTags->"c:3"]},
+ "c:4"->{
+  Cell[1551, 61, 83, 1, 52, "Subsection",
+   CellTags->{"c:4", "b:0.1.0"}]},
+ "b:0.1.0"->{
+  Cell[1551, 61, 83, 1, 52, "Subsection",
+   CellTags->{"c:4", "b:0.1.0"}],
+  Cell[1659, 66, 93, 1, 51, "Subsubsection",
+   CellTags->{"_sli_vect_scal", "c:5", "b:0.1.0"}],
+  Cell[1755, 69, 646, 21, 136, "Text",
+   CellTags->{"_sli_vect_scal", "b:0.1.0"}],
+  Cell[2404, 92, 806, 27, 136, "Text",
+   CellTags->{"_sli_vect_scal", "b:0.1.0"}],
+  Cell[3235, 123, 94, 1, 35, "List",
+   CellTags->{"_sli_vect_scal", "i:1", "b:0.1.0"}],
+  Cell[3332, 126, 402, 19, 41, "MonoText",
+   CellTags->{"_sli_vect_scal", "b:0.1.0"}],
+  Cell[3771, 150, 111, 1, 35, "List",
+   CellTags->{"_sli_vect_scal", "i:1", "b:0.1.0"}],
+  Cell[3885, 153, 239, 10, 36, "MonoText",
+   CellTags->{"_sli_vect_scal", "b:0.1.0"}],
+  Cell[4173, 169, 96, 1, 50, "Subsubsection",
+   CellTags->{"_sli_vect_op", "c:6", "i:2", "b:0.1.0"}],
+  Cell[4272, 172, 1448, 50, 156, "Text",
+   CellTags->{"_sli_vect_op", "b:0.1.0"}],
+  Cell[5745, 226, 73, 1, 33, "List",
+   CellTags->{"_sli_vect_op", "b:0.1.0"}],
+  Cell[5821, 229, 502, 25, 36, "MonoText",
+   CellTags->{"_sli_vect_op", "b:0.1.0"}],
+  Cell[6372, 260, 134, 1, 50, "Subsubsection",
+   CellTags->{"_sli_vect_eval", "c:7", "i:3", "b:0.1.0"}],
+  Cell[6509, 263, 679, 22, 132, "Text",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[7213, 289, 67, 1, 33, "List",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[7283, 292, 581, 28, 52, "MonoText",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[7901, 325, 104, 2, 33, "List",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[8008, 329, 1182, 55, 90, "MonoText",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[9227, 389, 120, 2, 33, "List",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[9350, 393, 995, 49, 71, "MonoText",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[10382, 447, 117, 2, 33, "List",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[10502, 451, 374, 16, 36, "MonoText",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[10913, 472, 120, 2, 33, "List",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[11036, 476, 967, 46, 71, "MonoText",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[12040, 527, 112, 1, 33, "List",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[12155, 530, 495, 22, 52, "MonoText",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}]},
+ "_sli_vect_scal"->{
+  Cell[1659, 66, 93, 1, 51, "Subsubsection",
+   CellTags->{"_sli_vect_scal", "c:5", "b:0.1.0"}],
+  Cell[1755, 69, 646, 21, 136, "Text",
+   CellTags->{"_sli_vect_scal", "b:0.1.0"}],
+  Cell[2404, 92, 806, 27, 136, "Text",
+   CellTags->{"_sli_vect_scal", "b:0.1.0"}],
+  Cell[3235, 123, 94, 1, 35, "List",
+   CellTags->{"_sli_vect_scal", "i:1", "b:0.1.0"}],
+  Cell[3332, 126, 402, 19, 41, "MonoText",
+   CellTags->{"_sli_vect_scal", "b:0.1.0"}],
+  Cell[3771, 150, 111, 1, 35, "List",
+   CellTags->{"_sli_vect_scal", "i:1", "b:0.1.0"}],
+  Cell[3885, 153, 239, 10, 36, "MonoText",
+   CellTags->{"_sli_vect_scal", "b:0.1.0"}]},
+ "c:5"->{
+  Cell[1659, 66, 93, 1, 51, "Subsubsection",
+   CellTags->{"_sli_vect_scal", "c:5", "b:0.1.0"}]},
+ "_sli_vect_op"->{
+  Cell[4173, 169, 96, 1, 50, "Subsubsection",
+   CellTags->{"_sli_vect_op", "c:6", "i:2", "b:0.1.0"}],
+  Cell[4272, 172, 1448, 50, 156, "Text",
+   CellTags->{"_sli_vect_op", "b:0.1.0"}],
+  Cell[5745, 226, 73, 1, 33, "List",
+   CellTags->{"_sli_vect_op", "b:0.1.0"}],
+  Cell[5821, 229, 502, 25, 36, "MonoText",
+   CellTags->{"_sli_vect_op", "b:0.1.0"}]},
+ "c:6"->{
+  Cell[4173, 169, 96, 1, 50, "Subsubsection",
+   CellTags->{"_sli_vect_op", "c:6", "i:2", "b:0.1.0"}]},
+ "i:2"->{
+  Cell[4173, 169, 96, 1, 50, "Subsubsection",
+   CellTags->{"_sli_vect_op", "c:6", "i:2", "b:0.1.0"}]},
+ "_sli_vect_eval"->{
+  Cell[6372, 260, 134, 1, 50, "Subsubsection",
+   CellTags->{"_sli_vect_eval", "c:7", "i:3", "b:0.1.0"}],
+  Cell[6509, 263, 679, 22, 132, "Text",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[7213, 289, 67, 1, 33, "List",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[7283, 292, 581, 28, 52, "MonoText",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[7901, 325, 104, 2, 33, "List",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[8008, 329, 1182, 55, 90, "MonoText",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[9227, 389, 120, 2, 33, "List",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[9350, 393, 995, 49, 71, "MonoText",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[10382, 447, 117, 2, 33, "List",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[10502, 451, 374, 16, 36, "MonoText",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[10913, 472, 120, 2, 33, "List",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[11036, 476, 967, 46, 71, "MonoText",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[12040, 527, 112, 1, 33, "List",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+  Cell[12155, 530, 495, 22, 52, "MonoText",
+   CellTags->{"_sli_vect_eval", "b:0.1.0"}]},
+ "c:7"->{
+  Cell[6372, 260, 134, 1, 50, "Subsubsection",
+   CellTags->{"_sli_vect_eval", "c:7", "i:3", "b:0.1.0"}]},
+ "i:3"->{
+  Cell[6372, 260, 134, 1, 50, "Subsubsection",
+   CellTags->{"_sli_vect_eval", "c:7", "i:3", "b:0.1.0"}]},
+ "c:8"->{
+  Cell[12711, 559, 73, 1, 51, "Subsection",
+   CellTags->{"c:8", "b:0.1.1"}]},
+ "b:0.1.1"->{
+  Cell[12711, 559, 73, 1, 51, "Subsection",
+   CellTags->{"c:8", "b:0.1.1"}],
+  Cell[12809, 564, 100, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_constr", "c:9", "i:4", "b:0.1.1"}],
+  Cell[12912, 567, 506, 10, 109, "Text",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[13443, 581, 120, 2, 33, "List",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[13566, 585, 432, 19, 36, "MonoText",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[14035, 609, 81, 1, 33, "List",
+   CellTags->{"_sli_mod_constr", "i:5", "b:0.1.1"}],
+  Cell[14119, 612, 534, 25, 52, "MonoText",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[14690, 642, 143, 3, 33, "List",
+   CellTags->{"_sli_mod_constr", "i:6", "b:0.1.1"}],
+  Cell[14836, 647, 627, 28, 52, "MonoText",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[15500, 680, 102, 1, 33, "List",
+   CellTags->{"_sli_mod_constr", "i:7", "b:0.1.1"}],
+  Cell[15605, 683, 255, 10, 36, "MonoText",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[15897, 698, 81, 1, 33, "List",
+   CellTags->{"_sli_mod_constr", "i:8", "b:0.1.1"}],
+  Cell[15981, 701, 513, 25, 36, "MonoText",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[16531, 731, 130, 2, 33, "List",
+   CellTags->{"_sli_mod_constr", "i:9", "b:0.1.1"}],
+  Cell[16664, 735, 737, 34, 52, "MonoText",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[17438, 774, 89, 1, 33, "List",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[17530, 777, 117, 2, 36, "MonoText",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[17696, 785, 100, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_opt", "c:10", "i:10", "b:0.1.1"}],
+  Cell[17799, 788, 387, 9, 62, "Text",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[18211, 801, 62, 1, 33, "List",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[18276, 804, 126, 5, 36, "MonoText",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[18439, 814, 93, 1, 33, "List",
+   CellTags->{"_sli_mod_opt", "i:11", "b:0.1.1"}],
+  Cell[18535, 817, 333, 16, 36, "MonoText",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[18905, 838, 78, 1, 33, "List",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[18986, 841, 179, 8, 36, "MonoText",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[19202, 854, 70, 1, 33, "List",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[19275, 857, 284, 13, 36, "MonoText",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[19596, 875, 78, 1, 33, "List",
+   CellTags->{"_sli_mod_opt", "i:12", "b:0.1.1"}],
+  Cell[19677, 878, 288, 13, 36, "MonoText",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[20002, 896, 80, 1, 33, "List",
+   CellTags->{"_sli_mod_opt", "i:13", "b:0.1.1"}],
+  Cell[20085, 899, 450, 22, 36, "MonoText",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[20584, 927, 98, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_prop", "c:11", "i:14", "b:0.1.1"}],
+  Cell[20685, 930, 233, 6, 62, "Text",
+   CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+  Cell[20943, 940, 108, 1, 33, "List",
+   CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+  Cell[21054, 943, 1098, 55, 71, "MonoText",
+   CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+  Cell[22189, 1003, 110, 1, 33, "List",
+   CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+  Cell[22302, 1006, 563, 28, 36, "MonoText",
+   CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+  Cell[22902, 1039, 74, 1, 33, "List",
+   CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+  Cell[22979, 1042, 505, 25, 36, "MonoText",
+   CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+  Cell[23533, 1073, 120, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_op", "c:12", "i:15", "b:0.1.1"}],
+  Cell[23656, 1076, 859, 18, 156, "Text",
+   CellTags->{"_sli_mod_op", "b:0.1.1"}],
+  Cell[24540, 1098, 92, 1, 33, "List",
+   CellTags->{"_sli_mod_op", "i:16", "b:0.1.1"}],
+  Cell[24635, 1101, 881, 49, 36, "MonoText",
+   CellTags->{"_sli_mod_op", "b:0.1.1"}],
+  Cell[25553, 1155, 93, 1, 33, "List",
+   CellTags->{"_sli_mod_op", "b:0.1.1"}],
+  Cell[25649, 1158, 735, 37, 36, "MonoText",
+   CellTags->{"_sli_mod_op", "b:0.1.1"}],
+  Cell[26421, 1200, 104, 1, 33, "List",
+   CellTags->{"_sli_mod_op", "i:17", "b:0.1.1"}],
+  Cell[26528, 1203, 335, 16, 36, "MonoText",
+   CellTags->{"_sli_mod_op", "b:0.1.1"}],
+  Cell[26912, 1225, 116, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_struc", "c:13", "b:0.1.1"}],
+  Cell[27031, 1228, 316, 8, 62, "Text",
+   CellTags->{"_sli_mod_struc", "b:0.1.1"}],
+  Cell[27372, 1240, 76, 1, 33, "List",
+   CellTags->{"_sli_mod_struc", "b:0.1.1"}],
+  Cell[27451, 1243, 256, 10, 36, "MonoText",
+   CellTags->{"_sli_mod_struc", "b:0.1.1"}],
+  Cell[27744, 1258, 91, 1, 33, "List",
+   CellTags->{"_sli_mod_struc", "b:0.1.1"}],
+  Cell[27838, 1261, 183, 7, 36, "MonoText",
+   CellTags->{"_sli_mod_struc", "b:0.1.1"}]},
+ "_sli_mod_constr"->{
+  Cell[12809, 564, 100, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_constr", "c:9", "i:4", "b:0.1.1"}],
+  Cell[12912, 567, 506, 10, 109, "Text",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[13443, 581, 120, 2, 33, "List",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[13566, 585, 432, 19, 36, "MonoText",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[14035, 609, 81, 1, 33, "List",
+   CellTags->{"_sli_mod_constr", "i:5", "b:0.1.1"}],
+  Cell[14119, 612, 534, 25, 52, "MonoText",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[14690, 642, 143, 3, 33, "List",
+   CellTags->{"_sli_mod_constr", "i:6", "b:0.1.1"}],
+  Cell[14836, 647, 627, 28, 52, "MonoText",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[15500, 680, 102, 1, 33, "List",
+   CellTags->{"_sli_mod_constr", "i:7", "b:0.1.1"}],
+  Cell[15605, 683, 255, 10, 36, "MonoText",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[15897, 698, 81, 1, 33, "List",
+   CellTags->{"_sli_mod_constr", "i:8", "b:0.1.1"}],
+  Cell[15981, 701, 513, 25, 36, "MonoText",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[16531, 731, 130, 2, 33, "List",
+   CellTags->{"_sli_mod_constr", "i:9", "b:0.1.1"}],
+  Cell[16664, 735, 737, 34, 52, "MonoText",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[17438, 774, 89, 1, 33, "List",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+  Cell[17530, 777, 117, 2, 36, "MonoText",
+   CellTags->{"_sli_mod_constr", "b:0.1.1"}]},
+ "c:9"->{
+  Cell[12809, 564, 100, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_constr", "c:9", "i:4", "b:0.1.1"}]},
+ "i:4"->{
+  Cell[12809, 564, 100, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_constr", "c:9", "i:4", "b:0.1.1"}]},
+ "i:5"->{
+  Cell[14035, 609, 81, 1, 33, "List",
+   CellTags->{"_sli_mod_constr", "i:5", "b:0.1.1"}]},
+ "i:6"->{
+  Cell[14690, 642, 143, 3, 33, "List",
+   CellTags->{"_sli_mod_constr", "i:6", "b:0.1.1"}]},
+ "i:7"->{
+  Cell[15500, 680, 102, 1, 33, "List",
+   CellTags->{"_sli_mod_constr", "i:7", "b:0.1.1"}]},
+ "i:8"->{
+  Cell[15897, 698, 81, 1, 33, "List",
+   CellTags->{"_sli_mod_constr", "i:8", "b:0.1.1"}]},
+ "i:9"->{
+  Cell[16531, 731, 130, 2, 33, "List",
+   CellTags->{"_sli_mod_constr", "i:9", "b:0.1.1"}]},
+ "_sli_mod_opt"->{
+  Cell[17696, 785, 100, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_opt", "c:10", "i:10", "b:0.1.1"}],
+  Cell[17799, 788, 387, 9, 62, "Text",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[18211, 801, 62, 1, 33, "List",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[18276, 804, 126, 5, 36, "MonoText",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[18439, 814, 93, 1, 33, "List",
+   CellTags->{"_sli_mod_opt", "i:11", "b:0.1.1"}],
+  Cell[18535, 817, 333, 16, 36, "MonoText",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[18905, 838, 78, 1, 33, "List",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[18986, 841, 179, 8, 36, "MonoText",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[19202, 854, 70, 1, 33, "List",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[19275, 857, 284, 13, 36, "MonoText",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[19596, 875, 78, 1, 33, "List",
+   CellTags->{"_sli_mod_opt", "i:12", "b:0.1.1"}],
+  Cell[19677, 878, 288, 13, 36, "MonoText",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+  Cell[20002, 896, 80, 1, 33, "List",
+   CellTags->{"_sli_mod_opt", "i:13", "b:0.1.1"}],
+  Cell[20085, 899, 450, 22, 36, "MonoText",
+   CellTags->{"_sli_mod_opt", "b:0.1.1"}]},
+ "c:10"->{
+  Cell[17696, 785, 100, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_opt", "c:10", "i:10", "b:0.1.1"}]},
+ "i:10"->{
+  Cell[17696, 785, 100, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_opt", "c:10", "i:10", "b:0.1.1"}]},
+ "i:11"->{
+  Cell[18439, 814, 93, 1, 33, "List",
+   CellTags->{"_sli_mod_opt", "i:11", "b:0.1.1"}]},
+ "i:12"->{
+  Cell[19596, 875, 78, 1, 33, "List",
+   CellTags->{"_sli_mod_opt", "i:12", "b:0.1.1"}]},
+ "i:13"->{
+  Cell[20002, 896, 80, 1, 33, "List",
+   CellTags->{"_sli_mod_opt", "i:13", "b:0.1.1"}]},
+ "_sli_mod_prop"->{
+  Cell[20584, 927, 98, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_prop", "c:11", "i:14", "b:0.1.1"}],
+  Cell[20685, 930, 233, 6, 62, "Text",
+   CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+  Cell[20943, 940, 108, 1, 33, "List",
+   CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+  Cell[21054, 943, 1098, 55, 71, "MonoText",
+   CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+  Cell[22189, 1003, 110, 1, 33, "List",
+   CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+  Cell[22302, 1006, 563, 28, 36, "MonoText",
+   CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+  Cell[22902, 1039, 74, 1, 33, "List",
+   CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+  Cell[22979, 1042, 505, 25, 36, "MonoText",
+   CellTags->{"_sli_mod_prop", "b:0.1.1"}]},
+ "c:11"->{
+  Cell[20584, 927, 98, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_prop", "c:11", "i:14", "b:0.1.1"}]},
+ "i:14"->{
+  Cell[20584, 927, 98, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_prop", "c:11", "i:14", "b:0.1.1"}]},
+ "_sli_mod_op"->{
+  Cell[23533, 1073, 120, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_op", "c:12", "i:15", "b:0.1.1"}],
+  Cell[23656, 1076, 859, 18, 156, "Text",
+   CellTags->{"_sli_mod_op", "b:0.1.1"}],
+  Cell[24540, 1098, 92, 1, 33, "List",
+   CellTags->{"_sli_mod_op", "i:16", "b:0.1.1"}],
+  Cell[24635, 1101, 881, 49, 36, "MonoText",
+   CellTags->{"_sli_mod_op", "b:0.1.1"}],
+  Cell[25553, 1155, 93, 1, 33, "List",
+   CellTags->{"_sli_mod_op", "b:0.1.1"}],
+  Cell[25649, 1158, 735, 37, 36, "MonoText",
+   CellTags->{"_sli_mod_op", "b:0.1.1"}],
+  Cell[26421, 1200, 104, 1, 33, "List",
+   CellTags->{"_sli_mod_op", "i:17", "b:0.1.1"}],
+  Cell[26528, 1203, 335, 16, 36, "MonoText",
+   CellTags->{"_sli_mod_op", "b:0.1.1"}]},
+ "c:12"->{
+  Cell[23533, 1073, 120, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_op", "c:12", "i:15", "b:0.1.1"}]},
+ "i:15"->{
+  Cell[23533, 1073, 120, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_op", "c:12", "i:15", "b:0.1.1"}]},
+ "i:16"->{
+  Cell[24540, 1098, 92, 1, 33, "List",
+   CellTags->{"_sli_mod_op", "i:16", "b:0.1.1"}]},
+ "i:17"->{
+  Cell[26421, 1200, 104, 1, 33, "List",
+   CellTags->{"_sli_mod_op", "i:17", "b:0.1.1"}]},
+ "_sli_mod_struc"->{
+  Cell[26912, 1225, 116, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_struc", "c:13", "b:0.1.1"}],
+  Cell[27031, 1228, 316, 8, 62, "Text",
+   CellTags->{"_sli_mod_struc", "b:0.1.1"}],
+  Cell[27372, 1240, 76, 1, 33, "List",
+   CellTags->{"_sli_mod_struc", "b:0.1.1"}],
+  Cell[27451, 1243, 256, 10, 36, "MonoText",
+   CellTags->{"_sli_mod_struc", "b:0.1.1"}],
+  Cell[27744, 1258, 91, 1, 33, "List",
+   CellTags->{"_sli_mod_struc", "b:0.1.1"}],
+  Cell[27838, 1261, 183, 7, 36, "MonoText",
+   CellTags->{"_sli_mod_struc", "b:0.1.1"}]},
+ "c:13"->{
+  Cell[26912, 1225, 116, 1, 50, "Subsubsection",
+   CellTags->{"_sli_mod_struc", "c:13", "b:0.1.1"}]},
+ "c:14"->{
+  Cell[28082, 1275, 67, 1, 51, "Subsection",
+   CellTags->{"c:14", "i:18", "b:0.1.2"}]},
+ "i:18"->{
+  Cell[28082, 1275, 67, 1, 51, "Subsection",
+   CellTags->{"c:14", "i:18", "b:0.1.2"}]},
+ "b:0.1.2"->{
+  Cell[28082, 1275, 67, 1, 51, "Subsection",
+   CellTags->{"c:14", "i:18", "b:0.1.2"}],
+  Cell[28152, 1278, 639, 18, 157, "Text",
+   CellTags->"b:0.1.2"],
+  Cell[28816, 1300, 106, 1, 50, "Subsubsection",
+   CellTags->{"_sli_tool_eval", "c:15", "b:0.1.2"}],
+  Cell[28947, 1305, 79, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "i:19", "b:0.1.2"}],
+  Cell[29029, 1308, 309, 7, 85, "Text",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[29341, 1317, 886, 43, 52, "MonoText",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[30264, 1365, 70, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "i:20", "b:0.1.2"}],
+  Cell[30337, 1368, 181, 4, 62, "Text",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[30521, 1374, 243, 10, 36, "MonoText",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[30801, 1389, 77, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "i:21", "b:0.1.2"}],
+  Cell[30881, 1392, 134, 3, 38, "Text",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[31018, 1397, 414, 19, 36, "MonoText",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[31469, 1421, 84, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "i:22", "b:0.1.2"}],
+  Cell[31556, 1424, 550, 16, 86, "Text",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[32109, 1442, 226, 10, 36, "MonoText",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[32372, 1457, 91, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "i:23", "b:0.1.2"}],
+  Cell[32466, 1460, 157, 4, 38, "Text",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[32626, 1466, 171, 7, 36, "MonoText",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[32834, 1478, 113, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "i:24", "b:0.1.2"}],
+  Cell[32950, 1481, 201, 4, 62, "Text",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[33154, 1487, 870, 40, 71, "MonoText",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[34061, 1532, 73, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[34137, 1535, 399, 19, 36, "MonoText",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[34573, 1559, 74, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[34650, 1562, 718, 34, 52, "MonoText",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[35417, 1602, 105, 1, 50, "Subsubsection",
+   CellTags->{"_sli_tool_eq", "c:16", "i:25", "b:0.1.2"}],
+  Cell[35525, 1605, 205, 6, 62, "Text",
+   CellTags->{"_sli_tool_eq", "b:0.1.2"}],
+  Cell[35733, 1613, 479, 23, 36, "MonoText",
+   CellTags->{"_sli_tool_eq", "b:0.1.2"}],
+  Cell[36249, 1641, 114, 1, 50, "Subsubsection",
+   CellTags->{"_sli_tool_split", "c:17", "b:0.1.2"}],
+  Cell[36366, 1644, 1273, 45, 139, "Text",
+   CellTags->{"_sli_tool_split", "b:0.1.2"}],
+  Cell[37664, 1693, 80, 1, 33, "List",
+   CellTags->{"_sli_tool_split", "b:0.1.2"}],
+  Cell[37747, 1696, 238, 10, 36, "MonoText",
+   CellTags->{"_sli_tool_split", "b:0.1.2"}],
+  Cell[38022, 1711, 100, 1, 33, "List",
+   CellTags->{"_sli_tool_split", "b:0.1.2"}],
+  Cell[38125, 1714, 182, 7, 36, "MonoText",
+   CellTags->{"_sli_tool_split", "b:0.1.2"}],
+  Cell[38344, 1726, 98, 1, 33, "List",
+   CellTags->{"_sli_tool_split", "b:0.1.2"}],
+  Cell[38445, 1729, 363, 17, 36, "MonoText",
+   CellTags->{"_sli_tool_split", "b:0.1.2"}],
+  Cell[38857, 1752, 90, 1, 50, "Subsubsection",
+   CellTags->{"_sli_tool_out", "c:18", "b:0.1.2"}],
+  Cell[38972, 1757, 79, 1, 33, "List",
+   CellTags->{"_sli_tool_out", "b:0.1.2"}],
+  Cell[39054, 1760, 521, 25, 36, "MonoText",
+   CellTags->{"_sli_tool_out", "b:0.1.2"}],
+  Cell[39612, 1790, 78, 1, 33, "List",
+   CellTags->{"_sli_tool_out", "b:0.1.2"}],
+  Cell[39693, 1793, 177, 7, 36, "MonoText",
+   CellTags->{"_sli_tool_out", "b:0.1.2"}]},
+ "_sli_tool_eval"->{
+  Cell[28816, 1300, 106, 1, 50, "Subsubsection",
+   CellTags->{"_sli_tool_eval", "c:15", "b:0.1.2"}],
+  Cell[28947, 1305, 79, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "i:19", "b:0.1.2"}],
+  Cell[29029, 1308, 309, 7, 85, "Text",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[29341, 1317, 886, 43, 52, "MonoText",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[30264, 1365, 70, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "i:20", "b:0.1.2"}],
+  Cell[30337, 1368, 181, 4, 62, "Text",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[30521, 1374, 243, 10, 36, "MonoText",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[30801, 1389, 77, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "i:21", "b:0.1.2"}],
+  Cell[30881, 1392, 134, 3, 38, "Text",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[31018, 1397, 414, 19, 36, "MonoText",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[31469, 1421, 84, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "i:22", "b:0.1.2"}],
+  Cell[31556, 1424, 550, 16, 86, "Text",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[32109, 1442, 226, 10, 36, "MonoText",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[32372, 1457, 91, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "i:23", "b:0.1.2"}],
+  Cell[32466, 1460, 157, 4, 38, "Text",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[32626, 1466, 171, 7, 36, "MonoText",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[32834, 1478, 113, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "i:24", "b:0.1.2"}],
+  Cell[32950, 1481, 201, 4, 62, "Text",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[33154, 1487, 870, 40, 71, "MonoText",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[34061, 1532, 73, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[34137, 1535, 399, 19, 36, "MonoText",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[34573, 1559, 74, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+  Cell[34650, 1562, 718, 34, 52, "MonoText",
+   CellTags->{"_sli_tool_eval", "b:0.1.2"}]},
+ "c:15"->{
+  Cell[28816, 1300, 106, 1, 50, "Subsubsection",
+   CellTags->{"_sli_tool_eval", "c:15", "b:0.1.2"}]},
+ "i:19"->{
+  Cell[28947, 1305, 79, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "i:19", "b:0.1.2"}]},
+ "i:20"->{
+  Cell[30264, 1365, 70, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "i:20", "b:0.1.2"}]},
+ "i:21"->{
+  Cell[30801, 1389, 77, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "i:21", "b:0.1.2"}]},
+ "i:22"->{
+  Cell[31469, 1421, 84, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "i:22", "b:0.1.2"}]},
+ "i:23"->{
+  Cell[32372, 1457, 91, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "i:23", "b:0.1.2"}]},
+ "i:24"->{
+  Cell[32834, 1478, 113, 1, 33, "List",
+   CellTags->{"_sli_tool_eval", "i:24", "b:0.1.2"}]},
+ "_sli_tool_eq"->{
+  Cell[35417, 1602, 105, 1, 50, "Subsubsection",
+   CellTags->{"_sli_tool_eq", "c:16", "i:25", "b:0.1.2"}],
+  Cell[35525, 1605, 205, 6, 62, "Text",
+   CellTags->{"_sli_tool_eq", "b:0.1.2"}],
+  Cell[35733, 1613, 479, 23, 36, "MonoText",
+   CellTags->{"_sli_tool_eq", "b:0.1.2"}]},
+ "c:16"->{
+  Cell[35417, 1602, 105, 1, 50, "Subsubsection",
+   CellTags->{"_sli_tool_eq", "c:16", "i:25", "b:0.1.2"}]},
+ "i:25"->{
+  Cell[35417, 1602, 105, 1, 50, "Subsubsection",
+   CellTags->{"_sli_tool_eq", "c:16", "i:25", "b:0.1.2"}]},
+ "_sli_tool_split"->{
+  Cell[36249, 1641, 114, 1, 50, "Subsubsection",
+   CellTags->{"_sli_tool_split", "c:17", "b:0.1.2"}],
+  Cell[36366, 1644, 1273, 45, 139, "Text",
+   CellTags->{"_sli_tool_split", "b:0.1.2"}],
+  Cell[37664, 1693, 80, 1, 33, "List",
+   CellTags->{"_sli_tool_split", "b:0.1.2"}],
+  Cell[37747, 1696, 238, 10, 36, "MonoText",
+   CellTags->{"_sli_tool_split", "b:0.1.2"}],
+  Cell[38022, 1711, 100, 1, 33, "List",
+   CellTags->{"_sli_tool_split", "b:0.1.2"}],
+  Cell[38125, 1714, 182, 7, 36, "MonoText",
+   CellTags->{"_sli_tool_split", "b:0.1.2"}],
+  Cell[38344, 1726, 98, 1, 33, "List",
+   CellTags->{"_sli_tool_split", "b:0.1.2"}],
+  Cell[38445, 1729, 363, 17, 36, "MonoText",
+   CellTags->{"_sli_tool_split", "b:0.1.2"}]},
+ "c:17"->{
+  Cell[36249, 1641, 114, 1, 50, "Subsubsection",
+   CellTags->{"_sli_tool_split", "c:17", "b:0.1.2"}]},
+ "_sli_tool_out"->{
+  Cell[38857, 1752, 90, 1, 50, "Subsubsection",
+   CellTags->{"_sli_tool_out", "c:18", "b:0.1.2"}],
+  Cell[38972, 1757, 79, 1, 33, "List",
+   CellTags->{"_sli_tool_out", "b:0.1.2"}],
+  Cell[39054, 1760, 521, 25, 36, "MonoText",
+   CellTags->{"_sli_tool_out", "b:0.1.2"}],
+  Cell[39612, 1790, 78, 1, 33, "List",
+   CellTags->{"_sli_tool_out", "b:0.1.2"}],
+  Cell[39693, 1793, 177, 7, 36, "MonoText",
+   CellTags->{"_sli_tool_out", "b:0.1.2"}]},
+ "c:18"->{
+  Cell[38857, 1752, 90, 1, 50, "Subsubsection",
+   CellTags->{"_sli_tool_out", "c:18", "b:0.1.2"}]},
+ "_sli_prog"->{
+  Cell[39931, 1807, 86, 1, 51, "Subsection",
+   CellTags->{"_sli_prog", "c:19", "i:26", "b:0.1.3"}],
+  Cell[40020, 1810, 167, 5, 38, "Text",
+   CellTags->{"_sli_prog", "b:0.1.3"}],
+  Cell[40212, 1819, 87, 1, 50, "Subsubsection",
+   CellTags->{"_sli_prog", "c:20", "b:0.1.3"}],
+  Cell[40302, 1822, 281, 13, 36, "MonoText",
+   CellTags->{"_sli_prog", "b:0.1.3"}],
+  Cell[40620, 1840, 79, 1, 50, "Subsubsection",
+   CellTags->{"_sli_prog", "c:21", "b:0.1.3"}],
+  Cell[40702, 1843, 849, 41, 52, "MonoText",
+   CellTags->{"_sli_prog", "b:0.1.3"}],
+  Cell[41588, 1889, 80, 1, 50, "Subsubsection",
+   CellTags->{"_sli_prog", "c:22", "b:0.1.3"}],
+  Cell[41671, 1892, 183, 7, 36, "MonoText",
+   CellTags->{"_sli_prog", "b:0.1.3"}],
+  Cell[41891, 1904, 75, 1, 50, "Subsubsection",
+   CellTags->{"_sli_prog", "c:23", "b:0.1.3"}],
+  Cell[41969, 1907, 351, 16, 36, "MonoText",
+   CellTags->{"_sli_prog", "b:0.1.3"}],
+  Cell[42357, 1928, 82, 1, 50, "Subsubsection",
+   CellTags->{"_sli_prog", "c:24", "b:0.1.3"}],
+  Cell[42442, 1931, 504, 25, 36, "MonoText",
+   CellTags->{"_sli_prog", "b:0.1.3"}]},
+ "c:19"->{
+  Cell[39931, 1807, 86, 1, 51, "Subsection",
+   CellTags->{"_sli_prog", "c:19", "i:26", "b:0.1.3"}]},
+ "i:26"->{
+  Cell[39931, 1807, 86, 1, 51, "Subsection",
+   CellTags->{"_sli_prog", "c:19", "i:26", "b:0.1.3"}]},
+ "b:0.1.3"->{
+  Cell[39931, 1807, 86, 1, 51, "Subsection",
+   CellTags->{"_sli_prog", "c:19", "i:26", "b:0.1.3"}],
+  Cell[40020, 1810, 167, 5, 38, "Text",
+   CellTags->{"_sli_prog", "b:0.1.3"}],
+  Cell[40212, 1819, 87, 1, 50, "Subsubsection",
+   CellTags->{"_sli_prog", "c:20", "b:0.1.3"}],
+  Cell[40302, 1822, 281, 13, 36, "MonoText",
+   CellTags->{"_sli_prog", "b:0.1.3"}],
+  Cell[40620, 1840, 79, 1, 50, "Subsubsection",
+   CellTags->{"_sli_prog", "c:21", "b:0.1.3"}],
+  Cell[40702, 1843, 849, 41, 52, "MonoText",
+   CellTags->{"_sli_prog", "b:0.1.3"}],
+  Cell[41588, 1889, 80, 1, 50, "Subsubsection",
+   CellTags->{"_sli_prog", "c:22", "b:0.1.3"}],
+  Cell[41671, 1892, 183, 7, 36, "MonoText",
+   CellTags->{"_sli_prog", "b:0.1.3"}],
+  Cell[41891, 1904, 75, 1, 50, "Subsubsection",
+   CellTags->{"_sli_prog", "c:23", "b:0.1.3"}],
+  Cell[41969, 1907, 351, 16, 36, "MonoText",
+   CellTags->{"_sli_prog", "b:0.1.3"}],
+  Cell[42357, 1928, 82, 1, 50, "Subsubsection",
+   CellTags->{"_sli_prog", "c:24", "b:0.1.3"}],
+  Cell[42442, 1931, 504, 25, 36, "MonoText",
+   CellTags->{"_sli_prog", "b:0.1.3"}]},
+ "c:20"->{
+  Cell[40212, 1819, 87, 1, 50, "Subsubsection",
+   CellTags->{"_sli_prog", "c:20", "b:0.1.3"}]},
+ "c:21"->{
+  Cell[40620, 1840, 79, 1, 50, "Subsubsection",
+   CellTags->{"_sli_prog", "c:21", "b:0.1.3"}]},
+ "c:22"->{
+  Cell[41588, 1889, 80, 1, 50, "Subsubsection",
+   CellTags->{"_sli_prog", "c:22", "b:0.1.3"}]},
+ "c:23"->{
+  Cell[41891, 1904, 75, 1, 50, "Subsubsection",
+   CellTags->{"_sli_prog", "c:23", "b:0.1.3"}]},
+ "c:24"->{
+  Cell[42357, 1928, 82, 1, 50, "Subsubsection",
+   CellTags->{"_sli_prog", "c:24", "b:0.1.3"}]},
+ "c:25"->{
+  Cell[42995, 1962, 70, 1, 51, "Subsection",
+   CellTags->{"c:25", "b:0.1.4"}]},
+ "b:0.1.4"->{
+  Cell[42995, 1962, 70, 1, 51, "Subsection",
+   CellTags->{"c:25", "b:0.1.4"}],
+  Cell[43068, 1965, 93, 1, 38, "Text",
+   CellTags->"b:0.1.4"],
+  Cell[43164, 1968, 253, 7, 38, "Text",
+   CellTags->"b:0.1.4"],
+  Cell[43420, 1977, 309, 10, 38, "Text",
+   CellTags->"b:0.1.4"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"i:1", 88015, 2927},
+ {"Fast Introduction", 88307, 2934},
+ {"c:1", 88406, 2937},
+ {"c:2", 88505, 2940},
+ {"b:0.0", 88588, 2943},
+ {"c:3", 88730, 2948},
+ {"c:4", 88801, 2951},
+ {"b:0.1.0", 88892, 2954},
+ {"_sli_vect_scal", 91186, 3007},
+ {"c:5", 91817, 3022},
+ {"_sli_vect_op", 91934, 3025},
+ {"c:6", 92298, 3034},
+ {"i:2", 92412, 3037},
+ {"_sli_vect_eval", 92537, 3040},
+ {"c:7", 93771, 3069},
+ {"i:3", 93888, 3072},
+ {"c:8", 94005, 3075},
+ {"b:0.1.1", 94098, 3078},
+ {"_sli_mod_constr", 98822, 3185},
+ {"c:9", 100284, 3218},
+ {"i:4", 100403, 3221},
+ {"i:5", 100522, 3224},
+ {"i:6", 100624, 3227},
+ {"i:7", 100727, 3230},
+ {"i:8", 100830, 3233},
+ {"i:9", 100932, 3236},
+ {"_sli_mod_opt", 101044, 3239},
+ {"c:10", 102275, 3268},
+ {"i:10", 102394, 3271},
+ {"i:11", 102513, 3274},
+ {"i:12", 102614, 3277},
+ {"i:13", 102715, 3280},
+ {"_sli_mod_prop", 102825, 3283},
+ {"c:11", 103544, 3300},
+ {"i:14", 103663, 3303},
+ {"_sli_mod_op", 103789, 3306},
+ {"c:12", 104513, 3323},
+ {"i:15", 104632, 3326},
+ {"i:16", 104751, 3329},
+ {"i:17", 104852, 3332},
+ {"_sli_mod_struc", 104964, 3335},
+ {"c:13", 105510, 3348},
+ {"c:14", 105624, 3351},
+ {"i:18", 105724, 3354},
+ {"b:0.1.2", 105827, 3357},
+ {"_sli_tool_eval", 109499, 3440},
+ {"c:15", 111564, 3487},
+ {"i:19", 111678, 3490},
+ {"i:20", 111782, 3493},
+ {"i:21", 111886, 3496},
+ {"i:22", 111990, 3499},
+ {"i:23", 112094, 3502},
+ {"i:24", 112198, 3505},
+ {"_sli_tool_eq", 112311, 3508},
+ {"c:16", 112602, 3515},
+ {"i:25", 112722, 3518},
+ {"_sli_tool_split", 112853, 3521},
+ {"c:17", 113585, 3538},
+ {"_sli_tool_out", 113709, 3541},
+ {"c:18", 114164, 3552},
+ {"_sli_prog", 114281, 3555},
+ {"c:19", 115378, 3580},
+ {"i:26", 115491, 3583},
+ {"b:0.1.3", 115607, 3586},
+ {"c:20", 116704, 3611},
+ {"c:21", 116812, 3614},
+ {"c:22", 116920, 3617},
+ {"c:23", 117028, 3620},
+ {"c:24", 117136, 3623},
+ {"c:25", 117244, 3626},
+ {"b:0.1.4", 117339, 3629}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 109, 2, 76, "Title",
+ CellTags->{"i:1", "Fast Introduction", "c:1"}],
+Cell[CellGroupData[{
+Cell[701, 28, 55, 1, 72, "Section",
+ CellTags->{"c:2", "b:0.0"}],
+Cell[759, 31, 683, 20, 134, "Text",
+ CellTags->"b:0.0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1479, 56, 47, 1, 72, "Section",
+ CellTags->"c:3"],
+Cell[CellGroupData[{
+Cell[1551, 61, 83, 1, 52, "Subsection",
+ CellTags->{"c:4", "b:0.1.0"}],
+Cell[CellGroupData[{
+Cell[1659, 66, 93, 1, 51, "Subsubsection",
+ CellTags->{"_sli_vect_scal", "c:5", "b:0.1.0"}],
+Cell[1755, 69, 646, 21, 136, "Text",
+ CellTags->{"_sli_vect_scal", "b:0.1.0"}],
+Cell[2404, 92, 806, 27, 136, "Text",
+ CellTags->{"_sli_vect_scal", "b:0.1.0"}],
+Cell[CellGroupData[{
+Cell[3235, 123, 94, 1, 35, "List",
+ CellTags->{"_sli_vect_scal", "i:1", "b:0.1.0"}],
+Cell[3332, 126, 402, 19, 41, "MonoText",
+ CellTags->{"_sli_vect_scal", "b:0.1.0"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3771, 150, 111, 1, 35, "List",
+ CellTags->{"_sli_vect_scal", "i:1", "b:0.1.0"}],
+Cell[3885, 153, 239, 10, 36, "MonoText",
+ CellTags->{"_sli_vect_scal", "b:0.1.0"}]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4173, 169, 96, 1, 50, "Subsubsection",
+ CellTags->{"_sli_vect_op", "c:6", "i:2", "b:0.1.0"}],
+Cell[4272, 172, 1448, 50, 156, "Text",
+ CellTags->{"_sli_vect_op", "b:0.1.0"}],
+Cell[CellGroupData[{
+Cell[5745, 226, 73, 1, 33, "List",
+ CellTags->{"_sli_vect_op", "b:0.1.0"}],
+Cell[5821, 229, 502, 25, 36, "MonoText",
+ CellTags->{"_sli_vect_op", "b:0.1.0"}]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6372, 260, 134, 1, 50, "Subsubsection",
+ CellTags->{"_sli_vect_eval", "c:7", "i:3", "b:0.1.0"}],
+Cell[6509, 263, 679, 22, 132, "Text",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+Cell[CellGroupData[{
+Cell[7213, 289, 67, 1, 33, "List",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+Cell[7283, 292, 581, 28, 52, "MonoText",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7901, 325, 104, 2, 33, "List",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+Cell[8008, 329, 1182, 55, 90, "MonoText",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9227, 389, 120, 2, 33, "List",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+Cell[9350, 393, 995, 49, 71, "MonoText",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10382, 447, 117, 2, 33, "List",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+Cell[10502, 451, 374, 16, 36, "MonoText",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10913, 472, 120, 2, 33, "List",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+Cell[11036, 476, 967, 46, 71, "MonoText",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12040, 527, 112, 1, 33, "List",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}],
+Cell[12155, 530, 495, 22, 52, "MonoText",
+ CellTags->{"_sli_vect_eval", "b:0.1.0"}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12711, 559, 73, 1, 51, "Subsection",
+ CellTags->{"c:8", "b:0.1.1"}],
+Cell[CellGroupData[{
+Cell[12809, 564, 100, 1, 50, "Subsubsection",
+ CellTags->{"_sli_mod_constr", "c:9", "i:4", "b:0.1.1"}],
+Cell[12912, 567, 506, 10, 109, "Text",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+Cell[CellGroupData[{
+Cell[13443, 581, 120, 2, 33, "List",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+Cell[13566, 585, 432, 19, 36, "MonoText",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14035, 609, 81, 1, 33, "List",
+ CellTags->{"_sli_mod_constr", "i:5", "b:0.1.1"}],
+Cell[14119, 612, 534, 25, 52, "MonoText",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14690, 642, 143, 3, 33, "List",
+ CellTags->{"_sli_mod_constr", "i:6", "b:0.1.1"}],
+Cell[14836, 647, 627, 28, 52, "MonoText",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15500, 680, 102, 1, 33, "List",
+ CellTags->{"_sli_mod_constr", "i:7", "b:0.1.1"}],
+Cell[15605, 683, 255, 10, 36, "MonoText",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15897, 698, 81, 1, 33, "List",
+ CellTags->{"_sli_mod_constr", "i:8", "b:0.1.1"}],
+Cell[15981, 701, 513, 25, 36, "MonoText",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16531, 731, 130, 2, 33, "List",
+ CellTags->{"_sli_mod_constr", "i:9", "b:0.1.1"}],
+Cell[16664, 735, 737, 34, 52, "MonoText",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17438, 774, 89, 1, 33, "List",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}],
+Cell[17530, 777, 117, 2, 36, "MonoText",
+ CellTags->{"_sli_mod_constr", "b:0.1.1"}]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17696, 785, 100, 1, 50, "Subsubsection",
+ CellTags->{"_sli_mod_opt", "c:10", "i:10", "b:0.1.1"}],
+Cell[17799, 788, 387, 9, 62, "Text",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+Cell[CellGroupData[{
+Cell[18211, 801, 62, 1, 33, "List",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+Cell[18276, 804, 126, 5, 36, "MonoText",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18439, 814, 93, 1, 33, "List",
+ CellTags->{"_sli_mod_opt", "i:11", "b:0.1.1"}],
+Cell[18535, 817, 333, 16, 36, "MonoText",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18905, 838, 78, 1, 33, "List",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+Cell[18986, 841, 179, 8, 36, "MonoText",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19202, 854, 70, 1, 33, "List",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}],
+Cell[19275, 857, 284, 13, 36, "MonoText",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19596, 875, 78, 1, 33, "List",
+ CellTags->{"_sli_mod_opt", "i:12", "b:0.1.1"}],
+Cell[19677, 878, 288, 13, 36, "MonoText",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20002, 896, 80, 1, 33, "List",
+ CellTags->{"_sli_mod_opt", "i:13", "b:0.1.1"}],
+Cell[20085, 899, 450, 22, 36, "MonoText",
+ CellTags->{"_sli_mod_opt", "b:0.1.1"}]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20584, 927, 98, 1, 50, "Subsubsection",
+ CellTags->{"_sli_mod_prop", "c:11", "i:14", "b:0.1.1"}],
+Cell[20685, 930, 233, 6, 62, "Text",
+ CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+Cell[CellGroupData[{
+Cell[20943, 940, 108, 1, 33, "List",
+ CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+Cell[21054, 943, 1098, 55, 71, "MonoText",
+ CellTags->{"_sli_mod_prop", "b:0.1.1"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22189, 1003, 110, 1, 33, "List",
+ CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+Cell[22302, 1006, 563, 28, 36, "MonoText",
+ CellTags->{"_sli_mod_prop", "b:0.1.1"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22902, 1039, 74, 1, 33, "List",
+ CellTags->{"_sli_mod_prop", "b:0.1.1"}],
+Cell[22979, 1042, 505, 25, 36, "MonoText",
+ CellTags->{"_sli_mod_prop", "b:0.1.1"}]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23533, 1073, 120, 1, 50, "Subsubsection",
+ CellTags->{"_sli_mod_op", "c:12", "i:15", "b:0.1.1"}],
+Cell[23656, 1076, 859, 18, 156, "Text",
+ CellTags->{"_sli_mod_op", "b:0.1.1"}],
+Cell[CellGroupData[{
+Cell[24540, 1098, 92, 1, 33, "List",
+ CellTags->{"_sli_mod_op", "i:16", "b:0.1.1"}],
+Cell[24635, 1101, 881, 49, 36, "MonoText",
+ CellTags->{"_sli_mod_op", "b:0.1.1"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[25553, 1155, 93, 1, 33, "List",
+ CellTags->{"_sli_mod_op", "b:0.1.1"}],
+Cell[25649, 1158, 735, 37, 36, "MonoText",
+ CellTags->{"_sli_mod_op", "b:0.1.1"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26421, 1200, 104, 1, 33, "List",
+ CellTags->{"_sli_mod_op", "i:17", "b:0.1.1"}],
+Cell[26528, 1203, 335, 16, 36, "MonoText",
+ CellTags->{"_sli_mod_op", "b:0.1.1"}]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26912, 1225, 116, 1, 50, "Subsubsection",
+ CellTags->{"_sli_mod_struc", "c:13", "b:0.1.1"}],
+Cell[27031, 1228, 316, 8, 62, "Text",
+ CellTags->{"_sli_mod_struc", "b:0.1.1"}],
+Cell[CellGroupData[{
+Cell[27372, 1240, 76, 1, 33, "List",
+ CellTags->{"_sli_mod_struc", "b:0.1.1"}],
+Cell[27451, 1243, 256, 10, 36, "MonoText",
+ CellTags->{"_sli_mod_struc", "b:0.1.1"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27744, 1258, 91, 1, 33, "List",
+ CellTags->{"_sli_mod_struc", "b:0.1.1"}],
+Cell[27838, 1261, 183, 7, 36, "MonoText",
+ CellTags->{"_sli_mod_struc", "b:0.1.1"}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28082, 1275, 67, 1, 51, "Subsection",
+ CellTags->{"c:14", "i:18", "b:0.1.2"}],
+Cell[28152, 1278, 639, 18, 157, "Text",
+ CellTags->"b:0.1.2"],
+Cell[CellGroupData[{
+Cell[28816, 1300, 106, 1, 50, "Subsubsection",
+ CellTags->{"_sli_tool_eval", "c:15", "b:0.1.2"}],
+Cell[CellGroupData[{
+Cell[28947, 1305, 79, 1, 33, "List",
+ CellTags->{"_sli_tool_eval", "i:19", "b:0.1.2"}],
+Cell[29029, 1308, 309, 7, 85, "Text",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+Cell[29341, 1317, 886, 43, 52, "MonoText",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30264, 1365, 70, 1, 33, "List",
+ CellTags->{"_sli_tool_eval", "i:20", "b:0.1.2"}],
+Cell[30337, 1368, 181, 4, 62, "Text",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+Cell[30521, 1374, 243, 10, 36, "MonoText",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30801, 1389, 77, 1, 33, "List",
+ CellTags->{"_sli_tool_eval", "i:21", "b:0.1.2"}],
+Cell[30881, 1392, 134, 3, 38, "Text",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+Cell[31018, 1397, 414, 19, 36, "MonoText",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31469, 1421, 84, 1, 33, "List",
+ CellTags->{"_sli_tool_eval", "i:22", "b:0.1.2"}],
+Cell[31556, 1424, 550, 16, 86, "Text",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+Cell[32109, 1442, 226, 10, 36, "MonoText",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32372, 1457, 91, 1, 33, "List",
+ CellTags->{"_sli_tool_eval", "i:23", "b:0.1.2"}],
+Cell[32466, 1460, 157, 4, 38, "Text",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+Cell[32626, 1466, 171, 7, 36, "MonoText",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32834, 1478, 113, 1, 33, "List",
+ CellTags->{"_sli_tool_eval", "i:24", "b:0.1.2"}],
+Cell[32950, 1481, 201, 4, 62, "Text",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+Cell[33154, 1487, 870, 40, 71, "MonoText",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34061, 1532, 73, 1, 33, "List",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+Cell[34137, 1535, 399, 19, 36, "MonoText",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34573, 1559, 74, 1, 33, "List",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}],
+Cell[34650, 1562, 718, 34, 52, "MonoText",
+ CellTags->{"_sli_tool_eval", "b:0.1.2"}]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35417, 1602, 105, 1, 50, "Subsubsection",
+ CellTags->{"_sli_tool_eq", "c:16", "i:25", "b:0.1.2"}],
+Cell[35525, 1605, 205, 6, 62, "Text",
+ CellTags->{"_sli_tool_eq", "b:0.1.2"}],
+Cell[35733, 1613, 479, 23, 36, "MonoText",
+ CellTags->{"_sli_tool_eq", "b:0.1.2"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36249, 1641, 114, 1, 50, "Subsubsection",
+ CellTags->{"_sli_tool_split", "c:17", "b:0.1.2"}],
+Cell[36366, 1644, 1273, 45, 139, "Text",
+ CellTags->{"_sli_tool_split", "b:0.1.2"}],
+Cell[CellGroupData[{
+Cell[37664, 1693, 80, 1, 33, "List",
+ CellTags->{"_sli_tool_split", "b:0.1.2"}],
+Cell[37747, 1696, 238, 10, 36, "MonoText",
+ CellTags->{"_sli_tool_split", "b:0.1.2"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[38022, 1711, 100, 1, 33, "List",
+ CellTags->{"_sli_tool_split", "b:0.1.2"}],
+Cell[38125, 1714, 182, 7, 36, "MonoText",
+ CellTags->{"_sli_tool_split", "b:0.1.2"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[38344, 1726, 98, 1, 33, "List",
+ CellTags->{"_sli_tool_split", "b:0.1.2"}],
+Cell[38445, 1729, 363, 17, 36, "MonoText",
+ CellTags->{"_sli_tool_split", "b:0.1.2"}]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[38857, 1752, 90, 1, 50, "Subsubsection",
+ CellTags->{"_sli_tool_out", "c:18", "b:0.1.2"}],
+Cell[CellGroupData[{
+Cell[38972, 1757, 79, 1, 33, "List",
+ CellTags->{"_sli_tool_out", "b:0.1.2"}],
+Cell[39054, 1760, 521, 25, 36, "MonoText",
+ CellTags->{"_sli_tool_out", "b:0.1.2"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39612, 1790, 78, 1, 33, "List",
+ CellTags->{"_sli_tool_out", "b:0.1.2"}],
+Cell[39693, 1793, 177, 7, 36, "MonoText",
+ CellTags->{"_sli_tool_out", "b:0.1.2"}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39931, 1807, 86, 1, 51, "Subsection",
+ CellTags->{"_sli_prog", "c:19", "i:26", "b:0.1.3"}],
+Cell[40020, 1810, 167, 5, 38, "Text",
+ CellTags->{"_sli_prog", "b:0.1.3"}],
+Cell[CellGroupData[{
+Cell[40212, 1819, 87, 1, 50, "Subsubsection",
+ CellTags->{"_sli_prog", "c:20", "b:0.1.3"}],
+Cell[40302, 1822, 281, 13, 36, "MonoText",
+ CellTags->{"_sli_prog", "b:0.1.3"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40620, 1840, 79, 1, 50, "Subsubsection",
+ CellTags->{"_sli_prog", "c:21", "b:0.1.3"}],
+Cell[40702, 1843, 849, 41, 52, "MonoText",
+ CellTags->{"_sli_prog", "b:0.1.3"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[41588, 1889, 80, 1, 50, "Subsubsection",
+ CellTags->{"_sli_prog", "c:22", "b:0.1.3"}],
+Cell[41671, 1892, 183, 7, 36, "MonoText",
+ CellTags->{"_sli_prog", "b:0.1.3"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[41891, 1904, 75, 1, 50, "Subsubsection",
+ CellTags->{"_sli_prog", "c:23", "b:0.1.3"}],
+Cell[41969, 1907, 351, 16, 36, "MonoText",
+ CellTags->{"_sli_prog", "b:0.1.3"}]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[42357, 1928, 82, 1, 50, "Subsubsection",
+ CellTags->{"_sli_prog", "c:24", "b:0.1.3"}],
+Cell[42442, 1931, 504, 25, 36, "MonoText",
+ CellTags->{"_sli_prog", "b:0.1.3"}]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[42995, 1962, 70, 1, 51, "Subsection",
+ CellTags->{"c:25", "b:0.1.4"}],
+Cell[43068, 1965, 93, 1, 38, "Text",
+ CellTags->"b:0.1.4"],
+Cell[43164, 1968, 253, 7, 38, "Text",
+ CellTags->"b:0.1.4"],
+Cell[43420, 1977, 309, 10, 38, "Text",
+ CellTags->"b:0.1.4"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,558 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     15372,        548]
+NotebookOptionsPosition[     13582,        485]
+NotebookOutlinePosition[     14058,        504]
+CellTagsIndexPosition[     14015,        501]
+WindowFrame->Normal
+ContainsDynamic->False*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\[GothicK]\[GothicA]\[GothicS]", "Title"],
+
+Cell[CellGroupData[{
+
+Cell["Algebra K(1|6)", "Subsubsection"],
+
+Cell[BoxData[{
+ RowBox[{"Needs", "[", "\"\<SuperLie`\>\"", "]"}], "\n", 
+ RowBox[{
+  RowBox[{"VectorSpace", "[", 
+   RowBox[{"\[Zeta]", ",", 
+    RowBox[{"Dim", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "3"}], "}"}]}]}], "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"VectorSpace", "[", 
+   RowBox[{"\[Eta]", ",", 
+    RowBox[{"Dim", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "3"}], "}"}]}]}], "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Symmetric", "[", "VTimes", "]"}], ";"}], "\n", 
+ RowBox[{"ContactAlgebra", "[", 
+  RowBox[{"g", ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Zeta]", ",", "\[Eta]"}], "}"}], ",", "t"}], "]"}]}], "Input",
+ EmphasizeSyntaxErrors->True],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Kbn", "[", 
+   RowBox[{"f_", ",", "g_"}], "]"}], ":=", 
+  RowBox[{"VNormal", "[", 
+   RowBox[{"Kb", "[", 
+    RowBox[{"f", ",", "g"}], "]"}], "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Bracket", "[", "g", "]"}], "^=", "Kbn"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"P", "[", "Kbn", "]"}], "^=", "0"}], ";"}]}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Weight", "Subsubsection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"wt\[Zeta]", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0", ",", "1", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0", ",", "0", ",", "1"}], "}"}]}], "}"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"wt\[Eta]", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", 
+       RowBox[{"-", "1"}], ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0", ",", 
+       RowBox[{"-", "1"}], ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0", ",", "0", ",", 
+       RowBox[{"-", "1"}]}], "}"}]}], "}"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Weight", "[", 
+   RowBox[{"\[Zeta]", "[", "i_", "]"}], "]"}], "^:=", 
+  RowBox[{
+  "wt\[Zeta]", "\[LeftDoubleBracket]", "i", 
+   "\[RightDoubleBracket]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"Weight", "[", 
+   RowBox[{"\[Eta]", "[", "i_", "]"}], "]"}], "^:=", 
+  RowBox[{
+  "wt\[Eta]", "\[LeftDoubleBracket]", "i", 
+   "\[RightDoubleBracket]"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Weight", "[", "t", "]"}], "^=", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "0", ",", "0", ",", "0"}], "}"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Weight", "[", "Id", "]"}], "^=", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Weight", "[", 
+    RowBox[{"VTimes", "[", "]"}], "]"}], "^=", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}]}], ";"}]}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Algebra ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["\[Kappa]", "0"], TraditionalForm]]]
+}], "Subsubsection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"k0list", "=", 
+   RowBox[{"Flatten", "[", 
+    RowBox[{"{", 
+     RowBox[{"t", ",", 
+      RowBox[{"DegreeBasis", "[", 
+       RowBox[{"2", ",", 
+        RowBox[{"{", 
+         RowBox[{
+          SubscriptBox["\[Zeta]", "1"], ",", 
+          SubscriptBox["\[Zeta]", "2"], ",", 
+          SubscriptBox["\[Zeta]", "3"], ",", 
+          SubscriptBox["\[Eta]", "1"], ",", 
+          SubscriptBox["\[Eta]", "2"], ",", 
+          SubscriptBox["\[Eta]", "3"]}], "}"}]}], "]"}]}], "}"}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{"SubAlgebra", "[", 
+  RowBox[{"k0", ",", "g", ",", "k0list"}], "]"}]}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Delete negative powers of t", "Subsubsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"deltNeg", "[", "list_", "]"}], ":=", 
+  RowBox[{"DeleteCases", "[", 
+   RowBox[{
+    RowBox[{"list", "/.", 
+     RowBox[{
+      RowBox[{"VPower", "[", 
+       RowBox[{"t", ",", 
+        RowBox[{"k_", "/;", 
+         RowBox[{"k", "<", "0"}]}]}], "]"}], ":>", "0"}]}], ",", "0"}], 
+   "]"}]}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Basis of \[GothicK]\[GothicA]\[GothicS]", "Subsubsection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Scalar", "[", 
+   RowBox[{"n", ",", "even", ",", "odd"}], "]"}], ";"}]], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"kas0", "[", "n_", "]"}], ":=", 
+  RowBox[{
+   SuperscriptBox["t", "n"], "-", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"n", 
+      RowBox[{"(", 
+       RowBox[{"n", "-", "1"}], ")"}], 
+      RowBox[{"(", 
+       RowBox[{"n", "-", "2"}], ")"}]}], ")"}], "~", "SVTimes", "~", 
+    RowBox[{"(", 
+     RowBox[{
+      SuperscriptBox["t", 
+       RowBox[{"n", "-", "3"}]], 
+      SubscriptBox["\[Zeta]", "1"], 
+      SubscriptBox["\[Zeta]", "2"], 
+      SubscriptBox["\[Zeta]", "3"], 
+      SubscriptBox["\[Eta]", "1"], 
+      SubscriptBox["\[Eta]", "2"], 
+      SubscriptBox["\[Eta]", "3"]}], ")"}]}]}]}], "\n", 
+ RowBox[{
+  RowBox[{"kas1", "[", 
+   RowBox[{"x_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"VTimes", "[", 
+    RowBox[{
+     SuperscriptBox["t", "n"], ",", "x"}], "]"}], "+", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"n", 
+      RowBox[{"(", 
+       RowBox[{"n", "-", "1"}], ")"}]}], ")"}], "~", "SVTimes", "~", " ", 
+    RowBox[{"VTimes", "[", 
+     RowBox[{
+      SuperscriptBox["t", 
+       RowBox[{"n", "-", "2"}]], ",", 
+      RowBox[{"LDer", "[", 
+       RowBox[{
+        RowBox[{
+         SubscriptBox["\[Zeta]", "1"], 
+         SubscriptBox["\[Zeta]", "2"], 
+         SubscriptBox["\[Zeta]", "3"], 
+         SubscriptBox["\[Eta]", "1"], 
+         SubscriptBox["\[Eta]", "2"], 
+         SubscriptBox["\[Eta]", "3"]}], ",", 
+        RowBox[{"x", "/.", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"\[Zeta]", "\[Rule]", "\[Eta]"}], ",", 
+           RowBox[{"\[Eta]", "\[Rule]", "\[Zeta]"}]}], "}"}]}], ",", 
+        RowBox[{"_\[Zeta]", "|", "_\[Eta]", "|", "t"}]}], "]"}]}], 
+     "]"}]}]}]}], "\n", 
+ RowBox[{
+  RowBox[{"kas2", "[", 
+   RowBox[{
+    RowBox[{"VTimes", "[", 
+     RowBox[{"x_", ",", "y_"}], "]"}], ",", "n_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"VTimes", "[", 
+    RowBox[{
+     SuperscriptBox["t", "n"], ",", "x", ",", "y"}], "]"}], "+", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"-", "n"}], ")"}], "~", "SVTimes", "~", " ", 
+    RowBox[{"VTimes", "[", 
+     RowBox[{
+      SuperscriptBox["t", 
+       RowBox[{"n", "-", "1"}]], ",", 
+      RowBox[{"LDer", "[", 
+       RowBox[{
+        RowBox[{"LDer", "[", 
+         RowBox[{
+          RowBox[{
+           SubscriptBox["\[Zeta]", "1"], 
+           SubscriptBox["\[Zeta]", "2"], 
+           SubscriptBox["\[Zeta]", "3"], 
+           SubscriptBox["\[Eta]", "1"], 
+           SubscriptBox["\[Eta]", "2"], 
+           SubscriptBox["\[Eta]", "3"]}], ",", 
+          RowBox[{"y", "/.", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"\[Zeta]", "\[Rule]", "\[Eta]"}], ",", 
+             RowBox[{"\[Eta]", "\[Rule]", "\[Zeta]"}]}], "}"}]}], ",", 
+          RowBox[{"_\[Zeta]", "|", "_\[Eta]", "|", "t"}]}], "]"}], ",", 
+        RowBox[{"x", "/.", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"\[Zeta]", "\[Rule]", "\[Eta]"}], ",", 
+           RowBox[{"\[Eta]", "\[Rule]", "\[Zeta]"}]}], "}"}]}], ",", 
+        RowBox[{"_\[Zeta]", "|", "_\[Eta]", "|", "t"}]}], "]"}]}], 
+     "]"}]}]}]}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{"SubModule", "[", 
+  RowBox[{"kas3", ",", "g", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     SubscriptBox["\[Zeta]", "1"], 
+     SubscriptBox["\[Zeta]", "2"], 
+     SubscriptBox["\[Zeta]", "3"]}], "}"}], ",", 
+   RowBox[{"Algebra", "\[Rule]", "k0"}]}], "]"}]], "Input"],
+
+Cell[BoxData[{
+ RowBox[{"lf0", "=", 
+  RowBox[{"{", 
+   RowBox[{
+    SubscriptBox["\[Zeta]", "1"], ",", 
+    SubscriptBox["\[Zeta]", "2"], ",", 
+    SubscriptBox["\[Zeta]", "3"], ",", 
+    SubscriptBox["\[Eta]", "1"], ",", 
+    SubscriptBox["\[Eta]", "2"], ",", 
+    SubscriptBox["\[Eta]", "3"]}], "}"}]}], "\n", 
+ RowBox[{
+  RowBox[{"kaseven", "[", "n_", "]"}], "=", 
+  RowBox[{"Flatten", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"kas0", "[", "n", "]"}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"kas2", "[", 
+        RowBox[{"#", ",", 
+         RowBox[{"n", "-", "1"}]}], "]"}], "&"}], "/@", 
+      RowBox[{"DegreeBasis", "[", 
+       RowBox[{"2", ",", "lf0"}], "]"}]}]}], "}"}], "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"kasodd", "[", "n_", "]"}], "=", 
+  RowBox[{"Join", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"kas1", "[", 
+       RowBox[{"#", ",", "n"}], "]"}], "&"}], "/@", "lf0"}], ",", 
+    RowBox[{
+     SuperscriptBox["t", 
+      RowBox[{"n", "-", "1"}]], 
+     RowBox[{"Image", "[", "kas3", "]"}]}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{3.482408053203125*^9}],
+
+Cell[BoxData[{
+ RowBox[{"Define", "[", 
+  RowBox[{"kas", ",", 
+   RowBox[{"{", 
+    RowBox[{"Vector", ",", 
+     RowBox[{"Bracket", "\[Rule]", "Kbn"}], ",", 
+     RowBox[{"bracket", "\[Rule]", "kb"}]}], "}"}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"kas", "::", "usage"}], "=", 
+  "\"\<kas(1|6) is the \[GothicK]\[GothicA]\[GothicS] superalbebra\>\""}]}], \
+"Input",
+ CellChangeTimes->{3.48240773909375*^9, 3.482407943*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Basis", "[", 
+   RowBox[{"kas", ",", 
+    RowBox[{"n_", "?", "EvenQ"}]}], "]"}], ":=", 
+  RowBox[{"VNormal", "/@", 
+   RowBox[{"deltNeg", "[", 
+    RowBox[{"kaseven", "[", 
+     RowBox[{"n", "/", "2"}], "]"}], "]"}]}]}], "\n", 
+ RowBox[{
+  RowBox[{"Basis", "[", 
+   RowBox[{"kas", ",", 
+    RowBox[{"n_", "?", "OddQ"}]}], "]"}], ":=", 
+  RowBox[{"VNormal", "/@", 
+   RowBox[{"deltNeg", "[", 
+    RowBox[{"kasodd", "[", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"n", "-", "1"}], ")"}], "/", "2"}], "]"}], "]"}]}]}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Basis", "[", 
+   RowBox[{"kas", ",", "even"}], "]"}], ":=", 
+  RowBox[{"kaseven", "[", "n", "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"Basis", "[", 
+   RowBox[{"kas", ",", "odd"}], "]"}], ":=", 
+  RowBox[{"kasodd", "[", "n", "]"}]}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Basis", "[", 
+   RowBox[{"kas", ",", 
+    RowBox[{"even", "+", "k_"}]}], "]"}], ":=", 
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"EvenQ", "[", "k", "]"}], ",", 
+    RowBox[{"kaseven", "[", 
+     RowBox[{"n", "+", 
+      RowBox[{"k", "/", "2"}]}], "]"}], ",", 
+    RowBox[{"kasodd", "[", 
+     RowBox[{"n", "+", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"k", "-", "1"}], ")"}], "/", "2"}]}], "]"}]}], 
+   "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"Basis", "[", 
+   RowBox[{"kas", ",", 
+    RowBox[{"odd", "+", "k_"}]}], "]"}], ":=", 
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"EvenQ", "[", "k", "]"}], ",", 
+    RowBox[{"kasodd", "[", 
+     RowBox[{"n", "+", 
+      RowBox[{"k", "/", "2"}]}], "]"}], ",", 
+    RowBox[{"kaseven", "[", 
+     RowBox[{"n", "+", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"k", "-", "1"}], ")"}], "/", "2"}]}], "]"}]}], 
+   "]"}]}]}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Standard Grade", "Subsubsection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Grade", "[", "t", "]"}], "^=", "2"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Grade", "[", 
+    RowBox[{"\[Zeta]", "[", "_", "]"}], "]"}], "^=", "1"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Grade", "[", 
+    RowBox[{"\[Eta]", "[", "_", "]"}], "]"}], "^=", "1"}], ";"}]}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Grade 1", "Subsubsection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Grade", "[", "t", "]"}], "^=", "2"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Grade", "[", 
+    RowBox[{"\[Zeta]", "[", "1", "]"}], "]"}], "^=", "0"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Grade", "[", 
+    RowBox[{"\[Zeta]", "[", "_", "]"}], "]"}], "^=", "1"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Grade", "[", 
+    RowBox[{"\[Eta]", "[", "1", "]"}], "]"}], "^=", "2"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Grade", "[", 
+    RowBox[{"\[Eta]", "[", "_", "]"}], "]"}], "^=", "1"}], ";"}]}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Grade 3\[Zeta]", "Subsubsection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Grade", "[", "t", "]"}], "^=", "1"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Grade", "[", 
+    RowBox[{"\[Zeta]", "[", "_", "]"}], "]"}], "^=", "0"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Grade", "[", 
+    RowBox[{"\[Eta]", "[", "_", "]"}], "]"}], "^=", "1"}], ";"}]}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Grade 3\[Eta]", "Subsubsection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Grade", "[", "t", "]"}], "^=", "1"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Grade", "[", 
+    RowBox[{"\[Zeta]", "[", "_", "]"}], "]"}], "^=", "1"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Grade", "[", 
+    RowBox[{"\[Eta]", "[", "_", "]"}], "]"}], "^=", "0"}], ";"}]}], "Input"]
+}, Open  ]]
+}, Open  ]]
+},
+AutoGeneratedPackage->None,
+WindowSize->{1283, 833},
+WindowMargins->{{Automatic, 44}, {Automatic, 48}},
+DockedCells->FEPrivate`FrontEndResource[
+ "FEExpressions", "CompatibilityToolbar"],
+Magnification->1.25,
+FrontEndVersion->"6.0 for Microsoft Windows (32-bit) (April 20, 2007)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[590, 23, 47, 0, 103, "Title"],
+Cell[CellGroupData[{
+Cell[662, 27, 39, 0, 34, "Subsubsection"],
+Cell[704, 29, 682, 20, 124, "Input"],
+Cell[1389, 51, 389, 13, 80, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1815, 69, 31, 0, 34, "Subsubsection"],
+Cell[1849, 71, 1629, 52, 168, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3515, 128, 128, 5, 34, "Subsubsection"],
+Cell[3646, 135, 631, 18, 58, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4314, 158, 52, 0, 34, "Subsubsection"],
+Cell[4369, 160, 336, 11, 35, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4742, 176, 64, 0, 34, "Subsubsection"],
+Cell[4809, 178, 116, 3, 35, "Input"],
+Cell[4928, 183, 3078, 93, 131, "Input"],
+Cell[8009, 278, 287, 8, 35, "Input"],
+Cell[8299, 288, 1106, 35, 82, "Input"],
+Cell[9408, 325, 440, 12, 58, "Input"],
+Cell[9851, 339, 569, 18, 58, "Input"],
+Cell[10423, 359, 274, 8, 58, "Input"],
+Cell[10700, 369, 929, 32, 58, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11666, 406, 39, 0, 34, "Subsubsection"],
+Cell[11708, 408, 344, 11, 80, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12089, 424, 32, 0, 34, "Subsubsection"],
+Cell[12124, 426, 585, 19, 124, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12746, 450, 39, 0, 34, "Subsubsection"],
+Cell[12788, 452, 344, 11, 80, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13169, 468, 38, 0, 34, "Subsubsection"],
+Cell[13210, 470, 344, 11, 80, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

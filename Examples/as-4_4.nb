@@ -1,0 +1,2811 @@
+(************** Content-type: application/mathematica **************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     81532,       2663]*)
+(*NotebookOutlinePosition[     82213,       2687]*)
+(*  CellTagsIndexPosition[     82169,       2683]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+    \(TextForm\`Algebra\ \[GothicA]\[GothicS] \((4 | 4)\)\)], "Title"],
+
+Cell[BoxData[
+    \(Needs["\<SuperLie`\>"]\)], "Input"],
+
+Cell[BoxData[{
+    \(VectorSpace[x, Dim \[Rule] {4, 4}, CoLeft \[Rule] v]\), "\n", 
+    \(VectorLieAlgebra[g, x]\)}], "Input"],
+
+Cell[BoxData[{
+    \(\(Linear[Tp];\)\), "\n", 
+    \(\(Symmetric[VTimes];\)\), "\n", 
+    \(\(Scalar[\[Lambda]];\)\)}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  "Algera ",
+  StyleBox["\[GothicA]\[GothicS]",
+    FontSize->18]
+}], "Subsection"],
+
+Cell[BoxData[{
+    \(\(ax[i_, j_] := x[i] ** v[j] - x[j + 4] ** v[i + 4];\)\), "\n", 
+    \(bx[i_, j_] := 
+      x[i] ** v[j + 4] + \(\(x[j]\)\(**\)\(v[i + 4]\)\(\ \)\( (*\ 
+            bx[i, j] == bx[j, i]\ *) \)\)\)}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(a1 = Table[ax[i, j], {i, 1, 3}, {j, i + 1, 4}]\), 
+    \(a2 = Table[ax[i, j], {i, 2, 4}, {j, 1, i - 1}]\), 
+    \(a3 = Table[VExpand[ax[i, i] - ax[i + 1, i + 1]], {i, 1, 3}]\), 
+    \(ac = Flatten[{a1, a2, a3}]\)}], "Input"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{"{", 
+          RowBox[{
+            RowBox[{
+              RowBox[{
+                InterpretationBox[\(x\_1\),
+                  Subscripted[ 
+                    x[ 1]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_2\),
+                  Subscripted[ 
+                    v[ 2]],
+                  Editable->False]}], "-", 
+              RowBox[{
+                InterpretationBox[\(x\_6\),
+                  Subscripted[ 
+                    x[ 6]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_5\),
+                  Subscripted[ 
+                    v[ 5]],
+                  Editable->False]}]}], ",", 
+            RowBox[{
+              RowBox[{
+                InterpretationBox[\(x\_1\),
+                  Subscripted[ 
+                    x[ 1]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_3\),
+                  Subscripted[ 
+                    v[ 3]],
+                  Editable->False]}], "-", 
+              RowBox[{
+                InterpretationBox[\(x\_7\),
+                  Subscripted[ 
+                    x[ 7]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_5\),
+                  Subscripted[ 
+                    v[ 5]],
+                  Editable->False]}]}], ",", 
+            RowBox[{
+              RowBox[{
+                InterpretationBox[\(x\_1\),
+                  Subscripted[ 
+                    x[ 1]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_4\),
+                  Subscripted[ 
+                    v[ 4]],
+                  Editable->False]}], "-", 
+              RowBox[{
+                InterpretationBox[\(x\_8\),
+                  Subscripted[ 
+                    x[ 8]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_5\),
+                  Subscripted[ 
+                    v[ 5]],
+                  Editable->False]}]}]}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{
+            RowBox[{
+              RowBox[{
+                InterpretationBox[\(x\_2\),
+                  Subscripted[ 
+                    x[ 2]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_3\),
+                  Subscripted[ 
+                    v[ 3]],
+                  Editable->False]}], "-", 
+              RowBox[{
+                InterpretationBox[\(x\_7\),
+                  Subscripted[ 
+                    x[ 7]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_6\),
+                  Subscripted[ 
+                    v[ 6]],
+                  Editable->False]}]}], ",", 
+            RowBox[{
+              RowBox[{
+                InterpretationBox[\(x\_2\),
+                  Subscripted[ 
+                    x[ 2]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_4\),
+                  Subscripted[ 
+                    v[ 4]],
+                  Editable->False]}], "-", 
+              RowBox[{
+                InterpretationBox[\(x\_8\),
+                  Subscripted[ 
+                    x[ 8]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_6\),
+                  Subscripted[ 
+                    v[ 6]],
+                  Editable->False]}]}]}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{
+            RowBox[{
+              InterpretationBox[\(x\_3\),
+                Subscripted[ 
+                  x[ 3]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_4\),
+                Subscripted[ 
+                  v[ 4]],
+                Editable->False]}], "-", 
+            RowBox[{
+              InterpretationBox[\(x\_8\),
+                Subscripted[ 
+                  x[ 8]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_7\),
+                Subscripted[ 
+                  v[ 7]],
+                Editable->False]}]}], "}"}]}], "}"}]], "Output"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{"{", 
+          RowBox[{
+            RowBox[{
+              InterpretationBox[\(x\_2\),
+                Subscripted[ 
+                  x[ 2]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_1\),
+                Subscripted[ 
+                  v[ 1]],
+                Editable->False]}], "-", 
+            RowBox[{
+              InterpretationBox[\(x\_5\),
+                Subscripted[ 
+                  x[ 5]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_6\),
+                Subscripted[ 
+                  v[ 6]],
+                Editable->False]}]}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{
+            RowBox[{
+              RowBox[{
+                InterpretationBox[\(x\_3\),
+                  Subscripted[ 
+                    x[ 3]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_1\),
+                  Subscripted[ 
+                    v[ 1]],
+                  Editable->False]}], "-", 
+              RowBox[{
+                InterpretationBox[\(x\_5\),
+                  Subscripted[ 
+                    x[ 5]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_7\),
+                  Subscripted[ 
+                    v[ 7]],
+                  Editable->False]}]}], ",", 
+            RowBox[{
+              RowBox[{
+                InterpretationBox[\(x\_3\),
+                  Subscripted[ 
+                    x[ 3]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_2\),
+                  Subscripted[ 
+                    v[ 2]],
+                  Editable->False]}], "-", 
+              RowBox[{
+                InterpretationBox[\(x\_6\),
+                  Subscripted[ 
+                    x[ 6]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_7\),
+                  Subscripted[ 
+                    v[ 7]],
+                  Editable->False]}]}]}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{
+            RowBox[{
+              RowBox[{
+                InterpretationBox[\(x\_4\),
+                  Subscripted[ 
+                    x[ 4]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_1\),
+                  Subscripted[ 
+                    v[ 1]],
+                  Editable->False]}], "-", 
+              RowBox[{
+                InterpretationBox[\(x\_5\),
+                  Subscripted[ 
+                    x[ 5]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_8\),
+                  Subscripted[ 
+                    v[ 8]],
+                  Editable->False]}]}], ",", 
+            RowBox[{
+              RowBox[{
+                InterpretationBox[\(x\_4\),
+                  Subscripted[ 
+                    x[ 4]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_2\),
+                  Subscripted[ 
+                    v[ 2]],
+                  Editable->False]}], "-", 
+              RowBox[{
+                InterpretationBox[\(x\_6\),
+                  Subscripted[ 
+                    x[ 6]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_8\),
+                  Subscripted[ 
+                    v[ 8]],
+                  Editable->False]}]}], ",", 
+            RowBox[{
+              RowBox[{
+                InterpretationBox[\(x\_4\),
+                  Subscripted[ 
+                    x[ 4]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_3\),
+                  Subscripted[ 
+                    v[ 3]],
+                  Editable->False]}], "-", 
+              RowBox[{
+                InterpretationBox[\(x\_7\),
+                  Subscripted[ 
+                    x[ 7]],
+                  Editable->False], "**", 
+                InterpretationBox[\(v\_8\),
+                  Subscripted[ 
+                    v[ 8]],
+                  Editable->False]}]}]}], "}"}]}], "}"}]], "Output"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_1\),
+              Subscripted[ 
+                v[ 1]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}]}]}], "}"}]], "Output"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_1\),
+              Subscripted[ 
+                v[ 1]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_1\),
+              Subscripted[ 
+                v[ 1]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_1\),
+              Subscripted[ 
+                v[ 1]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_1\),
+              Subscripted[ 
+                v[ 1]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}]}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(bc = Flatten[Table[VNormal[bx[i, j]], {i, 1, 4}, {j, i, 4}]]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{"2", "\[ThinSpace]", 
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}], ",", 
+        RowBox[{"2", "\[ThinSpace]", 
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], ",", 
+        RowBox[{"2", "\[ThinSpace]", 
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}]}], ",", 
+        RowBox[{"2", "\[ThinSpace]", 
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}]}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(ii[1, 2] = 3; \njj[1, 2] = 4; \nii[1, 3] = 4; \njj[1, 3] = 2; \n
+    ii[1, 4] = 2; \njj[1, 4] = 3; \nii[2, 3] = 1; \njj[2, 3] = 4; \n
+    ii[2, 4] = 3; \njj[2, 4] = 1; \nii[3, 4] = 1; \njj[3, 4] = 2; \)], "Input"],
+
+Cell[BoxData[{
+    \(cx[i_, j_] := 
+      x[i + 4]**v[j] - x[j + 4]**v[i] - 
+          \[Lambda]\ x[ii[i, j]]**v[jj[i, j] + 4] + 
+          \[Lambda]\ x[jj[i, j]]**v[ii[i, j] + 4] /; i < j\), 
+    \(cx[i_, j_] := \(-cx[j, i]\) /; i > j\), 
+    \(cx[i_, i_] := 0\)}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(cc = Flatten[Table[cx[i, j], {i, 1, 3}, {j, i + 1, 4}]]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_1\),
+              Subscripted[ 
+                v[ 1]],
+              Editable->False]}], "-", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_3\),
+                Subscripted[ 
+                  x[ 3]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_8\),
+                Subscripted[ 
+                  v[ 8]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_4\),
+                Subscripted[ 
+                  x[ 4]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_7\),
+                Subscripted[ 
+                  v[ 7]],
+                Editable->False]}]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_1\),
+              Subscripted[ 
+                v[ 1]],
+              Editable->False]}], "-", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_4\),
+                Subscripted[ 
+                  x[ 4]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_6\),
+                Subscripted[ 
+                  v[ 6]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_2\),
+                Subscripted[ 
+                  x[ 2]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_8\),
+                Subscripted[ 
+                  v[ 8]],
+                Editable->False]}]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_1\),
+              Subscripted[ 
+                v[ 1]],
+              Editable->False]}], "-", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_2\),
+                Subscripted[ 
+                  x[ 2]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_7\),
+                Subscripted[ 
+                  v[ 7]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_3\),
+                Subscripted[ 
+                  x[ 3]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_6\),
+                Subscripted[ 
+                  v[ 6]],
+                Editable->False]}]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "-", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_1\),
+                Subscripted[ 
+                  x[ 1]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_8\),
+                Subscripted[ 
+                  v[ 8]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_4\),
+                Subscripted[ 
+                  x[ 4]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_5\),
+                Subscripted[ 
+                  v[ 5]],
+                Editable->False]}]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "-", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_3\),
+                Subscripted[ 
+                  x[ 3]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_5\),
+                Subscripted[ 
+                  v[ 5]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_1\),
+                Subscripted[ 
+                  x[ 1]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_7\),
+                Subscripted[ 
+                  v[ 7]],
+                Editable->False]}]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_1\),
+                Subscripted[ 
+                  x[ 1]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_6\),
+                Subscripted[ 
+                  v[ 6]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_2\),
+                Subscripted[ 
+                  x[ 2]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_5\),
+                Subscripted[ 
+                  v[ 5]],
+                Editable->False]}]}]}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(dx = VSum[\[Lambda]\ x[i]**v[i], {i, 1, 8}]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{"\[Lambda]", "\[ThinSpace]", 
+        RowBox[{
+          InterpretationBox[\(x\_1\),
+            Subscripted[ 
+              x[ 1]],
+            Editable->False], "**", 
+          InterpretationBox[\(v\_1\),
+            Subscripted[ 
+              v[ 1]],
+            Editable->False]}]}], "+", 
+      RowBox[{"\[Lambda]", "\[ThinSpace]", 
+        RowBox[{
+          InterpretationBox[\(x\_2\),
+            Subscripted[ 
+              x[ 2]],
+            Editable->False], "**", 
+          InterpretationBox[\(v\_2\),
+            Subscripted[ 
+              v[ 2]],
+            Editable->False]}]}], "+", 
+      RowBox[{"\[Lambda]", "\[ThinSpace]", 
+        RowBox[{
+          InterpretationBox[\(x\_3\),
+            Subscripted[ 
+              x[ 3]],
+            Editable->False], "**", 
+          InterpretationBox[\(v\_3\),
+            Subscripted[ 
+              v[ 3]],
+            Editable->False]}]}], "+", 
+      RowBox[{"\[Lambda]", "\[ThinSpace]", 
+        RowBox[{
+          InterpretationBox[\(x\_4\),
+            Subscripted[ 
+              x[ 4]],
+            Editable->False], "**", 
+          InterpretationBox[\(v\_4\),
+            Subscripted[ 
+              v[ 4]],
+            Editable->False]}]}], "+", 
+      RowBox[{"\[Lambda]", "\[ThinSpace]", 
+        RowBox[{
+          InterpretationBox[\(x\_5\),
+            Subscripted[ 
+              x[ 5]],
+            Editable->False], "**", 
+          InterpretationBox[\(v\_5\),
+            Subscripted[ 
+              v[ 5]],
+            Editable->False]}]}], "+", 
+      RowBox[{"\[Lambda]", "\[ThinSpace]", 
+        RowBox[{
+          InterpretationBox[\(x\_6\),
+            Subscripted[ 
+              x[ 6]],
+            Editable->False], "**", 
+          InterpretationBox[\(v\_6\),
+            Subscripted[ 
+              v[ 6]],
+            Editable->False]}]}], "+", 
+      RowBox[{"\[Lambda]", "\[ThinSpace]", 
+        RowBox[{
+          InterpretationBox[\(x\_7\),
+            Subscripted[ 
+              x[ 7]],
+            Editable->False], "**", 
+          InterpretationBox[\(v\_7\),
+            Subscripted[ 
+              v[ 7]],
+            Editable->False]}]}], "+", 
+      RowBox[{"\[Lambda]", "\[ThinSpace]", 
+        RowBox[{
+          InterpretationBox[\(x\_8\),
+            Subscripted[ 
+              x[ 8]],
+            Editable->False], "**", 
+          InterpretationBox[\(v\_8\),
+            Subscripted[ 
+              v[ 8]],
+            Editable->False]}]}]}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(dc = {dx}\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{"\[Lambda]", "\[ThinSpace]", 
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_1\),
+              Subscripted[ 
+                v[ 1]],
+              Editable->False]}]}], "+", 
+        RowBox[{"\[Lambda]", "\[ThinSpace]", 
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}]}], "+", 
+        RowBox[{"\[Lambda]", "\[ThinSpace]", 
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}]}], "+", 
+        RowBox[{"\[Lambda]", "\[ThinSpace]", 
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}]}], "+", 
+        RowBox[{"\[Lambda]", "\[ThinSpace]", 
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}], "+", 
+        RowBox[{"\[Lambda]", "\[ThinSpace]", 
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], "+", 
+        RowBox[{"\[Lambda]", "\[ThinSpace]", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}]}], "+", 
+        RowBox[{"\[Lambda]", "\[ThinSpace]", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}]}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[BoxData[{
+    \(\(raise = {ax[1, 2], ax[2, 3], ax[3, 4]};\)\ \), "\n", 
+    \(\(drop = {ax[2, 1], ax[3, 2], ax[4, 3]};\)\ \)}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(a3 = VSum[x[i]**v[i], {i, 1, 8}]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{
+      RowBox[{
+        InterpretationBox[\(x\_1\),
+          Subscripted[ 
+            x[ 1]],
+          Editable->False], "**", 
+        InterpretationBox[\(v\_1\),
+          Subscripted[ 
+            v[ 1]],
+          Editable->False]}], "+", 
+      RowBox[{
+        InterpretationBox[\(x\_2\),
+          Subscripted[ 
+            x[ 2]],
+          Editable->False], "**", 
+        InterpretationBox[\(v\_2\),
+          Subscripted[ 
+            v[ 2]],
+          Editable->False]}], "+", 
+      RowBox[{
+        InterpretationBox[\(x\_3\),
+          Subscripted[ 
+            x[ 3]],
+          Editable->False], "**", 
+        InterpretationBox[\(v\_3\),
+          Subscripted[ 
+            v[ 3]],
+          Editable->False]}], "+", 
+      RowBox[{
+        InterpretationBox[\(x\_4\),
+          Subscripted[ 
+            x[ 4]],
+          Editable->False], "**", 
+        InterpretationBox[\(v\_4\),
+          Subscripted[ 
+            v[ 4]],
+          Editable->False]}], "+", 
+      RowBox[{
+        InterpretationBox[\(x\_5\),
+          Subscripted[ 
+            x[ 5]],
+          Editable->False], "**", 
+        InterpretationBox[\(v\_5\),
+          Subscripted[ 
+            v[ 5]],
+          Editable->False]}], "+", 
+      RowBox[{
+        InterpretationBox[\(x\_6\),
+          Subscripted[ 
+            x[ 6]],
+          Editable->False], "**", 
+        InterpretationBox[\(v\_6\),
+          Subscripted[ 
+            v[ 6]],
+          Editable->False]}], "+", 
+      RowBox[{
+        InterpretationBox[\(x\_7\),
+          Subscripted[ 
+            x[ 7]],
+          Editable->False], "**", 
+        InterpretationBox[\(v\_7\),
+          Subscripted[ 
+            v[ 7]],
+          Editable->False]}], "+", 
+      RowBox[{
+        InterpretationBox[\(x\_8\),
+          Subscripted[ 
+            x[ 8]],
+          Editable->False], "**", 
+        InterpretationBox[\(v\_8\),
+          Subscripted[ 
+            v[ 8]],
+          Editable->False]}]}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(g0bas = Flatten[{ac, bc, cc, dc}]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_1\),
+              Subscripted[ 
+                v[ 1]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_1\),
+              Subscripted[ 
+                v[ 1]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_1\),
+              Subscripted[ 
+                v[ 1]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_1\),
+              Subscripted[ 
+                v[ 1]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}]}], ",", 
+        RowBox[{"2", "\[ThinSpace]", 
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}], ",", 
+        RowBox[{"2", "\[ThinSpace]", 
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], ",", 
+        RowBox[{"2", "\[ThinSpace]", 
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}]}], ",", 
+        RowBox[{"2", "\[ThinSpace]", 
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_1\),
+              Subscripted[ 
+                v[ 1]],
+              Editable->False]}], "-", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_3\),
+                Subscripted[ 
+                  x[ 3]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_8\),
+                Subscripted[ 
+                  v[ 8]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_4\),
+                Subscripted[ 
+                  x[ 4]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_7\),
+                Subscripted[ 
+                  v[ 7]],
+                Editable->False]}]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_1\),
+              Subscripted[ 
+                v[ 1]],
+              Editable->False]}], "-", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_4\),
+                Subscripted[ 
+                  x[ 4]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_6\),
+                Subscripted[ 
+                  v[ 6]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_2\),
+                Subscripted[ 
+                  x[ 2]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_8\),
+                Subscripted[ 
+                  v[ 8]],
+                Editable->False]}]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_1\),
+              Subscripted[ 
+                v[ 1]],
+              Editable->False]}], "-", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_2\),
+                Subscripted[ 
+                  x[ 2]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_7\),
+                Subscripted[ 
+                  v[ 7]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_3\),
+                Subscripted[ 
+                  x[ 3]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_6\),
+                Subscripted[ 
+                  v[ 6]],
+                Editable->False]}]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "-", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_1\),
+                Subscripted[ 
+                  x[ 1]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_8\),
+                Subscripted[ 
+                  v[ 8]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_4\),
+                Subscripted[ 
+                  x[ 4]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_5\),
+                Subscripted[ 
+                  v[ 5]],
+                Editable->False]}]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "-", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_3\),
+                Subscripted[ 
+                  x[ 3]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_5\),
+                Subscripted[ 
+                  v[ 5]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_1\),
+                Subscripted[ 
+                  x[ 1]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_7\),
+                Subscripted[ 
+                  v[ 7]],
+                Editable->False]}]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_1\),
+                Subscripted[ 
+                  x[ 1]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_6\),
+                Subscripted[ 
+                  v[ 6]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_2\),
+                Subscripted[ 
+                  x[ 2]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_5\),
+                Subscripted[ 
+                  v[ 5]],
+                Editable->False]}]}]}], ",", 
+        RowBox[{
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_1\),
+                Subscripted[ 
+                  x[ 1]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_1\),
+                Subscripted[ 
+                  v[ 1]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_2\),
+                Subscripted[ 
+                  x[ 2]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_2\),
+                Subscripted[ 
+                  v[ 2]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_3\),
+                Subscripted[ 
+                  x[ 3]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_3\),
+                Subscripted[ 
+                  v[ 3]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_4\),
+                Subscripted[ 
+                  x[ 4]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_4\),
+                Subscripted[ 
+                  v[ 4]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_5\),
+                Subscripted[ 
+                  x[ 5]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_5\),
+                Subscripted[ 
+                  v[ 5]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_6\),
+                Subscripted[ 
+                  x[ 6]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_6\),
+                Subscripted[ 
+                  v[ 6]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_7\),
+                Subscripted[ 
+                  x[ 7]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_7\),
+                Subscripted[ 
+                  v[ 7]],
+                Editable->False]}]}], "+", 
+          RowBox[{"\[Lambda]", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_8\),
+                Subscripted[ 
+                  x[ 8]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_8\),
+                Subscripted[ 
+                  v[ 8]],
+                Editable->False]}]}]}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Length[%]\)], "Input"],
+
+Cell[BoxData[
+    \(32\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SubAlgebra[qp, g, raise]\)], "Input"],
+
+Cell[BoxData[
+    \("qp is a sublagebra in g"\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(PDim[qp]\)], "Input"],
+
+Cell[BoxData[
+    \({6, 0}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Image[qp]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_1\),
+              Subscripted[ 
+                x[ 1]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_4\),
+              Subscripted[ 
+                v[ 4]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{"-", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_1\),
+                Subscripted[ 
+                  x[ 1]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_4\),
+                Subscripted[ 
+                  v[ 4]],
+                Editable->False]}]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_8\),
+              Subscripted[ 
+                x[ 8]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_5\),
+              Subscripted[ 
+                v[ 5]],
+              Editable->False]}]}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SubAlgebra[qm, g, drop]\)], "Input"],
+
+Cell[BoxData[
+    \("qm is a sublagebra in g"\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(PDim[qm]\)], "Input"],
+
+Cell[BoxData[
+    \({6, 0}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Image[qm]\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_2\),
+              Subscripted[ 
+                x[ 2]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_1\),
+              Subscripted[ 
+                v[ 1]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_6\),
+              Subscripted[ 
+                v[ 6]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_3\),
+              Subscripted[ 
+                x[ 3]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_2\),
+              Subscripted[ 
+                v[ 2]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{
+            InterpretationBox[\(x\_4\),
+              Subscripted[ 
+                x[ 4]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_3\),
+              Subscripted[ 
+                v[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{
+            InterpretationBox[\(x\_7\),
+              Subscripted[ 
+                x[ 7]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{"-", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_3\),
+                Subscripted[ 
+                  x[ 3]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_1\),
+                Subscripted[ 
+                  v[ 1]],
+                Editable->False]}]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_7\),
+              Subscripted[ 
+                v[ 7]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{"-", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_4\),
+                Subscripted[ 
+                  x[ 4]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_2\),
+                Subscripted[ 
+                  v[ 2]],
+                Editable->False]}]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_6\),
+              Subscripted[ 
+                x[ 6]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}]}], ",", 
+        RowBox[{
+          RowBox[{"-", "\[ThinSpace]", 
+            RowBox[{
+              InterpretationBox[\(x\_4\),
+                Subscripted[ 
+                  x[ 4]],
+                Editable->False], "**", 
+              InterpretationBox[\(v\_1\),
+                Subscripted[ 
+                  v[ 1]],
+                Editable->False]}]}], "+", 
+          RowBox[{
+            InterpretationBox[\(x\_5\),
+              Subscripted[ 
+                x[ 5]],
+              Editable->False], "**", 
+            InterpretationBox[\(v\_8\),
+              Subscripted[ 
+                v[ 8]],
+              Editable->False]}]}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Length/@{ac, bc, cc, dc}\)], "Input"],
+
+Cell[BoxData[
+    \({15, 10, 6, 1}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\[Lambda] = 1\)], "Input"],
+
+Cell[BoxData[
+    \(Act[f_, g_] =. \)], "Input"],
+
+Cell[BoxData[
+    \(Lbn[f_, g_] := VNormal[Lb[f, g]]\)], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Decompose as over sl4", "Subsection"],
+
+Cell[BoxData[
+    \(\(raise = {ax[1, 2], ax[2, 3], ax[3, 4]}; \)\)], "Input"],
+
+Cell[BoxData[
+    \(bas = Join[ac, bc, cc, dc]\)], "Input"],
+
+Cell[BoxData[
+    \(SplitList[bas, _, Weight]\)], "Input"],
+
+Cell[BoxData[
+    \(hvect[bas]\)], "Input"],
+
+Cell[BoxData[
+    \(cx[3, 4]\)], "Input"],
+
+Cell[BoxData[
+    \(drop = {ax[2, 1], ax[3, 2], ax[4, 3]}\)], "Input"],
+
+Cell[BoxData[
+    \(lvect[bas]\)], "Input"],
+
+Cell[BoxData[
+    \(bx[4, 4]\)], "Input"],
+
+Cell[BoxData[
+    \(cx[1, 2]\)], "Input"],
+
+Cell[BoxData[
+    \(Weight[%]\)], "Input"],
+
+Cell[BoxData[
+    \(Weight[bx[4, 4]]\)], "Input"],
+
+Cell[BoxData[
+    \(\(bs = SplitList[bas, _, Weight]; \)\)], "Input"],
+
+Cell[BoxData[
+    \(ForSplit[{zzhh, wt -> z}, \n\tzzz = z; \n\t
+      For[i = 1, i <= 8, \(i++\), \n\t\t
+        img = PartSplit[bs, wt + Weight[v[i]]]; \n\t\tPrint[{zzz, img}]; \n
+        \t\tzzz = 
+          GeneralPreImage[Act[v[i], #]&, zzz, c, GeneralSum[a, img], a]]; \n\t
+      Print[wt -> zzz]]\)], "Input"]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"4.1 for X",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+AutoGeneratedPackage->None,
+WindowSize->{792, 529},
+WindowMargins->{{Automatic, 224}, {Automatic, 163}},
+Magnification->1.25
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1727, 52, 84, 1, 136, "Title"],
+Cell[1814, 55, 55, 1, 35, "Input"],
+Cell[1872, 58, 126, 2, 56, "Input"],
+Cell[2001, 62, 128, 3, 77, "Input"],
+
+Cell[CellGroupData[{
+Cell[2154, 69, 99, 4, 68, "Subsection"],
+Cell[2256, 75, 229, 4, 56, "Input"],
+
+Cell[CellGroupData[{
+Cell[2510, 83, 245, 4, 98, "Input"],
+Cell[2758, 89, 4105, 121, 56, "Output"],
+Cell[6866, 212, 4105, 121, 56, "Output"],
+Cell[10974, 335, 3501, 113, 56, "Output"],
+Cell[14478, 450, 10497, 341, 119, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[25012, 796, 93, 1, 35, "Input"],
+Cell[25108, 799, 4846, 156, 56, "Output"]
+}, Open  ]],
+Cell[29969, 958, 233, 3, 266, "Input"],
+Cell[30205, 963, 275, 6, 119, "Input"],
+
+Cell[CellGroupData[{
+Cell[30505, 973, 88, 1, 35, "Input"],
+Cell[30596, 976, 7758, 236, 77, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[38391, 1217, 76, 1, 35, "Input"],
+Cell[38470, 1220, 2513, 81, 56, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[41020, 1306, 42, 1, 35, "Input"],
+Cell[41065, 1309, 2700, 82, 56, "Output"]
+}, Open  ]],
+Cell[43780, 1394, 141, 2, 56, "Input"],
+
+Cell[CellGroupData[{
+Cell[43946, 1400, 65, 1, 35, "Input"],
+Cell[44014, 1403, 2001, 73, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[46052, 1481, 66, 1, 35, "Input"],
+Cell[46121, 1484, 25800, 810, 266, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[71958, 2299, 42, 1, 35, "Input"],
+Cell[72003, 2302, 36, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[72076, 2308, 57, 1, 35, "Input"],
+Cell[72136, 2311, 59, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[72232, 2317, 41, 1, 35, "Input"],
+Cell[72276, 2320, 40, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[72353, 2326, 42, 1, 35, "Input"],
+Cell[72398, 2329, 3618, 117, 56, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[76053, 2451, 56, 1, 35, "Input"],
+Cell[76112, 2454, 59, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[76208, 2460, 41, 1, 35, "Input"],
+Cell[76252, 2463, 40, 1, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[76329, 2469, 42, 1, 35, "Input"],
+Cell[76374, 2472, 3738, 119, 56, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[80149, 2596, 57, 1, 35, "Input"],
+Cell[80209, 2599, 48, 1, 35, "Output"]
+}, Open  ]],
+Cell[80272, 2603, 46, 1, 35, "Input"],
+Cell[80321, 2606, 48, 1, 35, "Input"],
+Cell[80372, 2609, 65, 1, 35, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[80474, 2615, 43, 0, 56, "Subsection"],
+Cell[80520, 2617, 77, 1, 35, "Input"],
+Cell[80600, 2620, 59, 1, 35, "Input"],
+Cell[80662, 2623, 58, 1, 35, "Input"],
+Cell[80723, 2626, 43, 1, 35, "Input"],
+Cell[80769, 2629, 41, 1, 35, "Input"],
+Cell[80813, 2632, 70, 1, 35, "Input"],
+Cell[80886, 2635, 43, 1, 35, "Input"],
+Cell[80932, 2638, 41, 1, 35, "Input"],
+Cell[80976, 2641, 41, 1, 35, "Input"],
+Cell[81020, 2644, 42, 1, 35, "Input"],
+Cell[81065, 2647, 49, 1, 35, "Input"],
+Cell[81117, 2650, 69, 1, 35, "Input"],
+Cell[81189, 2653, 315, 6, 182, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

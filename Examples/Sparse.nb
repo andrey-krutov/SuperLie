@@ -1,0 +1,418 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     10413,        309]*)
+(*NotebookOutlinePosition[     11132,        334]*)
+(*  CellTagsIndexPosition[     11088,        330]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+    \(Needs["\<SuperLie`Sparse`\>"]\)], "Input"],
+
+Cell[BoxData[
+    \("SuperLie Package Version 2.06 installed\nDisclaimer: This software is \
+provided \"AS IS\", without a warranty of any kind"\)], "Print"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(Off[Solve::svars]\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["Example: \[GothicB]\[GothicR](3)", "Subsection",
+  CellChangeTimes -> {{3.4056974925507407`*^9, 3.4056975133406353`*^9}, \
+3.4056999260399265`*^9}],
+
+Cell["FieldChar[3];", "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(CartanMatrixAlgebra[
+      g, {x, h, 
+        y}, {{2, \(-1\), 0}, {\(-1\), 2, \(-1\)}, {0, \(-1\), 0}}]\)], "Input",\
+
+  CellChangeTimes -> {{3.405621297866085*^9, 3.4056213059477053`*^9}, \
+{3.4056971369894686`*^9, 3.405697156918125*^9}, {3.405698368540352*^9, \
+3.4056983928052435`*^9}, {3.4056999570044513`*^9, 3.4057000152682304`*^9}, \
+3.4057004379460115`*^9, 3.4057004698919473`*^9}],
+
+Cell[BoxData[
+    \(29\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SubAlgebra[a, g, Basis[g]]\)], "Input",
+  CellChangeTimes -> {{3.405621329771963*^9, 3.405621336882187*^9}, \
+3.405697188072923*^9}],
+
+Cell[BoxData[
+    \("a is a sublagebra in g"\)], "Output"]
+}, Open  ]],
+
+Cell["Now we can check the bracket of the algebra:", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(cijk = ActToSparse[a]\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"SparseArray", "[", 
+        RowBox[{
+          InterpretationBox[\("<"\[InvisibleSpace]426\[InvisibleSpace]">"\),
+            SequenceForm[ "<", 426, ">"],
+            Editable->False], ",", \({29, 29, 29}\)}], "]"}],
+      False,
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(TestSparseBracket[a, %]\)], "Input"],
+
+Cell[BoxData[
+    \(True\)], "Output"]
+}, Open  ]],
+
+Cell["\<\
+Now we test a Jacobi identity for a 2-cocycle
+If you call chSetAlg(...) you don'h have to call DLeft (because it is called \
+from chSetAlg)\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DLeft[a \[Rule] da]\)], "Input",
+  CellChangeTimes -> {{3.405697873408387*^9, 3.405697882361261*^9}}],
+
+Cell[BoxData[
+    \("da is the a-module of the left derivatives on a"\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(c1 = 
+        2\[ThinSpace]a\_19 ** \((da\_15\[Wedge]da\_16)\) + 
+          2\[ThinSpace]a\_21 ** \((da\_14\[Wedge]da\_16)\) + 
+          2\[ThinSpace]a\_22 ** \((da\_14\[Wedge]da\_15)\) + 
+          a\_23 ** \((da\_13\[Wedge]da\_16)\) + 
+          a\_24 ** \((da\_13\[Wedge]da\_15)\) + 
+          a\_25 ** \((da\_13\[Wedge]da\_14)\) + 
+          2\[ThinSpace]a\_26 ** \((da\_10\[Wedge]da\_16)\) + 
+          a\_26 ** \((da\_11\[Wedge]da\_15)\) + 
+          2\[ThinSpace]a\_26 ** \((da\_12\[Wedge]da\_14)\) + 
+          2\[ThinSpace]a\_27 ** \((da\_8\[Wedge]da\_16)\) + 
+          a\_27 ** \((da\_9\[Wedge]da\_15)\) + 
+          2\[ThinSpace]a\_27 ** \((da\_12\[Wedge]da\_13)\) + 
+          2\[ThinSpace]a\_28 ** \((da\_6\[Wedge]da\_16)\) + 
+          a\_28 ** \((da\_9\[Wedge]da\_14)\) + 
+          2\[ThinSpace]a\_28 ** \((da\_11\[Wedge]da\_13)\) + 
+          2\[ThinSpace]a\_29 ** \((da\_6\[Wedge]da\_15)\) + 
+          a\_29 ** \((da\_8\[Wedge]da\_14)\) + 
+          2\[ThinSpace]a\_29 ** \((da\_10\[Wedge]da\_13)\);\)\)], "Input",
+  CellChangeTimes -> {{3.405701359741488*^9, 3.4057013869405985`*^9}, \
+3.405701521894653*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(FormToSparse[c1]\)], "Input",
+  CellChangeTimes -> {3.4056975402092705`*^9, {3.4056975732067184`*^9, \
+3.405697708821723*^9}, {3.4056987441905107`*^9, 3.405698744711259*^9}}],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"SparseArray", "[", 
+        RowBox[{
+          InterpretationBox[\("<"\[InvisibleSpace]36\[InvisibleSpace]">"\),
+            SequenceForm[ "<", 36, ">"],
+            Editable->False], ",", \({29, 29, 29}\)}], "]"}],
+      False,
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(TestSparseBracket[a, %]\)], "Input",
+  CellChangeTimes -> {{3.4056987782995567`*^9, 3.4056987957646704`*^9}}],
+
+Cell[BoxData[
+    \(True\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(c2 = 
+        2\[ThinSpace]a\_6 ** \((da\_4\[Wedge]da\_16)\) + 
+          a\_8 ** \((da\_7\[Wedge]da\_16)\) + 
+          a\_10 ** \((da\_9\[Wedge]da\_16)\) + 
+          a\_17 ** \((da\_7\[Wedge]da\_13)\) + 
+          2\[ThinSpace]a\_17 ** \((da\_9\[Wedge]da\_12)\) + 
+          2\[ThinSpace]a\_17 ** \((da\_16\[Wedge]da\_19)\) + 
+          a\_20 ** \((da\_4\[Wedge]da\_13)\) + 
+          a\_20 ** \((da\_9\[Wedge]da\_11)\) + 
+          a\_20 ** \((da\_16\[Wedge]da\_21)\) + 
+          a\_22 ** \((da\_4\[Wedge]da\_12)\) + 
+          a\_22 ** \((da\_7\[Wedge]da\_11)\) + 
+          2\[ThinSpace]a\_22 ** \((da\_16\[Wedge]da\_23)\) + 
+          2\[ThinSpace]a\_24 ** \((da\_7\[Wedge]da\_9)\) + 
+          a\_25 ** \((da\_4\[Wedge]da\_9)\) + 
+          2\[ThinSpace]a\_26 ** \((da\_4\[Wedge]da\_7)\) + 
+          a\_29 ** \((da\_4\[Wedge]da\_19)\) + 
+          a\_29 ** \((da\_7\[Wedge]da\_21)\) + 
+          a\_29 ** \((da\_9\[Wedge]da\_23)\);\)\)], "Input",
+  CellChangeTimes -> {3.40570193052223*^9}],
+
+Cell[BoxData[
+    \(\(c3 = 
+        2\[ThinSpace]a\_4 ** \((da\_5\[Wedge]da\_13)\) + 
+          2\[ThinSpace]a\_4 ** \((da\_8\[Wedge]da\_12)\) + 
+          2\[ThinSpace]a\_4 ** \((da\_15\[Wedge]da\_19)\) + 
+          a\_6 ** \((da\_15\[Wedge]da\_17)\) + 
+          2\[ThinSpace]a\_9 ** \((da\_5\[Wedge]da\_15)\) + 
+          a\_11 ** \((da\_8\[Wedge]da\_15)\) + 
+          2\[ThinSpace]a\_18 ** \((da\_8\[Wedge]da\_10)\) + 
+          2\[ThinSpace]a\_18 ** \((da\_13\[Wedge]da\_17)\) + 
+          2\[ThinSpace]a\_18 ** \((da\_15\[Wedge]da\_22)\) + 
+          2\[ThinSpace]a\_21 ** \((da\_5\[Wedge]da\_10)\) + 
+          a\_21 ** \((da\_12\[Wedge]da\_17)\) + 
+          2\[ThinSpace]a\_21 ** \((da\_15\[Wedge]da\_24)\) + 
+          a\_23 ** \((da\_5\[Wedge]da\_8)\) + 
+          2\[ThinSpace]a\_25 ** \((da\_8\[Wedge]da\_17)\) + 
+          2\[ThinSpace]a\_26 ** \((da\_5\[Wedge]da\_17)\) + 
+          2\[ThinSpace]a\_28 ** \((da\_5\[Wedge]da\_22)\) + 
+          a\_28 ** \((da\_8\[Wedge]da\_24)\) + 
+          2\[ThinSpace]a\_28 ** \((da\_17\[Wedge]da\_19)\);\)\)], "Input",
+  CellChangeTimes -> {3.4057019324550095`*^9}],
+
+Cell[BoxData[
+    \(\(c4 = 
+        2\[ThinSpace]a\_5 ** \((da\_6\[Wedge]da\_10)\) + 
+          a\_5 ** \((da\_13\[Wedge]da\_20)\) + 
+          2\[ThinSpace]a\_5 ** \((da\_14\[Wedge]da\_22)\) + 
+          a\_7 ** \((da\_6\[Wedge]da\_11)\) + 
+          a\_7 ** \((da\_13\[Wedge]da\_18)\) + 
+          a\_7 ** \((da\_14\[Wedge]da\_21)\) + 
+          2\[ThinSpace]a\_8 ** \((da\_14\[Wedge]da\_20)\) + 
+          a\_9 ** \((da\_14\[Wedge]da\_18)\) + 
+          a\_12 ** \((da\_6\[Wedge]da\_14)\) + 
+          2\[ThinSpace]a\_19 ** \((da\_10\[Wedge]da\_18)\) + 
+          2\[ThinSpace]a\_19 ** \((da\_11\[Wedge]da\_20)\) + 
+          2\[ThinSpace]a\_19 ** \((da\_14\[Wedge]da\_25)\) + 
+          2\[ThinSpace]a\_23 ** \((da\_6\[Wedge]da\_18)\) + 
+          a\_24 ** \((da\_6\[Wedge]da\_20)\) + 
+          a\_26 ** \((da\_18\[Wedge]da\_20)\) + 
+          a\_27 ** \((da\_6\[Wedge]da\_25)\) + 
+          a\_27 ** \((da\_18\[Wedge]da\_22)\) + 
+          a\_27 ** \((da\_20\[Wedge]da\_21)\);\)\)], "Input",
+  CellChangeTimes -> {3.405701934227558*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(TestSparseBracket[a, FormToSparse[c2]]\)], "Input",
+  CellChangeTimes -> {{3.405697999139179*^9, 3.405698003825918*^9}, \
+{3.4056988233042707`*^9, 3.405698848490486*^9}, 3.4056990927717457`*^9}],
+
+Cell[BoxData[
+    \(True\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(TestSparseBracket[a, FormToSparse[c3]]\)], "Input",
+  CellChangeTimes -> {3.4056975402092705`*^9, {3.4056975732067184`*^9, \
+3.405697708821723*^9}, {3.4056987441905107`*^9, 3.405698744711259*^9}, \
+3.405699095055029*^9}],
+
+Cell[BoxData[
+    \(True\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(TestSparseBracket[a, FormToSparse[c4]]\)], "Input",
+  CellChangeTimes -> {{3.4056987782995567`*^9, 3.4056987957646704`*^9}}],
+
+Cell[BoxData[
+    \(True\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(TestSparseBracket[a, FormToSparse[c2 + c3]]\)], "Input",
+  CellChangeTimes -> {{3.405697999139179*^9, 3.405698003825918*^9}, \
+{3.4056988233042707`*^9, 3.405698848490486*^9}, 3.4056990927717457`*^9, \
+3.4056993005905743`*^9}],
+
+Cell[BoxData[
+    \(TestSparseBracket::"jac" \(\(:\)\(\ \)\) 
+      "The Jacobi identity for bracket is not valid"\)], "Message"],
+
+Cell[BoxData[
+    \(False\)], "Output"]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"5.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1400}, {0, 967}},
+WindowSize->{1392, 776},
+WindowMargins->{{0, Automatic}, {0, Automatic}},
+ShowSelection->True,
+Magnification->1.5,
+StyleDefinitions -> "Default.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 62, 1, 42, "Input"],
+Cell[1841, 56, 157, 2, 60, "Print"]
+}, Open  ]],
+Cell[2013, 61, 50, 1, 42, "Input"],
+
+Cell[CellGroupData[{
+Cell[2088, 66, 153, 2, 56, "Subsection"],
+Cell[2244, 70, 30, 0, 41, "Input"],
+
+Cell[CellGroupData[{
+Cell[2299, 74, 410, 8, 42, "Input"],
+Cell[2712, 84, 36, 1, 41, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2785, 90, 152, 3, 42, "Input"],
+Cell[2940, 95, 58, 1, 41, "Output"]
+}, Open  ]],
+Cell[3013, 99, 60, 0, 47, "Text"],
+
+Cell[CellGroupData[{
+Cell[3098, 103, 54, 1, 42, "Input"],
+Cell[3155, 106, 306, 8, 41, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3498, 119, 56, 1, 42, "Input"],
+Cell[3557, 122, 38, 1, 41, "Output"]
+}, Open  ]],
+Cell[3610, 126, 163, 4, 73, "Text"],
+
+Cell[CellGroupData[{
+Cell[3798, 134, 121, 2, 42, "Input"],
+Cell[3922, 138, 83, 1, 41, "Output"]
+}, Open  ]],
+Cell[4020, 142, 1152, 21, 120, "Input"],
+
+Cell[CellGroupData[{
+Cell[5197, 167, 194, 3, 42, "Input"],
+Cell[5394, 172, 304, 8, 41, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5735, 185, 129, 2, 42, "Input"],
+Cell[5867, 189, 38, 1, 41, "Output"]
+}, Open  ]],
+Cell[5920, 193, 1022, 20, 120, "Input"],
+Cell[6945, 215, 1119, 20, 120, "Input"],
+Cell[8067, 237, 1042, 20, 120, "Input"],
+
+Cell[CellGroupData[{
+Cell[9134, 261, 214, 3, 42, "Input"],
+Cell[9351, 266, 38, 1, 41, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9426, 272, 240, 4, 42, "Input"],
+Cell[9669, 278, 38, 1, 41, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9744, 284, 144, 2, 42, "Input"],
+Cell[9891, 288, 38, 1, 41, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9966, 294, 245, 4, 42, "Input"],
+Cell[10214, 300, 129, 2, 32, "Message"],
+Cell[10346, 304, 39, 1, 41, "Output"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+
