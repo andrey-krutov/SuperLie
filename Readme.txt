@@ -313,3 +313,23 @@ List of changes
 18jul13 Added palette with Help button (because F1 does not work with add-ons
         in Mathematica 8.0)
 
+==============================================
+21jul13  Version 2.07 released 
+==============================================
+
+24oct14 Fixed compatibility with Mathematica 9. In case of conflicting symbols
+        the SuperLie symbols will shadow the Mathematica symbols.
+
+19jul15 Fixed redefinition of symmetry of Wedge
+        Added version of HamiltonAlgebra with explicit struclure constants
+
+25oct15 Fixed action of algeras with Cartan matrix on CoLeft[module]
+
+01dec15 Fixed HWModule for characteristic 2
+
+10jan16 SubAlgebra: Checking if the generators are graded
+        (unless a new grading is defined in subalgebra).
+
+==============================================
+21jul13  Version 2.08 Beta 01
+==============================================

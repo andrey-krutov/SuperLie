@@ -3,7 +3,7 @@
 BeginPackage["SuperLie`Irrmod`", {"SuperLie`", "SuperLie`Enum`", "SuperLie`Space`",
  "SuperLie`Generate`", "SuperLie`Domain`", "SuperLie`Solvars`"}]
 
-HWModule::usage = "HWModule[name, alg, wt] build the irreducible
+SuperLie`Irrmod`HWModule::usage = "HWModule[name, alg, wt] build the irreducible
 module with highest weight wt";
 
 Begin["$`"]
@@ -22,6 +22,7 @@ Begin["$`"]
 >	P->p        - the parity of the highest vector (default 0)
 >	ToGrade->rn   - compute down to the grade -Abs[rn] (default - Infinity).
 >        The grade of the highest vector is assigned to 0.
+>        With ToGrade->Auto the range limit is adjusted as needed. 
 >	Order->{y1,...,ym}  - the order in which the elements of g_ should
 >        appear in the expressions of the basis of v in terms of
 >        generators of U(g_). Default order is given by Basis[g_].
@@ -59,7 +60,7 @@ HWModule[v_, g_, wt_, opts___Rule] :=
     rnf = - Min @@ Grade /@ Basis[f]; (* maximal -grade in y *)
     dimf = Dim[f];
     clr = (Clear /. {opts});
-    If[clr===Continue,
+    If[clr===Continue,  (* continue with new range limit *)
        {factor,flist,gen,ind} = info[v];
        rn0 = ToGrade[v];
        adx = ActTable[x,v];
@@ -142,10 +143,10 @@ DPrint[2, "Grade[f]: ", Grade /@ bf, ", Grade[x] = ", Grade /@ Basis[x]];
 DPrint[1, "rngx = ", rngx, ", rngf = ", rngf];
 
     For [r=rn0+1; k=Dim[v,rn0], r<=rn, ++r,  (* loop over grade *)
-      If[r>rnf-Grade[v[Dim[v]]], Break[]];
+      If[r>rnf-Grade[v[Dim[v]]], Break[]];   (* no new elements possible *)
 DPrint[1, "Grade = ", -r];
       m = Min[rn-r+1, rnf];
-(* Extend the multiplication table *)
+(* Extend the multiplication table (limit width according to range) *)
       adf = Join[adf, Table[none, {k}, {If[cont, dimf, rngf[[m]]]}]];
 (* Collect all ordered pairs {f[i],v[j]} with grade -r *)
       For [ii=1; l=0; zt={}; tind={},  ii<=dimf, ii++,
@@ -155,7 +156,7 @@ DPrint[1, "Grade = ", -r];
         rj = r+Grade[fi];
         If[rj<0||rj>=r, Continue[]];
 DPrint[3, "Searching [",fi,",v], Grade[v]=", -rj, ", j in [",If[rj==0,1,j1[[rj]]], ",", j1[[rj+1]]-1, "]"];
-        For[j=If[rj==0,1,j1[[rj]]], j<j1[[rj+1]], j++,
+        For[j=If[rj==0,1,j1[[rj]]], j<j1[[rj+1]], j++,   (* loop over v[i] with grade -r-Grade[fi] *)
           If[ind[[j]]>=minind,
 	    zt = { zt, act[fi,v[j]] };	(* list of expressions of grade -r *)
 	    tind = {tind, ii};		(* list ordering indices *)
@@ -182,10 +183,10 @@ DPrint[4, "(decoded) : ", eq/.y[i_]:>zt[[i]]];
          srel = If [$Solve===ParamSolve,
                         Block[{UserRate=hwOrderRate},ParamSolve[eq, Array[y,l]]],
                 (*else*)
-                        $Solve[eq, Array[y,l]]
+                        $Solve[eq, Array[y,l]] (* TODO: resolve solutions to ensure that y[i] is replaced with y[j] with j>i *)
                 ] [[1]] //. $`RestoreSV;
 DPrint[2, "Relations in max submodule: srel = ", srel];
-DPrint[4, "(decoded) :" srel/.y[i_]:>zt[[i]]],
+DPrint[4, "(decoded) :", srel/.y[i_]:>zt[[i]]],
       (* else: Build module Verma *)
          srel = {}
       ];
@@ -239,6 +240,8 @@ DPrint[1, "GList : ", GList[v]];
     v/: ActTable[x,v] = adx;
     GenRel[v] ^= rel;
     PDim[v]^=With[{s=Plus@@PList[v]},{Dim[v]-s,s}];
+    TheAlgebra[v] ^= g;
+    Relatives[v]^= Table[None, {i, 8}];
     If [(Enum /.{opts}) =!= False,		(* enumeration *)
       With[{r=Length[RangeIndex[v]]-1},
 		EnumSet[v, {0,-r,-1}->
@@ -253,11 +256,12 @@ evalHWAct[fj_,act[fi_,z_]]:=
   VNormal[
     DPrint[2,evalHWAct->{fj,fi,z, VNormal[Act[fj, z]], Act[Act[fj,fi],z], VNormal[Act[fi, Act[fj, z]]]}];
     If[fj===fi,
-      SVTimes[($p+1)/2 , Act[Act[fj,fi],z]],
+      If [$p===2, Act[Squaring[fi,Act],z], (*else*) SVTimes[1/2 , Act[Act[fj,fi],z]]],
     (* else *)
       Act[Act[fj,fi],z] ~VPlus~
 	SVTimes[(-1)^(P[fj]P[fi]), Act[fi, Act[fj, z]]]]];
 
+(* returns {max[rnglist], {last position of # in rnglist}} *)
 rngHW[rnglist_]:=
   Module[{maxrng, indlist, i, r, dim},
     maxrng = Max@@rnglist;

@@ -1,7 +1,7 @@
 BeginPackage["SuperLie`Cartmatr`",
   {"SuperLie`", "SuperLie`Domain`", "SuperLie`Enum`", "SuperLie`Space`", "SuperLie`Generate`"}]
 
-CartanMatrixAlgebra::usage =
+SuperLie`Cartmatr`CartanMatrixAlgebra::usage =
 "CartanMatrixAlgebra[name, {x,h,y}, matr] defines a Lie (super)algebra
 with given Cartan matrix \"matr\". It's elements are named h[i] (Cartan 
 subalgebra), x[i] (positive weight), y[i] (negative weight). The parities
@@ -10,19 +10,19 @@ PList->{p1, ...} and GList->{g1, ...}. The option ToDegree->d and ToGrade->g
 limits computations up to terms of polynomial degree d and grading g.";
 
 
-CartanMatrix::usage = 
+SuperLie`Cartmatr`CartanMatrix::usage = 
 "If the algebra g is constructed from Cartan matrix, CartanMatrix[g] returns that matrix."; 
 
-RootReflection::usage =
+SuperLie`Cartmatr`RootReflection::usage =
 "For an algebra g constructed from Cartan matrix, RootReflection[g,i] returns the matrix
 of reflection about the i-th simple root. These reflections generate the Weyl group of
 the algebra g."
 
-WeightToPolyGrade::usage = 
+SuperLie`Cartmatr`WeightToPolyGrade::usage = 
 "WeightToPolyGrade[g,w] converts the weight w from the basis given by the action of
 the Cartan subalgebra to the basis of simple positive roots"
 
-PolyGradeToWeight::usage =
+SuperLie`Cartmatr`PolyGradeToWeight::usage =
 "PolyGradeToWeight[g,d] converts the weight d from the basis of simple positive roots
 to the basis given by the action of the Cartan subalgebra"
 

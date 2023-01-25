@@ -1,21 +1,21 @@
 BeginPackage["SuperLie`Tensor`",
  {"SuperLie`", "SuperLie`Domain`", "SuperLie`Space`"}]
 
-MatrixLieAlgebra::usage =
+SuperLie`Tensor`MatrixLieAlgebra::usage =
   "MatrixLieAlgebra[name, vect] - defines \"name\" as a matrix Lie 
 (super)algebra on the space \"vect\"; MatrixLieAlgebra[matr, Dim->dim] -
 defines \"matr\" as Lie (super)algebra of dim*dim matrices (if
 dim={d1,d2,..} - d1 odd components, d2 - even, d3 - odd, ...).";
 
-TensorSpace::usage = 
+SuperLie`Tensor`TensorSpace::usage = 
   "TensorSpace[name,over,{comp,..}] - define space \"name\" as tensor 
 product of components. Repeated components may be written as comp^n. All
 component must be the relatives of the space \"over\".";
 
-CompList::usage = "CompList[TensSpace] - the list of vector spaces -
+SuperLie`Tensor`CompList::usage = "CompList[TensSpace] - the list of vector spaces -
  components of tensor space."
 
-Rank::usage = "Rank[tensSpace] - the rank of the tensor space."
+SuperLie`Tensor`Rank::usage = "Rank[tensSpace] - the rank of the tensor space."
 
 Begin["$`"]
 

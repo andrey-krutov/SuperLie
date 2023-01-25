@@ -3,12 +3,12 @@ BeginPackage[
   "SuperLie`Subspace`", {"SuperLie`", "SuperLie`Space`",  
     "SuperLie`Genvect`", "SuperLie`Domain`","SuperLie`Vsplit`", "SuperLie`Enum`"}]
 
-KerSpace::usage = 
+SuperLie`Subspace`KerSpace::usage = 
  "KerSpace[sub, in, fn] calculates the subspace sub={v\[Element]in\
 \[VerticalSeparator]fn(v)=0}. fn is a linear function or a list of linear \
 functions."
-		
-GradedKerSpace::usage = 
+
+SuperLie`Subspace`GradedKerSpace::usage = 
  "GradedKerSpace[sub, in, fn] calculates the subspace sub={v\[Element]in\
 \[VerticalSeparator]fn(v)=0}. fn is a linear function or a list of linear \
 functions. The oprions From->degree and To->degree restricts the \

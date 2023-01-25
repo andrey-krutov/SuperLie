@@ -7,15 +7,15 @@ BeginPackage["SuperLie`Sparse`", {"SuperLie`", "SuperLie`Domain`",
 This package works with sparse array representation of algebras
 *)
 
-ActToSparse::usage = "ActToSparse[g] returns the structural constants \!\({\(C\^k\)\_\(i\[InvisibleComma]j\)}\) of the bracket on the algebra g as a sparce array."
+SuperLie`Sparse`ActToSparse::usage = "ActToSparse[g] returns the structural constants \!\({\(C\^k\)\_\(i\[InvisibleComma]j\)}\) of the bracket on the algebra g as a sparce array."
 
-SquaringToSparse::usage = "SquaringToSparse[g] returns the structural constants \!\({\(S\^k\)\_i}\) of the squaring operation on the algebra g as sparce array."
+SuperLie`Sparse`SquaringToSparse::usage = "SquaringToSparse[g] returns the structural constants \!\({\(S\^k\)\_i}\) of the squaring operation on the algebra g as sparce array."
 
-FormToSparse::usage = "FormToSparse[\[Omega]] returns the sparce-array representation of the form \!\(\[Omega]\[Element]\[GothicM]\[CircleTimes]\(\[CapitalLambda]\^k\)\[GothicN]\) where \!\(\[GothicM]=\[LeftAngleBracket]m\_i, i\[Element][1,dim(\[GothicM])]\[RightAngleBracket]\) and \!\(\[GothicN]=\[LeftAngleBracket]n\_i, i\[Element][1,dim(\[GothicN])]\[RightAngleBracket]\) a finite-dimensional modules over a Lie (super)algebra."
+SuperLie`Sparse`FormToSparse::usage = "FormToSparse[\[Omega]] returns the sparce-array representation of the form \!\(\[Omega]\[Element]\[GothicM]\[CircleTimes]\(\[CapitalLambda]\^k\)\[GothicN]\) where \!\(\[GothicM]=\[LeftAngleBracket]m\_i, i\[Element][1,dim(\[GothicM])]\[RightAngleBracket]\) and \!\(\[GothicN]=\[LeftAngleBracket]n\_i, i\[Element][1,dim(\[GothicN])]\[RightAngleBracket]\) a finite-dimensional modules over a Lie (super)algebra."
 
-PowerToSparse::usage = "PowerToSparse[\[Omega]] returns the sparce-array representation of coefficients \!\(c\_\(i\[InvisibleComma]j\)\) of the form \!\(\[Omega]=c\_\(i\[InvisibleComma]j\) m\_i\[CircleTimes]\(n\_j\)\^\(\[Wedge]k\) + ...\[Element]\[GothicM]\[CircleTimes]\(\[CapitalLambda]\^p\)\[GothicN]\) where \!\(\[GothicM]=\[LeftAngleBracket]m\_i, i\[Element][1,dim(\[GothicM])]\[RightAngleBracket]\) and \!\(\[GothicN]=\[LeftAngleBracket]n\_i, i\[Element][1,dim(\[GothicN])]\[RightAngleBracket]\) a finite-dimensional modules over a Lie (super)algebra. The members of form \[Omega] that are not powers (e.g., \!\(m\_k\[CircleTimes]n\_i\[Wedge]n\_j\) for i!=j) are ignored."
+SuperLie`Sparse`PowerToSparse::usage = "PowerToSparse[\[Omega]] returns the sparce-array representation of coefficients \!\(c\_\(i\[InvisibleComma]j\)\) of the form \!\(\[Omega]=c\_\(i\[InvisibleComma]j\) m\_i\[CircleTimes]\(n\_j\)\^\(\[Wedge]k\) + ...\[Element]\[GothicM]\[CircleTimes]\(\[CapitalLambda]\^p\)\[GothicN]\) where \!\(\[GothicM]=\[LeftAngleBracket]m\_i, i\[Element][1,dim(\[GothicM])]\[RightAngleBracket]\) and \!\(\[GothicN]=\[LeftAngleBracket]n\_i, i\[Element][1,dim(\[GothicN])]\[RightAngleBracket]\) a finite-dimensional modules over a Lie (super)algebra. The members of form \[Omega] that are not powers (e.g., \!\(m\_k\[CircleTimes]n\_i\[Wedge]n\_j\) for i!=j) are ignored."
 
-TestSparseBracket::usage = "TestSparseBracket[g,c] tests that \!\(c={\(C\^k\)\_\(i\[InvisibleComma]j\)}\) are structure constant of a valid superalgebra bracket on g. TestSparseBracket[g,c,s] tests also the structure constants \!\(s={\(S\^k\)\_i}\) of squaring operation on g"
+SuperLie`Sparse`TestSparseBracket::usage = "TestSparseBracket[g,c] tests that \!\(c={\(C\^k\)\_\(i\[InvisibleComma]j\)}\) are structure constant of a valid superalgebra bracket on g. TestSparseBracket[g,c,s] tests also the structure constants \!\(s={\(S\^k\)\_i}\) of squaring operation on g"
 
 Begin["$`"]
 

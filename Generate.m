@@ -1,28 +1,28 @@
 BeginPackage["SuperLie`Generate`", {"SuperLie`", "SuperLie`Domain`"}]
 
-GenBasis::usage =
+SuperLie`Generate`GenBasis::usage =
  "GenBasis[g] is the representation of the basis of \"g\" in terms of
 (free) generators.";
 
-GenRel::usage = 
+SuperLie`Generate`GenRel::usage = 
  "GenRel[g] is the list of relations between the generators of \"g\"."
 
-ToDegree::usage =
+SuperLie`Generate`ToDegree::usage =
  "ToDegree->n is an optional parameter for space constructors. It restricts the
 calculations to the elements of polynomial degree d in terms of generators.
 ToDegree[m] returns this limit. The results of operations in m are evaluated
 only if its degree <= ToDegree[m]."
-
+(*
 ToDegree::usage =
  "Option ToDegree->d restrict the calculation in algebra constructors to the
 elements of polynomial degree d in terms of generators."
+*)
 
+SuperLie`Generate`GRange::usage = "Replaced by ToDegree."
 
-GRange::usage = "Replaced by ToDegree."
+SuperLie`Generate`GRange = ToDegree;
 
-GRange = ToDegree;
-
-(*JacRel::usage =
+(*SuperLie`Generate`JacRel::usage =
  "JacRel[g] is the list of Jacobi relations between the generators of \"g\"."*)
 
 Begin["$`"]
@@ -240,7 +240,8 @@ StepGenerationVG[g_, grade_, deg_, rng_, Brk_, brk_, sqr_:False] :=
 	  ]]
       ]]]];
 (* Extra Jacobi identies for char=3 *)
-      If[$p==3 && Mod[deg,3]==0,
+      If[$p==3 && Mod[deg,3]==0 && Mod[grade,3]==0,
+        g1=grade/3;
         q = deg/3;
         Do [ If[P[g[i]]==1,
               jac = VNormal[Brk[g[i],If[sqr, Squaring[g[i],Brk], Brk[g[i],g[i]]]] /. solj ];
@@ -254,7 +255,7 @@ StepGenerationVG[g_, grade_, deg_, rng_, Brk_, brk_, sqr_:False] :=
                 sol = MapAt[VNormal, sol[[1]], 2 ];
                 solj = Append[ MapAt[VNormal,#/.sol,2]& /@ solj, sol];
              ]],
-             {i, gen$ind[[q]], gen$ind[[q+1]]-1}
+             {i, gen$ind[g1][[q]], gen$ind[g1][[q+1]]-1}
         ]
       ];
      (* gen$tbl = gen$tbl //. solj; *)

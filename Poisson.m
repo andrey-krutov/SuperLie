@@ -4,7 +4,7 @@ BeginPackage["SuperLie`Poisson`",
   {"SuperLie`", "SuperLie`Space`", "SuperLie`Vsplit`","SuperLie`Domain`",
    "SuperLie`Enum`", "SuperLie`Symalg`"}]
 
-PoissonAlgebra::usage = 
+SuperLie`Poisson`PoissonAlgebra::usage = 
   "PoissonAlgebra[name, x] defines a Lie (super)algebra \"name\" as the algebra of
 the polynomials on the space \"x\" with standard Poisson bracket. 
 PoissonAlgebra[name, {p1,...,pn,[\[Theta],]qn,...,q1}] defines a Lie
@@ -13,80 +13,81 @@ spaces p1,...,q1 with standard Poisson bracket on {pi,qi} and diagonal on \[Thet
 PoissonAlgebra[name, x, {{c1,i1,j1},...}] define the Poisson algebra with form
 {f,g}=c1 df/dxi1 dg/dxi2 + ..."
 
-Pb::usage = "Pb[x,y] is the Poisson bracket (operator)."
-pb::usage = "pb[x,y] is the Poisson bracket (unevaluated form)."
+SuperLie`Poisson`Pb::usage = "Pb[x,y] is the Poisson bracket (operator)."
+SuperLie`Poisson`pb::usage = "pb[x,y] is the Poisson bracket (unevaluated form)."
 
-HamiltonAlgebra::usage = 
+SuperLie`Poisson`HamiltonAlgebra::usage = 
   "HamiltonAlgebra[name, x] defines a Lie (super)algebra \"name\" as the
 algebra of the polynomials of x[1],... ,x[n] modulo constants with standard Poisson 
 bracket. This algebra is isomorphic to the algebra of Hamiltonian vector fields.
 HamiltonAlgebra[name, {p1,...}] defines non-standard Poisson	brackets."
 
-Hb::usage = "Hb[x,y] is the Poisson bracket modulo constants (operator).";
-hb::usage = "hb[x,y] is the Poisson bracket modulo constants (unevaluated form)."
+SuperLie`Poisson`Hb::usage = "Hb[x,y] is the Poisson bracket modulo constants (operator).";
+SuperLie`Poisson`hb::usage = "hb[x,y] is the Poisson bracket modulo constants (unevaluated form)."
 
-ContactAlgebra::usage = 
+SuperLie`Poisson`ContactAlgebra::usage = 
   "ContactAlgebra[name, x, t] defines a Lie (super)algebra \"name\" as the
 algebra of the polynomials of x[1],... ,x[n], t. with standard Contact 
 bracket. The Poisson bracket is also defined. ContactAlgebra[name, {p1,...}, t]
 and ContactAlgebra[name, x, t, form] defines non-standard Contact and Poisson
 brackets."
 
-Kb::usage = "Kb[x,y] is the Contact bracket (operator).";
-kb::usage = "kb[x,y] is the Contact bracket (unevaluated form)."
+SuperLie`Poisson`Kb::usage = "Kb[x,y] is the Contact bracket (operator).";
+SuperLie`Poisson`kb::usage = "kb[x,y] is the Contact bracket (unevaluated form)."
 
 
-HamiltonianH::usage =
+SuperLie`Poisson`HamiltonianH::usage =
  "HamiltonianH[alg] is the operator from functions to vector fields (implemented
 as differential operators) associated with the Poisson algebra alg."
 
-\[CapitalDelta]::usage =
+SuperLie`Poisson`\[CapitalDelta]::usage =
  "\[CapitalDelta][alg] is the Laplacian in the algebra alg"
 
-EulerOp::usage =
+SuperLie`Poisson`EulerOp::usage =
  "EulerOp[alg] is the Euler operator in algebra alg"
 
-ContactK::usage =
+SuperLie`Poisson`ContactK::usage =
  "ContactK[alg] is the operator from functions to vector fields (implemented
 as differential operators) associated with the breaket in the Contact algebra."
 
-ButtinAlgebra::usage = 
+SuperLie`Poisson`ButtinAlgebra::usage = 
   "ButtinAlgebra[name, {x,y}] defines a Buttin (super)algebra \"name\" as the algebra of
 the polynomials on x1,x2,...,y1,y2,... with standard Buttin bracket."
 
-Bb::usage = "Bb[x,y] is the Buttin bracket (operator).";
-bb::usage = "bb[x,y] is the Buttin bracket (unevaluated form)."
+SuperLie`Poisson`Bb::usage = "Bb[x,y] is the Buttin bracket (operator).";
+SuperLie`Poisson`bb::usage = "bb[x,y] is the Buttin bracket (unevaluated form)."
 
-OKAlgebra::usage = 
+SuperLie`Poisson`OKAlgebra::usage = 
   "OKAlgebra[name, {x,y,t}] defines an \"odd\" contact (super)algebra \"name\" as the algebra of
 the polynomials on x1,x2,...,y1,y2,... and t with standard bracket."
 
-Ob::usage = "Ob[x,y] is the odd Contact bracket (operator).";
-ob::usage = "ob[x,y] is the odd Contact bracket (unevaluated form)."
+SuperLie`Poisson`Ob::usage = "Ob[x,y] is the odd Contact bracket (operator).";
+SuperLie`Poisson`ob::usage = "ob[x,y] is the odd Contact bracket (unevaluated form)."
 
-MoebiusAlgebra::usage = 
+SuperLie`Poisson`MoebiusAlgebra::usage = 
   "MoebiusAlgebra[g, {x,\[Theta],t}] defines a Moebius-Poisson superalgebra g as the
 algebra of the polynomials on x1,...xn,\[Theta], and t. The x may be also a list of
 components, as in PoissonAlgebra."
 
-Mb::usage = "Mb[x,y] is the Moebius bracket (operator).";
-mb::usage = "mb[x,y] is the Moebius bracket (unevaluated form)."
+SuperLie`Poisson`Mb::usage = "Mb[x,y] is the Moebius bracket (operator).";
+SuperLie`Poisson`mb::usage = "mb[x,y] is the Moebius bracket (unevaluated form)."
 
-RamondAlgebra::usage = 
+SuperLie`Poisson`RamondAlgebra::usage = 
   "RamondAlgebra[g, {x,\[Theta],t}] defines a Ramond superalgebra g as the algebra of
 the polynomials on x1,...xn,\[Theta], and t. The x may be also a list of components,
 as in PoissonAlgebra."
 
-Rb::usage = "Rb[x,y] is the Ramond bracket (operator).";
-rb::usage = "rb[x,y] is the Ramond bracket (unevaluated form)."
+SuperLie`Poisson`Rb::usage = "Rb[x,y] is the Ramond bracket (operator).";
+SuperLie`Poisson`rb::usage = "rb[x,y] is the Ramond bracket (unevaluated form)."
 
-RamondD ZRamondD
+SuperLie`Poisson`RamondD
+SuperLie`Poisson`ZRamondD
 
-RamondK::usage =
+SuperLie`Poisson`RamondK::usage =
  "RamondK[alg] is the operator from functions to vector fields (implemented
 as differential operators) associated with the breaket in the Ramond algebra."
 
-NewBrace::usage =
+SuperLie`Poisson`NewBrace::usage =
  "NewBrace[Op, txt] defines new braket Op[f,g] = {f,g}_txt.
  NewBrace[Op, txt, p, op] defines also the unevaluated form op and the parity p."
 
@@ -408,9 +409,18 @@ poRev[x_] :=
 
 NewBrace[Hb, "h.b.", 0, hb]
 
-HamiltonAlgebra[name_, x_, opts___] :=
+HamiltonAlgebra[name_, x_, opts___Rule] :=
   With[{Hb$l=Hb/.{opts}, hb$l=hb/.{opts}, Pb$l=Pb/.{opts}},
     PoissonAlgebra[name, x, opts];
+	Hb$l[f_, g_] := Pb$l[f, g] /. e_VTimes :> 0 /; Length[e] == 0;
+    Bracket[name] ^= Hb$l;
+	bracket[name] ^= hb$l;
+	name::usage ^= SPrint["`` is a Hamiltonian algebra over ``", name, x]
+  ]
+
+HamiltonAlgebra[name_, x_Symbol, form_List, opts___Rule] :=
+  With[{Hb$l=Hb/.{opts}, hb$l=hb/.{opts}, Pb$l=Pb/.{opts}},
+    PoissonAlgebra[name, x, form, opts];
 	Hb$l[f_, g_] := Pb$l[f, g] /. e_VTimes :> 0 /; Length[e] == 0;
     Bracket[name] ^= Hb$l;
 	bracket[name] ^= hb$l;

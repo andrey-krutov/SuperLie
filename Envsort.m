@@ -6,52 +6,52 @@ BeginPackage["SuperLie`Envsort`", {"SuperLie`", "SuperLie`Domain`", "SuperLie`Sp
 
 (* === The product in the enveloping algebra === *)
 
-EnvNormal::usage = "EnvNormal[e] gives the standard form of element e of an
+SuperLie`Envsort`EnvNormal::usage = "EnvNormal[e] gives the standard form of element e of an
 enveloping algebra. EnvNormal[e,p] uses the function p[t1,t2] to determine
 the required order in the product."
 
-EnvSortRule::usage = "e //. EnvSortRule sorts the terms of the miltiplication
+SuperLie`Envsort`EnvSortRule::usage = "e //. EnvSortRule sorts the terms of the miltiplication
 in enveloping algebra into canonical order."
 
-$EnvLess::usage = "The value of $EnvLess is the default sorting function
+SuperLie`Envsort`$EnvLess::usage = "The value of $EnvLess is the default sorting function
 for the product in enveloping algebras"
 
 
-EnvelopingOperation::usage = "EnvelopingOperation[times,power,act,order]
+SuperLie`Envsort`EnvelopingOperation::usage = "EnvelopingOperation[times,power,act,order]
 defines times to be an operation in enveloping algebra with action act;
 power is the power operation corresponding to times; order[f,g] is True if
 times[f,g] is in the canonical order in the enveloping algebra."
 
-EnvelopingSymbol::usage = "EnvelopingSymbol[symb,mult,brk,order]
+SuperLie`Envsort`EnvelopingSymbol::usage = "EnvelopingSymbol[symb,mult,brk,order]
 introduces notations: symb[...] for the elements of basis of an enveloping
 algebra, mult[...] for the multiplication in enveloping algebras with
 bracket brk. The function order[f,g] should return True if symb[f,g] is
 in the canonical order in the enveloping algebra."
 
-ExpandOp::usage = "ExpandOp[expr,op] expands the operation in the expression
+SuperLie`Envsort`ExpandOp::usage = "ExpandOp[expr,op] expands the operation in the expression
 as (noncommutative) multiplication"
 
-ExpandOpRule::usage = "expr //. ExpandOpRule[op] expands the operation in the 
+SuperLie`Envsort`ExpandOpRule::usage = "expr //. ExpandOpRule[op] expands the operation in the 
 expression as (noncommutative) multiplication"
 
 (* === The composition of differential operators === *)
 
-dSymbol::usage = "dSymbol[d] assigns the symbol used as differential
+SuperLie`Envsort`dSymbol::usage = "dSymbol[d] assigns the symbol used as differential
  operator: d[x]^n will represent the differential operator d/(dx)^n"
 
-CleardSymbol::usage = "CleardSymbol[] clears the symbol that was used as
+SuperLie`Envsort`CleardSymbol::usage = "CleardSymbol[] clears the symbol that was used as
  differential operator"
 
-dSortRule::usage = "expr //. dSortRule[d] sorts the terms in the composition
+SuperLie`Envsort`dSortRule::usage = "expr //. dSortRule[d] sorts the terms in the composition
  of differential operators: d[x]x -> x d[x] + 1"
 
-dNormal::usage = "dNormal[expr] gives the standard form of the composition
+SuperLie`Envsort`dNormal::usage = "dNormal[expr] gives the standard form of the composition
  of differential operators"
 
-DiffAlgebra::usage = "DiffAlgebra[g,space] defines g as the algebra of
+SuperLie`Envsort`DiffAlgebra::usage = "DiffAlgebra[g,space] defines g as the algebra of
  differential operators on the given space."
 
-Dc::usage = "Dc is the default name for the bracket in DiffAlgebra" 
+SuperLie`Envsort`Dc::usage = "Dc is the default name for the bracket in DiffAlgebra" 
 
 Options[DiffAlgebra]={Bracket->Dc, D->d}
 

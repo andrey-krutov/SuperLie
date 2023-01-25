@@ -4,61 +4,64 @@ BeginPackage["SuperLie`Det`"];
 
 
 
-rowt::usage = "selected row"
-colt::usage = "selected column"
-mrest::usage = "the matrix"
-mfact::usage = "the extracted factor"
+SuperLie`Det`rowt::usage = "selected row"
+SuperLie`Det`colt::usage = "selected column"
+SuperLie`Det`mrest::usage = "the matrix"
+SuperLie`Det`mfact::usage = "the extracted factor"
 
-ini::usage = "ini[m,p1,...] initialize the calgication of determinant with parameters p1,..."
+SuperLie`Det`ini::usage = "ini[m,p1,...] initialize the calgication of determinant with parameters p1,..."
 
-tcol::usage = "tcol[i] assigns and prints selected column"
+SuperLie`Det`tcol::usage = "tcol[i] assigns and prints selected column"
 
-prcol::usage = "prcol prints the selected columns"
-prdeg::usage = "prdeg prints the maximal polymomial degrees in the rows of the matrix"
+SuperLie`Det`prcol::usage = "prcol prints the selected columns"
+SuperLie`Det`prdeg::usage = "prdeg prints the maximal polymomial degrees in the rows of the matrix"
 
-$prfunc::usage = "The value of $prfunc is a function applied to matrix element when printing. Default in Identity."
+SuperLie`Det`$prfunc::usage = "The value of $prfunc is a function applied to matrix element when printing. Default in Identity."
 
 (*
-optm::usage = optz::usage = optd::usage =
+SuperLie`Det`optm::usage = optz::usage = optd::usage =
  "optm, optz, and optd select optimal row/column for eliminating from matrix
 (using optimization criteria)."
 
-scol::usage = scoz::usage = scod::usage =
+SuperLie`Det`scol::usage = scoz::usage = scod::usage =
  "scol, scoz, and scod select optimal row/column for eliminating from matrix
 (using optimization criteria) and print the contents of the selected column"
 *)
 
-optm::usage =
+SuperLie`Det`optm::usage =
  "optm select optimal row/column for eliminating from matrix"
 
-scol::usage = 
+SuperLie`Det`scol::usage = 
  "scol select optimal row/column for eliminating from matrix
 and print the contents of the selected column"
 
-adr::usage =
+SuperLie`Det`adr::usage =
  "adr[i,j,c] adds c*row_j to row_i and prints the contents of the selected column.
 adr[i,j] is equivalent to adr[i,j,1]. adr[{i1,j1[,c1]},...] adds multiple rows
 and that prints the contents of the selected column."
 
-fat::usage =
+SuperLie`Det`fat::usage =
  "fat extracts all common factors from the rows of the matrix"
 
-elim::usage =
+SuperLie`Det`redt::usage =
+ "redt reduces the current column"
+
+SuperLie`Det`elim::usage =
  "elim[i,j] eliminate row_i and col_j from matrix"
 
-sim::usage =
+SuperLie`Det`sim::usage =
  "sim elimitates all row and column that have monomial elements" 
 
-simt::usage =
+SuperLie`Det`simt::usage =
  "simt elimitates the selected row and column than find and print new optimal selection" 
 
-expn::usage =
+SuperLie`Det`expn::usage =
  "expn expands the matrix elements"
 
-sav::usage =
+SuperLie`Det`sav::usage =
  "sav saves the current matrix to \"det.pnt\" in the current directory"
 
-fini::usage =
+SuperLie`Det`fini::usage =
  "fini calculate the determinant of the matrix (usung Standard Mathematica functions)
 and save the result to \"det.sav\" in the current directory"
 
@@ -169,7 +172,8 @@ prcol := Do[Print[i," : ", $prfunc[mrest[[i,colt]]]],{i,Length[mrest]}]
 dg[(List|Plus)[v__]] := dg /@ Unevaluated[Max[v]]
 dg[Times[u_,v__]] := dg /@ Unevaluated[u+v]
 vars[x__]:=
- (var = Alternatives[x];
+ (dgVars = {x};
+  var = Alternatives[x];
   dg[var^n_.] := n
  )
 dg[_] = 0
@@ -270,6 +274,35 @@ fat :=
     ];
     Print ["nfact = ", mfact];
   ];
+
+
+PolyDeg[f_Times]:=Plus@@PolyDeg/@List@@f
+PolyDeg[f_Plus]:=Max@@PolyDeg/@List@@f
+PolyDeg[Power[f_,n_]]:=n*PolyDeg[f]
+PolyDeg[f_Symbol]=1;
+PolyDeg[f_Integer]=0;
+PolyDeg[f_Rational]=0;
+PolyDeg[f_Real]=0;
+
+
+redt :=
+  Module[{dg, cf, re, lm, lg, i, j, loop=True},
+    While[loop,
+      loop = False;
+      lm = Length[mrest];
+      dg=Sort[DeleteCases[Table[If[mrest[[i,colt]]=!=0,{-PolyDeg[mrest[[i,colt]]],i},0],{i,lm}],0]];
+      lg = Length[dg];
+  Print["Deg"->dg];
+      For[j=1, j<lg, j++,
+        {cf,re}=PolynomialReduce[mrest[[dg[[j,2]],colt]],Table[mrest[[dg[[i,2]],colt]],{i,j+1,lg}],dgVars];
+  Print[{dg[[j]],mrest[[dg[[j,2]],colt]],re,cf}//ColumnForm];
+        If[PolyDeg[re]+dg[[j,1]]<0,
+          For[i=j+1, i<=lg, i++, If[cf[[i-j]]=!=0, adr$[dg[[j,2]],dg[[i,2]],-cf[[i-j]]]]];
+  Print[mrest[[dg[[j,2]],colt]]];
+          loop = True]]];
+    fat;
+    scol]
+
 
 (* ------ Expand, transpose, save --------------- *)
 expn := (mrest = Expand[mrest]; scol);		

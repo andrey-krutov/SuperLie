@@ -2,7 +2,7 @@ BeginPackage["SuperLie`Free`",
  {"SuperLie`", "SuperLie`Domain`", "SuperLie`Enum`",
   "SuperLie`Space`", "SuperLie`Generate`"}] 
 
-FreeLieAlgebra::usage =
+SuperLie`Free`FreeLieAlgebra::usage =
 "FreeLieAlgebra[alg, {gen}, {rel}, range] defines the (super)algebra generated
 (as free algebra) by elements gen[[1]], ... with relations rel[[1]]... .
 Options Grade->{gr1,...} and PList->{p1,...} defines the degrees and parities

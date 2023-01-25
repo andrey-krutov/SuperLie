@@ -7,114 +7,130 @@ BeginPackage["SuperLie`Sing`", {"SuperLie`", "SuperLie`Domain`",
 This package defines functions for calculation of singular vectors.
 *)
 
-svSetAlg::usage =
+SuperLie`Sing`svSetAlg::usage =
 "svSetAlg[g,{neg, zero, pos}] declares the algebra
 and subalgebras to be used  in calculations."
 
-svSetAlg2::usage =
+SuperLie`Sing`svSetAlg2::usage =
 "svSetAlg2[g,{neg, zero, pos}] declares the algebra
 and subalgebras to be used  in calculations (the subalgebras are already calculated)."
 
-svScalars::usage =
+SuperLie`Sing`svScalars::usage =
 "svScalars[c,...] declares the indefinite scalar parameters to be used in
 calculations. The first parameter will be used as indefinite coefficient
 in vectors." 
 
-svCheckRL::usage =
+SuperLie`Sing`svCheckRL::usage =
 "svCheckRL[r, l, [,d]] checks that the proposed lists of raising and
 lowering elements agrees with the weight defined in the algebra." 
 
-svCart::usage= 
+SuperLie`Sing`svCart::usage= 
 "svCart[x, h, y] builds the Cartan decomposition of \!\(g\_0\)" 
 
-svVerma::usage= 
+SuperLie`Sing`svVerma::usage= 
 "svVerma[m, \[Lambda], grade] builds the Verma module over \!\(g\_0\)
 with highest weight \[Lambda] and the basis of \!\(U(\(g\_0\^+\))\);
 all computations up to the given grade."
  
-svDefEq::usage=
+SuperLie`Sing`svDefEq::usage=
 "svDefEq[deg] builds the equation system for singular vectors of given
 degree in Ind(V), with undefinite \!\(g\_0\)-module V."
 
-svEq::usage=
+SuperLie`Sing`svEq::usage=
 "svEq[\[Eta]] builds the equation system for singular vectors in
 \!\(Ind(M\_\[Lambda])\) of the degree defined by svDefEq and
 weight \[Lambda]-\[Eta]."
  
-svAct::usage=
+SuperLie`Sing`svAct::usage=
 "svAct[u,m] returns the action of \!\(u \[Element] U(\(a\_+\))\) on
 \!\(m \[Element] Ind(M\_\[Lambda])\)." 
 
-svSp::usage=
+SuperLie`Sing`svSp::usage=
 "svSp[u, m] returns the scalar product of  \!\(u\[Element]U(\(a\_+\))\)
 and \!\(m \[Element] Ind(M\_\[Lambda])\). Defined if w(u) + w(m) = \[Lambda]."
  
-svRep::usage =
+SuperLie`Sing`svRep::usage =
 "svRep[expr] apply the current substitutions to expression expr and tries
 to simplify the result."
 
-svH::usage =
+SuperLie`Sing`svH::usage =
 "svH converts the highness conditions using current substitutions, stores
 and prints the resulting equations"
 
-svZ::usage =
+SuperLie`Sing`svZ::usage =
 "svZ[] converts the equations of singularity using current substitutions, 
 stores and prints the resulting equations. svZ[i] do the same only for
 i-th singularity condition."
 
-svSub::usage =
+SuperLie`Sing`svSub::usage =
 "svSub[sol,...] adds the solutions to the substitution list. The sol may
 be (a) a rule \[Lambda][_]->._; (b) a rule c[__]->_; (c) an integer, to
 add the solution with this number (see svSolve); (d) en expression sv$e, to
 add the  solution of sv$e==0."
 
-svUnSub::usage = "sbUnSub undoes the last svSub or svExcl in the current branch"
+SuperLie`Sing`svUnSub::usage = "sbUnSub undoes the last svSub or svExcl in the current branch"
 
-svExcl::usage =
+SuperLie`Sing`svExcl::usage =
 "svExcl[expr] adds the expression to the list of non-zero expressions.
 Such expressions will be canceled in equations."
 
-svBranch::usage =
+SuperLie`Sing`svBranch::usage =
 "svBranch[level] starts new logical branch of solving equations. If level
 is <= the current level, the solution list and exclusion list are restored
 as they were when the level was created."
 
-svHiCf::usage =
+SuperLie`Sing`svHiCf::usage =
 "svHiCf returns the coefficient(s) at \!\(m\_\[Lambda]\) of the vector in
 question, applying solution list"
  
-svSolve::usage =
+SuperLie`Sing`svSolve::usage =
 "svSolve examines the list of stored equations, tries to solve each of them
 and print the solutions together with conditions on \[Lambda] when the
 equations are valid. Use svSub[i] to add the solution of i-th equation
 to the substitution list."
 
-svResult::usage =
+SuperLie`Sing`svResult::usage =
 "svResult returns the solution(s) of the current replacement list, as
 element(s) of \!\(U(\(g\_-\))\[CircleTimes]M\_\[Lambda]\)"
  
-svImg::usage =
+SuperLie`Sing`svImg::usage =
 "svImg[f] substitutes elements of \!\(g\_-\), \!\(g\_0\), and \!\(g\_+\)
 in expression f with their images in the main algebra g"
 
-sv$Out::usage =
+SuperLie`Sing`sv$Out::usage =
 "expr/.sv$Out converts an expression containing elements of main algebra g
 and Verma module m to the user-defined form. The default sv$Out is empty"
 
-svLess::usage = sv$Less::usage =
+SuperLie`Sing`svLess::usage = sv$Less::usage =
 "The value of sv$Less is the ordering function used for sorting the terms in
 the enveloping algebra. The default function is svLess"
 
-sv$Print::usage = "Controls the amount of information printed by SuperLie`Sing`"
+SuperLie`Sing`sv$Print::usage = "Controls the amount of information printed by SuperLie`Sing`"
 
 (* Variables *)
 
-sv$g; sv$n; sv$a; sv$p; sv$y; sv$h; sv$x; sv$r; sv$l; sv$d; sv$m;
-sv$\[Lambda]; sv$z; sv$v; sv$c;
-sv$hi; sv$eqHi; sv$eqZ; sv$e;
+SuperLie`Sing`sv$g;
+SuperLie`Sing`sv$n;
+SuperLie`Sing`sv$a;
+SuperLie`Sing`sv$p;
+SuperLie`Sing`sv$y;
+SuperLie`Sing`sv$h;
+SuperLie`Sing`sv$x;
+SuperLie`Sing`sv$r;
+SuperLie`Sing`sv$l;
+SuperLie`Sing`sv$d;
+SuperLie`Sing`sv$m;
+SuperLie`Sing`sv$\[Lambda];
+SuperLie`Sing`sv$z;
+SuperLie`Sing`sv$v;
+SuperLie`Sing`sv$c;
+SuperLie`Sing`sv$hi;
+SuperLie`Sing`sv$eqHi;
+SuperLie`Sing`sv$eqZ;
+SuperLie`Sing`sv$e;
 
-sv$solTime = 20 (*sec*)
-sv$Print = 0
+SuperLie`Sing`sv$solTime = 20 (*sec*)
+SuperLie`Sing`sv$Print = 0
 
 (* ======  Private ======== *)
 Begin["sv`"]

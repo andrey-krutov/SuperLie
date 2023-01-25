@@ -3,23 +3,23 @@
 BeginPackage["SuperLie`Vecfield`",
  {"SuperLie`", "SuperLie`Space`", "SuperLie`Domain`", "SuperLie`Enum`", "SuperLie`Symalg`"}]
 
-VectorLieAlgebra::usage = 
+SuperLie`Vecfield`VectorLieAlgebra::usage = 
   "VectorLieAlgebra[name, x] defines a Lie (super)algebra \"name\" as the
 algebra of vector fields on the space \"x\" and its action on the
 (super)space of polynomials on \"x\".";
 
-VectorRepresentation::usage =
+SuperLie`Vecfield`VectorRepresentation::usage =
   "VectorRepresentation[g, vect] maps algebra g into vector Lie (super)algebra
 vect over an g-module." 
 
-Lb::usage = "Lb[x,y] is the Lie bracket (operator)."
-lb::usage = "lb[x,y] is the Lie bracket (unevaluated form)."
+SuperLie`Vecfield`Lb::usage = "Lb[x,y] is the Lie bracket (operator)."
+SuperLie`Vecfield`lb::usage = "lb[x,y] is the Lie bracket (unevaluated form)."
 
 NewBracket[Lb, Unevaluated->lb, Output->ArgForm["[``,``]"],
 	TeX->ArgForm["\\left[``,\\,``\\right]"] ]
 Jacobi[Lb->{CircleTimes,VTimes}]
 
-Div::usage = "The options Div->operation gives the name the divergention of
+SuperLie`Vecfield`Div::usage = "The options Div->operation gives the name the divergention of
 (poly)vector fields"
 
 (*Lb[_,Id] ^= 0*)

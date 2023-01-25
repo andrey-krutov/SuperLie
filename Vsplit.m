@@ -12,7 +12,7 @@ BeginPackage["SuperLie`Vsplit`", {"SuperLie`", "SuperLie`Domain`"}]
 
 (* ------------- Split expressions --------------------- *)
 
-SplitSum::usage =
+SuperLie`Vsplit`SplitSum::usage =
  "SplitSum[expr, ptrn] transform the expression c1*v1 + c2*v2 + ... with
 v1, v2, .. matching pattern \"ptrn\", gathering terms with equals \"v\".
 The result is the list { vi1->sc1, vi2->sc2, ... }, there 
@@ -24,7 +24,7 @@ where {f1,f2,..} is a sorted list of different values func[vi] and
 \"sej\".. is the sum of the members of \"expr\" giving value \"fj\" of
 function \"func\" (not including members with func[vi]==SkipVal)."
 
-SplitList::usage =
+SuperLie`Vsplit`SplitList::usage =
  "SplitList[expr, ptrn] transform the expression {c1*v1, c2*v2, ...} with
 v1, v2, .. matching pattern \"ptrn\", gathering terms with equals \"v\".
 The result is the list { vi1->lc1, vi2->lc2, ... }, there 
@@ -36,35 +36,35 @@ where {f1,f2,..} is a sorted list of different values func[vi] and
 \"lej\".. is the list of the members of \"expr\" giving value \"fj\" of
 function \"func\" (not including members with func[vi]==SkipVal)."
 
-ForSplit::usage =
+SuperLie`Vsplit`ForSplit::usage =
  "ForSplit[{expr, memb, cnt}, body] or ForSplit[{expr, sel->memb, cnt}, body]
 evaluates the body for each term of the splitted sum or list expr. The
 variables sel and memb are assigned to the current values of the selector
 and the member of the expr, the optional cnt is the loop counter.
 The Break[], Continue[] and Return[value] can be used in the body." 
 
-MergeSplit::usage =
+SuperLie`Vsplit`MergeSplit::usage =
  "MergeSplit[fn, expr, expr, ...] merges terms of splitted expression."
 
-AddSplit::usage =
+SuperLie`Vsplit`AddSplit::usage =
  "AddSplit[expr, expr, ...] adds terms of splitted sum."
 
-JoinSplit::usage =
+SuperLie`Vsplit`JoinSplit::usage =
  "JoinSplit[expr, expr, ...] joins terms of splitted list."
 
-ApplySplit::usage =
+SuperLie`Vsplit`ApplySplit::usage =
  "ApplySplit[func, expr, args...] applies function \"func\" to terms of splitted
 sum or list."
 
-MapSplit::usage =
+SuperLie`Vsplit`MapSplit::usage =
  "MapSplit[func, expr] applies function \"func\" to member of lists -
 terms of splitted list."
 
-PartSplit::usage =
+SuperLie`Vsplit`PartSplit::usage =
  "PartSplit[expr, sel] returns the part of splitted expression with
 given selector."
 
-SkipVal::usage =
+SuperLie`Vsplit`SkipVal::usage =
  "\"SkipVal\" is the value of selection function for \"SplitSum\" and
 \"SplitList\". If func[member]==SkipVal, \"member\" will be omitted."
 
@@ -132,7 +132,7 @@ AddSplit[expr___] :=
 *)
 
 MergeSplit[fn_, expr___] :=
-  Merge[expr,
+  MergeLists[expr,
     Sort->(OrderedQ[{First[#1],First[#2]}]&),
     SameTest->(First[#1]===First[#2]&),
     Merge->((#[[1]]->fn@@Last/@{##})&)]

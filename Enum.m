@@ -18,50 +18,53 @@
 
 BeginPackage["SuperLie`Enum`"]
 
-EnumFor::usage =
+SuperLie`Enum`EnumFor::usage =
  "EnumFor[var, set, options..., body] executes body for any var from set.
 Options are: Range->range or Range->{from,to,[step]} restricts the range
 of elements; From->elt, FromNext->elt, To->elt, Until->elt give the first
 and the last element."
 
-EnumTable::usage =
+SuperLie`Enum`EnumTable::usage =
  "EnumTable[expr, {var,set,options...}] generates a list of the values of
 expr when var runs over all elements of the enumerated set. The options
 (see EnumFor) restricts the range of elements. The EnumTable[expr, iter ...]
 with several iterators gives a nested list, the first iterator is outermost."
 
-EnumList::usage =
+SuperLie`Enum`EnumList::usage =
  "EnumList[set,options...] generates the list of elements of the enumerated
 set. The options (see EnumFor) restricts the range of elements."
 
-EnumPoint::usage =
+SuperLie`Enum`EnumPoint::usage =
  "EnumPoint[var, set, elt, options...] finds the location of the elt in
 the set and assign the var to point the result. The options are the same
 as for EnumFor."
 
-From FromNext To Until
+SuperLie`Enum`From
+SuperLie`Enum`FromNext
+SuperLie`Enum`To
+SuperLie`Enum`Until
 
-EnumSet::usage =
+SuperLie`Enum`EnumSet::usage =
  "EnumSet[set, range1->comp1, ...] builds new enumerated set from given
 components. The result is attached to the symbol in first argument.
 The arguments must have format {start,end,step}->{deg:>{list}, ... }."
 
-EnumAddTo::usage =
+SuperLie`Enum`EnumAddTo::usage =
  "EnumAddTo[set, range1->comp1, ...] adds the components to the enumerated set."
 
-EnumJoin::usage =
+SuperLie`Enum`EnumJoin::usage =
  "EnumJoin[new, set1, ...]  builds new enumerated set joining the enumerated
 sets set1, set2, ..., setn. EnumJoin[new, old] builds the duplicate of old."
 
-Enum::usage =
+SuperLie`Enum`Enum::usage =
  "Enum[set, i] is the component of the enumeration of the set. Enum[set] is
 the number of the components in the enumeration of the set."
  
-EnumRange::usage =
+SuperLie`Enum`EnumRange::usage =
  "EnumRange[set, no] = {stars, end, step} is the range iterator of the component
  set[no] of the enumerated set."
 
-TestRange::usage =
+SuperLie`Enum`TestRange::usage =
  "TestRange[val, range] tests whether val is in the given range. The range must
  be {end}, {start,end} or {start, end, step}. Returns True, False, Greater or
  Less." 

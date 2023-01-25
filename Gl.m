@@ -3,19 +3,19 @@
 BeginPackage["SuperLie`Gl`",
  {"SuperLie`", "SuperLie`Domain`", "SuperLie`Enum`", "SuperLie`Space`"}]
 
-glAlgebra::usage =
+SuperLie`Gl`glAlgebra::usage =
   "glAlgebra[name, vect] - defines \"name\" as a matrix Lie 
 (super)algebra on the space \"vect\"; glAlgebra[matr, Dim->dim] -
 defines \"matr\" as Lie (super)algebra of dim*dim matrices (if
 dim={d1,d2,..} - d1 odd components, d2 - even, d3 - odd, ...).";
 
-slAlgebra::usage =
+SuperLie`Gl`slAlgebra::usage =
   "slAlgebra[name, vect] - defines \"name\" as a traceless matrix Lie 
 (super)algebra on the space \"vect\"; slAlgebra[matr, Dim->dim] -
 defines \"matr\" as Lie (super)algebra of traceless dim*dim matrices (if
 dim={d1,d2,..} - d1 odd components, d2 - even, d3 - odd, ...).";
 
-pslAlgebra::usage =
+SuperLie`Gl`pslAlgebra::usage =
   "pslAlgebra[name, vect] - defines \"name\" as a traceless matrix Lie 
 (super)algebra on the space \"vect\"; pslAlgebra[matr, Dim->dim] -
 defines \"matr\" as Lie (super)algebra of traceless dim*dim matrices (if

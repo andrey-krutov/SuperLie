@@ -8,7 +8,7 @@ BeginPackage["SuperLie`ShapDet`", {"SuperLie`", "SuperLie`Domain`",
 This package defines functions for calculation of Shapovalov Determinants.
 *)
 
-sdDefAlg::usage=
+SuperLie`ShapDet`sdDefAlg::usage=
  "sdDefAlg[g,{marks}] declares the algebra those Shapovalov determinant are computed.
 The argument {marks} gives the list of replacement rules {h1->m1,...} that maps
 the elements of Cartan subalgebra to the corresponding weight marks of the vacuum vector.
@@ -17,51 +17,51 @@ Order->fn sets the ordering function that define the order of the terms in U(g).
 Split->fn defines the function used to split the U(g) in sum of subspaces ortogonal
 with respect to the invariant bilinear form on U(g). By default a is splitted by weight and parity."
 
-sd$Order::usage=
+SuperLie`ShapDet`sd$Order::usage=
  "The value of sd$Order is a function used to order terms in enveloping product.
   sd$Order[x,y] should give True if the the pair (x,y) is in the order
   desired for terms of the enveloping product, and False otherwise.
   The default value of sd$Order is sdOrder."
 
-sdOrder::usage=
+SuperLie`ShapDet`sdOrder::usage=
  "The function sdOrder is used by default to order terms in enveloping product.
   sdOrder[x,y] gives True if either Grade[x]<Grade[y] or the grades are equals
   and the terms are either in canonical order (for grade>=0) or reversed
   canonical order (for grade<0). See also sd$Order."
 
-sdVacuumAnnulatorQ::usage=
+SuperLie`ShapDet`sdVacuumAnnulatorQ::usage=
  "sdVacuumAnnulatorQ[up[...]] gives True if degrees of terms in up[...] are
   such that this element always annulate the vacuum vector in Verma module"
 
-sdInvolution::usage =
+SuperLie`ShapDet`sdInvolution::usage =
  "sdInvolution[x] implements the involution on U[g]. It should be defined by the
   user on the basis of algebra g"
 
-sdShapForm::usage =
+SuperLie`ShapDet`sdShapForm::usage =
  "sdShapForm[x,y] gives the value of <i(x)m0,i(y)m0> where x,y are elements of U(g+),
 i is the involution, m0 is the vacuum vector and <,> is the invariant form.
 The weights, grades, and parities of x and y should be equal."
 
-sdShapFormInv::usage =
+SuperLie`ShapDet`sdShapFormInv::usage =
  "sdShapFormInv[x,y] gives the value of <i(x)m0, y m0> where x,y are elements of U(g+) and U(g-),
 i is the involution, m0 is the vacuum vector and <,> is the invariant form.
 The weights and grades of x and y should be oppesite, the parities should be equal."
 
 
-sd$hRepl::usage =
+SuperLie`ShapDet`sd$hRepl::usage =
   "sd$hRepl is bound to the list of replacement rules that maps the elements
 of the Cartan subalgebra to the corresponding weight marks of the vacuum vector."
 
-sdFormTo::usage =
+SuperLie`ShapDet`sdFormTo::usage =
   "sdFormTo[file] instruct the program to write the matrix elements of the invariant
 form to the given file. The option Clear->True instructs program to clear the file."
 
-sdCalcForm::usage =
+SuperLie`ShapDet`sdCalcForm::usage =
  "sdCalcForm[r] calculates and save to file (defuned by sdFormTo) the matrix elements of the
 invariant form up to the elements of grade r. sdCalcForm[r,{n,i,j}] starts calculations with
 the matrix element (i,j) of the n-th component of the splitted U(g+)."
 
-sd$Calc::usage =
+SuperLie`ShapDet`sd$Calc::usage =
  "When calculating matrix element (i,j) of the n-th component of the splitted U(g+), sd$Calc is bound to {n,i,j}."
 
 (* ======  Private ======== *)

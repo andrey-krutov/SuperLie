@@ -1,55 +1,56 @@
 BeginPackage["SuperLie`Space`",
  {"SuperLie`", "SuperLie`Domain`", "SuperLie`Enum`"}]
 
-VectorSpace::usage = 
+SuperLie`Space`VectorSpace::usage = 
   "VectorSpace[name, Dim->dim] - define space \"name\" with dimension \"dim\" .
  For superspace dim = {d1, d2, .. } - d1 even components, d2 odd, d3 even, ...";
 
-ReGrade::usage = 
+SuperLie`Space`ReGrade::usage = 
   "ReGrade[x, {g1,...}] changes the grading of the space x and all known relatives.
 ReGrade[x, gradingName] changes the grading of x to the named special grading.";
 
-TrivialSpace::usage = 
+SuperLie`Space`TrivialSpace::usage = 
   "TrivialSpace[name] - define space \"name\" with dimension 1 and basis {name}.
  TrivialSpace[name,1] define trivial odd space";
 
 Options[VectorSpace] ^=
   { Output->Subscripted, TeX->Subscripted, Standard->Subscripted,
-    Traditional->Subscripted, Enum->Auto }
+    Traditional->Subscripted, SuperLie`Enum`Enum->Auto }
 Options[Algebra] ^= { Bracket->Act }
 
-SpacePlus::usage = 
+SuperLie`Space`SpacePlus::usage = 
   "SpacePlus[name, {term,...}] - define space \"name\" as a direct sum of the terms";
 
-NewRelative::usage =
+SuperLie`Space`NewRelative::usage =
   "NewRelative[rel, old->new] - attach a new relative to the family of modules.
 The first argument is the relation of \"new\" to \"old\" : MLeft (the same),
 CoLeft, MRight, CoRight, PiRight, DLeft, PiLeft, DRight."
 
-{ MLeft, CoLeft, MRight, CoRight, PiRight, DRight, PiLeft , DLeft }
+{ SuperLie`Space`MLeft, SuperLie`Space`CoLeft, SuperLie`Space`MRight, SuperLie`Space`CoRight,
+  SuperLie`Space`PiRight, SuperLie`Space`DRight, SuperLie`Space`PiLeft , SuperLie`Space`DLeft }
 
-GetRelative::usage =
+SuperLie`Space`GetRelative::usage =
   "GetRelative[v, relation] returns the relative space to v. If no relative defined,
 creates a new one (asks the user about the name)"
 
-PiLeft::usage = 
+SuperLie`Space`PiLeft::usage = 
  "PiLeft[md->pimd] builds the module \"pimd\" as pi*md, where \"pi\" is
 1-dimensional trivial odd module."
 
-PiRight::usage = 
+SuperLie`Space`PiRight::usage = 
  "PiRight[md->mdpi] builds the module \"mdpi\" as md*pi, where \"pi\" is
 1-dimensional trivial odd module."
 
-MRight::usage = 
+SuperLie`Space`MRight::usage = 
  "MRight[md->altmd] builds the module \"altmd\" as pi*md*pi, where \"pi\" 
 is 1-dimensional trivial odd module."
 
-CoLeft::usage =
+SuperLie`Space`CoLeft::usage =
  "CoLeft[md->comd] builds the module \"comd\" on the space of left even
 linear form on \"md\". The function is implemented only for finite-dimensional
 modules with one-indexed basis."
 
-DLeft::usage =
+SuperLie`Space`DLeft::usage =
  "DLeft[md->dmd] builds the module \"dmd\" on the space of left odd linear
 form on \"md\".  If md is an algebra, DLeft defines also the exterior derivative
 Der : dmd -> dmd/\\dmd."
@@ -57,76 +58,76 @@ Der : dmd -> dmd/\\dmd."
 Options[NewRelative] ^=
   {Output->Auto, TeX->Auto, Standard->Auto, Traditional->Auto}
 
-SubSpace::usage = 
+SuperLie`Space`SubSpace::usage = 
  "SubSpace[name, in, basis] - define a subspace with given basis."
 
-Algebra::usage = 
+SuperLie`Space`Algebra::usage = 
   "(A) Algebra[x, options] defines vector space and algebra \"x\".
 The operation on x should be defined explicitly.
 (B) Algebra->name is an option for some constructors."
 
-CommutativeLieAlgebra::usage = 
+SuperLie`Space`CommutativeLieAlgebra::usage = 
   "CommutativeLieAlgebra[x] defines on space \"x\" a Lie bracket 
 [x[..], x[..]] = 0."
 
-Enum::usage = Enum::usage <>
+SuperLie`Enum`Enum::usage = SuperLie`Enum`Enum::usage <>
  "Enum->mode is the optional parameter for VectorSpace function. It sets
 the mode of the enumeration of the basis of the space.
 Enum->False suppresses the enumeration."
 
-Relatives::usage = 
+SuperLie`Space`Relatives::usage = 
   "Relatives[x] (x is a module) is the list of relative spaces :\n
 {MLeft (x itself), CoLeft, MRight, CoRight, PiRight, DRight, PiLeft, DLeft}."
 
-TheSpace::usage =
+SuperLie`Space`TheSpace::usage =
   "For any space name or other symbol \"x\", TheSpace[x] is the name of
 original space from which \"x\" is derived."
 
-InSpace::usage =
+SuperLie`Space`InSpace::usage =
   "InSpace[subspace] in the name of the space where the subspace lies."
 
-Basis::usage =
+SuperLie`Space`Basis::usage =
  "Basis[space] returns the basis of the space. Basis[space,d] returns the
  basis of the d-th grade component of the space."
 
-BasisPattern::usage =
+SuperLie`Space`BasisPattern::usage =
  "BasisPattern[space] is the pattern for basis of this space."
 
-Image::usage =
+SuperLie`Space`Image::usage =
  "Image[g] is the list of images of basis elements of \"g\" if \"g\" is
 defined as a subspace.";
 
-PList::usage =
- "PList->{...} is the optional parameter for VectorSpace function. It is
+SuperLie`PList::usage = SuperLie`PList::usage <> "
+PList->{...} is the optional parameter for VectorSpace function. It is
 the list of parities of the vectors forming basis of new space."
 
-GList::usage =
+SuperLie`Space`GList::usage =
  "GList->{...} is the optional parameter of Space Constructor functions. It is
 the list of degrees of generators of new space."
 
-WList::usage =
+SuperLie`Space`WList::usage =
  "WList->{...} is the optional parameter of Space Constructor functions. It is
 the list of weights of generators of new space."
 
-TheAlgebra::usage =
+SuperLie`Space`TheAlgebra::usage =
   "TheAlgebra[m] is the name of the algebra acting on the module m."
 
-TheModule::usage =
+SuperLie`Space`TheModule::usage =
   "TheModule[v] is the name of the module hosting the vector v."
 
-(* $Algebra::usage = "$Algebra - current default algebra." *)
+(* SuperLie`Space`$Algebra::usage = "$Algebra - current default algebra." *)
 
-(* $Module::usage = "$Module - current default module." *)
+(* SuperLie`Space`$Module::usage = "$Module - current default module." *)
 
-Components::usage =
+SuperLie`Space`Components::usage =
  "For modules with regular Lie operation Components[m] is the list or
 regular components."
 
-MappingRule::usage=
+SuperLie`Space`MappingRule::usage=
 "MappingRule[U,V] returns the rule of mapping U->V.
  Use LinearChange[u,MappingRule[U,V]] to implement the mapping. See also Mapping option."
 
-Mapping::usage=
+SuperLie`Space`Mapping::usage=
 "The option Mapping->fn instructs the sub- and factorspace constructors to define fn as
  mapping function (immersion or projection)."
 
@@ -427,7 +428,9 @@ NewRelative[rel_, old_->new_, opts___Rule] :=
       (*else*)	P[new[args___]] ^:= 1 - P[old[args]];
 		PDim[new] ^= Reverse[PDim[old]]
     ];
-    If[Dim[old]<Infinity, Basis[new, d_] ^:= Select[Basis[new], Grade[#]==d&]];
+    If[Dim[old]<Infinity && ValueQ[Basis[old]],
+       Basis[new] ^= Basis[old] /. old->new;
+       Basis[new, d_] ^:= Select[Basis[new], Grade[#]==d&]];
   ]
 
 relativeFormat[old_, new_, format_, ftype_] :=
@@ -526,16 +529,31 @@ PiRight[m_] := Relatives[m][[5]]
 (**************** CoLeft (left even forms) ***********)
 
 CoLeft[ m_->cm_, opts___Rule] :=
-  Module[{i, j, k, pf, cf, pm, pfm, l, m1 },
   With[{g = Algebra /. {opts} /. Algebra->TheAlgebra[m]},
    If [(Clear /. {opts}) =!= False,
       Clear[cm];
       NewRelative[CoLeft, m->cm, opts]];
-   If[g===None,
-    cm::usage =	SPrint["`` is the space of the left even forms on ``", cm, m],
+   Which[
+    g===None,
+       cm::usage = SPrint["`` is the space of the left even forms on ``", cm, m],
+    ListQ[DecompositionList[g,CartanTriade]],
+       defCoAction[#, m, cm]& /@ DecompositionList[g,CartanTriade];
+       TheAlgebra[cm] ^= g;
+       cm::usage = SPrint["`` is the ``-module of the left even forms on ``", cm, g, m],
+    BracketMode[g]==Tabular,
+       defCoAction[g, m, cm];
+       TheAlgebra[cm] ^= g;
+       cm::usage = SPrint["`` is the ``-module of the left even forms on ``", cm, g, m],
+    True,
+       Message[CoLeft::noact];
+       cm::usage = SPrint["`` is the space of the left even forms on ``", cm, m]
+   ]]
+
+defCoAction[g_, m_, cm_] :=
+  Module[{i, j, k, pf, cf, pm, pfm, l, m1},
     pm = Table[0, {i, Dim[m]}, {j, Dim[g]}];
     For [i=1, i<=Dim[g], ++i, For[j=1, j<=Dim[m], ++j,
-      pf = VNormal @ Act[g[i],m[j]];      
+      pf = VNormal @ Act[g[i],m[j]];
       If [pf==0, Continue[]];
       If [ Head[pf]=!=VPlus, pf = {pf}];
       For [l=1, l<=Length[pf], ++l,
@@ -548,10 +566,7 @@ CoLeft[ m_->cm_, opts___Rule] :=
     ]];
     ActTable[g, cm] ^= pm;
     Act[g[i_], cm[j_]] ^:= ActTable[g,cm][[j,i]];
-    TheAlgebra[cm] ^= g;
-    cm::usage =
-	SPrint["`` is the ``-module of the left even forms on ``", cm, g, m]]
-  ]]
+  ]
 
 CoLeft[m_] := Relatives[m][[2]]
 

@@ -2,23 +2,23 @@
 
 BeginPackage["SuperLie`Symalg`", {"SuperLie`"}];
 
-DegreeBasis::usage = "DegreeBasis[deg, vars] returns the list of elements
+SuperLie`Symalg`DegreeBasis::usage = "DegreeBasis[deg, vars] returns the list of elements
 of degree deg in the symmetric algebra of variables vars.
 DegreeBasis[deg, vars, lim] returns the list of monomial of degree deg with degrees
 of variables do not exceed the corresponding limits.
 DegreeBasis[deg, vars, op] and DegreeBasis[deg, vars, lim, op] use op instead of VTimes."
 
-UpToDegreeBasis::usage = "UpToDegreeBasis[deg, vars] returns the list of elements
+SuperLie`Symalg`UpToDegreeBasis::usage = "UpToDegreeBasis[deg, vars] returns the list of elements
 of degree <= deg in the symmetric algebra of variables vars.
 UpToDegreeBasis[deg, vars, op] uses op instead of VTimes."
 
-GradeBasis::usage = "GradeBasis[deg, vars] returns the list of elements
+SuperLie`Symalg`GradeBasis::usage = "GradeBasis[deg, vars] returns the list of elements
 of grade deg in the symmetric algebra of variables vars. The grades of
 variables must be predefined. GradeBasis[deg, vars, op] uses op instead of
 VTimes. If deg is a list, PolyGrade is used instead of Grade."
 
 
-FilterBasis::usage = "FilterBasis[deg, vars] returns the list of elements
+SuperLie`Symalg`FilterBasis::usage = "FilterBasis[deg, vars] returns the list of elements
 of grade <= deg in the symmetric algebra of variables vars. The grades of
 variables must be predefined. FilterBasis[deg, vars, op] uses op instead of
 VTimes."

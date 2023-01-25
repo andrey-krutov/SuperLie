@@ -75,295 +75,295 @@ dmn`FlagsList = {Alpha, Scalar}
 
 (* #################### PART 1. Domains #################### *)
 
-STimesOp::usage = "STimesOp[domain] is the name of \"*\" in Scalar*domain."
+SuperLie`STimesOp::usage = "STimesOp[domain] is the name of \"*\" in Scalar*domain."
 
-PlusOp::usage = "PlusOp[domain] is the name of \"+\" in the domain."
+SuperLie`PlusOp::usage = "PlusOp[domain] is the name of \"+\" in the domain."
 
-CondOp::usage =
+SuperLie`CondOp::usage =
  "CondOp[domain] is the name of \"If\" operation with values in the domain.
 CondOp[domain->name] defines this operation"
 
-SumOp::usage =
+SuperLie`SumOp::usage =
  "SumOp[op] is the name of \"Sum\" function, associated with \"plus\"
 operation op. SumOp[op->name] defines this operation."
 
-PowerOp::usage =
+SuperLie`PowerOp::usage =
  "PowerOp[op] is the name of \"power\" operation, associated with \"times\"
 operation op. PowerOp[op->name] defines this operation."
 
 (*
-UnitElement::usage =
+SuperLie`UnitElement::usage =
  "UnitElement[domain] is the \"1\" element in this domain"
 *)
 
 (* --------- Common Domain --------------- *)
 
-GPlus::usage = "GPlus is the name of \"+\" in Common domain."
-GTimes::usage = "GTimes is the name of \"*\" in Common domain."
-GPower::usage = "GPower is the name of \"^\" in Common domain."
+SuperLie`GPlus::usage = "GPlus is the name of \"+\" in Common domain."
+SuperLie`GTimes::usage = "GTimes is the name of \"*\" in Common domain."
+SuperLie`GPower::usage = "GPower is the name of \"^\" in Common domain."
 (* GSum::usage = "GSum is the name of Sum function in Common domain." *)
 
 (* --------- Vector Domain --------------- *)
 
-Vector::usage = 
+SuperLie`Vector::usage = 
  "Vector is the domain of vectors. Vector[obj,..] is the constructor of 
 Vector objects."
 
-UnVector::usage = "UnVector[obj,..] is the destructor of Vector objects."
+SuperLie`UnVector::usage = "UnVector[obj,..] is the destructor of Vector objects."
 
 SuperLie`VectorQ::usage =
   "VectorQ[x] returns True if x is an object of Vector domain."
 
-VPlus::usage = "VPlus is the name of \"+\" in Vector domain."
-VTimes::usage = "VTimes is the name of \"*\" in Vector domain."
-VPower::usage = "VPower is the name of \"^\" in Vector domain."
-VSum::usage = "VSum is the name of Sum function in Vector domain."
-VIf::usage = "VIf[cond, v] is a vector-valued version of If function."
-SVTimes::usage = "SVTimes is the name of \"*\" in Scalar*Vector."
-tPower::usage = "v ^\[CircleTimes] n is the n-th tensor power of v."
-(*ePower::usage = "v /\\^ n is the n-th exterior power of v."*)
+SuperLie`VPlus::usage = "VPlus is the name of \"+\" in Vector domain."
+SuperLie`VTimes::usage = "VTimes is the name of \"*\" in Vector domain."
+SuperLie`VPower::usage = "VPower is the name of \"^\" in Vector domain."
+SuperLie`VSum::usage = "VSum is the name of Sum function in Vector domain."
+SuperLie`VIf::usage = "VIf[cond, v] is a vector-valued version of If function."
+SuperLie`SVTimes::usage = "SVTimes is the name of \"*\" in Scalar*Vector."
+SuperLie`tPower::usage = "v ^\[CircleTimes] n is the n-th tensor power of v."
+(*SuperLie`ePower::usage = "v /\\^ n is the n-th exterior power of v."*)
 
-VExpand::usage = VExpandRule::usage =
+SuperLie`VExpand::usage = SuperLie`VExpandRule::usage =
  "VExpand[expr] or expr //. VExpandRule expand out all VTimes and SVTimes
 products in expr."
 
-SVExpandRule::usage =
+SuperLie`SVExpandRule::usage =
  "expr /. SVExpandRule expand out all scalar coefficients in SVTimes."
 
-SVFactorRule::usage =
+SuperLie`SVFactorRule::usage =
  "expr /. SVFactorRule factors all scalar coefficients in SVTimes."
 
-SVSimplifyRule::usage =
+SuperLie`SVSimplifyRule::usage =
  "expr /. SVSimplifyRule simplifies all scalar coefficients in SVTimes."
 
-SVNormalRule::usage =
+SuperLie`SVNormalRule::usage =
  "expr /. SVNormalRule converts all scalar coefficients in SVTimes to the
 normal form using the function $SNormal."
 
-VCollect::usage =
+SuperLie`VCollect::usage =
  "VCollect[expr] collects together terms c*v with the same v."
 
-TCollect::usage =
+SuperLie`TCollect::usage =
  "TCollect[expr,case] collects together terms a**b with the same a (if case=First)
   or with same b (if case=Last). TCollect[expr,case,op] collect terms of operation
   op rather than **. The operation should not be declared additive or linear."
 
-VNormal::usage =
+SuperLie`VNormal::usage =
  "VNormal[expr] returns the normal form of the vector expression."
 
-SymmetricNormal::usage =
+SuperLie`SymmetricNormal::usage =
  "SymmetricNormal[expr] returns the normal form of the vector expression,
 assuming the supersymmetry of vector product VTimes."
 
-$SNormal::usage =
+SuperLie`$SNormal::usage =
  "$SNormal is the user-defined function which is called by VNormal function
 to convert the scalar coefficients to the normal form. Default is Together.
 The function $SNormal must always convert to zero the scalars equal to zero."
 
-VBasis::usage =
+SuperLie`VBasis::usage =
   "VBasis[expr] returns the list of vectors in the expression."
 
-VSort::usage =
+SuperLie`VSort::usage =
  "VSort[sum] sorts the terms of the vector sum in alphabetical order of
 vectors."
 
-VOrder::usage =
+SuperLie`VOrder::usage =
  "VOrder[v1,v2] returns 0,+1,-1 depending of order of vectors v1 and v2."
 
-VOrderQ::usage =
+SuperLie`VOrderQ::usage =
  "VOrderQ[v1,v2] returns True or False depending of order of vectors v1 and v2."
 
-VSameQ::usage = 
+SuperLie`VSameQ::usage = 
  "VSameQ[v1,v2] returns True if v1=c1*v, v2=c2*v with scalars c1, c2
 and False otherwise."
 
-SameElement::usage =
+SuperLie`SameElement::usage =
  "SameElement[v1,v2] returns True if the arguments represents the same element
 of the basis of a vector space (maybe with differens scalar coefficients) and
 False if they represent different elements.
 If the arguments have symbolic indices, the function returns the condition of
 equality of these indices e.g., SameElement[x[i],x[j]] returns i==j."
 
-VSolve::usage =
+SuperLie`VSolve::usage =
  "VSolve[eqns, vars] attempts to solve an equation or set of equations for the
 vector variables vars. VSolve[eqns] treats all vector variables encountered as
 vars above. For other parameters and options see Solve."
 
-SVSolve::usage =
+SuperLie`SVSolve::usage =
  "SVSolve[eqns, vars] attempts to solve a vector equation or set of equations
 for the scalar variables vars. SVSolve[eqns] treats all non-vector variables 
 encountered as vars above. For other parameters and options see Solve."
 
-ScalarEquation::usage =
+SuperLie`ScalarEquation::usage =
  "ScalarEquation[equ] converts the equation with scalar variables to 
  scalar equation"
 
-LinearChange::usage =
+SuperLie`LinearChange::usage =
  "LinearChange[expr, rule] applies the rule or list of rules in an attempt to 
 transform each vector in an expression expr."
 
-$Solve::usage =
+SuperLie`$Solve::usage =
  "$Solve is the user-defined function for solving the scalar equations. The
 default setting is $Solve = Solve."
 
-$p::usage = "The value of $p is the characteristic of the base field"
+SuperLie`$p::usage = "The value of $p is the characteristic of the base field"
 
 (* ################### PART 2. Properties ################## *)
 
-ZeroArg::usage = UnZeroArg::usage =
+SuperLie`ZeroArg::usage = SuperLie`UnZeroArg::usage =
  "ZeroArg[f] is the property f[.., 0, ..] = 0."
-ZeroArgRule::usage =
+SuperLie`ZeroArgRule::usage =
  "Use expr /. ZeroArgRule[f] to remove terms with f[..,0,..]."
 
 (*
-IdArg::usage = UnIdArg::usage =
+SuperLie`IdArg::usage = SuperLie`UnIdArg::usage =
  "IdArg[f] is the property f[x, Id, y] = f[x,y]."
-IdArgRule::usage =
+SuperLie`IdArgRule::usage =
  "Use expr /. IdArgRule[f] to remove Id from f[..,Id,..]."
 *)
 
-Homogen::usage = UnHomogen::usage =
+SuperLie`Homogen::usage = SuperLie`UnHomogen::usage =
  "Homogen[f->deg] is the property f[c*v] = (c^deg)*f[v] for scalar c.
 Homogen[f] is equivalent to Homogen[f->1]."
-HomogenRule::usage = 
+SuperLie`HomogenRule::usage = 
  "HomogenRule[f,deg] is replacement rule f[c*v] -> (c^deg)*f[v] where c is
 scalar. Default value of deg is 1."
 
-Symmetric::usage = UnSymmetric::usage = SymmetricQ::usage = 
+SuperLie`Symmetric::usage = SuperLie`UnSymmetric::usage = SuperLie`SymmetricQ::usage = 
  "Symmetric[f] is the property f[..,x,y,..] = (-1)^(P[x]P[y]) f[..,y,x,..]."
-SymmetricRule::usage =
+SuperLie`SymmetricRule::usage =
  "SymmetricRule[f] is the replacement rule for sorting the arguments of the
 supercommutative function f."
 
-SkewSymmetric::usage = UnSkewSymmetric::usage = SkewSymmetricQ::usage = 
+SuperLie`SkewSymmetric::usage = SuperLie`UnSkewSymmetric::usage = SuperLie`SkewSymmetricQ::usage = 
  "SkewSymmetric[f] is the property
 f[..,x,y,..] = (-1)^((1+P[x])(1+P[y])) f[..,y,x,..]."
-SkewSymmetricRule::usage =
+SuperLie`SkewSymmetricRule::usage =
  "SkewSymmetricRule[f] is the replacement rule for sorting the arguments of the
 superskewcommutative function f."
 
-AntiSymmetric::usage = UnAntiSymmetric::usage = AntiSymmetricQ::usage = 
+SuperLie`AntiSymmetric::usage = SuperLie`UnAntiSymmetric::usage = SuperLie`AntiSymmetricQ::usage = 
  "AntiSymmetric[f] is the property f[..,x,y,..] = - (-1)^(P[x]P[y]) f[..,y,x,..]."
-AntiSymmetricRule::usage =
+SuperLie`AntiSymmetricRule::usage =
  "AntiSymmetricRule[f] is the replacement rule for sorting the arguments of the
 superanticommutative function f."
 
-AntiSkewSymmetric::usage = 
+SuperLie`AntiSkewSymmetric::usage = 
  "AntiSkewSymmetric[f] introduces the automatical sorting of operands of f using 
 super-anti-skew simmetry f[..,x,y,..] = - (-1)^((1+P[x])(1+P[y])) f[..,y,x,..]."
 
-UnAntiSkewSymmetric::usage = 
+SuperLie`UnAntiSkewSymmetric::usage = 
  "UnAntiSkewSymmetric[f] cancels the automatical sorting of operands of f."
 
-AntiSkewSymmetricQ::usage = 
+SuperLie`AntiSkewSymmetricQ::usage = 
  "AntiSkewSymmetricQ[f] returns True if f was declared anti-skew-simmetric."
 
-AntiSkewSymmetricRule::usage =
+SuperLie`AntiSkewSymmetricRule::usage =
  "AntiSkewSymmetricRule[f] is the replacement rule for sorting the arguments of f
 using super-anti-skew simmetry f[..,x,y,..] -> - (-1)^((1+P[x])(1+P[y])) f[..,y,x,..]."
 
-Leibniz::usage = UnLeibniz::usage =
+SuperLie`Leibniz::usage = SuperLie`UnLeibniz::usage =
  "Leibniz[f->g] is the property  f @ g[x1,x2,..] = g[f@x1,x2,..] +/-
 g[x1,f@x2,...] +/- ... (f acts as a derivation of parity P[f]).
 Leibniz[f->{g1,..}] is the list if properties."
 
-LeibnizRule::usage =
+SuperLie`LeibnizRule::usage =
  "LeibnizRule[f, g] is the rule to expand  f[g[..]] into sum of
 (+/-) g[.. f[.] ..] (like a derivation of parity P[f]).
 LeibnizRule[f,{g1,..}] is the list of rules."
 
 (*
-LeibnizExpand::usage = 
+SuperLie`LeibnizExpand::usage = 
  "LeibnizExpand[d[f[arg]],p] expands d[f[arg]] as a derivation of parity p."
 *)
 
-Jacobi::usage = UnJacobi::usage =
+SuperLie`Jacobi::usage = SuperLie`UnJacobi::usage =
  "Jacobi[f->g] is the property  f[x, g[y1,y2,..]] = g[f[x,y1],y2,..] +/-
 g[y1,f[x,y2],...] +/- ... (f acts as a bracket in Lie superalgebra).
 Jacobi[f->{g1,..}] is the list if properties."
 
-JacobiRule::usage =
+SuperLie`JacobiRule::usage =
  "JacobiRule[f, g] is the rule to expand  f[x, g[..]] into sum of
 (+/-) g[.. f[x,.] ..] (like a bracket in Lie superalgebra).
 JacobiRule[f,{g1,..}] is the list of rules."
 
-Graded::usage = UnGraded::usage = GradedQ::usage =
+SuperLie`Graded::usage = SuperLie`UnGraded::usage = SuperLie`GradedQ::usage =
  "Graded[op] is the property Grade[a ~op~ b] = Grade[a] + Grade[b]."
 
-GradedPw::usage = UnGradedPw::usage = GradedPwQ::usage =
+SuperLie`GradedPw::usage = SuperLie`UnGradedPw::usage = SuperLie`GradedPwQ::usage =
  "GradedPw[op] is the property Grade[a ~op~ k] = k*Grade[a]."
 
-ThreadGraded::usage = UnThreadGraded::usage =
+SuperLie`ThreadGraded::usage = SuperLie`UnThreadGraded::usage =
  "ThreadGraded[f] is the property f[a ~op~ b] = f[a] + f[b] for any
 graded operation op. ThreadGraded[f->sm] is f[a ~op~ b] = f[a] ~sm~ f[b]."
 
-ThreadGradedRule::usage =
+SuperLie`ThreadGradedRule::usage =
  "ThreadGradedRule[f,sm] is the replacement rule f[a ~op~ b] -> f[a] ~sm~ f[b],
 where op is any graded operation. Default sm is Plus."
 
-DegTimes::usage = UnDegTimes::usage = 
+SuperLie`DegTimes::usage = SuperLie`UnDegTimes::usage = 
  "DegTimes[op] is the property Deg[a ~op~ b, x] = Deg[a,x] + Deg[b,x]."
 
-TestFirst::usage = UnTestFirst::usage =
+SuperLie`TestFirst::usage = SuperLie`UnTestFirst::usage =
  "TestFirst[f] is the property f[x1+...] = f[x1]."
 
-TestFirstRule::usage =
+SuperLie`TestFirstRule::usage =
  "TestFirstRule[f] is the replacement rule f[x1+...] -> f[x1]."
 
-LogPower::usage = UnLogPower::usage =
+SuperLie`LogPower::usage = SuperLie`UnLogPower::usage =
  "LogPower[f] is the property f[x^p] = p*f[x]. LogPower[f->tms] is
 f[x^p] = tm[p, f[x]]."
 
-LogPowerPule::usage =
+SuperLie`LogPowerPule::usage =
  "LogPowerRule[f, tm] is the replacement rule f[x^p] -> p ~tm~ f[x]. Default
 tm is Scalar*Vector Times."
 
-Additive::usage =
+SuperLie`Additive::usage =
  "Additive[f] constitutes the property f[.., x+y, ..] = f[..,x,..] + f[..,y,..].
 Additive[f->First] and Additive[f->Last] declares the additivity in the first
 (last) argument of f."
 
-UnAdditive::usage =
+SuperLie`UnAdditive::usage =
  "UnAdditive[f] cancels the additive expansion of f[.., x+y, ..].
 UnAdditive[f->First] and UnAdditive[f->Last] cancel the additive expansion of the
 first (last) argument of f."
 
-AdditiveRule::usage =
+SuperLie`AdditiveRule::usage =
  "AdditiveRule[f] is the replacement rule f[..,x+y,..] -> f[..,x,..] + f[..,y,..].
 AdditiveRule[f,First] and Additive[f,Last] are rules for additive expansion of the
 first (last) argument of f."
 
-Linear::usage = UnLinear::usage = (* LinearQ::usage = *)
+SuperLie`Linear::usage = SuperLie`UnLinear::usage = (* SuperLie`LinearQ::usage = *)
  "Linear[f] is the (multi)linearity of f."
 
-LinearRule::usage =
+SuperLie`LinearRule::usage =
  "LinearRule[f] is the list of rules for expand f[expr] if \"f\"
 is linear function."
 
-LinearCollectRule::usage =
+SuperLie`LinearCollectRule::usage =
  "LinearCollectRule[f] is the list of rules for collect together the term
 in the sum f[x1,y1,..] + f[x2,y2,..]+...  wich differe in one argument only,
 there f is linear function."
 
-Output::usage = UnOutput::usage =
+SuperLie`Output::usage = SuperLie`UnOutput::usage =
  "Output[v->f] defines the format of v[...] in OutputForm as f[v[...]].
 The space constructor option Output->f defines the output format of the elements
 of the space basis.
 UnOutput[v] cancels the definition given by Output."  
 
-TeX::usage = UnTeX::usage =
+SuperLie`TeX::usage = SuperLie`UnTeX::usage =
  "TeX[v->f] defines the format of v[...] in TeXForm as f[v[...]].
 The space constructor option TeX->f defines the TeX output format of the elements
 of the space basis.
 UnTeX[v] cancels the definition given by TeX."
 
-Standard::usage = UnStandard::usage =
+SuperLie`Standard::usage = SuperLie`UnStandard::usage =
  "Standard[v->f] defines the format of v[...] in StandardForm as f[v[...]].
 The space constructor option Standard->f defines the Standard output format of the elements
 of the space basis.
 UnStandard[v] cancels the definition given by Standard."
 
-Traditional::usage = UnTraditional::usage =
+SuperLie`Traditional::usage = SuperLie`UnTraditional::usage =
  "Traditional[v->f] defines the format of v[...] in TraditionalForm as f[v[...]].
 The space constructor option Traditional->f defines the Traditional output format of the elements
 of the space basis.
@@ -372,147 +372,147 @@ UnTraditional[v] cancels the definition given by Traditional."
 (* ################## PART 3. Tools ###################### *)
 
 
-MatchList::usage = 
+SuperLie`MatchList::usage = 
   "MatchList[expr, ptrn] returns list of terms in \"expr\", matching the 
 pattern \"ptrn\".\n MatchList[expr, ptrn, f] returns the list of values of
 f[term].";
 
-WithUnique::usage =
+SuperLie`WithUnique::usage =
   "WithUnique[{symb..}, expr] evalutes expr replacing the listed symbols
 with the new symbols with unique names." 
 
-UniqueCounters::usage =
+SuperLie`UniqueCounters::usage =
   "UniqueCounters[expr] return the expr with all counters in all sums and
 tables replaced with unique symbols."
 
 
-SimplifySignRule::usage =
+SuperLie`SimplifySignRule::usage =
   "SimplifySignRule is the rule for simplifying (-1)^expression."
 
-SimplifySign::usage =
+SuperLie`SimplifySign::usage =
   "SimplifySign[expr] simplifies the (-1)^expo in the expr."
 
-ArgForm::usage =
+SuperLie`ArgForm::usage =
  "ArgForm[\"controlstring\"][expr] prints as the text of the
    controlstring, with the printed forms of the arguments of expr embedded."
 
-SeqForm::usage =
+SuperLie`SeqForm::usage =
  "SeqForm[e1,...][h[a1,..]] prints the sequence e1,..., substituting
    h, a1,... instead of placeholders #0, #1,... ."
 
 (* #########  PART 4. Operations, Functions, Parameters ######### *)
 
-FieldChar::usage =
+SuperLie`FieldChar::usage =
 "FieldChar[p] sets the characteristic of the base field, that may be zero or a prime number"
 
-ModSolve::usage =
+SuperLie`ModSolve::usage =
 "ModSolve[eq, ...] solves scalar equations modulo $p (the characteristic of the base field).
 The arguments are the same as for Solve"
 
-DivPowers::usage = DivPowersQ::usage = UnDivPowers::usage =
+SuperLie`DivPowers::usage = SuperLie`DivPowersQ::usage = SuperLie`UnDivPowers::usage =
 "The property DivPowers[u] means that u^n and u[_]^n denote divided powers of u and u[_].
 DivPowers[u->power] defines divided semantic for given \"power\" operation (e.g. exterior power)."
 
-Dim::usage = "Dim[v] = dimension of the vector space v."
-PDim::usage = "PDim[v] = {EvenDim,OddDim} is the dimension of the
+SuperLie`Dim::usage = "Dim[v] = dimension of the vector space v."
+SuperLie`PDim::usage = "PDim[v] = {EvenDim,OddDim} is the dimension of the
 vector superspace \"v\"."
-FDim::usage = "FDim[v] returns dimension of the vector (super)space v
+SuperLie`FDim::usage = "FDim[v] returns dimension of the vector (super)space v
 formatted  for output"
 
-PList::usage = "PList[v] stores the list of parities of the element
+SuperLie`PList::usage = "PList[v] stores the list of parities of the element
 of the basis of the vector space v."
 
-P::usage = "P[vect] is the parity of vect."
+SuperLie`P::usage = "P[vect] is the parity of vect."
 
-Parity::usage = Mixed::usage =
+SuperLie`Parity::usage = SuperLie`Mixed::usage =
   "Parity[vect] checks if vect is homogenious and returnt its parity.
 For nonhomogenious vectors, and when checking fails, returns Mixed."
 
-Plus2::usage = "Plus2[x,...] is a sum modulo 2"
+SuperLie`Plus2::usage = "Plus2[x,...] is a sum modulo 2"
 
-Times2::usage = "Times2[x,...] is a product modulo 2"
+SuperLie`Times2::usage = "Times2[x,...] is a product modulo 2"
 
-Delta::usage = 
+SuperLie`Delta::usage = 
  "Delta[x,y] = 1 if x=y and =0 if x!=y; Delta[x] = Delta[x,0]."
 
-Grade::usage = 
+SuperLie`Grade::usage = 
  "For graded object \"m\" value Grade[m[..]] is grading (degree)
 of m[..]."
 
-ToGrade::usage =
+SuperLie`ToGrade::usage =
  "ToGrade->g is an optional parameter for space constructors. It restricts the
 calculations to the range from -g to +g (the range of generators must be given).
 ToGrade[m] returns this limit. The results of operations in m are evaluated
 only if its grade is berweein -ToGrade[m] and +ToGrade[m]."
 
-Weight::usage = "Weight[v] is the weight of the homogeneous element \"v\"."
+SuperLie`Weight::usage = "Weight[v] is the weight of the homogeneous element \"v\"."
 
-WeightMark::usage = "WeightMark[length, mark, ...] returns a list of given
+SuperLie`WeightMark::usage = "WeightMark[length, mark, ...] returns a list of given
 length. All elements of the result are initially set to 0.
 For every mark mi, if mi>0, the mi-th element of the result is increased by 1.
 If mi<0, the (-mi)-th element is diminished by 1."
 
-PolyGrade::usage = "PolyGrade[v] - weight range - is the weight of v in the 
+SuperLie`PolyGrade::usage = "PolyGrade[v] - weight range - is the weight of v in the 
 basis of primitive roots."
 
-NewBracket::usage =
+SuperLie`NewBracket::usage =
   "NewBracket[op] defines op as the bracket in Lie superalgebra.
 The options Parity and Grade declare the parity and the grade of the bracket"
 
-Bracket::usage =
+SuperLie`Bracket::usage =
  "Bracket[alg] is the name of the bracket operation in the Lie algebra."
 
-bracket::usage =
+SuperLie`bracket::usage =
  "bracket[alg] is the name of unevaluated form of the bracket in Lie algebra."
 
-BracketMode::usage = Regular::usage = Tabular::usage =
+SuperLie`BracketMode::usage = SuperLie`Regular::usage = SuperLie`Tabular::usage =
  "BracketMode[md] is the method of the definition of the bracket operation
 on the algebra or of the action of the algebra on the module. The value
 of BracketMode[md] can be Regular or Tabular."
 
-Operator::usage =
+SuperLie`Operator::usage =
  "If symb denotes the passive form of some operatot, Operator[symb] returns the name
 of the active form of the same operator."
 
-OpSymbol::usage =
+SuperLie`OpSymbol::usage =
  "If symb denotes the active form of some operatot, OpSymbol[symb] returns the name
 of the passive form of the same operator."
 
-Act::usage = "Act[g,m] - the action of the element \"g\" on  \"m\"."
+SuperLie`Act::usage = "Act[g,m] - the action of the element \"g\" on  \"m\"."
 
-act::usage = 
+SuperLie`act::usage = 
  "act[g,m] - the action of the element  \"g\" on  \"m\" (unevaluated)."
 
-ActTable::usage =
+SuperLie`ActTable::usage =
  "ActTable[g] is the table used to define the bracket on algebra g
 if BracketMode[g] is Tabular. ActTable[g,m] is used to define the
 action of g on m."
 
-Squaring::usage =
+SuperLie`Squaring::usage =
  "2*Squaring[x,bracket] = bracket[x,x] for odd x. This operation is defined independently
 of the bracket so it is defined even for fields with characteristic 2."
 
-SqrTable::usage =
+SuperLie`SqrTable::usage =
  "SqrTable[g] is the table used to define the squaring on algebra g
 if BracketMode[g] is Tabular."
 
-Deg::usage =
+SuperLie`Deg::usage =
  "Deg[times[...], x] is the degree of \"x\" in expression \"times[...]\"."
 
-LDer::usage =
+SuperLie`LDer::usage =
  "LDer[expr, x, ptrn] is the left partial derivative of expression expr.
 The pattern ptrn should match all independent and none dependent variables."
 
-ZLDer::usage =
+SuperLie`ZLDer::usage =
  "ZLDer[x,ptrn][expr] is the left partial derivative of expression expr.
 The pattern ptrn should match all independent and none dependent variables.
 ZLDer[x,ptrn] may be used in symbolic calculations."
 
-RDer::usage =
+SuperLie`RDer::usage =
  "RDer[expr, x, ptrn] is the right partial derivative of expression expr.
 The pattern ptrn should match all independent and none dependent variables."
 
-ZRDer::usage =
+SuperLie`ZRDer::usage =
  "ZRDer[x,ptrn][expr] is the right partial derivative of expression expr.
 The pattern ptrn should match all independent and none dependent variables.
 ZRDer[x,ptrn] may be used in symbolic calculations."
@@ -521,44 +521,44 @@ CircleTimes::usage = "v1 \[CircleTimes] v2 ...  is the tensor product of the vec
 
 Wedge::usage = "v1\[Wedge]v2\[Wedge]... is the exterior product of the vectors."
 
-wPower::usage = "\!\(v\^\(\[Wedge]n\)\" is the n-th exterior power of vector v\"\)"
+SuperLie`wPower::usage = "\!\(v\^\(\[Wedge]n\)\" is the n-th exterior power of vector v\"\)"
 
-wedge::usage = "wedge[e1,...,en] is the internal representation of the basis of
+SuperLie`wedge::usage = "wedge[e1,...,en] is the internal representation of the basis of
 exterior algebras. The external representation is e1\[Wedge]...\[Wedge]en."
 
-Tp::usage = 
+SuperLie`Tp::usage = 
   "expr1 ** expr2 ** ...  is the tensor product of expressions."
-(* up::usage = "\"up\" is the multiplication in the enveloping algebra." *)
+(* SuperLie`up::usage = "\"up\" is the multiplication in the enveloping algebra." *)
 
-(* Id::usage = "Id is the unit element in tensor algebra" *)
+(* SuperLie`Id::usage = "Id is the unit element in tensor algebra" *)
 
-ZId::usage = "ZId is the identity operator. Used in symbolical calculations."
+SuperLie`ZId::usage = "ZId is the identity operator. Used in symbolical calculations."
 
-Auto::usage = "Auto is the default value for some options"
+SuperLie`Auto::usage = "Auto is the default value for some options"
 
-CTimes::usage =
+SuperLie`CTimes::usage =
  "CTimes[op] declares new \"Coefficient Times\" operation that may be used instead of **
 between coefficient and vector parts of forms, vector fields, etc.
 CTimes->op is an options that indicates such operation." 
  
 (* ########### PART 5. Space Constructors ############## *)
 
-DecompositionList::usage =
+SuperLie`DecompositionList::usage =
  "DecompositionList[g,f] returns the list of subalgebras in the decomposition
  f of the algeba g."
 
-DecompositionRule::usage =
+SuperLie`DecompositionRule::usage =
  "expr /. DecompositionRule[g,f] replaces the elements of the basis of g in
  the expression expr with their images under decomposition f."
 
-CartanTriade::usage =
+SuperLie`CartanTriade::usage =
  "CartanTriade is the decomposition of algebras in 3 subalgebras:
   g -> {g+, g0, g-} (the components of positive, null and negative weight)"
 
-NGen::usage = "NGen[g] is the number of generators of the \"g\""
+SuperLie`NGen::usage = "NGen[g] is the number of generators of the \"g\""
 
 
-(*UEBasis::usage =
+(*SuperLie`UEBasis::usage =
  "UEBasis[alg] builds a graded basis of the Enveloping Algebra of the
 given graded algebra \"alg\"."*)
 
@@ -572,10 +572,10 @@ Protect[General]
 
 (* ---------  Debug tools -------------- *)
 
-$DPrint::usage = DPrint::usage = 
+SuperLie`$DPrint::usage = SuperLie`DPrint::usage = 
   "DPrint[level, data...] prints data (using Print) if $DPrint>=level."
 
-$DPrintLabel::usage =
+SuperLie`$DPrintLabel::usage =
   "The value of $DPrintLabel[] is printed as a label for debug printing.
 Use $DPrintLabel=DateString or TimeString to use [date and] time as label.
 Use $DPrintLabel=None for debug printing without labels."
@@ -584,7 +584,7 @@ If [$VersionNumber < 6,
   DateString::usage =
     "DateString[] return a string representing the current date and time."]
 
-TimeString::usage =
+SuperLie`TimeString::usage =
   "TimeString[] return a string representing the current time."
 
 
@@ -707,6 +707,7 @@ With[{wrapper=If[$VersionNumber>=3.0, HoldPattern, Literal]},
 ]
 
 Attributes[SuperSignature] = {HoldFirst}
+
 
 SuperSignature[arg_,sign_,skew_,ord_:OrderedQ] :=
  Block[{ssgn=1, pplist},
@@ -1208,9 +1209,9 @@ SVCoef[v_] := 1
 SVVect[SVTimes[_.,v_]] := v
 
 
-TCollect[e_VPlus, case_, op_:NonCommutativeMultiply]:=
+TCollect[ex_VPlus, case_, op_:NonCommutativeMultiply]:=
   Block[{tcolOp=op,tcolCase=case},
-    With[{e=e/.Switch[tcolCase,
+    With[{e=ex/.Switch[tcolCase,
                  Last, SVTimes[c_, tcolOp[x_, y__]] :> tcolOp[SVTimes[c, x], y],
                  First, SVTimes[c_, tcolOp[x__, y_]] :> tcolOp[x, SVTimes[c, y]],
                  _, Message[TCollect::arg, case]; Return[$Failed]]},
@@ -1713,7 +1714,7 @@ Wedge3[x_, y_, pow_] :=
           bj = If[Head[yj]===pow, yj[[1]], yj];
           Which[
             bi===bj,
-		If[pyj==1&&bi===bj,Return[0]];
+		If[pyj==1 && yj===bj,Return[0]];
 		{s,r} = wPow2[xi,yj,pow];
 		res={res,r};
 		sgn *=s;
@@ -1811,6 +1812,23 @@ wedge /: LeibnizExpandPower[f_[prm___,wPower[v_,n_]], wedge] :=
     f[prm,v] ~Wedge~ wPower[v,n-1],
     n ~SVTimes~ (f[prm,v] ~Wedge~ wPower[v,n-1])]
 
+
+Symmetric[Wedge] ^:= True /; symPower[PowerOp[Wedge],1]
+SkewSymmetric[Wedge] ^:= True /; symPower[PowerOp[Wedge],0]
+AntiSymmetric[Wedge] ^:= True /; symPower[PowerOp[Wedge],0]
+AntiSkewSymmetric[Wedge] ^:= True /; symPower[PowerOp[Wedge],1]
+
+UnSymmetric[Wedge] ^:= True /; unSymPower[PowerOp[Wedge],1]
+UnSkewSymmetric[Wedge] ^:= True /; unSymPower[PowerOp[Wedge],0]
+UnAntiSymmetric[Wedge] ^:= True /; unSymPower[PowerOp[Wedge],0]
+UnAntiSkewSymmetric[Wedge] ^:= True /; unSymPower[PowerOp[Wedge],1]
+
+symPower[__] = False
+unSymPower[__] = False
+With[{wrapper=If[$VersionNumber>=3.0, HoldPattern, Literal]},
+  symPower[pw_Symbol, asym_] := (wrapper[ (x_/;P[x]==asym)~pw~(n_/;n!=1&&n!=-1)] := 0; False);
+  unSymPower[pw_Symbol, asym_] := (wrapper[ (x_/;P[x]==asym)~pw~(n_/;n!=1&&n!=-1)] =.; False)
+]
 
 (********* Coefficient Times ************)
 
@@ -2327,7 +2345,7 @@ If[$VersionNumber>=3.0,
     Get["SuperLie`Format2`"]
 ]
 
-If[$FrontEnd=!=Null,
+(*If[$FrontEnd=!=Null && Notebooks["SuperLie"]==={},
 CreatePalette[{Cell[BoxData[
  ButtonBox["\<\"SuperLie Help\"\>",
   Appearance->Automatic,
@@ -2337,7 +2355,7 @@ CreatePalette[{Cell[BoxData[
        SelectionMove[$CellContext`nb, All, Word]; ToString[
          NotebookRead[$CellContext`nb]]]]}],
   Evaluator->Automatic,
-  Method->"Preemptive"]], NotebookDefault]},WindowTitle->"SuperLie"]]
+  Method->"Preemptive"]], NotebookDefault]},WindowTitle->"SuperLie"]]*)
 
 Print["SuperLie Package Version 2.07 installed\nDisclaimer: This software is provided \"AS IS\", without a warranty of any kind"]
 

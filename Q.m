@@ -5,25 +5,25 @@
 
 BeginPackage["SuperLie`Q`", {"SuperLie`", "SuperLie`Domain`", "SuperLie`Enum`", "SuperLie`Gl`", "SuperLie`Space`"}]
 
-qAlgebra::usage = "qAlgebra[g,{x,y},n] define the superalgebra g = q(n)
+SuperLie`Q`qAlgebra::usage = "qAlgebra[g,{x,y},n] define the superalgebra g = q(n)
  with basis x[i,j] (even elements) and y[i,j] (odd elements)."
 
-sqAlgebra::usage = "sqAlgebra[g,{x,y},n] define the superalgebra g = sq(n)
+SuperLie`Q`sqAlgebra::usage = "sqAlgebra[g,{x,y},n] define the superalgebra g = sq(n)
  with basis x[i,j] (even elements) and y[i], y[i,j] (odd elements)."
 
-pqAlgebra::usage = "pqAlgebra[g,{x,y},n] define the superalgebra g = pq(n)
+SuperLie`Q`pqAlgebra::usage = "pqAlgebra[g,{x,y},n] define the superalgebra g = pq(n)
  with basis x[i], x[i,j] (even elements) and y[i,j] (odd elements)."
 
-psqAlgebra::usage = "psqAlgebra[g,{x,y},n] define the superalgebra g = psq(n)
+SuperLie`Q`psqAlgebra::usage = "psqAlgebra[g,{x,y},n] define the superalgebra g = psq(n)
  with basis x[i], x[i,j] (even elements) and y[i], y[i,j] (odd elements)."
 
-q2Algebra::usage = "q2Algebra[g, n] defines the superalgebra g = q^2(n)
+SuperLie`Q`q2Algebra::usage = "q2Algebra[g, n] defines the superalgebra g = q^2(n)
  with basis \!\(\(g\_ij\) \[Tau]\^k=g[i,j][k]\)."
 
-psq2Algebra::usage = "psq2Algebra[g, n] defines the superalgebra g = psq^2(n)
+SuperLie`Q`psq2Algebra::usage = "psq2Algebra[g, n] defines the superalgebra g = psq^2(n)
  with basis \!\(\(g\_i\) \[Tau]\^k=g[i][t]\), \!\(\(g\_ij\) \[Tau]\^k=g[i,j][t]\)."
 
-psl2pAlgebra::usage =
+SuperLie`Q`psl2pAlgebra::usage =
   "psl2pAlgebra[g, {a,b}, n] - defines the superalgebra
    g = \!\(\"\[GothicP]\[GothicS]\[GothicL](n|n)\"\_\[Pi]\%(2)\)
    with basis \!\(a\_\(i,j\)[k]\) and \!\(b\_\(i,j\)[k]\)."

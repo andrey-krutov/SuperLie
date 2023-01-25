@@ -10,54 +10,54 @@ BeginPackage["SuperLie`Domain`"]
 
 (* #################   PART I. Tools. ##################### *)
 
-SPrint::usage =
+SuperLie`Domain`SPrint::usage =
  "SPrint[format, val,..] = ToString[StringForm[...]]"
 SPrint := Composition[ToString, StringForm]
 
-AutoRule::usage =
+SuperLie`Domain`AutoRule::usage =
  "AutoRule[rule] converts the replacement rule into definition, so the rule
 will be automatically applied whenever possible. AutoRule[rule,tag]
 attaches this definition to \"tag\"."
 
-UnAutoRule::usage =
+SuperLie`Domain`UnAutoRule::usage =
  "UnAutoRule[rule] cancels the definition(s) made by AutoRule[rule] or
 AutoRule[rule,tag]."
 
-NameSuffix::usage =
+SuperLie`Domain`NameSuffix::usage =
  "NameSuffix[name, \"suffix\"] builds new name, appending the suffix to 
 the old name."
 
-PrefixName::usage =
+SuperLie`Domain`PrefixName::usage =
  "NameSuffix[\"prefix\", name] builds new name, prepending the prefix to
 the old name."
 
-ClearDef::usage =
+SuperLie`Domain`ClearDef::usage =
  " ClearDef[def] clears all definitions matching the pattern def."
 
 If [VersionNumber>=3.0,
- Tag::usage =
+ SuperLie`Domain`Tag::usage =
   "Tag[expr] returns the HoldPattern[tag], there \"tag\", is the first symbol
 in the sequence \"expr, Head[expr], Head[Head[expr]], ... \". The head
 of \"expr\" only is evaluated (as in left hand part of \"=\").";
- Target::usage =
+ SuperLie`Domain`Target::usage =
   "Target[expr] returns the HoldPattern[value], there \"value\", is the given
 expression \"expr\" with head and arguments evaluated (as in left hand
 part of \"=\").",
 (* else *)
- Tag::usage =
+ SuperLie`Domain`Tag::usage =
   "Tag[expr] returns the Literal[tag], there \"tag\", is the first symbol
 in the sequence \"expr, Head[expr], Head[Head[expr]], ... \". The head
 of \"expr\" only is evaluated (as in left hand part of \"=\").";
- Target::usage =
+ SuperLie`Domain`Target::usage =
   "Target[expr] returns the Literal[value], there \"value\", is the given
 expression \"expr\" with head and arguments evaluated (as in left hand
 part of \"=\")."]
 
-AddHead::usage =
+SuperLie`Domain`AddHead::usage =
   "AddHead[head,expr] adds header to the expression if Head[expr] =!= head.";
 
-Prec::usage = Group::usage = Empty::usage = Type::usage =
-InfixFormat::usage =
+SuperLie`Domain`Prec::usage = SuperLie`Domain`Group::usage = SuperLie`Domain`Empty::usage = SuperLie`Domain`Type::usage =
+SuperLie`Domain`InfixFormat::usage =
   "InfixFormat[sep][f]  define infix output format for \"f\":\n
   f[x1,x2,..] --> x1 sep x2 ... .\n
 Options:\n
@@ -65,70 +65,72 @@ Options:\n
   Empty - format for f[] (1);\n
   Type - format type (OutputForm).";
 
-SetFormat::usage =
+SuperLie`Domain`SetFormat::usage =
   "SetFormat[type, h, func] define the format of h[...] as func[h[...]]."
 
-ClearFormat::usage =
+SuperLie`Domain`ClearFormat::usage =
   "ClearFormat[type, h] cancels the definition given by SetFormat."
 
-SetToTag::usage =
+SuperLie`Domain`SetToTag::usage =
   "SetToTag[symb] attaches assignments symb[arg,..] = ... to \"arg\"."
 
-Compound::usage =
+SuperLie`Domain`Compound::usage =
  "Compound[{proc,..}] converts the list of procedures with the same parameters
 into compound procedure (proc[##];...)&."
 
-JoinProperties::usage =
+SuperLie`Domain`JoinProperties::usage =
  "JoinProperties[lst1,..] joins the list of properties. From the properties
 with the same name the first one is included."
 
-UpdateProperties::usage =
+SuperLie`Domain`UpdateProperties::usage =
  "UpdateProperties[{oldlist},{newvalues}] change the properties from oldlist to
 newvalues ignoring the options missing in oldlist."
 
-SymbolQ::usage =
+SuperLie`Domain`SymbolQ::usage =
  "SymbolQ gives True if expr is a symbol, and False otherwise."
 
 (*Domain`Union::usage = System`Union::usage*)
 
-DeleteSame::usage =
+SuperLie`Domain`DeleteSame::usage =
  "DeleteSame[h[arg..]] deletes the repeating consequent arguments.
 DeleteSame[h[arg..], test] use test instead of SameQ for comparing arguments."
 
-SameKeysQ::usage =
+SuperLie`Domain`SameKeysQ::usage =
  "SameKeysQ[lft,rht] tests if the arguments are \"key\" or \"key->value\" with
 the same key."
 
-OrderedKeysQ::usage =
+SuperLie`Domain`OrderedKeysQ::usage =
  "OrderedKeysQ[h[e1, e2, ...]] gives True if the keys of ei are in canonical 
 order, and False otherwise."
 
-OrderKeys::usage =
+SuperLie`Domain`OrderKeys::usage =
  "OrderKeys[expr1, expr2] gives 1 if the key of expr1 is before than the key of 
 expr2 in canonical order, and -1 if expr1 is after expr2 in canonical order.
 It gives 0 if the keys of expr1 and expr2 are identical."
 
-SortKeys::usage =
+SuperLie`Domain`SortKeys::usage =
  "SortKeys[list] sorts the elements of list into canonical order of keys."
 
-UnionKeys::usage =
+SuperLie`Domain`UnionKeys::usage =
  "UnionKeys[list1, list2, ...] gives a sorted list of all elements with
 distinct keys that appear in any of the listi. UnionKeys[list] gives a sorted
 version of a list, in which all elements with duplicated keys have been
 dropped."
 
-ComplementKeys::usage =
+SuperLie`Domain`ComplementKeys::usage =
  "ComplementKeys[list, list1, ...] gives a list of elements of list whose
 keys does not that appear in any of the listi."
 
-KeyValue::usage =
+SuperLie`Domain`KeyValue::usage =
  "KeyValue[list,key] returns True if the list contains member key, the right
 hand side of key->value if the list contains such member and False otherwise."
 
-Merge::usage =
- "Merge[list,...,option...] returns the merged list. Options are:
+SuperLie`Domain`MergeLists::usage =
+ "MergeLists[list,...,option...] returns the merged list. Options are:
 Sort->p defines the predicate for Sort function, SameTest->fn gives a test
 for merging, and Merge->fn defines the merging function"
+
+If [$VersionNumber < 10, Symbol["SuperLie`Domain`Merge"]]
 
 (* ---------------  AttributeQ  ------------------- *)
 
@@ -137,45 +139,45 @@ dmn`attruse = "`1`Q[symb] gives True if \"symb\" has attribute \"`1`\",
 and False otherwise."
 
 
-AttributeQ::usage =
+SuperLie`Domain`AttributeQ::usage =
  "AttributeQ[symb, attr] gives True if \"symb\" has the attribute \"attr\",
 and False otherwise."
 AttributeQ =	MemberQ[Attributes[#1], #2]&
 
-ConstantQ::usage = SPrint[dmn`attruse, Constant]
+SuperLie`Domain`ConstantQ::usage = SPrint[dmn`attruse, Constant]
 ConstantQ =	MemberQ[Attributes[#], Constant]&
 
-HoldAllQ::usage = SPrint[dmn`attruse, HoldAll]
+SuperLie`Domain`HoldAllQ::usage = SPrint[dmn`attruse, HoldAll]
 HoldAllQ =	MemberQ[Attributes[#], HoldAll]&
 
-HoldFirstQ::usage = SPrint[dmn`attruse, "HoldFirst\" or \"HoldAll"]
+SuperLie`Domain`HoldFirstQ::usage = SPrint[dmn`attruse, "HoldFirst\" or \"HoldAll"]
 HoldFirstQ =	MemberQ[Attributes[#], HoldFirst|HoldAll]&
 
-HoldRestQ::usage = SPrint[dmn`attruse, "HoldFirst\" or \"HoldRest"]
+SuperLie`Domain`HoldRestQ::usage = SPrint[dmn`attruse, "HoldFirst\" or \"HoldRest"]
 HoldRestQ =	MemberQ[Attributes[#], HoldRest|HoldAll]&
 
-ListableQ::usage = SPrint[dmn`attruse, Listable]
+SuperLie`Domain`ListableQ::usage = SPrint[dmn`attruse, Listable]
 ListableQ =	MemberQ[Attributes[#], Listable]&
 
-LockedQ::usage = SPrint[dmn`attruse, Locked]
+SuperLie`Domain`LockedQ::usage = SPrint[dmn`attruse, Locked]
 LockedQ =	MemberQ[Attributes[#], Locked]&
 
-OneIdentityQ::usage = SPrint[dmn`attruse, OneIdentity]
+SuperLie`Domain`OneIdentityQ::usage = SPrint[dmn`attruse, OneIdentity]
 OneIdentityQ =	MemberQ[Attributes[#], OneIdentity]&
 
-OrderlessQ::usage = SPrint[dmn`attruse, Orderless]
+SuperLie`Domain`OrderlessQ::usage = SPrint[dmn`attruse, Orderless]
 OrderlessQ =	MemberQ[Attributes[#], Orderless]&
 
-ProtectedQ::usage = SPrint[dmn`attruse, Protected]
+SuperLie`Domain`ProtectedQ::usage = SPrint[dmn`attruse, Protected]
 ProtectedQ =	MemberQ[Attributes[#], Protected]&
 
-ReadProtectedQ::usage = SPrint[dmn`attruse, ReadProtected]
+SuperLie`Domain`ReadProtectedQ::usage = SPrint[dmn`attruse, ReadProtected]
 ReadProtectedQ =MemberQ[Attributes[#], ReadProtected]&
 
-StubQ::usage = SPrint[dmn`attruse, Stub]
+SuperLie`Domain`StubQ::usage = SPrint[dmn`attruse, Stub]
 StubQ =		MemberQ[Attributes[#], Stub]&
 
-TemporaryQ::usage = SPrint[dmn`attruse, Temporary]
+SuperLie`Domain`TemporaryQ::usage = SPrint[dmn`attruse, Temporary]
 TemporaryQ =	MemberQ[Attributes[#], Temporary]&
 
 
@@ -462,13 +464,13 @@ Union[args__,opts___Rule] :=
    DeleteSame[ Sort[Join[args], sort], same]
  ]
 
-Merge[e___List,opts___Rule]:=
-  With[{sort=Sort/.{opts}/.Options[Merge]/.Automatic->Unevaluated[],
-        same=SameTest/.{opts}/.Options[Merge]/.Automatic->Unevaluated[],
-	merge=Merge/.{opts}/.Options[Merge]},
+MergeLists[e___List,opts___Rule]:=
+  With[{sort=Sort/.{opts}/.Options[MergeLists]/.Automatic->Unevaluated[],
+        same=SameTest/.{opts}/.Options[MergeLists]/.Automatic->Unevaluated[],
+	merge=Merge/.{opts}/.Options[MergeLists]},
     Apply[merge, Split[Sort[Join[e],sort],same], {1}]]
 
-Options[Merge]^={Sort->Automatic,SameTest->Automatic,Merge->(#1&)}
+Options[MergeLists]^={Sort->Automatic,SameTest->Automatic,Merge->(#1&)}
 
 (* --------------- Sort keys --------------------- *)
 
@@ -545,8 +547,8 @@ Formats::usage =
 NewValue::usage =
  "NewValue[val,..] declares new properties of the type Value."
 
-Values::usage =
- "Values[obj] returns the list of values, associated with the object."
+ListValues::usage =
+ "ListValues[obj] returns the list of values, associated with the object."
 
 NewList::usage =
  "NewList[name,..] declares new properties of the type ValueList."
@@ -623,7 +625,7 @@ Domain[x_, _, _] := Domain[x,All]
 (* -------------------  About --------------------- *)
 
 $AboutList :=
-  { Domain, Attributes, Options, Flags, Values, Rules, Formats }
+  { Domain, Attributes, Options, Flags, ListValues, Rules, Formats }
 (*
 expr:About[obj_,topics_:$AboutList] :=
 With[{opt = Options[#, FormatType]& /@ $Output },
@@ -826,7 +828,7 @@ NewValue[name__] :=
 ValuesList = {}
 
 With[{wrapper=If[$VersionNumber>=3.0, HoldPattern, Literal]},
- Values[obj_] :=
+ ListValues[obj_] :=
   With[{val= wrapper[#[obj]]/.UpValues[obj]},
     If [val=!=wrapper[#[obj]], #->val[[1]], Unevaluated[]]
   ]& /@ ValuesList

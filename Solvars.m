@@ -5,7 +5,7 @@
 BeginPackage["SuperLie`Solvars`",
   {"SuperLie`", "SuperLie`Genvect`"}]
 
-ParamSolve::usage = "ParamSolve[equs, var] solves a system of linear equations with respect to
+SuperLie`Solvars`ParamSolve::usage = "ParamSolve[equs, var] solves a system of linear equations with respect to
 given unknown(s) var. (the equations are not necessary linear with respect to other parameters).
 Returns the general solution and prints a message every time then eliminating of a variable
 requires dividing by a non-constant. ParamSolve[equs, var, elim] first eliminates the valiable(s)
@@ -15,23 +15,23 @@ the equations modulo p."
 
 (*PatternQ::usage = "PatternQ[e] returns True if e contains a pattern"*)
 
-SolveSupportsPattern::usage = "SolveSupportsPattern[solve] returns True if vars in
+SuperLie`Solvars`SolveSupportsPattern::usage = "SolveSupportsPattern[solve] returns True if vars in
 solve[equs, vars] is allowed to be a pattern"
 
-ParamAssume::usage = "ParamAssume[code] executes the code and collects all assumption
+SuperLie`Solvars`ParamAssume::usage = "ParamAssume[code] executes the code and collects all assumption
 made by ParamSolve while solving equations. Returns list {result of code, assumptions}"
 
-$ParamAssume::usage = "Collects the cumulative list of assumptions made by consecuteve calls of ParamSolve.
+SuperLie`Solvars`$ParamAssume::usage = "Collects the cumulative list of assumptions made by consecuteve calls of ParamSolve.
 Use $ParamAssume = False to disable cumulative assumptions; $ParamAssume = {} to clear the list and
 $ParamAssume = list to define set user-defined assumptions"
 
-UserRate::usage = "Rating function for selecting variables in ParamSolve"
+SuperLie`Solvars`UserRate::usage = "Rating function for selecting variables in ParamSolve"
 
 Begin["$`"]
 
 ParamAssume[body_] :=
   If[$ParamAssume===False,
-    Block[{$ParamAssume={}}, {body, $ParamAssume}]
+    Block[{$ParamAssume={}}, {body, $ParamAssume}],
     With[{old=$ParamAssume}, Block[{$ParamAssume=old}, {body, Complement[$ParamAssume,old]}]]]
 
 Attributes[ParamAssume] ^= {HoldAll}
@@ -191,24 +191,25 @@ ElimVars[equs_, ptrn_, p_] :=
       exprList = 
         DeleteCases[Collect[PolynomialMod[#, p], ptrn] & /@ exprList, 0];
       sInd = 0;
-      optRate={Infinity};
+      optRate={Infinity,0,0,0,0,0};
       Do[rate = RateElim[exprList[[i]], ptrn, optRate];
         If[ListQ[rate],
-          maxRate = rate;
+          optRate = rate;
           sInd = i],
         {i, 1, Length[exprList]}];
       If[sInd > 0,
         {sOrd, sDeg, sAss, sNVar, sVar, cf} = optRate; 
         sol = Solve[exprList[[sInd]] == 0, sVar][[1]];
         If[sDeg>1,
-           If[ListQ[$ParamAssume],
-             cfn = First /@ FactorList[Numerator[cf]];
-             For [i=1,i<=Length[cfn],i++,
-               cfni = modReduce[cfn[[i]]!=0,$p];
+           cfn = First /@ FactorList[Numerator[cf]];
+           For [i=1,i<=Length[cfn],i++,
+             cfni = modReduce[cfn[[i]]!=0,$p];
+             If[ListQ[$ParamAssume],
                If[!TrueQ[Reduce[Implies[And@@$ParamAssume, cfni]]],
                    AppendTo[$ParamAssume, cfni];
-                   Print["ElimVars: Assuming ", StyleForm[cfni,FontColor->Blue], " to solve 0 = ", exprList[[sInd]]]]],
-             Print["ElimVars: Assuming ", StyleForm[cfn!=0,FontColor->Blue], " to solve 0 = ", exprList[[sInd]]]]];
+                   Print["ElimVars: Assuming ", StyleForm[cfni,FontColor->Blue], " to solve 0 = ", exprList[[sInd]]]],
+               If[!TrueQ[cfni],
+                   Print["ElimVars: Assuming ", StyleForm[cfni,FontColor->Blue], " to solve 0 = ", exprList[[sInd]]]]]]];
         exprList = $SNormal[Drop[exprList, {sInd}] /. sol],
       (*else*)
         Return[exprList]]]]

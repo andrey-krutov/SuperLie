@@ -1,50 +1,50 @@
-PreSL::usage =
+SuperLie`PreSL::usage =
  "PreSL is a preprocessor function what interprets the user input 
 in SuperLie package. Use $Pre=. and $Pre=PreSL to turn the preprocessing
 off and on."
 
-WithoutPreSL::usage =
+SuperLie`WithoutPreSL::usage =
  "Use WithoutPreSL[expr,...] to prevent preprocessing of expressions when
 the preprocessing is turned on."
 
-Plus$::usage = "Plus$ is equivalent to WithoutPreSL[Plus]"
-Times$::usage = "Times$ is equivalent to WithoutPreSL[Times]"
-Power$::usage = "Power$ is equivalent to WithoutPreSL[Power]"
+SuperLie`Plus$::usage = "Plus$ is equivalent to WithoutPreSL[Plus]"
+SuperLie`Times$::usage = "Times$ is equivalent to WithoutPreSL[Times]"
+SuperLie`Power$::usage = "Power$ is equivalent to WithoutPreSL[Power]"
 
-NewPower::usage =
+SuperLie`NewPower::usage =
  "NewPower[power, symbol, texsymbol] defines a new power operation
 (for an existing times-type operation) with the input/output format
 \"a^symbol b\" or \!\(a\^\(symbol\ b\)\)."
 
-RemovePower::usage =
+SuperLie`RemovePower::usage =
  "RemovePower[power] cancels the power operation defined with NewPower."
 
-NewSuperscript::usage =
+SuperLie`NewSuperscript::usage =
  "NewSuperscript[op, symb] defines new operation op[x] with superscript
 standard format \!\(x\^\(symb\)\). NewSuperscript[op, symb, tex] defines
 also TeX format x^{tex}."
 
-RemoveSuperscript::usage =
+SuperLie`RemoveSuperscript::usage =
  "RemoveSuperscript[op] cancels the superscript format for operation op
 defined with NewSuperscript."
 
-NewOverscript::usage =
+SuperLie`NewOverscript::usage =
  "NewOverscript[op, symb] defines new operation op[x] with overscript
 standard format \!\(x\&symb\). NewOverscript[op, symb, tex] defines
 also TeX format x^{tex}."
 
-RemoveOverscript::usage =
+SuperLie`RemoveOverscript::usage =
  "RemoveOverscript[op] cancels the overscript format for operation op
 defined with NewOverscript."
 
-UseAsSymbol::usage =
+SuperLie`UseAsSymbol::usage =
  "UseAsSymbol[expr] tells Mathematica to treate the given expression as
 a single symbol. UseAsSymbol[expr, symbol] explicitly names this symbol.
 The internal format of expr should be f[s,...] where f and s should be
 symbols. If expr=f[s] should have superscript format, the function
 NewSuperscript[f, s] should be called before UseAsSymbol."
 
-StopUseAsSymbol::usage =
+SuperLie`StopUseAsSymbol::usage =
  "StopUseAsSymbol[expr] cancels the treating of expr as a single symbol."
 
 

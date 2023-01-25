@@ -1,7 +1,7 @@
 BeginPackage["SuperLie`Deriv`",
  {"SuperLie`", "SuperLie`Domain`", "SuperLie`Space`"}]
 
-Der::usage =
+SuperLie`Deriv`Der::usage =
   "Der[form], Der[v**form] is the exterior derivative on forms (with
 trivial (scalar) coefficients as well as  or with coefficients in a
 module). The \"form\" may be an odd left form an an algebra or an
@@ -9,23 +9,23 @@ exterior product of such form; \"v \" must be an element of a module
 over the same algebra. The derivative of 0-form is written as
 Der0[v,algebra]."
 
-Der0::usage =
+SuperLie`Deriv`Der0::usage =
   "Der0[v,g] is the exterior derivative on 0-forms v**wedge[]
 with coefficients in g-module."
 
-der::usage = "der - unevaluated form of the exterior derivative Der."
+SuperLie`Deriv`der::usage = "der - unevaluated form of the exterior derivative Der."
 
-ZDer::usage = "ZDer[f] is the exterior derivative of the form f (with
+SuperLie`Deriv`ZDer::usage = "ZDer[f] is the exterior derivative of the form f (with
 trivial (scalar) coefficients). ZDer[f][x0,x1,...,xn] gives the value
 of the derivative of n-form f on elements x0,x1,...,xn. The expression
 ZDer[f] may be used in symbolical calculations."
 
-ExteriorAlgebra::usage =
+SuperLie`Deriv`ExteriorAlgebra::usage =
 "ExteriorAlgebra[name, x, options] defines an exterior algebra on the space x.
 Options changes the operation names: Wedge->exterior product, Der->derivative,
 CTimes->operation for x\[CenterDot]dx."
 
-NDer::usage =
+SuperLie`Deriv`NDer::usage =
 "NDer->opname in an option of ExteriorAlgebra. If gives the name of the 
 derivative (normalized form)."
 
