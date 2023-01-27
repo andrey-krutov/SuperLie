@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 BrowserCategory["SuperLie", None, {
  Item["Disclaimer", "Disclaimer.nb", CopyTag->None],
  Item["Introduction", "Intro.nb", CopyTag->None],
@@ -80,7 +82,7 @@ BrowserCategory["SuperLie", None, {
     Item["CTimes", "Alpha.nb"] }], 
   BrowserCategory["D", None, {
     Item["\[CapitalDelta]", "Alpha.nb"],
-    Item["DateString", "Alpha.nb"], 
+    Item["Dc", "Alpha.nb"], 
     Item["DecompositionList", "Alpha.nb"], 
     Item["DecompositionRule", "Alpha.nb"], 
     Item["DefSubAlgebra", "Alpha.nb"], 
@@ -144,7 +146,10 @@ BrowserCategory["SuperLie", None, {
     Item["GradedQ", "Alpha.nb"], 
     Item["GTimes", "Alpha.nb"] }], 
   BrowserCategory["H", None, {
+    Item["HamiltonAlgebra", "Alpha.nb"],
     Item["HamiltonianH", "Alpha.nb"], 
+    Item["Hb", "Alpha.nb"], 
+    Item["hb", "Alpha.nb"], 
     Item["Homogen", "Alpha.nb"], 
     Item["HomogenRule", "Alpha.nb"], 
     Item["HWModule", "Alpha.nb"] }], 
@@ -166,6 +171,7 @@ BrowserCategory["SuperLie", None, {
     Item["LDer", "Alpha.nb"], 
     Item["Leibniz", "Alpha.nb"], 
     Item["LeibnizRule", "Alpha.nb"], 
+    Item["LeitesAlgebra", "Alpha.nb"],
  (*   Item["LieAlgebra", "Alpha.nb"], 	*)
     Item["Linear", "Alpha.nb"], 
     Item["LinearChange", "Alpha.nb"], 
@@ -222,7 +228,9 @@ BrowserCategory["SuperLie", None, {
     Item["PowerOp", "Alpha.nb"], 
     Item["PowerToSparse", "Sparse.nb"],
     Item["Power$", "Alpha.nb"], 
+    Item["pqAlgebra", "Alpha.nb"], 
     Item["PreSL", "Alpha.nb"], 
+    Item["psl2Algebra", "Alpha.nb"], 
     Item["pslAlgebra", "Alpha.nb"], 
     Item["psq2Algebra", "Alpha.nb"], 
     Item["psqAlgebra", "Alpha.nb"] }], 
@@ -247,7 +255,10 @@ BrowserCategory["SuperLie", None, {
     Item["RestrictModule", "Alpha.nb"], 
     Item["RootReflection", "Alpha.nb"] }], 
   BrowserCategory["S", None, {
-    Item["Scalar", "Alpha.nb"], 
+    Item["SameElement", "Alpha.nb"], 
+    Item["Sb", "Alpha.nb"],
+    Item["sb", "Alpha.nb"],
+    Item["Scalar", "Alpha.nb"],
     Item["ScalarEquation", "Alpha.nb"], 
     Item["ScalarQ", "Alpha.nb"], 
     Item["SeqForm", "Alpha.nb"], 
@@ -263,6 +274,7 @@ BrowserCategory["SuperLie", None, {
     Item["SplitList", "Alpha.nb"], 
     Item["SplitSum", "Alpha.nb"], 
     Item["sqAlgebra", "Alpha.nb"],
+    Item["SqrTable", "Alpha.nb"], 
     Item["Squaring", "Alpha.nb"], 
     Item["SquaringToSparse", "Sparse.nb"],
     Item["Standard", "Alpha.nb"], 
@@ -276,6 +288,7 @@ BrowserCategory["SuperLie", None, {
     Item["SVNormalRule", "Alpha.nb"], 
     Item["SVSimplifyRule", "Alpha.nb"], 
     Item["SVSolve", "Alpha.nb"], 
+    Item["SVTimes", "Alpha.nb"], 
     Item["Symmetric", "Alpha.nb"], 
     Item["SymmetricNormal", "Alpha.nb"], 
     Item["SymmetricQ", "Alpha.nb"], 
@@ -358,6 +371,7 @@ BrowserCategory["SuperLie", None, {
     Item["WithUnique", "Alpha.nb"],
     Item["wPower", "Alpha.nb"] }], 
   BrowserCategory["Z", None, {
+    Item["ZDer", "Alpha.nb"], 
     Item["ZeroArg", "Alpha.nb"], 
     Item["ZeroArgRule", "Alpha.nb"], 
     Item["ZId", "Alpha.nb"], 
