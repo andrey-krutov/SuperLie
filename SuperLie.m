@@ -2366,7 +2366,7 @@ CreatePalette[{Cell[BoxData[
   Method->"Preemptive"]], NotebookDefault]},WindowTitle->"SuperLie"]]
 *)
 
-Print["SuperLie Package Version 2.08 Beta 07 installed\nDisclaimer: This software is provided \"AS IS\", without a warranty of any kind"]
+Print["SuperLie Package Version 2.08 Beta 07 AK02 installed\nDisclaimer: This software is provided \"AS IS\", without a warranty of any kind"]
 
 EndPackage[]
 
