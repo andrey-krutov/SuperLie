@@ -545,6 +545,8 @@ SuperLie`CTimes::usage =
 between coefficient and vector parts of forms, vector fields, etc.
 CTimes->op is an options that indicates such operation." 
  
+SuperLie`NoneToZero::usage = "Replace \"None\" by 0 in the commutation table"
+ 
 (* ########### PART 5. Space Constructors ############## *)
 
 SuperLie`DecompositionList::usage =
@@ -2366,7 +2368,7 @@ CreatePalette[{Cell[BoxData[
   Method->"Preemptive"]], NotebookDefault]},WindowTitle->"SuperLie"]]
 *)
 
-Print["SuperLie Package Version 2.08 Beta 07 AK02 installed\nDisclaimer: This software is provided \"AS IS\", without a warranty of any kind"]
+Print["SuperLie Package Version 2.08 Beta 07 AK03 installed\nDisclaimer: This software is provided \"AS IS\", without a warranty of any kind"]
 
 EndPackage[]
 

@@ -65,13 +65,15 @@ SubAlgebra::mixgrade = "The generators are not graded"
 SubAlgebra[g_, in_, elt_List, opts___Rule] :=
   Module[{ gen, zv, dim, y, r, q, s, t, i, j, l, sm, brk, Brk, inBrk, sqr,
 		agl, pgl, gt, pgt, bs, tog, eq, yQ, z, zg, vars, solj, sv, glist,
-		rel={}, jac, prev, gentbl, hl, rn, pg, pin, wt, props, grade$fn, gg},
+		rel={}, jac, prev, gentbl, hl, rn, pg, pin, wt, props, grade$fn, gg,
+		none2zero},
 $tm = TimeUsed[];
 	Clear["$`gen$*"];
     If [(Clear /. {opts}) =!= False, Clear[g]];
     rn = ToDegree /. {opts} /. ToDegree->Infinity;
     Brk = Bracket /. {opts} /. Bracket->Act;
-    brk = bracket /. {opts} /. bracket->act;
+    brk = bracket /. {opts} /. bracket->act;    
+    none2zero = NoneToZero /. {opts} /. NoneToZero->False;    
     inBrk = Bracket[in];
     wt = Weight /. {opts};
     glist = GList /. {opts} /. GList->Auto;
@@ -214,7 +216,14 @@ $tm = TimeUsed[];
     GenRel[g] ^= gen$rel //. g[i_] :> gen$basis[[i]];
     DPrint[2, GenRel[g] ];
    ];
-   ActTable[g] ^= VNormal[gen$tbl];			(* Final assignment *)
+   (* Final assignment *)   
+   If[none2zero, 
+     gen$tbl = gen$tbl /. {None -> 0};
+     If[sqr, 
+     	gen$sqr = gen$sqr /. {None -> 0};
+     ];
+   ];
+   ActTable[g] ^= VNormal[gen$tbl];   
    If[sqr,
      SqrTable[g] ^= VNormal[gen$sqr];
      TableBracket[g, Brk, Unevaluated[ActTable[g]], brk, rn, Unevaluated[SqrTable[g]]],
