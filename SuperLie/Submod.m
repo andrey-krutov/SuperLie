@@ -31,7 +31,8 @@ Begin["$`"]
 
 SubModule[n_, in_, el_, opts___Rule] :=
   Module[ {i, j, dim, (*dima,*) eq, ee, seq, tbl, tbr, sqr={}, ptrn, alg, img,
-            abas, gr, eqgr, seqgr, la, ia, ai, mj, lj, toimg={}, split, ideal, sqrn},
+            abas, gr, eqgr, seqgr, la, ia, ai, mj, lj, toimg={}, split, ideal, sqrn,
+            l, r, vl},
     With[{alg = Algebra /. {opts} /. Algebra->TheAlgebra[in]},
      With[{ brk=Bracket/.{opts}/.Bracket->Bracket[alg],
             brkn=Bracket[alg],
@@ -180,7 +181,8 @@ Ideal[n_, in_, el_, opts___] :=
 RestrictModule::noinv = "Module `` is not ``-invariant (``, ``)"
 
 RestrictModule[n_, alg_, opts___] :=
-  Module[ {i, j, dim, dima, eq, ee, seq, tbl, tbr, ptrn, rng, r, d, linrepl},
+  Module[ {i, j, dim, dima, eq, ee, seq, tbl, tbr, ptrn, rng, r, d, linrepl,
+  	l, vl},
     ptrn = BasisPattern[InSpace[n]];
     dima = Dim[alg];
     tbl = {};
@@ -310,7 +312,8 @@ QuotientModule::mod = "The argument `` should be a submodule name or a basis (li
 
 QuotientModule[n_, in_, sub_, opts___Rule]:=
   Module[ {i, j, dim, dima, dimn, dimp, eq, ee, seq, tbl, tbr, ptrn, alg, img=el,
-            wholebas, subbas, s, abas, gr, eqgr, seqgr, whole, sqrn, split,c},
+            wholebas, subbas, s, abas, gr, eqgr, seqgr, whole, sqrn, split,c,
+            subin,ideal,factin,proj,par},
     With[{alg = Algebra /. {opts} /. Algebra->TheAlgebra[in],
           mapping = Mapping /. {opts}},
       DPrint[1, "Building graded quotient ",alg,"-module"(*, n, "=", in,"/",sub*)];

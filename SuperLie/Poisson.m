@@ -287,14 +287,15 @@ PoissonAlgebra[name_, {x__}, opts___Rule] :=
  With[{Pb$l=Pb/.{opts}, pb$l=pb/.{opts},  ptrn=ptrnAux[{x},{opts}],
        EulerOp$l=EulerOp/.{opts}, HamiltonianH$l=HamiltonianH/.{opts},
        sqr = Squaring/.{opts}/.Squaring:>($p===2)},
-  Module[{r, n, k, k1, m, parlist, idx, nind, v, x1, x2, err=False, px, rule, dd},
+  Module[{r, n, k, k1, m, parlist, idx, nind, v, x1, x2, err=False, px, rule, dd,
+  	i,l},
     Vector[v];
       r = Length[{x}];
       n = Dim /@ {x};
       k = Floor[r/2];
       k1 = If[OddQ[r],k+1,0];
     SetProperties[name, { Vector, BasisPattern->ptrnPoly[ptrn],
-        Bracket->Pb$l, bracket->pb$l, opts} ];
+        Bracket->Pb$l, bracket->pb$l, opts} ];    
 	(* Check the dimensions of components correspondence of parities *)
 	Do[j=r+1-i;
 	   x1 = {x}[[i]];
@@ -315,7 +316,7 @@ PoissonAlgebra[name_, {x__}, opts___Rule] :=
      (HoldPattern[Pb$l[f_, g_]] :>
         Evaluate[VPlus[
 	  VSum[
-	    With[{x1={x}[[i]], x2={x}[[r+1-i]], d=dd[i]},
+	    With[{x1={x}[[i]], x2={x}[[r+1-i]], d=dd[i]},	    	
 	      VSum[Evaluate @
 	        VPlus[
 	          SVTimes[(-1)^(P[f]P[x1[l]]),
