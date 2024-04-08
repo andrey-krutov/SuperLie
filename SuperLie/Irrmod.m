@@ -82,8 +82,7 @@ HWModule[v_, g_, wt_, opts___Rule] :=
        (* Action *)
        v/: Act[x_g, y_v] := Act[x/.DecompositionRule[g,CartanTriade], y];
        v/: Act[h[i_], v[j_]] := Weight[v[j]][[i]] ~SVTimes~ v[j];
-       v/: Act[x[i_], v[j_]] :=
-	  If [ Grade[x[i]]+Grade[v[j]]<=0, ActTable[x,v][[j,i]], 0 ];
+       v/: Act[x[i_], v[j_]] := If [ Grade[x[i]]+Grade[v[j]]<=0, ActTable[x,v][[j,i]], 0 ];
        If [cont,
           v/: Act[f[i_], v[j_]] :=
                (If [ Grade[f[i]]+Grade[v[j]]<-ToGrade[v], HWModule[v,g,wt,Clear->Continue,ToGrade->-(Grade[f[i]]+Grade[v[j]])]];
@@ -94,7 +93,7 @@ HWModule[v_, g_, wt_, opts___Rule] :=
                (If [r>ToGrade[v], HWModule[v,g,wt,Clear->Continue,ToGrade->r]]; RangeIndex[v][[r+1]] - RangeIndex[v][[r]]),
        (*else*)
           v/: Act[f[i_], v[j_]] :=
-	     If [ Grade[f[i]]+Grade[v[j]]>=-ToGrade[v],
+           If [ Grade[f[i]]+Grade[v[j]]>=-ToGrade[v],
 		(*then*) ActTable[f,v][[j,i]],
 		(*else*) act[f[i],v[j]]];
           Basis[v,r_/;r>0&&r<=ToGrade[v]] ^:=

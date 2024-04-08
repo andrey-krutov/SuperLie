@@ -12,64 +12,49 @@ CM = {{1}};
 
 CartanMatrixAlgebra[g, {x,h,y}, CM, PList -> {1}]
 
-HWModule[v1, g, {1}];
-testv1 = checkModule[Basis[g], Basis[v1]]
-dimv1 = PDim[v1]
- 
-HWModule[v2, g, {2}];
-testv2 = checkModule[Basis[g], Basis[v2]]
-dimv2 = PDim[v2]
+For[i=1,i<10,++i,
+	Clear[m];
+	HWModule[m, g, {i}];
+	testM = checkModule[Basis[g], Basis[m]];
+	dimM = PDim[m];	
 
-HWModule[v3, g, {3}];
-testv3 = checkModule[Basis[g], Basis[v3]]
-dimv3 = PDim[v3]
+	Test[
+		testM
+		,
+		{True}
+		,
+		TestID->StringForm["HWModule: osp(1|2), (``), table", i]
+	];
 
-
-Test[
-	testv1
-	,
-	{True}
-	,
-	TestID->"HWModule: osp(1|2), (1), table"
-]
-
-Test[
-	dimv1
-	,
-	{2,1}
-	,
-	TestID->"HWModule: osp(1|2), (1), Dim"
-]
-
-Test[
-	testv2
-	,
-	{True}
-	,
-	TestID->"HWModule: osp(1|2), (2), table"
-]
-
-Test[
-	dimv2
-	,
-	{3,2}
-	,
-	TestID->"HWModule: osp(1|2), (2), Dim"
+	Test[
+		dimM
+		,
+		{i+1,i}
+		,
+		TestID->StringForm["HWModule: osp(1|2), (``), dim", i]
+	];
 ]
 
 
-Test[
-	testv3
-	,
-	{True}
-	,
-	TestID->"HWModule: osp(1|2), (3), table"
-]
+For[i=1,i<10,++i,
+	Clear[m];
+	HWModule[m, g, {i}, P->1];
+	testM = checkModule[Basis[g], Basis[m]];
+	dimM = PDim[m];	
 
-Test[
-	dimv3
-	,
-	{4,3}
-	,
-	TestID->"HWModule: osp(1|2), (3), Dim"
+	Test[
+		testM
+		,
+		{True}
+		,
+		TestID->StringForm["HWModule: osp(1|2), Pi(``), table", i]
+	];
+
+	Test[
+		dimM
+		,
+		{i,i+1}
+		,
+		TestID->StringForm["HWModule: osp(1|2), Pi(``), dim", i]
+	];
 ]
