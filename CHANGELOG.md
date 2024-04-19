@@ -2,7 +2,7 @@
 
 ## [2.8]
 
-- Fixed a bug in HWModule, #1
+- Fixed a bug in HWModule, [#1]
 - Fixed a project structure. Now we can make application packages.
 - Fixed a bug with (non)local variables in PoissonAlgebra
 - chQout and chBook should work in any characteristic now
