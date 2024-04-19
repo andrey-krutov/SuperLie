@@ -52,8 +52,8 @@ HWModule[v_, g_, wt_, opts___Rule] :=
   Vector[y, none];
   Scalar[cf];
   If[Length[comp]=!=3,
-    Message[HWModule::comp, g];
-    Return[$Failed]];
+  	Message[HWModule::comp, g];
+  	Return[$Failed]];
   rn = ToGrade /. {opts};
   If[rn===ToGrade, rn = Grade /. {opts} /. Grade->Infinity];
   With[{x=comp[[1]], h=comp[[2]], f=comp[[3]]},
@@ -82,8 +82,7 @@ HWModule[v_, g_, wt_, opts___Rule] :=
        (* Action *)
        v/: Act[x_g, y_v] := Act[x/.DecompositionRule[g,CartanTriade], y];
        v/: Act[h[i_], v[j_]] := Weight[v[j]][[i]] ~SVTimes~ v[j];
-       v/: Act[x[i_], v[j_]] :=
-	  If [ Grade[x[i]]+Grade[v[j]]<=0, ActTable[x,v][[j,i]], 0 ];
+       v/: Act[x[i_], v[j_]] := If [ Grade[x[i]]+Grade[v[j]]<=0, ActTable[x,v][[j,i]], 0 ];
        If [cont,
           v/: Act[f[i_], v[j_]] :=
                (If [ Grade[f[i]]+Grade[v[j]]<-ToGrade[v], HWModule[v,g,wt,Clear->Continue,ToGrade->-(Grade[f[i]]+Grade[v[j]])]];
@@ -94,7 +93,7 @@ HWModule[v_, g_, wt_, opts___Rule] :=
                (If [r>ToGrade[v], HWModule[v,g,wt,Clear->Continue,ToGrade->r]]; RangeIndex[v][[r+1]] - RangeIndex[v][[r]]),
        (*else*)
           v/: Act[f[i_], v[j_]] :=
-	     If [ Grade[f[i]]+Grade[v[j]]>=-ToGrade[v],
+           If [ Grade[f[i]]+Grade[v[j]]>=-ToGrade[v],
 		(*then*) ActTable[f,v][[j,i]],
 		(*else*) act[f[i],v[j]]];
           Basis[v,r_/;r>0&&r<=ToGrade[v]] ^:=
@@ -159,16 +158,19 @@ DPrint[1, "Grade = ", -r];
 DPrint[3, "Searching [",fi,",v], Grade[v]=", -rj, ", j in [",If[rj==0,1,j1[[rj]]], ",", j1[[rj+1]]-1, "]"];
         For[j=If[rj==0,1,j1[[rj]]], j<j1[[rj+1]], j++,   (* loop over v[i] with grade -r-Grade[fi] *)
           If[ind[[j]]>=minind,
-	    zt = { zt, act[fi,v[j]] };	(* list of expressions of grade -r *)
-	    tind = {tind, ii};		(* list ordering indices *)
-	    adf[[j,i]] = y[++l],	(* fill table of Lie operation *)
-	  (* else *)
-	    adf[[j,i]] = act[fi,v[j]]
-      ] ] ];
-      If [l==0,
+	    	zt = { zt, act[fi,v[j]] };	(* list of expressions of grade -r *)
+	    	tind = {tind, ii};		(* list ordering indices *)
+	    	adf[[j,i]] = y[++l],	(* fill table of Lie operation *)
+	  		(* else *)
+	    	adf[[j,i]] = act[fi,v[j]]
+      	  ]
+      	] 
+      ];
+      (* TODO: was it an over-optimization or it is crucial  for Verma modules? *)
+      (* If [l==0,
         ToGrade[v] ^= r;
         AppendTo[j1, j1[[r]]];
-        Continue[]];
+        Continue[]]; *)
       zt = Flatten[zt];
       tind = Flatten[tind];
 DPrint[1, "Commutators of degree ", -r, " : ", l];
