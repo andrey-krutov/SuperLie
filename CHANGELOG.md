@@ -9,7 +9,7 @@
 - TensorSpace: the action is defined with respect to the Sign Rule
 - TensorSpace: the BasisPattern is properly defined now
 - ParamSolve: the list of assumptions is printed in the message form now
-- Remove pallete with the documentation
+- Remove palette with the documentation
 - FreeLieAlgebra: ToDegree fixed
 - Domain: undef is defined
 - HWModule: fixes from Pavel Grozman
@@ -24,7 +24,7 @@
 - New function: LeAlgebra (temporary name)
 - Fixed function Basis[g,n] for algebras on polynomials in case of divided powers
 - glAlgebra, slAlgebra: Fixed list or relatives
-- TensorSpace: Defined properiies Dim, P, Grade, TheAlgebra;
+- TensorSpace: Defined properties Dim, P, Grade, TheAlgebra;
 - TensorSpace: For tensor spaces of a module, defined the action the module's algebra.    
 - HWModule: Fixed case when y_i was expressed via y_j with j>i
 - HWModule: Added properties TheAlgebra and Relatives
