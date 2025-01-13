@@ -25,10 +25,10 @@
 - Fixed function Basis[g,n] for algebras on polynomials in case of divided powers
 - glAlgebra, slAlgebra: Fixed list or relatives
 - TensorSpace: Defined properties Dim, P, Grade, TheAlgebra;
-- TensorSpace: For tensor spaces of a module, defined the action the module's algebra.    
+- TensorSpace: For tensor spaces of a module, defined the action the module's algebra.
 - HWModule: Fixed case when y_i was expressed via y_j with j>i
 - HWModule: Added properties TheAlgebra and Relatives
 - NewRelative: Added property Basis
 - Der, Der0: fixed case when Wedge is skew-symmetric
 - SubAlgebra: fixed case when all generators have grade > 1
-    
+
