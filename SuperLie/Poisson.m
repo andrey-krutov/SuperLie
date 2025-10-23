@@ -57,6 +57,15 @@ the polynomials on x1,x2,...,y1,y2,... with standard Buttin bracket."
 SuperLie`Poisson`Bb::usage = "Bb[x,y] is the Buttin bracket (operator).";
 SuperLie`Poisson`bb::usage = "bb[x,y] is the Buttin bracket (unevaluated form)."
 
+SuperLie`Poisson`SchoutenAlgebra::usage = 
+  "SchoutenAlgebra[name, {x,d}] defines a Buttin (super)algebra \"name\" as the algebra of
+the polynomials on x1,x2,...,d1,d2,... with standard the bracket common for differentail geometry: 
+x_i are coordinates and d_i are the corresponding partial derivatives"
+
+SuperLie`Poisson`Bb::usage = "Bb[x,y] is the Buttin bracket (operator).";
+SuperLie`Poisson`bb::usage = "bb[x,y] is the Buttin bracket (unevaluated form)."
+
+
 SuperLie`Poisson`LeitesAlgebra::usage =
   "LeitesAlgebra[name, {x,y}] defines a Leites (super)algebra \"name\" as the algebra of
 the polynomials on x1,x2,...,y1,y2,... with standard Schouten antibracket."
@@ -508,6 +517,40 @@ ButtinAlgebra[name_, {x_,y_}, opts___Rule] :=
       VSum[
         SVTimes[(-1)^(P[f]P[x[i]]),VTimes[LDer[f,x[i],ptrn],LDer[g,y[i],ptrn]]]~VPlus~
         SVTimes[(-1)^(P[f]P[y[i]]),VTimes[LDer[f,y[i],ptrn],LDer[g,x[i],ptrn]]],
+        {i,1,n}];
+    EulerOp$l[name] ^:=
+	 VSum[ VTimes[x[i], ZLDer[x[i],ptrn]], {i,1,n}]~VPlus~
+	 VSum[ VTimes[y[i], ZLDer[y[i],ptrn]], {i,1,n}];
+  (* 011215: added enumeration and Basis[g, d] *)
+     ReGrade[name] ^:= calcPoBasis[name, {x,y}, VTimes, opts];
+     ReGrade[name];
+    name::usage ^= SPrint["`` is a Buttin algebra over ``", name, {x, y}]
+]
+
+
+(* ======= Schouten Algebra ========= *)
+
+SchoutenAlgebra[name_, {x_,y_}, opts___Rule] :=
+  With[{n=Dim[x], Bb$l=Bb/.{opts}, bb$l=bb/.{opts},
+     sqr = Squaring/.{opts}/.Squaring:>($p===2),
+     EulerOp$l=EulerOp/.{opts}, ptrn=ptrnAux[{x,y},{opts}]},
+    SetProperties[name, { Vector, BasisPattern->ptrnPoly[ptrn],
+			Bracket->Bb$l, bracket->bb$l, opts} ];
+    If[Dim[y]=!=n,
+      Message[ButtinAlgebra::dims, x, y]; Return[$Failed]];
+    If[NumberQ[n],
+      Do[If[ PolynomialMod[P[x[i]]-P[y[i]], 2]=!=1,
+           Message[ButtinAlgebra::parity, x[i], y[i]]; Return[$Failed]],
+        {i,1,n}]];
+    PolyPattern[name]^=ptrn;
+    If [sqr,
+      Bb$l /: Squaring[f_,Bb$l] := VIf[P[f]==0,VSum[VTimes[LDer[f,x[i],ptrn],LDer[f,y[i],ptrn]],{i,1,n}]];
+      name /: EulerOp$l[name,2] := VSum[ VTimes[x[i], ZLDer[x[i],ptrn]], {i,1,n}];
+    ];
+    Bb$l[f_,g_] := 
+      VSum[
+        SVTimes[(-1)^(P[f]P[x[i]]+P[y[i]]),VTimes[LDer[f,x[i],ptrn],LDer[g,y[i],ptrn]]]~VPlus~
+        SVTimes[(-1)^(P[f]P[y[i]]+P[y[i]]),VTimes[LDer[f,y[i],ptrn],LDer[g,x[i],ptrn]]],
         {i,1,n}];
     EulerOp$l[name] ^:=
 	 VSum[ VTimes[x[i], ZLDer[x[i],ptrn]], {i,1,n}]~VPlus~

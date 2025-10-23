@@ -27,6 +27,7 @@ DeclarePackage["SuperLie`Irrmod`", {"HWModule"}]
 DeclarePackage["SuperLie`Poisson`", {"PoissonAlgebra", "Pb", "pb",
     "HamiltonAlgebra", "Hb", "hb", "LeitesAlgebra", "Sb", "sb",
     "ContactAlgebra", "Kb", "kb", "ButtinAlgebra", "Bb", "bb",
+    "SchoutenAlgebra",
     "MoebiusAlgebra", "Mb", "mb", "OKAlgebra", "Ob", "ob",
     "RamondAlgebra", "Rb", "rb", "RamondD", "ZRamondD", "RamondK",
     "HamiltonianH", "\[CapitalDelta]", "EulerOp", "ContactK", "NewBrace" }]
