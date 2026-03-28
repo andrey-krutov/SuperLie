@@ -530,6 +530,9 @@ ButtinAlgebra[name_, {x_,y_}, opts___Rule] :=
 
 (* ======= Schouten Algebra ========= *)
 
+SchoutenAlgebra::dims = PoissonAlgebra::dims;
+SchoutenAlgebra::parity = "The elements `` and `` should have different parity";
+
 SchoutenAlgebra[name_, {x_,y_}, opts___Rule] :=
   With[{n=Dim[x], Bb$l=Bb/.{opts}, bb$l=bb/.{opts},
      sqr = Squaring/.{opts}/.Squaring:>($p===2),
@@ -537,10 +540,10 @@ SchoutenAlgebra[name_, {x_,y_}, opts___Rule] :=
     SetProperties[name, { Vector, BasisPattern->ptrnPoly[ptrn],
 			Bracket->Bb$l, bracket->bb$l, opts} ];
     If[Dim[y]=!=n,
-      Message[ButtinAlgebra::dims, x, y]; Return[$Failed]];
+      Message[SchoutenAlgebra::dims, x, y]; Return[$Failed]];
     If[NumberQ[n],
       Do[If[ PolynomialMod[P[x[i]]-P[y[i]], 2]=!=1,
-           Message[ButtinAlgebra::parity, x[i], y[i]]; Return[$Failed]],
+           Message[SchoutenAlgebra::parity, x[i], y[i]]; Return[$Failed]],
         {i,1,n}]];
     PolyPattern[name]^=ptrn;
     If [sqr,
